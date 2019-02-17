@@ -12,3 +12,7 @@
 *.synctex.gz
 *.tks
 *.toc
+#ignore the thesis examples
+./Examples
+#ignore the logos
+./logos
