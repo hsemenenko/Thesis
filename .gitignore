@@ -12,10 +12,6 @@
 *.synctex.gz
 *.tks
 *.toc
-# ignore the thesis examples
-./Examples
-# ignore the logos
-./logos
 # ignore pdfs
 *.pdf
 #ignore all images
@@ -23,3 +19,7 @@
 *.svg
 *.jpg
 *.jpeg
+# ignore the thesis examples
+./Examples
+# ignore the logos
+./logos
