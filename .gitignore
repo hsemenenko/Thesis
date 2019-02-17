@@ -20,6 +20,6 @@
 *.jpg
 *.jpeg
 # ignore the thesis examples
-./Examples
+Examples/
 # ignore the logos
-./logos
+logos/
