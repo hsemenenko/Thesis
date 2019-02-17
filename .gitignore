@@ -1,0 +1,14 @@
+# ignore latex compiling files
+*.aux
+*.bbl
+*.blg
+*.brf
+*.idx
+*.idx
+*.lof
+*.log
+*.lot
+*.out
+*.synctex.gz
+*.tks
+*.toc
