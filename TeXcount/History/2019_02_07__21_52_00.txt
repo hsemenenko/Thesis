@@ -1,0 +1,137 @@
+File: ../memoirthesis.tex
+Encoding: utf8
+Words in text: 1
+Words in headers: 0
+Words outside text (captions, etc.): 0
+Number of headers: 0
+Number of floats/tables/figures: 0
+Number of math inlines: 0
+Number of math displayed: 0
+
+Included file: ../frontmatter/title.tex
+Encoding: ascii
+Words in text: 48
+Words in headers: 0
+Words outside text (captions, etc.): 0
+Number of headers: 0
+Number of floats/tables/figures: 0
+Number of math inlines: 0
+Number of math displayed: 0
+
+Included file: ../frontmatter/abstract.tex
+Encoding: ascii
+Words in text: 4
+Words in headers: 1
+Words outside text (captions, etc.): 0
+Number of headers: 1
+Number of floats/tables/figures: 0
+Number of math inlines: 0
+Number of math displayed: 0
+
+Included file: ../frontmatter/dedication.tex
+Encoding: ascii
+Words in text: 4
+Words in headers: 1
+Words outside text (captions, etc.): 0
+Number of headers: 1
+Number of floats/tables/figures: 0
+Number of math inlines: 0
+Number of math displayed: 0
+
+Included file: ../frontmatter/declaration.tex
+Encoding: ascii
+Words in text: 84
+Words in headers: 2
+Words outside text (captions, etc.): 0
+Number of headers: 1
+Number of floats/tables/figures: 0
+Number of math inlines: 0
+Number of math displayed: 0
+
+Included file: ../chapters/chapter01/chap01.tex
+Encoding: ascii
+Words in text: 114
+Words in headers: 1
+Words outside text (captions, etc.): 0
+Number of headers: 1
+Number of floats/tables/figures: 0
+Number of math inlines: 0
+Number of math displayed: 0
+
+Included file: ../chapters/chapter02/chap02.tex
+Encoding: ascii
+Words in text: 5
+Words in headers: 23
+Words outside text (captions, etc.): 0
+Number of headers: 13
+Number of floats/tables/figures: 0
+Number of math inlines: 0
+Number of math displayed: 0
+
+Included file: ../chapters/chapter03/chap03.tex
+Encoding: ascii
+Words in text: 9
+Words in headers: 7
+Words outside text (captions, etc.): 0
+Number of headers: 3
+Number of floats/tables/figures: 0
+Number of math inlines: 0
+Number of math displayed: 0
+
+Included file: ../chapters/chapter04/chap04.tex
+Encoding: ascii
+Words in text: 9
+Words in headers: 7
+Words outside text (captions, etc.): 0
+Number of headers: 3
+Number of floats/tables/figures: 0
+Number of math inlines: 0
+Number of math displayed: 0
+
+Included file: ../chapters/chapter05/chap05.tex
+Encoding: ascii
+Words in text: 9
+Words in headers: 7
+Words outside text (captions, etc.): 0
+Number of headers: 3
+Number of floats/tables/figures: 0
+Number of math inlines: 0
+Number of math displayed: 0
+
+Included file: ../chapters/chapter06/chap06.tex
+Encoding: ascii
+Words in text: 9
+Words in headers: 4
+Words outside text (captions, etc.): 0
+Number of headers: 3
+Number of floats/tables/figures: 0
+Number of math inlines: 0
+Number of math displayed: 0
+
+Included file: ../chapters/chapter07/chap07.tex
+Encoding: ascii
+Words in text: 9
+Words in headers: 3
+Words outside text (captions, etc.): 0
+Number of headers: 3
+Number of floats/tables/figures: 0
+Number of math inlines: 0
+Number of math displayed: 0
+
+Sum of files: ../memoirthesis.tex
+File(s) total: ../memoirthesis.tex
+Words in text: 305
+Words in headers: 56
+Words outside text (captions, etc.): 0
+Number of headers: 32
+Number of floats/tables/figures: 0
+Number of math inlines: 0
+Number of math displayed: 0
+Files: 12
+
+Word: Freq
+---
+Is_alphabetic: 359
+Digit+Is_alphabetic: 1
+Digit: 1
+All words: 361

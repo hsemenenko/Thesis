@@ -1,0 +1,44 @@
+\BOOKMARK [0][-]{section*.4}{List of Tables}{}% 1
+\BOOKMARK [0][-]{section*.5}{List of Figures}{}% 2
+\BOOKMARK [0][-]{chapter.1}{Introduction}{}% 3
+\BOOKMARK [0][-]{chapter.2}{Background}{}% 4
+\BOOKMARK [1][-]{section.2.1}{Cryptography}{chapter.2}% 5
+\BOOKMARK [2][-]{subsection.2.1.1}{Symmetric Key Encryption}{section.2.1}% 6
+\BOOKMARK [2][-]{subsection.2.1.2}{Public Key Cryptography}{section.2.1}% 7
+\BOOKMARK [1][-]{section.2.2}{Quantum Theory}{chapter.2}% 8
+\BOOKMARK [2][-]{subsection.2.2.1}{Quantum Information}{section.2.2}% 9
+\BOOKMARK [2][-]{subsection.2.2.2}{Quantum Photonics}{section.2.2}% 10
+\BOOKMARK [1][-]{section.2.3}{Quantum Key Distribution}{chapter.2}% 11
+\BOOKMARK [2][-]{subsection.2.3.1}{Protocols}{section.2.3}% 12
+\BOOKMARK [2][-]{subsection.2.3.2}{Hacking}{section.2.3}% 13
+\BOOKMARK [1][-]{section.2.4}{Integrated Photonics Devices}{chapter.2}% 14
+\BOOKMARK [2][-]{subsection.2.4.1}{Requirements}{section.2.4}% 15
+\BOOKMARK [2][-]{subsection.2.4.2}{Indium Phosphide}{section.2.4}% 16
+\BOOKMARK [2][-]{subsection.2.4.3}{Silicon on Insulator}{section.2.4}% 17
+\BOOKMARK [2][-]{subsection.2.4.4}{Integrated Detectors}{section.2.4}% 18
+\BOOKMARK [1][-]{section.2.5}{Summary}{chapter.2}% 19
+\BOOKMARK [0][-]{chapter.3}{Hong-Ou-Mandel Interference Between Integrated Devices}{}% 20
+\BOOKMARK [1][-]{section.3.1}{Sources and Requirements}{chapter.3}% 21
+\BOOKMARK [1][-]{section.3.2}{Experiment}{chapter.3}% 22
+\BOOKMARK [1][-]{section.3.3}{Results}{chapter.3}% 23
+\BOOKMARK [2][-]{subsection.3.3.1}{Hong-Ou-Mandel Interference Between GHZ Coherent States}{section.3.3}% 24
+\BOOKMARK [2][-]{subsection.3.3.2}{Phase Coherence}{section.3.3}% 25
+\BOOKMARK [1][-]{section.3.4}{Outlook}{chapter.3}% 26
+\BOOKMARK [0][-]{chapter.4}{Chip-Based Measurement-Device-Independent Quantum Key Distribution}{}% 27
+\BOOKMARK [1][-]{section.4.1}{MDI-QKD Protocol}{chapter.4}% 28
+\BOOKMARK [1][-]{section.4.2}{Integrated Transmitters}{chapter.4}% 29
+\BOOKMARK [1][-]{section.4.3}{Results}{chapter.4}% 30
+\BOOKMARK [1][-]{section.4.4}{Outlook}{chapter.4}% 31
+\BOOKMARK [0][-]{chapter.5}{Fully Integrated Quantum Key Distribution}{}% 32
+\BOOKMARK [1][-]{section.5.1}{QKD Metropolitan Network Requirements}{chapter.5}% 33
+\BOOKMARK [1][-]{section.5.2}{Receiver Device}{chapter.5}% 34
+\BOOKMARK [1][-]{section.5.3}{Experimental Setup}{chapter.5}% 35
+\BOOKMARK [1][-]{section.5.4}{Results}{chapter.5}% 36
+\BOOKMARK [1][-]{section.5.5}{Outlook}{chapter.5}% 37
+\BOOKMARK [0][-]{chapter.6}{Laser Seeding}{}% 38
+\BOOKMARK [1][-]{section.6.1}{QKD Transmitters Requirements}{chapter.6}% 39
+\BOOKMARK [1][-]{section.6.2}{Test Device}{chapter.6}% 40
+\BOOKMARK [1][-]{section.6.3}{Results}{chapter.6}% 41
+\BOOKMARK [1][-]{section.6.4}{Outlook}{chapter.6}% 42
+\BOOKMARK [0][-]{chapter.7}{Conclusion}{}% 43
+\BOOKMARK [0][-]{chapter*.8}{Bibliography}{}% 44
