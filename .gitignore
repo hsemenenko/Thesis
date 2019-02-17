@@ -14,7 +14,7 @@
 *.toc
 # ignore pdfs
 *.pdf
-#ignore all images
+# ignore all images
 *.png
 *.svg
 *.jpg
