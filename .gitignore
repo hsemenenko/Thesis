@@ -10,7 +10,6 @@
 *.lot
 *.out
 *.synctex.gz
-*.tks
 *.toc
 # ignore pdfs
 *.pdf
