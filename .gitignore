@@ -23,3 +23,6 @@
 Examples/
 # ignore the logos
 logos/
+# ignore TeXcount history and docs
+TeXcount/Doc
+TeXcount/History
