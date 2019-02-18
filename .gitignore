@@ -1,4 +1,9 @@
 # ignore latex compiling files
+*.acn
+*.glo
+*.glo-f
+*.ist
+*.slo
 *.aux
 *.bbl
 *.blg
