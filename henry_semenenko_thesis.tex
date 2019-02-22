@@ -197,7 +197,9 @@
 \usetikzlibrary{arrows,shapes,snakes,
 		       automata,backgrounds,
 		       petri,topaths}				%To use diverse features from tikz			       
-		       
+		
+		
+	       
 %%% GLOSSARIES STUFF %%%
 	% You will need to add "makeglossaries %" to the build chain after the first latex compilation. A sutable build chain for texmaker is:
 	% latex -interaction=nonstopmode %.tex|makeglossaries %|bibtex %|latex -interaction=nonstopmode %.tex|latex -interaction=nonstopmode %.tex|dvips -Pdownload35 -o %.ps %.dvi|ps2pdf %.ps|"C:/Program Files (x86)/Adobe/Reader 11.0/Reader/AcroRd32.exe" %.pdf
@@ -241,6 +243,9 @@
 			\ifglsnogroupskip\else & & \tabularnewline\fi}%
 	}
 %%% END OF GLOSSARIES STUFF %%%       
+	
+	
+	
 		       	
 %							
 %Reduce widows  (the last line of a paragraph at the start of a page) and orphans 
