@@ -1,29 +1,15 @@
-# ignore latex compiling files
-*.acn
-*.glo
-*.glo-f
-*.ist
-*.slo
-*.aux
-*.bbl
-*.blg
-*.brf
-*.idx
-*.idx
-*.lof
-*.log
-*.lot
-*.out
-*.synctex.gz
-*.tks
-*.toc
-# ignore pdfs
-*.pdf
-# ignore all images
-*.png
-*.svg
-*.jpg
-*.jpeg
+# All files
+*.*
+# Include latex files
+!*.tex
+!*.bib
+# Include gitignore and readme
+!.gitignore
+!README.md
+# Include Julia, perl and batch files
+!*.jl
+!*.bat
+!*.pl
 # ignore the thesis examples
 Examples/
 # ignore the logos
