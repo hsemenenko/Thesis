@@ -199,53 +199,10 @@
 		       petri,topaths}				%To use diverse features from tikz			       
 		
 		
-	       
-%%% GLOSSARIES STUFF %%%
-	% You will need to add "makeglossaries %" to the build chain after the first latex compilation. A sutable build chain for texmaker is:
-	% latex -interaction=nonstopmode %.tex|makeglossaries %|bibtex %|latex -interaction=nonstopmode %.tex|latex -interaction=nonstopmode %.tex|dvips -Pdownload35 -o %.ps %.dvi|ps2pdf %.ps|"C:/Program Files (x86)/Adobe/Reader 11.0/Reader/AcroRd32.exe" %.pdf
-	\usepackage[acronyms,toc,symbols,section,nogroupskip]{glossaries-extra}
-	\setabbreviationstyle{long-short}
-	\setabbreviationstyle[acronym]{long-short}
-	%\newglossary[glg-u]{units}{gls-u}{glo-u}{List of Units}
-	%\newglossary[glg-a]{abbreviations}{gls-a}{glo-a}{List of Abbreviations}
-	\newglossary[glg-f]{functions}{gls-f}{glo-f}{List of Functions}
-	\loadglsentries{glossaryEntries}
-	% Something important
-	\makeglossaries
-	% Add the ones that may not be referenced in the text
-	%\glsadd{S}
-	%\glsadd{j}
-	%\glsadd{mps}
-	% This command makes sure the entry name is in bold
-	\renewcommand{\glsnamefont}[1]{\textbf{#1}}
-	% Make the second column a bit wider
-	%\setlength{\glsdescwidth}{0.7\textwidth}
-	% GLS style modified from that shown on https://tex.stackexchange.com/questions/161443/glossary-style-long-but-without-the-indentation-before-the-notations
-	\newglossarystyle{mylong}{%
-		\renewenvironment{theglossary}%
-			{\begin{longtable}[l]{lp{\glsdescwidth}p{\glspagelistwidth}}}%
-			{\end{longtable}}%
-		\renewcommand*{\glossaryheader}{}%
-		\renewcommand*{\glsgroupheading}[1]{}%
-		\renewcommand{\glossentry}[2]{%
-			\glsentryitem{##1}\glstarget{##1}{\glossentryname{##1}} &
-			%\glossentrysymbol{##1} &
-			\glossentrydesc{##1} &
-			##2\tabularnewline
-		}%
-		\renewcommand{\subglossentry}[3]{%
-			&
-			\glssubentryitem{##2}%
-			%\glossentrysymbol{##2} &
-			\glstarget{##2}{\strut}\glossentrydesc{##2} & ##3\tabularnewline
-		}%
-		\renewcommand*{\glsgroupskip}{%
-			\ifglsnogroupskip\else & & \tabularnewline\fi}%
-	}
-%%% END OF GLOSSARIES STUFF %%%       
-	
-	
-	
+	  
+\usepackage{acronym}
+\input{acronyms}	  
+	    
 		       	
 %							
 %Reduce widows  (the last line of a paragraph at the start of a page) and orphans 
