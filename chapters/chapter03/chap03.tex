@@ -3,24 +3,26 @@
 % Author: Henry Semenenko
 % Description: HOM Interference
 %
+% Reset all acronyms 
 \glsresetall
+% Set the graphics path to find figures
 \graphicspath{{./chapters/chapter03/fig03/}}
 
 \let\textcircled=\pgftextcircled
 \chapter{Hong-Ou-Mandel Interference Between Integrated Devices}
 \label{chap:hom}
 
-\gls{HOM} interference is a fundamental tool in any quantum engineer's toolbox. It underpins a range of quantum technologies ranging from computing to communication. While it is well understood, generating states for quantum interference at the high speeds required for modern telecommunication remains practically challenging. In this chapter, we experimentally demonstrate that \gls{InP} devices fulfil all the requirements of state-of-the-art Hong-Ou-Mandel interference while also being practically scalable. 
+\ac{HOM} interference is a fundamental tool in any quantum engineer's toolbox. It underpins a range of quantum technologies ranging from computing to communication. While it is well understood, generating states for quantum interference at the high speeds required for modern telecommunication remains practically challenging. In this chapter, we experimentally demonstrate that \ac{InP} devices fulfil all the requirements of state-of-the-art Hong-Ou-Mandel interference while also being practically scalable. 
 
 %=======
 \section{Sources and Requirements}
 \label{sec:sources}
 
-In this chapter, we discuss the main difficulties in performing	\gls{HOM} interference and some of the sources that can be used to fulfil the requirements. 
+In this chapter, we discuss the main difficulties in performing	\ac{HOM} interference and some of the sources that can be used to fulfil the requirements. 
 
 It is well understood that for two light pulses to interfere, they need to be indistinguishable. That is to say, for maximum interference, the two pulses need to have the same wavelength; arrive at the same time; have equal intensities; be in the same polarisation; and have the same pulse shape.
 
-A source for \gls{QKD} will need to fulfil a few requirements listed here:
+A source for \ac{QKD} will need to fulfil a few requirements listed here:
 
 \begin{itemize}
 	\item Good extinction ratio
@@ -35,16 +37,16 @@ Several methods can be conceived to generate weak coherent pulses (WCPs)
 \begin{itemize}
 	\item Gain switched lasers
 	\item Laser seeding
-	\item Pulse carving
+	\item Intensity modulation
 \end{itemize}
 
 \section{Experiment}
 
-In this section, we detail the experimental setup used to demonstrate HOM interference at errors and speeds required to perform state-of-the-art measurement-device-independent QKD (MDI-QKD).
+In this section, we detail the experimental setup used to demonstrate \ac{HOM} interference at errors and speeds required to perform state-of-the-art \ac{MDI}.
 
-The experiment uses two InP devices which will we label Alice and Bob. Each devices uses a CW laser which is carved into  
+The experiment uses two \ac{InP} devices which will we label Alice and Bob. Each devices uses a \ac{CW} laser which is carved into  
 
-Alice (and Bob) uses a stable current sources to drive an on-chip distributed Bragg reflector (DBR) laser which demonstrates a FWHM of < \SI{30}{\pico\metre}.
+Alice (and Bob) uses a stable current sources to drive an on-chip \acp{DBR} laser which demonstrates a \ac{FWHM} of < \SI{30}{\pico\metre}.
 
 \subsection{Laser linewidth}
 
