@@ -27,6 +27,11 @@
 % Memoir class loads useful packages by default (see manual).
 \documentclass[a4paper,11pt,leqno,openbib,oldfontcommands]{memoir} %add 'draft' to turn draft option on (see below)
 %
+		  
+%Defining custom colours
+\usepackage{xcolor}		
+\definecolor{bristol-red}{HTML}{C82A39}  
+	
 %
 % Adding metadata:
 \usepackage{datetime}
@@ -34,7 +39,7 @@
 \ifpdf
 \pdfinfo{
    /Author (Henry Semenenko)
-   /Title (PhD Thesis)
+   /Title (Advances in Chip-Based Quantum Key Distribution)
    /Keywords (integrated optics; quantum key distribution; quantum optics)
    /CreationDate (D:\pdfdate)
 }
@@ -91,12 +96,15 @@
 \newcommand\feline@chapter@marker[1][4cm]{%
 	\sbox\feline@chapter{% 
 		\resizebox{!}{#1}{\fboxsep=1pt%
-			\colorbox{gray}{\color{white}\thechapter}% 
-		}}%
-		\rotatebox{90}{% 
-			\resizebox{%
-				\heightof{\usebox{\feline@chapter}}+\depthof{\usebox{\feline@chapter}}}% 
-			{!}{\scshape\so\@chapapp}}\quad%
+			{\color{white}\thechapter}% 
+			}
+		}%
+%		\rotatebox{0}{% 
+%		\resizebox{%
+%			\heightof{\usebox{\feline@chapter}}+\depthof{\usebox{\feline@chapter}}}% 
+%		{!}{\color{red}\scshape\so\@chapapp}%
+%		}%
+		\quad%
 		\raisebox{\depthof{\usebox{\feline@chapter}}}{\usebox{\feline@chapter}}%
 } 
 \newcommand\feline@chm[1][4cm]{%
@@ -106,11 +114,11 @@
 	}}
 \makechapterstyle{daleifmodif}{
 	\renewcommand\chapnamefont{\normalfont\Large\scshape\raggedleft\so} 
-	\renewcommand\chaptitlefont{\normalfont\Large\bfseries\scshape} 
+	\renewcommand\chaptitlefont{\normalfont\huge\bfseries\scshape} 
 	\renewcommand\chapternamenum{} \renewcommand\printchaptername{} 
-	\renewcommand\printchapternum{\null\hfill\feline@chm[2.5cm]\par} 
-	\renewcommand\afterchapternum{\par\vskip\midchapskip} 
-	\renewcommand\printchaptertitle[1]{\color{gray}\chaptitlefont\raggedleft ##1\par}
+	\renewcommand\printchapternum{\thispagestyle{empty}\pagecolor{bristol-red}\null\hfill\feline@chm[2.5cm]\par} 
+	\renewcommand\afterchapternum{\par\vspace{25pt}\vskip\midchapskip} 
+	\renewcommand\printchaptertitle[1]{\if@mainmatter\color{white}\chaptitlefont\raggedleft ##1\par\newpage\nopagecolor\else\color{gray}\chaptitlefont\raggedleft ##1\par\fi}
 } 
 \makeatother 
 \chapterstyle{daleifmodif}
@@ -133,7 +141,7 @@
 % contents sections will each start on an odd-numbered page they will
 % spill over onto the even-numbered pages if extending beyond one page
 % (hopefully, this is ok).
-\newcommand{\clearemptydoublepage}{\newpage{\thispagestyle{empty}\cleardoublepage}}
+\newcommand{\clearemptydoublepage}{\newpage{\thispagestyle{empty}}~\newpage{\thispagestyle{empty}\cleardoublepage}}
 %
 %
 % Creates indexes for Table of Contents, List of Figures, List of Tables and Index
@@ -209,7 +217,8 @@
  		\fi
 	}
 %%% END OF GLOSSARIES STUFF %%%       
-		       	
+		  
+	       	
 %							
 %Reduce widows  (the last line of a paragraph at the start of a page) and orphans 
 % (the first line of paragraph at the end of a page)
@@ -361,7 +370,6 @@
 \pagenumbering{roman}
 %
 \input{frontmatter/title}
-\clearemptydoublepage
 %
 \input{frontmatter/abstract}
 \clearemptydoublepage
