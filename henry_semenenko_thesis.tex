@@ -25,12 +25,12 @@
 % preliminary pages) should normally be double-sided.
 %
 % Memoir class loads useful packages by default (see manual).
-\documentclass[a4paper,11pt,leqno,openbib,oldfontcommands]{memoir} %add 'draft' to turn draft option on (see below)
+\documentclass[a4paper,11pt,reqno,openbib,oldfontcommands]{memoir} %add 'draft' to turn draft option on (see below)
 %
 		  
 %Defining custom colours
 \usepackage{xcolor}		
-\definecolor{bristol-red}{HTML}{BE2830}  
+\definecolor{bristol-red}{HTML}{AB1F2D}  
 	
 %
 % Adding metadata:
@@ -119,7 +119,7 @@
 	\renewcommand\chapternamenum{} \renewcommand\printchaptername{} 
 	\renewcommand\printchapternum{\thispagestyle{empty}\pagecolor{bristol-red}\null\hfill\feline@chm[2.5cm]\par} 
 	\renewcommand\afterchapternum{\par\vspace{25pt}\vskip\midchapskip} 
-	\renewcommand\printchaptertitle[1]{\if@mainmatter\color{white}\chaptitlefont\raggedleft ##1\par\newpage\nopagecolor\else\color{gray}\chaptitlefont\raggedleft ##1\par\fi}
+	\renewcommand\printchaptertitle[1]{\if@mainmatter\color{white}\chaptitlefont\raggedleft ##1\par\newpage{\thispagestyle{empty}}\nopagecolor~\newpage\else\color{gray}\chaptitlefont\raggedleft ##1\par\fi}
 } 
 \makeatother 
 \chapterstyle{daleifmodif}
@@ -132,8 +132,8 @@
 \makeoddfoot{myvf}{}{\thepage}{} 
 \makeevenfoot{myvf}{}{\thepage}{} 
 \makeheadrule{myvf}{\textwidth}{\normalrulethickness} 
-\makeevenhead{myvf}{\small\textsc{\leftmark}}{}{} 
-\makeoddhead{myvf}{}{}{\small\textsc{\rightmark}}
+\makeevenhead{myvf}{\small\textsc{\rightmark}}{}{} 
+\makeoddhead{myvf}{}{}{\small\textsc{\leftmark}}
 \pagestyle{myvf}
 %
 % Oscar's command (it works):
@@ -161,6 +161,8 @@
 \usepackage{import}
 
 % Add other packages needed for chapters here. For example:
+\usepackage{lipsum}
+\usepackage{braket}
 \usepackage{amsfonts} 					%Calls Amer. Math. Soc. (AMS) fonts
 \usepackage[centertags]{amsmath}			%Writes maths centred down
 \usepackage{stmaryrd}					%New AMS symbols
@@ -368,7 +370,7 @@
 % in the text.
 % 
 \frontmatter
-\pagenumbering{roman}
+\pagenumbering{gobble}
 %
 \input{frontmatter/title}
 %
@@ -381,6 +383,7 @@
 \input{frontmatter/declaration}
 \clearemptydoublepage
 %
+\pagenumbering{roman}
 \renewcommand{\contentsname}{Table of Contents}
 \maxtocdepth{subsection}
 \tableofcontents*
