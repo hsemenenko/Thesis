@@ -11,10 +11,12 @@
 \let\textcircled=\pgftextcircled
 \chapter[HOM Interference Between Integrated Devices]{Hong-Ou-Mandel Interference Between Integrated Devices}
 \label{chap:hom}
+%=======
 
 \ac{HOM} interference is a fundamental tool in any quantum engineer's toolbox. It underpins a range of quantum technologies ranging from computing to communication. While it is well understood, generating states for quantum interference at the high speeds required for modern telecommunication remains practically challenging. In this chapter, we experimentally demonstrate that \ac{InP} devices fulfil all the requirements of state-of-the-art Hong-Ou-Mandel interference while also being practically scalable. 
 
-%=======
+\section{Hong-Ou-Mandel Interference with Coherent States}
+
 \section{Sources and Requirements}
 \label{sec:sources}
 
@@ -48,9 +50,30 @@ The experiment uses two \ac{InP} devices which will we label Alice and Bob. Each
 
 Alice (and Bob) uses a stable current sources to drive an on-chip \ac{DBR} laser which demonstrates a \ac{FWHM} of < \SI{30}{\pico\metre}, although this is limited by the precision of the \ac{OSA} used.
 
+\begin{figure}[tbp]
+	\centering
+	\includegraphics[width=\textwidth]{Experiment.png}
+	\caption[HOM experimental setup]{Experimental setup of of the \ac{HOM} interference experiment with two identical \ac{InP} chips.}
+	\label{fig:hom_experiment}
+\end{figure}
+
 \subsection{Laser Linewidth}
 
+\begin{figure}[tbp]
+	\centering
+	\includegraphics[width=0.8\textwidth]{spectrum.pdf}
+	\caption[Laser spectrum]{Spectrum of the on-chip laser demonstrating a \ac{FWHM} of < \SI{30}{\pico\metre}.}
+	\label{fig:spectrum}
+\end{figure}
+
 \subsection{Pulse Carving}
+
+\begin{figure}[tbp]
+	\centering
+	\includegraphics[width=0.8\textwidth]{Pulse.pdf}
+	\caption[Pulse carving]{Pulse carving showing >20dB extinction ratio and a \ac{FWHM} of \SI{175}{\pico\second}.}
+	\label{fig:pulses}
+\end{figure}
 
 \subsection{Phase Randomisation}
 
@@ -59,6 +82,13 @@ Alice (and Bob) uses a stable current sources to drive an on-chip \ac{DBR} laser
 \section{Results}
 
 \subsection{Hong-Ou-Mandel Interference Between GHZ Coherent States}
+
+\begin{figure}[tbp]
+	\centering
+	\includegraphics[width=0.8\textwidth]{HOM.pdf}
+	\caption[Hong-Ou-Mandel interference between integrated devices]{\ac{HOM} interference between two integrated devices demonstrating $46.5\pm0.8\%$ visibility.}
+	\label{fig:HOM}
+\end{figure}
 
 \subsection{Phase Coherence}
 
