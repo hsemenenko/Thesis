@@ -119,7 +119,24 @@
 	\renewcommand\chapternamenum{} \renewcommand\printchaptername{} 
 	\renewcommand\printchapternum{\thispagestyle{empty}\ifdraftdoc\else\pagecolor{bristol-red}\fi\null\hfill\feline@chm[2.5cm]\par} 
 	\renewcommand\afterchapternum{\par\vspace{25pt}\vskip\midchapskip} 
-	\renewcommand\printchaptertitle[1]{\if@mainmatter\ifdraftdoc\color{gray}\else\color{white}\fi\chaptitlefont\raggedleft ##1\par\newpage{\thispagestyle{empty}}\nopagecolor~\newpage\else\color{gray}\chaptitlefont\raggedleft ##1\par\fi}
+	\renewcommand\printchaptertitle[1]{
+	\if@mainmatter
+		\ifdraftdoc
+			\color{gray}
+		\else
+			\color{white}
+		\fi
+		\chaptitlefont\raggedleft ##1\par
+		\begin{figure*}
+			\centering
+			\includegraphics[scale=0.35]{./logos/whitelogo_small.png}
+		\end{figure*}				
+		
+		\newpage{\thispagestyle{empty}}\nopagecolor~\newpage
+	\else
+		\color{gray}\chaptitlefont\raggedleft ##1\par
+	\fi
+	}
 } 
 \makeatother 
 \chapterstyle{daleifmodif}
