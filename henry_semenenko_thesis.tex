@@ -204,6 +204,43 @@
 		       automata,backgrounds,
 		       petri,topaths}				%To use diverse features from tikz			       
 		
+		
+%%% PGFPLOTS STUFF %%%
+
+\usepackage{pgfplots}
+\pgfplotsset{compat=newest}
+\usepgfplotslibrary{colorbrewer}
+\pgfplotsset{
+        % load the `cycle list' or `colormap' that contains the colors you want to use
+        cycle list/RdYlGn,
+        % define own `cycle list' by first creating a custom `colormap' where
+        % the colors are reversed ...
+        colormap={RdYlGn-reversed}{
+            indices of colormap=(
+                \pgfplotscolormaplastindexof{RdYlGn},...,0 of RdYlGn
+            )
+        },
+        % ... which then is mapped to a `cycle list'
+        cycle list/.define={RdYlGn-reversed}{[of colormap=RdYlGn-reversed]},
+    }
+    
+\makeatletter \newcommand{\pgfplotsdrawaxis}{\pgfplots@draw@axis} \makeatother
+
+\pgfplotsset{axis line on top/.style={
+  axis line style=transparent,
+  ticklabel style=transparent,
+  tick style=transparent,
+  axis on top=false,
+  after end axis/.append code={
+    \pgfplotsset{axis line style=opaque,
+      ticklabel style=opaque,
+      tick style=opaque,
+      grid=none}
+    \pgfplotsdrawaxis}
+  }
+}
+
+%%% END %%%
 		  
 %%% GLOSSARIES STUFF %%%
 	\usepackage[acronym,toc,symbols,section,nogroupskip,shortcuts=ac]{glossaries-extra}

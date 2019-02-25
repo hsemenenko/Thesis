@@ -19,6 +19,111 @@
 
 \Ac{HOM} interference is a quantum phenomena where two single photons incident on a beam splitter will interfere and bunch. This is an important process that is fundamental is many quantum information technologies.
 
+\subsection{Coherent States on a Beam Splitter}
+
+Consider two coherent states, $\ket{\alpha}$ and $\ket{\beta}$, incident on a beam splitter. Before the beam splitter, the states can be written as
+
+\begin{equation}
+\begin{split}
+	\ket{\alpha} = \text{D}(\alpha)\ket{0} = e^{\alpha a^\dagger - \alpha^\ast a}\ket{0} = e^{-\frac{|\alpha|^2}{2}} e^{-\alpha^\ast a} e^{\alpha a^\dagger}\ket{0}\\
+	\ket{\beta} = \text{D}(\beta)\ket{0} = e^{\beta b^\dagger - \beta^\ast b}\ket{0} = e^{-\frac{|\beta|^2}{2}} e^{-\beta^\ast b} e^{\beta b^\dagger}\ket{0}
+\end{split}
+\end{equation}
+which, before the beam splitter, can be written jointly as
+\begin{equation}
+	\text{D}(\alpha)\otimes\text{D}(\beta)\ket{0}
+\end{equation}
+
+For generality, we can consider a beam splitter in terms of reflections, $r$, and transmissions, $t$, which yields the transformation matrix
+\begin{equation}
+	\left(
+	\begin{matrix}
+		t & r \\
+		-r & t
+	\end{matrix}
+	\right)
+	\quad\text{such that}\quad
+	|r|^2 + |t|^2 = 1 
+	\quad\text{and}\quad
+	r^\ast t + r t^\ast = 0
+\end{equation}
+Using this beam splitter, where modes $a$ and $b$ are the incoming channels and $c$ and $d$ are the outgoing, the transformations are
+\begin{equation}
+	a^\dagger \rightarrow rc^\dagger + td^\dagger, \quad a \rightarrow r^\ast c + t^\ast d, \quad b^\dagger \rightarrow tc^\dagger - rd^\dagger, \quad b \rightarrow t^\ast c - r^\ast d
+\end{equation}
+so after the beam splitter, the state becomes
+\begin{align}
+	\text{D}_a(\alpha)\otimes\text{D}_b(\beta)\ket{0} &=  e^{\alpha a^\dagger - \alpha^\ast a} e^{\beta b^\dagger - \beta^\ast b}\ket{0}\\
+	&\longrightarrow  e^{\alpha (r c^\dagger + t d^\dagger) - \alpha^\ast (r^\ast c + t^\ast d)}e^{\beta (t c^\dagger - r d^\dagger) - \beta^\ast (t^\ast c - r^\ast d)}\ket{0}\\
+	&=  e^{(\alpha r + \beta t) c^\dagger - (\alpha^\ast r^\ast + \beta^\ast t^\ast) c} e^{(\alpha t - \beta r) d^\dagger - (\alpha^\ast t^\ast - \beta^\ast r^\ast) d}\ket{0}\\
+	&=  \text{D}_c(\alpha r + \beta t)\text{D}_d(\alpha t - \beta r)\ket{0}
+\end{align}
+given a 50:50 beam splitter, this gives the output $\text{D}_c(\frac{1}{\sqrt{2}}\big(i\alpha + \beta\big))\text{D}_d(\frac{1}{\sqrt{2}}\big(\alpha - i\beta\big))$. The single photon detectors are threshold, meaning that single photon events are not distinguishable from multi-photon events. The two detectors $\text{Det}_1$ and $\text{Det}_2$ have efficiencies $\eta_1$ and $\eta_2$, respectively. Therefore, the probability of a click in $\text{Det}_\text{c}$ is given by
+\begin{align}
+	\text{P}(\text{Det}_1 \text{ click}) &= \sum_{n=0}^\infty \frac{|\alpha r + \beta t|^{2n} e^{-|\alpha r + \beta t|^2}}{n!}(1-(1-\eta_1)^n)\\
+	&= 1 - e^{-|\alpha r + \beta t|^2 \eta_1}
+\end{align}
+and equivalently,
+\begin{equation}
+	\text{P}(\text{Det}_2 \text{ click}) = 1 - e^{-|\alpha t - \beta r|^2 \eta_2}
+\end{equation}
+Therefore, the probability of a coincidence click, with both coherent states overlapped on a beam splitter, is
+\begin{align}
+	\text{P}_\text{HOM}\text{(coincidence)} &= \text{P}(\text{Det}_1 \text{ click}) \times \text{P}(\text{Det}_2 \text{ click})\\
+	&= \left(1 - e^{-|\alpha r + \beta t|^2 \eta_1}\right)\left(1 - e^{-|\alpha t - \beta r|^2 \eta_2}\right)
+\end{align}
+
+\begin{figure}[tbp]
+\begin{tikzpicture}
+\begin{axis}[
+    axis line on top,
+	xlabel = {Reflectivity/Transmission},
+	ylabel = {Visibility},
+	width = 0.9\linewidth,
+	height = 0.5\linewidth,
+	cycle list name = RdYlGn-reversed,
+	xmin = 0,
+	xmax = 1,
+	ymin = 0,
+	ymax = 0.55,
+	xtick pos=left,
+	ytick pos=left,
+	xtick = {0,0.25,0.5,0.75,1},
+	ytick = {0,0.25,0.5},
+    tick align=outside,
+    grid=both,
+    grid style={line width=.1pt, draw=gray!10},
+    legend style={fill=blue!5, draw=gray!50}
+	]
+\addplot+[very thick] table[x index=0, y index = 1, col sep=comma] {./chapters/chapter03/fig03/HOM_Coherent/HOM_Bs_vis.dat};
+\addlegendentry{0.01};
+\foreach \y in {2,...,10}{
+  \edef\temp{\noexpand\addlegendentry{\y}}
+  \addplot+[very thick] table[x index=0,y index=\y, col sep=comma] {./chapters/chapter03/fig03/HOM_Coherent/HOM_Bs_vis.dat};
+  \temp
+}
+\end{axis}
+\end{tikzpicture}
+	\caption{Graph plotting the effect of an unbalanced beam splitter on the visibility of a HOM dip. Maximal visibility is found when the beam splitter is 50:50. Photon number also has an effect on visibility when using coherent states. Here we see average photon numbers ranging from 0.01 to 10. Both states are assumed to have equal average photon number.}
+	\label{fig:HOM_BS_Vis}
+\end{figure}
+
+To get a visibility for the HOM dip, we need to consider two coherent states not interfering on a beam splitter. The distributions after a beam splitter is a Poisson distribution of $P(|r\alpha|^2 + |t\beta|^2)$ and $P(|t\alpha|^2 + |r\beta|^2)$. Therefore, the probability of coincidence is given by
+\begin{align}
+	\text{P}_\text{ind}(\text{coincidence}) &= \left(1 - e^{-\eta_1(|r\alpha|^2 + |t\beta|^2)}\right)\left(1 - e^{-\eta_2(|t\alpha|^2 + |r\beta|^2)}\right)
+\end{align}
+We want to consider pulses that are phase randomised relative to each other. For this, we can introduce a phase $e^{i\theta}$ into the pulse incident from channel $a$. The coincidence probabilities then become
+\begin{align}
+	&\text{P}_\text{HOM}\text{(coincidence)} = \frac{1}{2\pi}\int_0^{2\pi}\left(1 - e^{-|e^{i\theta}\alpha r + \beta t|^2 \eta_1}\right)\left(1 - e^{-|e^{i\theta}\alpha t - \beta r|^2 \eta_2}\right)\text{d}\theta\\
+	&\text{P}_\text{ind}(\text{coincidence}) = \left(1 - e^{-\eta_1(|r\alpha|^2 + |t\beta|^2)}\right)\left(1 - e^{-\eta_2(|t\alpha|^2 + |r\beta|^2)}\right)
+\end{align}
+The visibility of the HOM dip can be calculated as
+\begin{equation}
+	\text{Visibility} = 1 - \frac{\text{P}_\text{HOM}}{\text{P}_\text{ind}}
+\end{equation}
+
+Using these equations, it is possible to estimate the visibility of a HOM dip given a beam splitter that is not 50:50. The effects of this will be seen in a reduced visibility. The average photon number of the pulses used will also affect the visibility as the detectors are threshold. In figure \ref{fig:HOM_BS_Vis} the effect of varying the photon number and using an unbalanced beam splitter on the visibility of interference.
+
 \section{Sources and Requirements}
 \label{sec:sources}
 
@@ -40,7 +145,7 @@ Several methods can be conceived to generate \acp{wcp}.
 
 \begin{itemize}
 	\item Gain switched lasers (filter required and timing jitter problems)
-	\item Laser seeding	(Multi-level and expensive control required)
+	\item Laser seeding	(Multi-level and expensive control required, filtering required)
 	\item Intensity modulation
 \end{itemize}
 
