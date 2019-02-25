@@ -47,8 +47,8 @@
 % When draft option is on. 
 \ifdraftdoc 
 	\usepackage{draftwatermark}				%Sets watermarks up.
-	\SetWatermarkScale{1}
-	\SetWatermarkText{\bf Draft}%: \today}
+	\SetWatermarkScale{0.25}
+	\SetWatermarkText{\bf Draft: \today}
 \fi
 %
 % Declare figure/table as a subfloat.
@@ -97,7 +97,7 @@
 \newcommand\feline@chapter@marker[1][4cm]{%
 	\sbox\feline@chapter{% 
 		\resizebox{!}{#1}{\fboxsep=1pt%
-			{\color{white}\thechapter}% 
+			{\ifdraftdoc\color{gray}\else\color{white}\fi\thechapter}% 
 			}
 		}%
 %		\rotatebox{0}{% 
@@ -117,9 +117,9 @@
 	\renewcommand\chapnamefont{\normalfont\Large\scshape\raggedleft\so} 
 	\renewcommand\chaptitlefont{\normalfont\huge\bfseries\scshape} 
 	\renewcommand\chapternamenum{} \renewcommand\printchaptername{} 
-	\renewcommand\printchapternum{\thispagestyle{empty}\pagecolor{bristol-red}\null\hfill\feline@chm[2.5cm]\par} 
+	\renewcommand\printchapternum{\thispagestyle{empty}\ifdraftdoc\else\pagecolor{bristol-red}\fi\null\hfill\feline@chm[2.5cm]\par} 
 	\renewcommand\afterchapternum{\par\vspace{25pt}\vskip\midchapskip} 
-	\renewcommand\printchaptertitle[1]{\if@mainmatter\color{white}\chaptitlefont\raggedleft ##1\par\newpage{\thispagestyle{empty}}\nopagecolor~\newpage\else\color{gray}\chaptitlefont\raggedleft ##1\par\fi}
+	\renewcommand\printchaptertitle[1]{\if@mainmatter\ifdraftdoc\color{gray}\else\color{white}\fi\chaptitlefont\raggedleft ##1\par\newpage{\thispagestyle{empty}}\nopagecolor~\newpage\else\color{gray}\chaptitlefont\raggedleft ##1\par\fi}
 } 
 \makeatother 
 \chapterstyle{daleifmodif}
@@ -142,7 +142,7 @@
 % contents sections will each start on an odd-numbered page they will
 % spill over onto the even-numbered pages if extending beyond one page
 % (hopefully, this is ok).
-\newcommand{\clearemptydoublepage}{\newpage{\thispagestyle{empty}}~\newpage{\thispagestyle{empty}\cleardoublepage}}
+\newcommand{\clearemptydoublepage}{\clearpage{\thispagestyle{empty}}~\newpage{\thispagestyle{empty}\cleardoublepage}}
 %
 %
 % Creates indexes for Table of Contents, List of Figures, List of Tables and Index
@@ -431,6 +431,12 @@
 \refstepcounter{chapter}
 \bibliography{thesisbiblio}
 \clearemptydoublepage
+\ifdraftdoc
+\else
+	\pagecolor{bristol-red}
+	~\newpage{\thispagestyle{empty}}
+	~\newpage{\thispagestyle{empty}}
+\fi
 %
 % Add index
 %\printindex

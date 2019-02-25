@@ -15,12 +15,14 @@
 
 \ac{HOM} interference is a fundamental tool in any quantum engineer's toolbox. It underpins a range of quantum technologies ranging from computing to communication. While it is well understood, generating states for quantum interference at the high speeds required for modern telecommunication remains practically challenging. In this chapter, we experimentally demonstrate that \ac{InP} devices fulfil all the requirements of state-of-the-art Hong-Ou-Mandel interference while also being practically scalable. 
 
-\section{Hong-Ou-Mandel Interference with Coherent States}
+\section{Hong-Ou-Mandel Interference}
+
+\Ac{HOM} interference is a quantum phenomena where two single photons incident on a beam splitter will interfere and bunch. This is an important process that is fundamental is many quantum information technologies.
 
 \section{Sources and Requirements}
 \label{sec:sources}
 
-In this chapter, we discuss the main difficulties in performing	\ac{HOM} interference and some of the sources that can be used to fulfil the requirements. 
+In this section, we discuss the main difficulties in performing	\ac{HOM} interference and some of the sources that can be used to fulfil the requirements. 
 
 It is well understood that for two light pulses to interfere, they need to be indistinguishable. That is to say, for maximum interference, the two pulses need to have the same wavelength; arrive at the same time; have equal intensities; be in the same polarisation; and have the same pulse shape.
 
@@ -37,8 +39,8 @@ A source for \ac{QKD} will need to fulfil a few requirements listed here:
 Several methods can be conceived to generate \acp{wcp}.
 
 \begin{itemize}
-	\item Gain switched lasers
-	\item Laser seeding
+	\item Gain switched lasers (filter required and timing jitter problems)
+	\item Laser seeding	(Multi-level and expensive control required)
 	\item Intensity modulation
 \end{itemize}
 
@@ -46,51 +48,45 @@ Several methods can be conceived to generate \acp{wcp}.
 
 In this section, we detail the experimental setup used to demonstrate \ac{HOM} interference at errors and speeds required to perform state-of-the-art \ac{MDI}.
 
-The experiment uses two \ac{InP} devices which will we label Alice and Bob. Each devices uses a \ac{CW} laser which is carved into  
-
-Alice (and Bob) uses a stable current sources to drive an on-chip \ac{DBR} laser which demonstrates a \ac{FWHM} of < \SI{30}{\pico\metre}, although this is limited by the precision of the \ac{OSA} used.
-
 \begin{figure}[tbp]
 	\centering
-	\includegraphics[width=\textwidth]{Experiment.png}
+	\includegraphics[width=\textwidth]{Experiment}
 	\caption[HOM experimental setup]{Experimental setup of of the \ac{HOM} interference experiment with two identical \ac{InP} chips.}
 	\label{fig:hom_experiment}
 \end{figure}
 
-\subsection{Laser Linewidth}
+The experiment uses two \ac{InP} devices which will we give the usual labels: Alice and Bob. Each device measures only \SI[product-units=power]{6x2}{mm} and contains all the required photonic components to generate the required states to perform \ac{HOM} interference at GHz rates. On only needs to compare the sizes of these optical components to fibre based optics to justify the benefits of integrated devices.
+
+Each devices contains a \ac{CW} laser which consists of two \acp{DBR} and a \ac{SOA} which forms a cavity to create a laser only \SI{1}{mm} in length. Typical spectra of the two transmitter lasers is shown in figure \ref{fig:spectra} which demonstrates a \SI{<30}{pm} \ac{FWHM} and a \SI{>50}{dB} sideband suppression. Notice that the linewidth here is stated as \SI{<30}{pm} \ac{FWHM} as this is limited to the precision of the \ac{OSA} used. 
 
 \begin{figure}[tbp]
 	\centering
-	\includegraphics[width=0.8\textwidth]{spectrum.pdf}
-	\caption[Laser spectrum]{Spectrum of the on-chip laser demonstrating a \ac{FWHM} of < \SI{30}{\pico\metre}.}
-	\label{fig:spectrum}
+	\includegraphics[width=0.8\textwidth]{spectrum}
+	\caption[Laser spectrum]{Typical spectra of the two on-chip laser demonstrating a \ac{FWHM} of \SI{<30}{pm}.}
+	\label{fig:spectra}
 \end{figure}
 
-\subsection{Pulse Carving}
+We note here that the narrow linewidth of the laser means that during no experiment with the \ac{InP} chips do we need to use a wavelength filter to clean up the light or optical pulses. This is important as it removed a component that would add cost to any system but also restrict the wavelength operation of the devices. Without the need for a filter, the lasers are free to operate in a wavelength that spans more than \SI{10}{nm}. This will be crucial as it is likely that \ac{QKD} systems will needed to be wavelength-division multiplexed (WDM) to meet the demands of high-speed networks.
+
+Alice (and Bob) uses a stable current sources to drive an on-chip \ac{DBR} laser which demonstrates a \ac{FWHM} of < \SI{30}{pm}, although this is limited by the precision of the \ac{OSA} used.
 
 \begin{figure}[tbp]
 	\centering
-	\includegraphics[width=0.8\textwidth]{Pulse.pdf}
+	\includegraphics[width=0.8\textwidth]{Pulse}
 	\caption[Pulse carving]{Pulse carving showing >20dB extinction ratio and a \ac{FWHM} of \SI{175}{\pico\second}.}
 	\label{fig:pulses}
 \end{figure}
 
-\subsection{Phase Randomisation}
-
-\subsection{Coincidence Logic}
-
-\section{Results}
-
-\subsection{Hong-Ou-Mandel Interference Between GHZ Coherent States}
+\section{Hong-Ou-Mandel Interference Between GHZ Coherent States}
 
 \begin{figure}[tbp]
 	\centering
-	\includegraphics[width=0.8\textwidth]{HOM.pdf}
+	\includegraphics[width=0.8\textwidth]{HOM}
 	\caption[Hong-Ou-Mandel interference between integrated devices]{\ac{HOM} interference between two integrated devices demonstrating $46.5\pm0.8\%$ visibility.}
 	\label{fig:HOM}
 \end{figure}
 
-\subsection{Phase Coherence}
+\section{Phase Randomisation}
 
 \section{Outlook}
 
