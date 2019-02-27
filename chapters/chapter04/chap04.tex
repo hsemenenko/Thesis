@@ -18,7 +18,21 @@
 
 \subsection{Protocol}
 
+Unlike a traditional point-to-point key exchange, \ac{MDI} introduces third party to act as to mediate the exchange.  
+
 \subsection{Security and Key Rates}
+
+The key rate of \ac{MDI} is given as
+
+\begin{equation}
+	R = p_{11}^Z Y_{11}^Z \left(1 - H_2(e_{11}^X)\right) - Q_{\mu\mu}^Z f_e E_{\mu\mu}^Z H_2(E_{\mu\mu}^Z)
+\end{equation}
+in the asymptotic case. As we are unable to know $Y_{11}^Z$ and $e_{11}^X$ exactly, we need to estimate. Therefore, we defined the lower bound of the secret key rate as
+
+\begin{equation}
+	\underline{R} \geq R
+\end{equation}
+for some lower and upper bounds of $Y_{11}^Z$ and $e_{11}^X$, respectively.
 
 \subsection{Shared Resources}
 
@@ -43,6 +57,10 @@
 \subsection{2GHz Clock Rate}
 
 \section{Outlook}
+
+\subsection{Security of Tranmitters}
+
+The security of the transmitters is still important \cite{makarov2019}.
 
 \subsection{Multiplexing}
 
