@@ -3,8 +3,6 @@
 % Author: Henry Semenenko
 % Description: Chip based MDI-QKD
 %
-% Reset all acronyms 
-\glsresetall
 % Set the graphics path to find figures
 \graphicspath{{./chapters/chapter04/fig04/}}
 
@@ -12,7 +10,7 @@
 \chapter[Chip-Based Measurement-Device-Independent QKD]{Chip-Based Measurement-Device-Independent Quantum Key Distribution}
 \label{chap:mdiqkd}
 
-In this section, we will be experimentally demonstrating 
+In this section, we will be experimentally demonstrating \ac{MDI} \cite{mdi-qkd} using integrated \ac{InP} transmitter devices. The receiver will be a fibre setup.
 
 %=======
 \section{Measurement-Device-Independent Quantum Key Distribution}
@@ -22,8 +20,6 @@ Unlike a traditional point-to-point key exchange, \ac{MDI} introduces third part
 
 \subsection{Protocol}
 
-The protocol is shown in figure \ref{fig:mdi_protocol}.
-
 \begin{figure}[tbp]
 	\centering
 	\includegraphics[scale=0.25]{MDI-QKD_Protocol.png}
@@ -31,12 +27,14 @@ The protocol is shown in figure \ref{fig:mdi_protocol}.
 	\label{fig:mdi_protocol}
 \end{figure}
 
+The protocol is shown in figure \ref{fig:mdi_protocol}. We will use a 4 decoy state protocol \cite{zhou2016} which treats the $Z$ and $X$ bases separately. The $Z$ basis is used entirely to generate keys, while the $X$ basis is used to bound knowledge gained by an eavesdropper. This is optimal for the symmetric case. The asymmetric case needs to be dealt with slightly differently \cite{wang2018}.
+
 \subsection{Security and Key Rates}
 
 The key rate of \ac{MDI} is given as
 
 \begin{equation}
-	R = p_{11}^Z Y_{11}^Z \left(1 - H_2(e_{11}^X)\right) - Q_{\mu\mu}^Z f_e e_{\mu\mu}^Z H_2(e_{\mu\mu}^Z)
+	R = p_{11}^Z Y_{11}^Z \left(1 - H_2(E_{11}^X)\right) - Q_{\mu_s\mu_S}^Z f_e E_{\mu_s\mu_s}^Z H_2(E_{\mu_s\mu_s}^Z)
 \end{equation}
 in the asymptotic case. As we are unable to know $Y_{11}^Z$ and $e_{11}^X$ exactly, we need to estimate. Therefore, we defined the lower bound of the secret key rate as
 
@@ -44,15 +42,29 @@ in the asymptotic case. As we are unable to know $Y_{11}^Z$ and $e_{11}^X$ exact
 	\underline{R} \geq R
 \end{equation}
 
-for some lower and upper bounds of $Y_{11}^Z$ and $e_{11}^X$, respectively. These bounds can be found through the decoy state technique \cite{}. In essence, decoys states are measuring the loss of the channel during a key exchange to bound the knowledge that could be gain by an eavesdropper. 
+for some lower and upper bounds of $Y_{11}^Z$ and $E_{11}^X$, respectively. These bounds can be found through the decoy state technique \cite{}. In essence, decoys states are measuring the loss of the channel during a key exchange to bound the knowledge that could be gain by an eavesdropper. 
+
+By measuring different intensities in a decoy state protocol, we can measure
 
 \begin{equation}
-	\underline{Y}_{11}^X = 
+	Q_{\mu_a \mu_b}^Z = \sum_{n,m=0} e^{-(\mu_a + \mu_b)}\frac{\mu_a^n}{n!}\frac{\mu_b^m}{m!} Y_{n,m}^Z
 \end{equation}
 
 \begin{equation}
-	\bar{e}_{11}^Z = 
+	Q_{\mu_{a} \mu_{b}}^X E^{X}_{\mu_{a} \mu_{b}}=\sum_{n, m=0} e^{-\left(\mu_{\mathrm{a}}+\mu_{\mathrm{b}}\right)} \frac{q_{\mathrm{a}}^{n}}{n !} \frac{q_{\mathrm{b}}^{m}}{m !} Y^{X}_{n, m} E^{X}_{n, m}
 \end{equation}
+
+where $\mu_a$ ($\mu_b$) are the intensities of Alice's (Bob's) pulses.
+
+\begin{equation}
+	\underline{Y_{11}^Z} = \frac{1}{\left(\mu_{\mathrm{a}}-\omega_{\mathrm{a}}\right)\left(\mu_{\mathrm{b}}-\omega_{\mathrm{b}}\right)\left(v_{\mathrm{a}}-\omega_{\mathrm{a}}\right)\left(\nu_{\mathrm{b}}-\omega_{\mathrm{b}}\right)\left(\mu_{\mathrm{a}}-v_{\mathrm{a}}\right)}
+\end{equation}
+
+\begin{equation}
+	\overline{E_{11}^Z} = \frac{1}{\left(v_{\mathrm{a}}-\omega_{\mathrm{a}}\right)\left(v_{\mathrm{b}}-\omega_{\mathrm{b}}\right) \underline{Y^{X}_{1,1}}}
+\end{equation}
+
+We can use the decoy sates in $X$ to bound the single photon events in $Z$ \cite{zhou2016}.
 
 \subsection{Shared Resources}
 
