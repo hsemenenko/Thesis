@@ -16,15 +16,44 @@ As with any work of research, it is built upon centuries of previous work. Here 
 \section{Cryptography}
 \label{sec1:crypto}
 
-Cryptography is the process of taking a message and translating it into a ciphertext. Importantly, it also encompasses the reverse process of taking a ciphertext and returning the original message. The idea of obscuring messages from third-party onlookers dates back (as far as we can tell) to ancient Egypt and has played an important role in the world for the last 2 millennia. 
+Cryptography is the process of taking a message ({\color{bristol-red} plaintext}) and translating it into a {\color{bristol-red} ciphertext}. Importantly, it also encompasses the reverse process of taking a ciphertext and returning the original message. The idea of obscuring messages from third-party onlookers dates back (as far as we can tell) to ancient Egypt and has played an important role in the world for the last 2 millennia. 
 
 The convenience of being able to share thoughts through written methods came with an immediate compromise to security.
 
 \subsection{Symmetric Key Cryptography}
 
+Two parties, typically Alice and Bob, share a secret key that can be used to encrypt messages. The method of encryption is, generally, publicly known. However, it will be hard to decrypt messages without the secret key.
+
 \subsection{Monoalphabetic Ciphers}
 
+Ciphers that permute the alphabet are known as {\color{bristol-red} monoalphabetic ciphers}. The symmetric key in these ciphers is the permutation used. There are two well known cases of monoalphabetic ciphers which we will present here. 
+
+\subsubsection*{Ceasar Cipher}
+
+\begin{center}
+\begin{tabular}{l l}%{@{}l@{\ }l}
+	Plain:  &\quad{\tt a b c \ldots x y z} \\ 
+	Cipher: &\quad{\tt A B C \ldots X Y Z} \\
+\end{tabular}
+\end{center}
+
+\subsubsection*{Affine Cipher}
+
+\subsection{Polyalphabetic Ciphers}
+
+\subsubsection*{Vigen\`{e}re Cipher}
+
+This cipher was developed by Giovan Battista Bellaso in 1553 but is attributed to Blaise de Vigen\`{e}re. The key is a word or phrase which can be `added' to the plaintext to get the cipher text.
+
+\subsubsection*{One-Time Pad}
+
+A polyalphabetic cipher where the key is as long as the message. If the key is truly random, each message is equally likely given a cipher text. Therefore, it is unbreakable provided that the key is completely secure.
+
+The problems then becomes how to distribute the keys between Alice and Bob.
+
 \subsection{Block Ciphers}
+
+\Ac{aes} is, by far, the most used encryption method used today. It is generally thought that \ac{aes} is secure against attacks by a quantum computer. However, much like security using classical computers, there is no proof.
 
 \subsection{Public Key Cryptography}
 
