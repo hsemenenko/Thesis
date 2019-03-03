@@ -63,7 +63,7 @@ This cipher was developed by Giovan Battista Bellaso in 1553 \cite{} but is attr
 
 A polyalphabetic cipher where the key is as long as the message. If the key is truly random, each message is equally likely given a cipher text. Therefore, it is unbreakable provided that the key is completely secure.
 
-The problems then becomes how to distribute the keys.
+The problem then becomes how to distribute the keys.
 
 \subsection{Block Ciphers}
 
@@ -80,8 +80,10 @@ This is the research into how encryption can be broken.
 
 \section{Quantum Theory}
 
+Coherent states are very useful and are given by
+
 \begin{equation}
-	\ket{0} + \ket{1}
+	\ket{\alpha} = \mathrm{e}^{-\frac{|\alpha|^2}{2}} \sum_{n=0}^\infty \frac{\alpha^n}{\sqrt{n}} \ket{n} 
 \end{equation}
 
 \subsubsection{No-Cloning Theorem}
@@ -96,9 +98,31 @@ This is the research into how encryption can be broken.
 
 \section{Quantum Key Distribution}
 
-BB84 \cite{BB84}. Shor \cite{shor1994}.
+Shor \cite{shor1994}.
 
-\subsection{Protocols}
+There are many different ways that information can be encoded on photons. This had led to quite a few different protocols. Here we will discuss 
+
+The resources available to the two parties, Alice and Bob, are a quantum communication channel that can be used to send quantum states and an authenticated, public classical channel. 
+
+\subsection*{DV-QKD}
+
+The first ways that it was conceived that information could be encoded on photons was using orthogonal states to represent 0 or 1. For example, one could use the vertical and horizontal polarisations of a photon where diagonal and anti-diagonal could be used to encode superpositions. 
+
+A more practical method of encoding information when intending to use fibre optics to transmit the photons is a time-bin encoding. Now the timing and relative phase information between two pulses gives us a complete encoding of all quantum states. Provided that the two time-bins are closely spaced they won't be as affected by fluctuations in the fibre.
+
+\subsubsection*{BB84}
+
+The first \ac{QKD} protocol that was developed was the BB84 protocol, named after its inventors: Bennett and Brassard \cite{BB84}. The protocol stemmed from an earlier idea of quantum money \cite{quantum_money}.
+
+\subsubsection*{E91}
+
+Independently of the development of BB84, another protocol was developed by Ekert called E91 \cite{E91}. The protocol took advantage of the correlations of entangled photons and realised that by distributing two entangled photons between Alice and Bob meant that they could share a secret key. 
+
+\subsection*{CV-QKD}
+
+More recently there has been an interest in \ac{cvqkd} due to the compatibility with current telecomms equipments. The states are encoded in quadrature space and measured using homodyne receivers, much like how classical information is transmitter.
+
+There are still some questions about the security of \ac{cvqkd} and the practicality of the post-processing requirements. Unlike in \ac{dvqkd} where only successful measurements need to be analyse, each potential event needs to be analysed. This leads to big overheads during the error correction stages of the protocol.
 
 \subsection{Hacking}
 
@@ -112,28 +136,43 @@ To remove potential attacks on \ac{QKD} systems, protocols have been developed t
 
 Creating accurate models for equipment is particularly challenging. By removing assumptions about their operation, full characterisation is no longer required.
 
-\section{Integrated Photonics Devices}
+\section{Integrated Photonics}
 
 \subsection{Requirements}
 
 \subsection{Indium Phosphide}
 
+One of the more recent advances in integrated photonics is from III-V materials.
+
 \subsubsection*{Lasers}
+
+Multi quantum well structures in \ac{InP} mean that we can create lasers on chip.
 
 \subsubsection*{Electro-optic Modulation}
 
-\subsubsection*{Thermo-optic Modulations}
+A \ac{qcse} gives rise to high speed electro-optic modulation of up to \SI{40}{GHZ}.
+
+\subsubsection*{Thermo-optic Modulation}
+
+Very stable phase modulation can be achieved with thermo-optic effects. By heating the material we can change the refractive index and induce a phase.
 
 \subsubsection*{Mach-Zehnder Interferometers}
 
+Combining \acp{eopm}, acp{topm} and \acp{mmi} we can create on-chip \acp{mzi} which can be used for very fast routing. 
+
 \subsection{Silicon}
 
-\begin{equation}
-	5+5=10
-\end{equation}
-	
+Silicon is ubiquitous in the world today. It powers everything from watches to supercomputers. We can fortunately take advantage of the trillion dollar semiconductor industry and use silicon for quantum photonics.
+
+The high index contrast in a \ac{soi} device means that we can create very compact devices with small bend radii.
+
+Coupling can be done with grating couplers meaning that coupling light on and off chip isn't limited to the edges.
+
+\subsubsection*{CMOS Compatibility}
 
 \subsection{Integrated Detectors}
+
+An important part of any communication protocol is the detection of states. Working with very weak pulses introduces 
 
 \section{Summary}
 
