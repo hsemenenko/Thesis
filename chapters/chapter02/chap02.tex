@@ -24,32 +24,46 @@ The convenience of being able to share thoughts through written methods came wit
 
 Two parties, typically Alice and Bob, share a secret key that can be used to encrypt messages. The method of encryption is, generally, publicly known. However, it will be hard to decrypt messages without the secret key.
 
+These ciphers have been widely used through history. However, with modern technology, they are not deemed to be secure. We will see in section \ref{sec1:cryptanalysis}
+
 \subsection{Monoalphabetic Ciphers}
 
-Ciphers that permute the alphabet are known as {\color{bristol-red} monoalphabetic ciphers}. The symmetric key in these ciphers is the permutation used. There are two well known cases of monoalphabetic ciphers which we will present here. 
+The simplest ciphers are those that permute the alphabet and are known as {\color{bristol-red} monoalphabetic ciphers}. The symmetric key in these ciphers is the permutation used. There are two well known cases of monoalphabetic ciphers which we will present here. 
 
-\subsubsection*{Ceasar Cipher}
+\subsubsection*{Caesar Cipher}
+
+The Caesar cipher one of the oldest that was well documented being used. Seutonius wrote that Julius Caesar used the cipher to send important information to the military. 
+
+By assigning values to each letter of the alphabet (`a' = 0, `b' = 1, etc.), the encryption is done by `adding' the secret key, $k$ to each letter modulo 26. For example, when $k = 5$ we get the encoding
 
 \begin{center}
 \begin{tabular}{l l}%{@{}l@{\ }l}
 	Plain:  &\quad{\tt a b c \ldots x y z} \\ 
-	Cipher: &\quad{\tt A B C \ldots X Y Z} \\
+	Cipher: &\quad{\tt F G H \ldots C D E} \\
 \end{tabular}
 \end{center}
 
+Deciphering the ciphertext is as simple as `subtracting' $k$ from each letter and reading out the plaintext message.
+
+As there are only 25 possibly keys, a brute force attack on this kind of cipher is fairly trivial. It is easy to loop over each choice, especially with modern computers, until the plaintext is revealed.
+
 \subsubsection*{Affine Cipher}
+
+A slightly more complex cipher is the affine cipher. This is still a mapping from the alphabet to itself (i.e. monoalphabetic) but the key now contains two numbers. Firstly
 
 \subsection{Polyalphabetic Ciphers}
 
+
+
 \subsubsection*{Vigen\`{e}re Cipher}
 
-This cipher was developed by Giovan Battista Bellaso in 1553 but is attributed to Blaise de Vigen\`{e}re. The key is a word or phrase which can be `added' to the plaintext to get the cipher text.
+This cipher was developed by Giovan Battista Bellaso in 1553 \cite{} but is attributed to Blaise de Vigen\`{e}re \cite{}. The key is a word or phrase which can be `added' to the plaintext to get the cipher text.
 
 \subsubsection*{One-Time Pad}
 
 A polyalphabetic cipher where the key is as long as the message. If the key is truly random, each message is equally likely given a cipher text. Therefore, it is unbreakable provided that the key is completely secure.
 
-The problems then becomes how to distribute the keys between Alice and Bob.
+The problems then becomes how to distribute the keys.
 
 \subsection{Block Ciphers}
 
@@ -60,6 +74,9 @@ The problems then becomes how to distribute the keys between Alice and Bob.
 A more practical method of encrypting data is to 
 
 \subsection{Cryptanalysis}
+\label{sec1:cryptanalysis}
+
+This is the research into how encryption can be broken.
 
 \section{Quantum Theory}
 
@@ -67,9 +84,13 @@ A more practical method of encrypting data is to
 	\ket{0} + \ket{1}
 \end{equation}
 
+\subsubsection{No-Cloning Theorem}
+
 \subsection{Quantum Information}
 
 \subsubsection{Time-bin Encoding}
+
+\subsection{Quantum Computing}
 
 \subsection{Quantum Photonics}
 
