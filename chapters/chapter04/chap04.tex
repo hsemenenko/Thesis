@@ -16,7 +16,9 @@ In this section, we will be experimentally demonstrating \ac{MDI} \cite{mdi-qkd}
 \section{Measurement-Device-Independent Quantum Key Distribution}
 \label{sec:mdi-qkd}
 
-Unlike a traditional point-to-point key exchange, \ac{MDI} introduces third party to act as to mediate the exchange.  
+Unlike a traditional point-to-point key exchange, \ac{MDI} introduces third party (Charlie) who mediates the exchange by announcing correlations between pulses sent by Alice and Bob. Importantly, it improves security by removing all, current and future, side-channels on the detectors \cite{}. This is an important step as the detectors are often vulnerable to attacks due to their complexity \cite{}.
+
+Secondly, it removes the asymmetry between Alice and Bob which allows for simpler metropolitan networks without reducing security with trusted nodes. This will be discussed further in chapter \ref{chap:node}.
 
 \subsection{Protocol}
 
@@ -27,22 +29,37 @@ Unlike a traditional point-to-point key exchange, \ac{MDI} introduces third part
 	\label{fig:mdi_protocol}
 \end{figure}
 
-The protocol is shown in figure \ref{fig:mdi_protocol}. We will use a 4 decoy state protocol \cite{zhou2016} which treats the $Z$ and $X$ bases separately. The $Z$ basis is used entirely to generate keys, while the $X$ basis is used to bound knowledge gained by an eavesdropper. This is optimal for the symmetric case. The asymmetric case needs to be dealt with slightly differently \cite{wang2018}.
+An outline of the protocol is shown in figure \ref{fig:mdi_protocol}. We will use a four decoy state protocol \cite{zhou2016} which treats the $Z$ and $X$ bases separately. The $Z$ basis is used entirely to generate keys, while the $X$ basis is used to bound knowledge gained by an eavesdropper. This is optimal for the symmetric case. The asymmetric case needs to be dealt with slightly differently \cite{wang2018}.
+
+\begin{enumerate}
+	\item \textbf{Preparation:} Alice and Bob independently and randomly choose \acp{wcs} from
+	\item \textbf{Measurement:} Charlie performs joint Bell state projections on states from Alice and Bob
+	\item \textbf{Announcement:}
+	\item \textbf{Parameter Estimation:}
+\end{enumerate}
 
 \subsection{Security and Key Rates}
 
-The key rate of \ac{MDI} is given as
+As we are not using a true single photon source, we need to be able to bound any knowledge gained by Eve through a photon number splitting attack. This is done through decoy-state \cite{}. 
+
+Here we used a four intensity decoy state protocol where we consider four sources: $o, x, y, z$. The $o$ source is vacuum, $x$ and $y$ are decoy pulses in the $X$ basis with average photon numbers $\mu_x$ and $\mu_x$, respectively. Finally, the $z$ source emits pulses with intensity $\mu_z$ in the $Z$ basis. 
+
+The estimate key rate of \ac{MDI} per pulse in the infinite case is given as
 
 \begin{equation}
-	R = p_{11}^Z Y_{11}^Z \left(1 - H_2(E_{11}^X)\right) - Q_{\mu_s\mu_S}^Z f_e E_{\mu_s\mu_s}^Z H_2(E_{\mu_s\mu_s}^Z)
+	R = (p_z)^2 p_{11}^Z Y_{11}^Z \left(1 - H_2(E_{11}^X)\right) - Q_{S,S}^Z f_e E_{S,S}^Z H_2(E_{\mu_s\mu_s}^Z)
 \end{equation}
-in the asymptotic case. As we are unable to know $Y_{11}^Z$ and $e_{11}^X$ exactly, we need to estimate. Therefore, we defined the lower bound of the secret key rate as
+where $Y_{11}^Z$ and $e_{11}^X$ are the yield in the $Z$ basis and error in the $X$ basis, respectively, when Alice and Bob both sent single photons. These quantities are not directly measurable so we will need to bound them. $Q_{S,S}^Z$ and $E_{S,S}^Z$ are the gain and error in the $Z$ basis and both can be measured directly. Finally, we introduce the error correction efficiency, $f$, and the binary entropy function defined as
+\begin{equation}
+	H_2(x) = -x\mathrm{log}_2(x) - (1-x)\mathrm{log}_2(1-x).
+\end{equation}
+
+Therefore, we define the upper bound of the secret key rate as
 
 \begin{equation}
 	\underline{R} \geq R
 \end{equation}
-
-for some lower and upper bounds of $Y_{11}^Z$ and $E_{11}^X$, respectively. These bounds can be found through the decoy state technique \cite{}. In essence, decoys states are measuring the loss of the channel during a key exchange to bound the knowledge that could be gain by an eavesdropper. 
+for the lower and upper bounds of $Y_{11}^Z$ and $E_{11}^X$, respectively. These bounds can be found through the decoy state technique \cite{}. In essence, decoys states are measuring the loss of the channel during a key exchange to bound the knowledge that could be gain by an eavesdropper. 
 
 By measuring different intensities in a decoy state protocol, we can measure
 
