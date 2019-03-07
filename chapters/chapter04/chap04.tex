@@ -10,7 +10,13 @@
 \chapter[Chip-Based Measurement-Device-Independent QKD]{Chip-Based Measurement-Device-Independent Quantum Key Distribution}
 \label{chap:mdiqkd}
 
-In this section, we will be experimentally demonstrating \ac{MDI} \cite{mdi-qkd} using integrated \ac{InP} transmitter devices. The receiver will be a fibre setup.
+\section*{Introduction}
+
+Advances in \ac{QKD} have seen many protocols developed for different purposes and security levels. The emerging quantum hacking community has exposed discrepancies between security theory and practical implementations. 
+
+Technological advances require scalability. All currently available commercial \ac{QKD} systems are big, bulky and fibre-based. To encourage widespread adoption beyond commercial and military applications, an integrated platform it required to require manufacturing costs, as well as the size, weight and power requirements.
+
+In this section, we will be experimentally demonstrating \ac{MDI} \cite{mdi-qkd} using integrated \ac{InP} transmitter devices. We will first outline the \ac{MDI} protocol before describing the experiment and showing our results. We will then discuss potential improvements to the experiment and further work.
 
 %=======
 \section{Measurement-Device-Independent Quantum Key Distribution}
@@ -101,6 +107,20 @@ We can use the decoy sates in $X$ to bound the single photon events in $Z$ \cite
 
 \section{Results}
 
+
+
+\subsection{Calibration}
+
+As mentioned before, the \ac{MDI} protocol is very dependent on high fidelity \ac{HOM} interference. Therefore, we must make sure that the two different transmitters have a good overlap in all degrees of freedom. In this section we will discuss method used to create indistinguishable pulses.
+
+\begin{figure}[tbp]
+	\centering
+	\includegraphics[scale=0.25]{BSM_Curr_Sweep/Fit.pdf}
+	\caption[Laser current-error sweep]{Sweeping the current on one laser changes the wavelength relative to the other. This changes the relative phases between the two pulses in the +/- states. Using this allows good calibration of wavelength.}
+	\label{fig:wavelength_cal}
+\end{figure}
+
+
 \subsection{Phase Randomised Transmitters}
 
 \subsection{2GHz Clock Rate}
@@ -115,10 +135,10 @@ Statistical fluctuations in the measurements mean that the values used to estima
 
 \subsection{Improved Transmitters}
 
-\begin{figure}[tbp]
+\begin{sidewaysfigure}
 	\includegraphics[width=\textwidth]{HHI_Transmitter}
-	\caption[Latest generation InP Transmitter Device]{There are many ways of improving the QKD transmitters. For example, encoding in time-bin using a delay line to separate the pulses or generating different states using independent lasers.}
-\end{figure}
+	\caption[Latest generation InP QKD Transmitter]{There are many ways of improving the QKD transmitters. For example, encoding in time-bin using a delay line to separate the pulses or generating different states using independent lasers.}
+\end{sidewaysfigure}
 
 \subsection{Security of Transmitters}
 
