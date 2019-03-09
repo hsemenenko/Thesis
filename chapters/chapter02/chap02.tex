@@ -80,21 +80,51 @@ This is the research into how encryption can be broken.
 
 \section{Quantum Theory}
 
+\subsection{Quantum Mechanics}
+
+Quantum mechanics creates a framework which rests on four postulates
+
+\begin{itemize}
+	\item[] \textbf{Postulate 1:} The state defined the quantum system
+	\item[] \textbf{Postulate 2:} The state evolves in time
+	\item[] \textbf{Postulate 3:} Measurements of quantum systems
+	\item[] \textbf{Postulate 4:} System can be combined into composite systems
+\end{itemize}
+
+\subsubsection{No-Cloning Theorem}
+
+A fundamental theorem in quantum mechanics is the {\color{bristol-red} no-cloning theorem}, which incidentally also underpins the security of \ac{QKD}. The general principle of the theorem states that there is no physical process that copies, or clones, an arbitrary quantum state.
+
+\begin{theo}
+	 No-Cloning theorem states that there is no quantum channel, $\mathcal{E}$, from $M(\mathbb{C}^d)$ to $M(\mathbb{C}^d) \otimes M(\mathbb{C}^d)$ such that
+	 \begin{equation}
+	 	\mathcal{E}(\ket{\psi}\bra{\psi}) = \ket{\psi}\bra{\psi} \otimes \ket{\psi}\bra{\psi}
+	 \end{equation}
+	 for all states $\ket{\psi} \in \mathbb{C}^d$.
+\end{theo}
+
+
+\subsection{Quantum Photonics}
+
+
 Coherent states are very useful and are given by
 
 \begin{equation}
 	\ket{\alpha} = \mathrm{e}^{-\frac{|\alpha|^2}{2}} \sum_{n=0}^\infty \frac{\alpha^n}{\sqrt{n}} \ket{n} 
 \end{equation}
 
-\subsubsection{No-Cloning Theorem}
 
 \subsection{Quantum Information}
 
+
+
 \subsubsection{Time-bin Encoding}
+
+
 
 \subsection{Quantum Computing}
 
-\subsection{Quantum Photonics}
+
 
 \section{Quantum Key Distribution}
 
@@ -104,7 +134,7 @@ There are many different ways that information can be encoded on photons. This h
 
 The resources available to the two parties, Alice and Bob, are a quantum communication channel that can be used to send quantum states and an authenticated, public classical channel. 
 
-\subsection{DV-QKD}
+\subsection{Discrete Variable QKD}
 
 The first ways that it was conceived that information could be encoded on photons was using orthogonal states to represent 0 or 1. For example, one could use the vertical and horizontal polarisations of a photon where diagonal and anti-diagonal could be used to encode superpositions. 
 
@@ -114,11 +144,15 @@ A more practical method of encoding information when intending to use fibre opti
 
 The first \ac{QKD} protocol that was developed was the BB84 protocol, named after its inventors: Bennett and Brassard \cite{BB84}. The protocol stemmed from an earlier idea of quantum money \cite{quantum_money}.
 
+This protocol is typically referred to as {\color{bristol-red}prepared-and-measure}. Alice and Bob play complementary roles. Alice {color{bristol-red}prepares} a quantum state which she sends to Bob who {\color{bristol-red}measures} the state in a predefined way. 
+
+There are many other prepares and measure protocols which have been developed over the years such as \ac{cow} \cite{COW-QKD} and \ac{dps} \cite{DPS-QKD}.
+
 \subsubsection*{E91}
 
-Independently of the development of BB84, another protocol was developed by Ekert called E91 \cite{E91}. The protocol took advantage of the correlations of entangled photons and realised that by distributing two entangled photons between Alice and Bob meant that they could share a secret key. 
+Independently of the development of BB84, another protocol was developed by Ekert called E91 \cite{E91}. The protocol took advantage of the correlations of entangled photons and realised that by distributing two entangled photons between Alice and Bob meant that they could share a secret key. While it could be argues that this could be considered a prepare-and-measure scheme, we distinguish it so as to describe the use of entangled states.
 
-\subsection{CV-QKD}
+\subsection{Continuous Variable QKD}
 
 More recently there has been an interest in \ac{cvqkd} due to the compatibility with current telecomms equipments. The states are encoded in quadrature space and measured using homodyne receivers, much like how classical information is transmitter.
 
@@ -130,27 +164,41 @@ While \ac{QKD} is often claimed to be ``perfectly secure'' or ``unhackable'', th
 
 There have been numerous demonstrations that \ac{QKD} system are insecure under real world condition.
 
-\subsubsection*{Device Independence}
+\subsection*{Device-Independent QKD}
 
 To remove potential attacks on \ac{QKD} systems, protocols have been developed to relieve some of the assumptions required for security in a key exchange. 
 
 Creating accurate models for equipment is particularly challenging. By removing assumptions about their operation, full characterisation is no longer required.
 
-\section{Integrated Photonics}
+\section{Integrated Photonic Circuits}
+
+On the route to a scalable technology, we will need to find a platform which allows for many devices to be made without an exponentially increase in resources. 
 
 \subsection{Requirements}
 
+In the search for a platform for \ac{QKD} protocols, we will need to define certain criteria which will need to be met.
+
+\begin{itemize}
+	\item High speed modulation
+	\item Creation of quantum light
+	\item Detectors
+\end{itemize}
+
+
+
 \subsection{Indium Phosphide}
 
-One of the more recent advances in integrated photonics is from III-V materials.
+One of the more recent advances in integrated photonics is from III-V materials which offer certain benefits for \acp{pic}, especially for communication purposes. In this section, we will introduce the \acl{InP} platform and describe some of the components that we will find useful for the remainder of the thesis.
 
 \subsubsection*{Lasers}
+
+As \ac{InP} has a direct bandgap it is possible to monolithically integrate lasers onto the devices. 
 
 Multi quantum well structures in \ac{InP} mean that we can create lasers on chip.
 
 \subsubsection*{Electro-optic Modulation}
 
-A \ac{qcse} gives rise to high speed electro-optic modulation of up to \SI{40}{GHZ}.
+A \ac{qcse} gives rise to high speed electro-optic modulation of up to \SI{40}{GHz}.
 
 \subsubsection*{Thermo-optic Modulation}
 
@@ -160,19 +208,31 @@ Very stable phase modulation can be achieved with thermo-optic effects. By heati
 
 Combining \acp{eopm}, acp{topm} and \acp{mmi} we can create on-chip \acp{mzi} which can be used for very fast routing. 
 
+\subsection*{Electronics Integration}
+
 \subsection{Silicon}
 
-Silicon is ubiquitous in the world today. It powers everything from watches to supercomputers. We can fortunately take advantage of the trillion dollar semiconductor industry and use silicon for quantum photonics.
+Silicon is ubiquitous in the world today and powers everything from watches to supercomputers. The advances that have been made in the trillion dollar semiconductor industry have made silicon a hugely successful platform for quantum photonics. With a band gap of $\sim 1100nm$, we can also leverage the telecommunications industry to create low-loss \acl{pic}.
 
-The high index contrast in a \ac{soi} device means that we can create very compact devices with small bend radii.
+The high index contrast in a \ac{soi} device means that very compact devices with small bend radii are possible.
 
 Coupling can be done with grating couplers meaning that coupling light on and off chip isn't limited to the edges.
 
 \subsubsection*{CMOS Compatibility}
 
-\subsection{Integrated Detectors}
+One of the major 
+
+\subsubsection*{Integrated Detectors}
 
 An important part of any communication protocol is the detection of states. Working with very weak pulses introduces 
+
+\subsection{Hybrid platforms}
+
+More recently, there have been effects to hybridise \acp{pic} to create devices which exploit the benefits of multiple platforms. 
+
+For example, hybrids of an \ac{InP} laser and Si ring filters to make a laser device with a linewidth of \SI{290}{Hz} \cite{Fan2017}.
+
+There are also efforts to develop cross-platform electronic integration between III-V materials and Silicon \cite{}. 
 
 \section{Summary}
 

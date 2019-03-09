@@ -38,7 +38,7 @@ Secondly, it removes the asymmetry between Alice and Bob which allows for simple
 An outline of the protocol is shown in figure \ref{fig:mdi_protocol}. We will use a four decoy state protocol \cite{zhou2016} which treats the $Z$ and $X$ bases separately. The $Z$ basis is used entirely to generate keys, while the $X$ basis is used to bound knowledge gained by an eavesdropper. This is optimal for the symmetric case. The asymmetric case needs to be dealt with slightly differently \cite{wang2018}.
 
 \begin{enumerate}
-	\item \textbf{Preparation:} Alice and Bob independently and randomly choose \acp{wcs} from
+	\item \textbf{Preparation:} Alice and Bob independently and randomly choose \acp{wcs} from the BB84 states. 
 	\item \textbf{Measurement:} Charlie performs joint Bell state projections on states from Alice and Bob
 	\item \textbf{Announcement:}
 	\item \textbf{Parameter Estimation:}
@@ -55,7 +55,7 @@ The estimate key rate of \ac{MDI} per pulse in the infinite case is given as
 \begin{equation}
 	R = (p_z)^2 p_{11}^Z Y_{11}^Z \left(1 - H_2(E_{11}^X)\right) - Q_{S,S}^Z f_e E_{S,S}^Z H_2(E_{\mu_s\mu_s}^Z)
 \end{equation}
-where $Y_{11}^Z$ and $e_{11}^X$ are the yield in the $Z$ basis and error in the $X$ basis, respectively, when Alice and Bob both sent single photons. These quantities are not directly measurable so we will need to bound them. $Q_{S,S}^Z$ and $E_{S,S}^Z$ are the gain and error in the $Z$ basis and both can be measured directly. Finally, we introduce the error correction efficiency, $f$, and the binary entropy function defined as
+where $Y_{11}^Z$ and $e_{11}^X$ are the yield in the $Z$ basis and error in the $X$ basis, respectively, when Alice and Bob both sent single photons. These quantities are not directly measurable so we will need to bound them using a decoy state protocol. $Q_{S,S}^Z$ and $E_{S,S}^Z$ are the gain and error in the $Z$ basis and both can be measured directly. Finally, we introduce the error correction efficiency, $f>1$, and the binary entropy function defined as
 \begin{equation}
 	H_2(x) = -x\mathrm{log}_2(x) - (1-x)\mathrm{log}_2(1-x).
 \end{equation}
@@ -135,9 +135,12 @@ Statistical fluctuations in the measurements mean that the values used to estima
 
 \subsection{Improved Transmitters}
 
+There are many ways of improving the QKD transmitters. For example, encoding in time-bin using a delay line to separate the pulses or generating different states using independent lasers.
+
 \begin{sidewaysfigure}
-	\includegraphics[width=\textwidth]{HHI_Transmitter}
-	\caption[Latest generation InP QKD Transmitter]{There are many ways of improving the QKD transmitters. For example, encoding in time-bin using a delay line to separate the pulses or generating different states using independent lasers.}
+	\centering
+	\includegraphics[width=0.8\textwidth]{HHI_Transmitter}
+	\caption[Latest generation InP QKD Transmitter]{Latest generation HHI indium phosphide transmitter. The \SI[product-units=power]{6x4}{mm} chip contains a few ways to create BB84 states for QKD. Firstly, we have designs to compare \ac{dfb} and \ac{DBR} lasers. Secondly, we can use a delay line to separate the time bins. Finally, we have multiplexed lasers to pulse independently lasers for each state.}
 \end{sidewaysfigure}
 
 \subsection{Security of Transmitters}
