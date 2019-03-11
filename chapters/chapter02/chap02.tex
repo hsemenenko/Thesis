@@ -194,15 +194,13 @@ In the search for a platform for \ac{QKD} protocols, we will need to define cert
 	\item Detectors
 \end{itemize}
 
-
-
 \subsection{Indium Phosphide}
 
 One of the more recent advances in integrated photonics is from III-V materials which offer certain benefits for \acp{pic}, especially for communication purposes. In this section, we will introduce the \acl{InP} platform and describe some of the components that we will find useful for the remainder of the thesis.
 
 \subsubsection*{Lasers}
 
-As \ac{InP} has a direct bandgap it is possible to monolithically integrate lasers onto the devices. 
+As \ac{InP} has a direct band gap it is possible to monolithically integrate lasers onto the devices. 
 
 Multi quantum well structures in \ac{InP} mean that we can create lasers on chip.
 
@@ -216,9 +214,7 @@ Very stable phase modulation can be achieved with thermo-optic effects. By heati
 
 \subsubsection*{Mach-Zehnder Interferometers}
 
-Combining \acp{eopm}, acp{topm} and \acp{mmi} we can create on-chip \acp{mzi} which can be used for very fast routing. 
-
-\subsection*{Electronics Integration}
+Combining \acp{eopm}, acp{topm} and \acp{mmi} we can create on-chip \acp{mzi} which can be used for very fast routing, intensity modulation and phase encoding. 
 
 \subsection{Silicon}
 
@@ -243,6 +239,12 @@ An important part of any communication protocol is the detection of states. Work
 More recently, there have been effects to hybridise \acp{pic} to create devices which exploit the benefits of multiple platforms. 
 
 For example, hybrids of an \ac{InP} laser and Si ring filters to make a laser device with a linewidth of \SI{290}{Hz} \cite{Fan2017}.
+
+While \ac{InP} offers many appealing optical properties, control through integrated electronics is desirable to create a scalable \ac{pic} platform. There are two ways that could create hybrid \ac{InP}-Si devices. 
+
+Heterogeneous integrated can be a achieved by wafer bonding an \ac{InP} \ac{pic} to either a silicon photonics chip or a \ac{cmos} control chip \cite{jeppix}. The bonded devices can then be further processed on a wafer scale.
+
+\Ac{imos} aims to introduce an \ac{InP} membrane onto a silicon wafer to provide efficient optic-electronic integration \cite{jeppix}. The \ac{imos} platform has been demonstrated with some basis building blocks.
 
 There are also efforts to develop cross-platform electronic integration between III-V materials and Silicon \cite{}. 
 
