@@ -80,7 +80,15 @@ This is the research into how encryption can be broken.
 
 \section{Quantum Theory}
 
+\section{Linear Algebra}
+
+To be able to introduce quantum theory, we first need to introduce some linear algebra 
+
+
+
 \subsection{Quantum Mechanics}
+
+At the turn of the 20\textsuperscript{th}, physics was built upon Newtonian mechanics, Maxwell's equations and statistical mechanics. 
 
 Quantum mechanics creates a framework which rests on four postulates
 
@@ -97,14 +105,15 @@ A fundamental theorem in quantum mechanics is the {\color{bristol-red} no-clonin
 
 \begin{theo}
 	 No-Cloning theorem states that there is no quantum channel, $\mathcal{E}$, from $M(\mathbb{C}^d)$ to $M(\mathbb{C}^d) \otimes M(\mathbb{C}^d)$ such that
-	 \begin{equation}
+	 \begin{equation*}
 	 	\mathcal{E}(\ket{\psi}\bra{\psi}) = \ket{\psi}\bra{\psi} \otimes \ket{\psi}\bra{\psi}
-	 \end{equation}
+	 \end{equation*}
 	 for all states $\ket{\psi} \in \mathbb{C}^d$.
 \end{theo}
 
 
 \subsection{Quantum Photonics}
+
 
 
 Coherent states are very useful and are given by
@@ -120,15 +129,16 @@ Coherent states are very useful and are given by
 
 \subsubsection{Time-bin Encoding}
 
-
+For communication protocols, we will find it useful to encode information using time and phase of quantum states.
 
 \subsection{Quantum Computing}
 
+To motivate the introduction of quantum-secure communication, we will introduce some concepts and protocols in quantum computing. 
+
+Shor's algorithm efficiently factors composite numbers into their prime factors \cite{shor1994}. Both RSA and Diffie-Hellman are vulnerable to attacks from a quantum computer using Shor's algorithm.
 
 
 \section{Quantum Key Distribution}
-
-Shor \cite{shor1994}.
 
 There are many different ways that information can be encoded on photons. This had led to quite a few different protocols. Here we will discuss 
 
@@ -212,15 +222,17 @@ Combining \acp{eopm}, acp{topm} and \acp{mmi} we can create on-chip \acp{mzi} wh
 
 \subsection{Silicon}
 
-Silicon is ubiquitous in the world today and powers everything from watches to supercomputers. The advances that have been made in the trillion dollar semiconductor industry have made silicon a hugely successful platform for quantum photonics. With a band gap of $\sim 1100nm$, we can also leverage the telecommunications industry to create low-loss \acl{pic}.
+Silicon is ubiquitous in the world today and powers everything from watches to supercomputers. The advances that have been made in the trillion dollar semiconductor industry have made silicon a hugely successful platform for quantum photonics. With a band gap of $\sim 1100nm$, we can also leverage the telecommunications industry to create low-loss \acl{pic}. However, as it is an indirect band gap, it has been challenging to develop efficient light sources on-chip \cite{}. While efforts have been made to create integrated lasers and amplifiers, their performances don't match those of other integrated approaches such as III-V materials.
 
 The high index contrast in a \ac{soi} device means that very compact devices with small bend radii are possible.
 
 Coupling can be done with grating couplers meaning that coupling light on and off chip isn't limited to the edges.
 
+It is not possible to realise \ac{eopm} in silicon as there is no $\chi^{(2)}$ non-linearity because of the centrosymmetry of the structure. High-speed modulation can be achieved through current injection but the phase dependent losses limit their performance \cite{} or the symmetry can be broken by introducing strain such as depositing a silicon nitride thin film.
+
 \subsubsection*{CMOS Compatibility}
 
-One of the major 
+One of the major advantages of the silicon platform is the potential for integration for control electronics on the same device as the photonics.
 
 \subsubsection*{Integrated Detectors}
 

@@ -220,7 +220,8 @@
 \usetikzlibrary{arrows,shapes,snakes,
 		       automata,backgrounds,
 		       petri,topaths}				%To use diverse features from tikz			       
-		
+\usepackage{etoolbox}				%Package to change theorem style boxes
+\usepackage{changepage}				%Package to change theorem style boxes
 		
 %%% PGFPLOTS STUFF %%%
 
@@ -382,6 +383,8 @@
 %
 \theoremstyle{plain}
 \newtheorem{theo}{Theorem}[chapter]
+
+
 \theoremstyle{plain}
 \newtheorem{prop}{Proposition}[chapter]
 \theoremstyle{plain}
@@ -393,6 +396,11 @@
 \newtheorem{cor}{Corollary}[chapter]
 \theoremstyle{plain}
 \newtheorem{resu}{Result}[chapter]
+
+
+\BeforeBeginEnvironment{theo}{\begin{adjustwidth}{1cm}{1cm}}
+\AfterEndEnvironment{theo}{\end{adjustwidth}}
+
 %
 % Hyphenation for some words
 %
