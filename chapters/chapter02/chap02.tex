@@ -10,9 +10,23 @@
 \chapter{Background}
 \label{chap:background}
 
-As with any work of research, it is built upon centuries of previous work. Here we highlight some important advances which will be required for the rest of the thesis.
-
 %=======
+\section{Cast of Characters}
+
+Before we begin, we will need to introduce the cast of characters that will each have parts to play throughout this thesis.
+
+\noindent{\large\color{bristol-red}Alice}, for reasons that we will not discuss here, would like to send a message to Bob without any other party knowing the message. While she has never met Bob, she wants to make sure that the message is actually being sent to Bob.
+
+\noindent{\large\color{bristol-red}Bob} wants to receive and read the message from Alice, whom he has never met, whilst also being sure that the message is, in fact, from Alice. He also wants to ensure that the message has not been tampered with along the way.
+
+\noindent{\large\color{bristol-red}Charlie} is a friend of Alice and Bob who acts as a mediator. His role will depend on how they are communicating, but he is often forgotten. While he is not actively trying to sabotage Alice and Bob's communication, neither is he actively protecting them.
+
+\noindent{\large\color{bristol-red}Eve} is a very nosey individual who listens to all public communication between Alice and Bob. She is not very inventive or active so will not put very much effort into deciphering the message. Eve is often mistaken as Mallory, as they have similar intents.
+
+\noindent{\large\color{bristol-red}Mallory} would also like to know what Alice and Bob are saying to each other, but will go to more extreme measures to discover their secrets. She has practically unlimited resources available and will use all possible methods within her power to crack the ciphertext. 
+
+\noindent While the exact reasons behind each persons role is unclear, we can be sure that they will follow their roles without question. 
+
 \section{Cryptography}
 \label{sec1:crypto}
 
@@ -67,30 +81,76 @@ The problem then becomes how to distribute the keys.
 
 \subsection{Block Ciphers}
 
-\Ac{aes} is, by far, the most used encryption method used today. It is generally thought that \ac{aes} is secure against attacks by a quantum computer. However, much like security using classical computers, there is no proof.
+The first block encryption was the \ac{des} cipher which was developed in the early 70's \cite{}. It remained a standard in cryptography until the late 1990's when it was demonstrated that it was insecure against modern computers \cite{}. 
+
+The \ac{aes} cipher is by far the most used encryption method used today which superseded \ac{des} in the early 2000's \cite{}. It is generally thought that \ac{aes} is secure against attacks by a quantum computer. However, much like security using classical computers, there is no proof.
+
+Typically, 256 bit keys are exchanged using public key cryptography which are then used in a block cipher. 
+
+
 
 \subsection{Public Key Cryptography}
 
-A more practical method of encrypting data is to 
+A more practical method of encrypting data is to employ an asymmetric scheme which allows many people to send encrypted messages to a single person. For example, customers of a bank may want an easy way to send encrypted messages about their finances.
+
+These ciphers include what is know as a {\color{bristol-red} trapdoor function}: A function that is 
+
+\subsubsection*{RSA}
+
+The RSA algorithm is named after it's inventors Ron Rivest, Adi Shamir, and Leonard Adleman 
+\footnote{It was later discovered that the RSA method had been known by Clifford Cocks during his time at GCHQ \cite{}.} and was released in 1977 \cite{}. Suppose Alice would like to send a message to Bob. The algorithm goes something like:
+
+\begin{enumerate}
+	\item Bob needs to first choose a secret key. He selects to large (typically 2048 bit) prime numbers, $p$ and $q$, and calculates $n = p \times q$.
+	\item He then chooses some $d < (p-1)(q-1)$ which is coprime\footnote{Two numbers are coprime if they share no common factors greater than 1.} to $(p-1)(q-1)$.
+	\item Finally, Bob calculates the inverse, $e$, of $d$ modulo $(p-1)(q-1)$ and publishes the public key $N$ and $e$ whilst keeping $p,q$ and $d$ private.
+	\item Alice breaks her message into integers $m < N$ and encrypts as $c = m^d \mathrm{modulo} N$. The ciphertext $c$ can now be sent to Bob.
+	\item To decrypt Alice's message, Bob computes $m = c^d$ and the communication is complete. 
+\end{enumerate}   
+
+The proof that $m \equiv c^d \equiv m^{d\times e}$ requires a few theorems from number theory. 
+
+Although this algorithm outlines the general understanding of RSA encryption, it is not actually secure as it stands. The problem is that it is essentially a monoalphabetic cipher i.e. each $m$ modulo $N$ will always encode to the same ciphertext $c$. Implementations used introduce some randomness to make it secure.
+
+
+\subsubsection*{Diffe-Hellman}
+
+The Diffe-Hellman cipher isn't used to share messages, but instead distributes keys between Alice and Bob in a secure way that can then be used in a symmetric key cipher. It is attributed to Whit Diffe and Martin E. Hellman\footnote{Malcolm J. Williamson had already discovered the Diffe-Hellman cipher whilst working at GCHQ but it was classified.} after they discovered it in 1976 \cite{}.
+
+\begin{enumerate}
+	\item Alice and Bob agree on a large prime number, $p$, and a primitive root, $a$. These numbers can actually be publicly available.
+	\item They both also secretly choose integers $d_A$ and $d_B$.
+	\item Alice sends her public key, $q_A = a^{d_A}$, to Bob, and Bob send his public key, $q_B = a^{d_B}$ to Alice.
+	\item On receiving a public key, Alice and Bob compute $k = q_B^{d_A} = a^{d_A\times d_B}$ and $k = q_A^{d_B} = a^{d_A\times d_B}$, respectively.
+	\item Alice and Bob now share the secret key $k$.
+\end{enumerate}
+
+The information that is available to Eve are the numbers $p, a, q_{A}$ and $q_{B}$. Without being able to solve the discrete logarithm she is unable to break the code. 
+
+\subsection{Authentication}
+
+Until this point, we have discussed how Alice and Bob and create ciphertext that would deceive Eve. However, we also need to be aware that Mallory is more cunning than Eve. 
+
+As we have mentioned before, Alice and Bob have never met. However, they would like to be sure that they are talking to each other. If they don't ensure they are talking to each other, Mallory can perform a \ac{mitm} attack. Mallory is able to intercept messages sent from Alice to Bob. To Alice, she will imitate Bob, and to Bob, she will imitate Alice. By exchanging keys with both, she can fool Alice and Bob into sending their secret messages to her without ever knowing.
+
+As we will see later, authentication will play a crucial role in a \ac{QKD} system.
 
 \subsection{Cryptanalysis}
 \label{sec1:cryptanalysis}
 
-This is the research into how encryption can be broken.
+This is the research into how encryption can be broken. Simple ciphers can easily be broken by comparing the ciphertext to the percentage of each letter used. As {\tt `e'} is the most common letter in the English language, it follows that if a monoalphabetic cipher is used, then the most common letter in a passage is likely to be decoded to {\tt `e'}.
 
 \section{Quantum Theory}
 
-\section{Linear Algebra}
+At the turn of the 20\textsuperscript{th}, physics was built upon Newtonian mechanics, Maxwell's equations and statistical mechanics. 
 
-To be able to introduce quantum theory, we first need to introduce some linear algebra 
+\subsection{Linear Algebra}
 
-
+To be able to introduce quantum theory, we first need to introduce some linear algebra which provides much of the language of quantum mechanics.
 
 \subsection{Quantum Mechanics}
 
-At the turn of the 20\textsuperscript{th}, physics was built upon Newtonian mechanics, Maxwell's equations and statistical mechanics. 
-
-Quantum mechanics creates a framework which rests on four postulates
+Quantum mechanics can be seen as a generalised probability theory and was born out of mathematics. The ideas create a framework to describe physical systems which rests on four postulates:
 
 \begin{itemize}
 	\item[] \textbf{Postulate 1:} The state defined the quantum system
@@ -101,10 +161,10 @@ Quantum mechanics creates a framework which rests on four postulates
 
 \subsubsection{No-Cloning Theorem}
 
-A fundamental theorem in quantum mechanics is the {\color{bristol-red} no-cloning theorem}, which incidentally also underpins the security of \ac{QKD}. The general principle of the theorem states that there is no physical process that copies, or clones, an arbitrary quantum state.
+A fundamental theorem in quantum mechanics is the {\color{bristol-red} no-cloning theorem} which, incidentally, underpins the security of \ac{QKD}. The general principle of the theorem states that there is no physical process that copies, or clones, an arbitrary quantum state. We can state this more formally:
 
 \begin{theo}
-	 No-Cloning theorem states that there is no quantum channel, $\mathcal{E}$, from $M(\mathbb{C}^d)$ to $M(\mathbb{C}^d) \otimes M(\mathbb{C}^d)$ such that
+	 The no-cloning theorem states that there is no quantum channel, $\mathcal{E}$, from $M(\mathbb{C}^d)$ to $M(\mathbb{C}^d) \otimes M(\mathbb{C}^d)$ such that
 	 \begin{equation*}
 	 	\mathcal{E}(\ket{\psi}\bra{\psi}) = \ket{\psi}\bra{\psi} \otimes \ket{\psi}\bra{\psi}
 	 \end{equation*}
@@ -114,7 +174,7 @@ A fundamental theorem in quantum mechanics is the {\color{bristol-red} no-clonin
 
 \subsection{Quantum Photonics}
 
-
+Fock states
 
 Coherent states are very useful and are given by
 
@@ -122,10 +182,9 @@ Coherent states are very useful and are given by
 	\ket{\alpha} = \mathrm{e}^{-\frac{|\alpha|^2}{2}} \sum_{n=0}^\infty \frac{\alpha^n}{\sqrt{n}} \ket{n} 
 \end{equation}
 
-
 \subsection{Quantum Information}
 
-
+Exploiting quantum mechanical processes gives rise to a new information theory called {\textcolor{bristol-red} quantum information}. Using quantum phenomena, we introduce quantum bits (qubits) as a generalisation of the bits that are typically used in classical computing.
 
 \subsubsection{Time-bin Encoding}
 
@@ -144,7 +203,7 @@ There are many different ways that information can be encoded on photons. This h
 
 The resources available to the two parties, Alice and Bob, are a quantum communication channel that can be used to send quantum states and an authenticated, public classical channel. 
 
-\subsection{Discrete Variable QKD}
+\subsection{Discrete-Variable QKD}
 
 The first ways that it was conceived that information could be encoded on photons was using orthogonal states to represent 0 or 1. For example, one could use the vertical and horizontal polarisations of a photon where diagonal and anti-diagonal could be used to encode superpositions. 
 
@@ -162,7 +221,7 @@ There are many other prepares and measure protocols which have been developed ov
 
 Independently of the development of BB84, another protocol was developed by Ekert called E91 \cite{E91}. The protocol took advantage of the correlations of entangled photons and realised that by distributing two entangled photons between Alice and Bob meant that they could share a secret key. While it could be argues that this could be considered a prepare-and-measure scheme, we distinguish it so as to describe the use of entangled states.
 
-\subsection{Continuous Variable QKD}
+\subsection{Continuous-Variable QKD}
 
 More recently there has been an interest in \ac{cvqkd} due to the compatibility with current telecomms equipments. The states are encoded in quadrature space and measured using homodyne receivers, much like how classical information is transmitter.
 
@@ -174,6 +233,8 @@ While \ac{QKD} is often claimed to be ``perfectly secure'' or ``unhackable'', th
 
 There have been numerous demonstrations that \ac{QKD} system are insecure under real world condition.
 
+One of the most vulnerable parts of a \ac{QKD} system are the detectors. Due to their complexity, they have been exposed to many attacks which have allows an attacker to be 
+
 \subsection*{Device-Independent QKD}
 
 To remove potential attacks on \ac{QKD} systems, protocols have been developed to relieve some of the assumptions required for security in a key exchange. 
@@ -184,7 +245,7 @@ Creating accurate models for equipment is particularly challenging. By removing 
 
 On the route to a scalable technology, we will need to find a platform which allows for many devices to be made without an exponentially increase in resources. 
 
-\subsection{Requirements}
+\Acp{pic} are still widely being research and although there are many commercial applications there are also many challenges before they become mass producible. Packing, the process of electrically and optically connecting a \ac{pic}, is still a highly manual process and typically each \ac{pic} package will need custom built. We will see in chapter \ref{chap:laser-seeding} how packaging problems can limit \ac{pic} operation.
 
 In the search for a platform for \ac{QKD} protocols, we will need to define certain criteria which will need to be met.
 
@@ -193,6 +254,8 @@ In the search for a platform for \ac{QKD} protocols, we will need to define cert
 	\item Creation of quantum light
 	\item Detectors
 \end{itemize}
+
+In this section, we will introduce two platforms for photonic integration: \Ac{InP} and Silicon.
 
 \subsection{Indium Phosphide}
 
@@ -204,17 +267,27 @@ As \ac{InP} has a direct band gap it is possible to monolithically integrate las
 
 Multi quantum well structures in \ac{InP} mean that we can create lasers on chip.
 
-\subsubsection*{Electro-optic Modulation}
-
-A \ac{qcse} gives rise to high speed electro-optic modulation of up to \SI{40}{GHz}.
+We can make either \ac{DBR} or \ac{dfb} lasers in \ac{InP} with very competitive linewidths and mW power into fibre \cite{jeppix}. An example spectrum is show in 
 
 \subsubsection*{Thermo-optic Modulation}
 
 Very stable phase modulation can be achieved with thermo-optic effects. By heating the material we can change the refractive index and induce a phase.
 
+The modulation that can be achieved is relatively slow as it is reliant on heating effects. Typically, the modulation has a bandwidth of KHz. 
+
+Thermal management can become an issue if too many \acp{topm} are used on a chip and this can also introduce crosstalk between modulators. This can cause issues with calibration of \acp{pic}.
+
+\subsubsection*{Electro-optic Modulation}
+
+A \ac{qcse} gives rise to high speed electro-optic modulation of up to \SI{40}{GHz}.
+
+High-speed modulations can also be achieved through current injection into the material to change the refractive index. 
+
 \subsubsection*{Mach-Zehnder Interferometers}
 
 Combining \acp{eopm}, acp{topm} and \acp{mmi} we can create on-chip \acp{mzi} which can be used for very fast routing, intensity modulation and phase encoding. 
+
+The layout is shown in figure \ref{fig:mzi}
 
 \subsection{Silicon}
 
