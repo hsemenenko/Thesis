@@ -13,19 +13,17 @@
 %=======
 \section{Cast of Characters}
 
-Before we begin, we will need to introduce the cast of characters that will each have parts to play throughout this thesis.
+Before we begin, we will need to introduce the cast of characters that will each have parts to play throughout this thesis. While the exact reasons behind each persons' role is unclear, we can be sure that they will follow their roles without question. 
 
-\noindent{\large\color{bristol-red}Alice}, for reasons that we will not discuss here, would like to send a message to Bob without any other party knowing the message. While she has never met Bob, she wants to make sure that the message is actually being sent to Bob.
+{\large\color{bristol-red}Alice}, for reasons that we will not discuss here, would like to send a message to Bob without any other party knowing the message. While she has never met Bob, she wants to make sure that the message is actually being sent to Bob.
 
-\noindent{\large\color{bristol-red}Bob} wants to receive and read the message from Alice, whom he has never met, whilst also being sure that the message is, in fact, from Alice. He also wants to ensure that the message has not been tampered with along the way.
+{\large\color{bristol-red}Bob} wants to receive and read the message from Alice, whom he has never met, whilst also being sure that the message is, in fact, from Alice. He also wants to ensure that the message has not been tampered with along the way.
 
-\noindent{\large\color{bristol-red}Charlie} is a friend of Alice and Bob who acts as a mediator. His role will depend on how they are communicating, but he is often forgotten. While he is not actively trying to sabotage Alice and Bob's communication, neither is he actively protecting them.
+{\large\color{bristol-red}Charlie} is a friend of Alice and Bob who acts as a mediator. His role will depend on how they are communicating, but he is often forgotten. While he is not actively trying to sabotage Alice and Bob's communication, neither is he actively protecting them.
 
-\noindent{\large\color{bristol-red}Eve} is a very nosey individual who listens to all public communication between Alice and Bob. She is not very inventive or active so will not put very much effort into deciphering the message. Eve is often mistaken as Mallory, as they have similar intents.
+{\large\color{bristol-red}Eve} is a very nosey individual who listens to all public communication between Alice and Bob. She is not very inventive or active so will not put very much effort into deciphering the message. Eve is often mistaken as Mallory, as they have similar intents.
 
-\noindent{\large\color{bristol-red}Mallory} would also like to know what Alice and Bob are saying to each other, but will go to more extreme measures to discover their secrets. She has practically unlimited resources available and will use all possible methods within her power to crack the ciphertext. 
-
-\noindent While the exact reasons behind each persons role is unclear, we can be sure that they will follow their roles without question. 
+{\large\color{bristol-red}Mallory} would also like to know what Alice and Bob are saying to each other, but will go to more extreme measures to discover their secrets. She has practically unlimited resources available and will use all possible methods within her power to crack the ciphertext. 
 
 \section{Cryptography}
 \label{sec1:crypto}
@@ -203,7 +201,7 @@ There are many different ways that information can be encoded on photons. This h
 
 The resources available to the two parties, Alice and Bob, are a quantum communication channel that can be used to send quantum states and an authenticated, public classical channel. 
 
-\subsection{Discrete-Variable QKD}
+\subsection{Discrete-Variable}
 
 The first ways that it was conceived that information could be encoded on photons was using orthogonal states to represent 0 or 1. For example, one could use the vertical and horizontal polarisations of a photon where diagonal and anti-diagonal could be used to encode superpositions. 
 
@@ -221,7 +219,7 @@ There are many other prepares and measure protocols which have been developed ov
 
 Independently of the development of BB84, another protocol was developed by Ekert called E91 \cite{E91}. The protocol took advantage of the correlations of entangled photons and realised that by distributing two entangled photons between Alice and Bob meant that they could share a secret key. While it could be argues that this could be considered a prepare-and-measure scheme, we distinguish it so as to describe the use of entangled states.
 
-\subsection{Continuous-Variable QKD}
+\subsection{Continuous-Variable}
 
 More recently there has been an interest in \ac{cvqkd} due to the compatibility with current telecomms equipments. The states are encoded in quadrature space and measured using homodyne receivers, much like how classical information is transmitter.
 
@@ -229,13 +227,13 @@ There are still some questions about the security of \ac{cvqkd} and the practica
 
 \subsection{Hacking}
 
-While \ac{QKD} is often claimed to be ``perfectly secure'' or ``unhackable'', this is only true under certain assumptions. 
+While \ac{QKD} is often claimed to be ``perfectly secure'' or ``unhackable'', this is only true under certain assumptions.  Mallory, however, is quite determined to gain any knowledge of the secret key. 
 
 There have been numerous demonstrations that \ac{QKD} system are insecure under real world condition.
 
 One of the most vulnerable parts of a \ac{QKD} system are the detectors. Due to their complexity, they have been exposed to many attacks which have allows an attacker to be 
 
-\subsection*{Device-Independent QKD}
+\subsection{Device-Independence}
 
 To remove potential attacks on \ac{QKD} systems, protocols have been developed to relieve some of the assumptions required for security in a key exchange. 
 
