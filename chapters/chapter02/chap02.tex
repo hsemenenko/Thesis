@@ -15,20 +15,20 @@
 
 Before we begin, we will need to introduce the cast of characters that will each have parts to play throughout this thesis. While the exact reasons behind each persons' role is unclear, we can be sure that they will follow their roles without question. 
 
-{\large\color{bristol-red}Alice}, for reasons that we will not discuss here, would like to send a message to Bob without any other party knowing the message. While she has never met Bob, she wants to make sure that the message is actually being sent to Bob.
+\brisred{Alice}, for reasons that we will not discuss here, would like to send a message to Bob without any other party knowing the message. While she has never met Bob, she wants to make sure that the message is actually being sent to Bob.
 
-{\large\color{bristol-red}Bob} wants to receive and read the message from Alice, whom he has never met, whilst also being sure that the message is, in fact, from Alice. He also wants to ensure that the message has not been tampered with along the way.
+\brisred{Bob} wants to receive and read the message from Alice, whom he has never met, whilst also being sure that the message is, in fact, from Alice. He also wants to ensure that the message has not been tampered with along the way.
 
-{\large\color{bristol-red}Charlie} is a friend of Alice and Bob who acts as a mediator. His role will depend on how they are communicating, but he is often forgotten. While he is not actively trying to sabotage Alice and Bob's communication, neither is he actively protecting them.
+\brisred{Charlie} is a friend of Alice and Bob who acts as a mediator. His role will depend on how they are communicating, but he is often forgotten. While he is not actively trying to sabotage Alice and Bob's communication, neither is he actively protecting them.
 
-{\large\color{bristol-red}Eve} is a very nosey individual who listens to all public communication between Alice and Bob. She is not very inventive or active so will not put very much effort into deciphering the message. Eve is often mistaken as Mallory, as they have similar intents.
+\brisred{Eve} is a very nosey individual who listens to all public communication between Alice and Bob. She is not very inventive or active so will not put very much effort into deciphering the message. Eve is often mistaken as Mallory, as they have similar intents.
 
-{\large\color{bristol-red}Mallory} would also like to know what Alice and Bob are saying to each other, but will go to more extreme measures to discover their secrets. She has practically unlimited resources available and will use all possible methods within her power to crack the ciphertext. 
+\brisred{Mallory} would also like to know what Alice and Bob are saying to each other, but will go to more extreme measures to discover their secrets. She has unlimited resources available (confined only by the laws of physics) and will use all possible methods within her power to crack the ciphertext. 
 
 \section{Cryptography}
 \label{sec1:crypto}
 
-Cryptography is the process of taking a message ({\color{bristol-red} plaintext}) and translating it into a {\color{bristol-red} ciphertext}. Importantly, it also encompasses the reverse process of taking a ciphertext and returning the original message. The idea of obscuring messages from third-party onlookers dates back (as far as we can tell) to ancient Egypt and has played an important role in the world for the last 2 millennia. 
+Cryptography is the process of taking a message (\brisred{plaintext}) and translating it into a \brisred{ciphertext}. Importantly, it also encompasses the reverse process of taking a ciphertext and returning the original message. The idea of obscuring messages from third-party onlookers dates back (as far as we can tell) to ancient Egypt and has played an important role in the world for the last 2 millennia. 
 
 The convenience of being able to share thoughts through written methods came with an immediate compromise to security.
 
@@ -113,7 +113,7 @@ Although this algorithm outlines the general understanding of RSA encryption, it
 
 \subsubsection*{Diffe-Hellman}
 
-The Diffe-Hellman cipher isn't used to share messages, but instead distributes keys between Alice and Bob in a secure way that can then be used in a symmetric key cipher. It is attributed to Whit Diffe and Martin E. Hellman\footnote{Malcolm J. Williamson had already discovered the Diffe-Hellman cipher whilst working at GCHQ but it was classified.} after they discovered it in 1976 \cite{}.
+The Diffe-Hellman cipher isn't used to share messages, but instead distributes keys between Alice and Bob in a secure way that can then be used in a symmetric key cipher. It is attributed to Whit Diffe and Martin E. Hellman\footnote{Malcolm J. Williamson had already discovered the Diffe-Hellman key exchange whilst working at GCHQ but it remained classified.} after they discovered it in 1976 \cite{}.
 
 \begin{enumerate}
 	\item Alice and Bob agree on a large prime number, $p$, and a primitive root, $a$. These numbers can actually be publicly available.
@@ -211,7 +211,7 @@ A more practical method of encoding information when intending to use fibre opti
 
 The first \ac{QKD} protocol that was developed was the BB84 protocol, named after its inventors: Bennett and Brassard \cite{BB84}. The protocol stemmed from an earlier idea of quantum money \cite{quantum_money}.
 
-This protocol is typically referred to as {\color{bristol-red}prepared-and-measure}. Alice and Bob play complementary roles. Alice {color{bristol-red}prepares} a quantum state which she sends to Bob who {\color{bristol-red}measures} the state in a predefined way. 
+This protocol is typically referred to as {\color{bristol-red}prepared-and-measure}. Alice and Bob play complementary roles. Alice {\color{bristol-red}prepares} a quantum state which she sends to Bob who {\color{bristol-red}measures} the state in a predefined way. 
 
 There are many other prepares and measure protocols which have been developed over the years such as \ac{cow} \cite{COW-QKD} and \ac{dps} \cite{DPS-QKD}.
 
@@ -309,13 +309,13 @@ An important part of any communication protocol is the detection of states. Work
 
 More recently, there have been effects to hybridise \acp{pic} to create devices which exploit the benefits of multiple platforms. 
 
-For example, hybrids of an \ac{InP} laser and Si ring filters to make a laser device with a linewidth of \SI{290}{Hz} \cite{Fan2017}.
+For example, hybrids of an \ac{InP} laser and Si ring filters to make a laser device with a linewidth of \SI{290}{Hz} \cite{Fan2017}. \ac{InP} lasers have also been directly coupled to silicon devices for \ac{QKD} transmission \cite{Agnesi2019}.
 
 While \ac{InP} offers many appealing optical properties, control through integrated electronics is desirable to create a scalable \ac{pic} platform. There are two ways that could create hybrid \ac{InP}-Si devices. 
 
 Heterogeneous integrated can be a achieved by wafer bonding an \ac{InP} \ac{pic} to either a silicon photonics chip or a \ac{cmos} control chip \cite{jeppix}. The bonded devices can then be further processed on a wafer scale.
 
-\Ac{imos} aims to introduce an \ac{InP} membrane onto a silicon wafer to provide efficient optic-electronic integration \cite{jeppix}. The \ac{imos} platform has been demonstrated with some basis building blocks.
+\Ac{imos} aims to introduce an \ac{InP} membrane onto a silicon wafer to provide efficient optic-electronic integration \cite{jeppix, IMOS}. The \ac{imos} platform has been demonstrated with some basis building blocks.
 
 There are also efforts to develop cross-platform electronic integration between III-V materials and Silicon \cite{}. 
 

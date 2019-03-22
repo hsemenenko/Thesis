@@ -14,7 +14,7 @@
 
 Advances in \ac{QKD} have seen many protocols developed for different purposes and security levels. The emerging quantum hacking community has exposed discrepancies between security theory and practical implementations. 
 
-Technological advances require scalability. All currently available commercial \ac{QKD} systems are big, bulky and fibre-based. To encourage widespread adoption beyond commercial and military applications, an integrated platform it required to require manufacturing costs, as well as the size, weight and power requirements.
+Technological advances require scalability. All currently available commercial \ac{QKD} systems are big, bulky and fibre-based. To encourage widespread adoption beyond commercial and military applications, an integrated platform it required to require manufacturing costs, as well as the size, weight and power requirements. \ac{QKD} transmitters have been demonstrated in both InP \cite{Sibson2017InP} and silicon \cite{Sibson2017Si}.
 
 In this section, we will be experimentally demonstrating \ac{MDI} \cite{mdi-qkd} using integrated \ac{InP} transmitter devices. We will first outline the \ac{MDI} protocol before describing the experiment and showing our results. We will then discuss potential improvements to the experiment and further work.
 
@@ -22,7 +22,7 @@ In this section, we will be experimentally demonstrating \ac{MDI} \cite{mdi-qkd}
 \section{Measurement-Device-Independent Quantum Key Distribution}
 \label{sec:mdi-qkd}
 
-Unlike a traditional point-to-point key exchange, \ac{MDI} introduces third party (Charlie) who mediates the exchange by announcing correlations between pulses sent by Alice and Bob. Importantly, it improves security by removing all, current and future, side-channels on the detectors \cite{}. This is an important step as the detectors are often vulnerable to attacks due to their complexity \cite{}.
+Unlike a traditional point-to-point key exchange, \ac{MDI} introduces third party (Charlie) who mediates the exchange by announcing correlations between pulses sent by Alice and Bob. Importantly, it improves security by removing all, current and future, side-channels on the detectors \cite{mdi-qkd}. This is an important step as the detectors are often vulnerable to attacks due to their complexity \cite{Lydersen2010,Makarov2006}.
 
 Secondly, it removes the asymmetry between Alice and Bob which allows for simpler metropolitan networks without reducing security with trusted nodes. This will be discussed further in chapter \ref{chap:node}.
 
@@ -38,15 +38,16 @@ Secondly, it removes the asymmetry between Alice and Bob which allows for simple
 An outline of the protocol is shown in figure \ref{fig:mdi_protocol}. We will use a four decoy state protocol \cite{zhou2016} which treats the $Z$ and $X$ bases separately. The $Z$ basis is used entirely to generate keys, while the $X$ basis is used to bound knowledge gained by an eavesdropper. This is optimal for the symmetric case. The asymmetric case needs to be dealt with slightly differently \cite{wang2018}.
 
 \begin{enumerate}
-	\item \textbf{Preparation:} Alice and Bob independently and randomly choose \acp{wcs} from the BB84 states. 
-	\item \textbf{Measurement:} Charlie performs joint Bell state projections on states from Alice and Bob
-	\item \textbf{Announcement:}
-	\item \textbf{Parameter Estimation:}
+	\item \brisred{Preparation} Alice and Bob independently and randomly choose \acp{wcs} from the BB84 states. 
+	\item \brisred{Measurement} Charlie performs joint Bell state projections on states from Alice and Bob
+	\item \brisred{Announcement} Each successful projection is publicly announced by Charlie, along with timing information.
+	\item \brisred{Basis Discussion} Alice and Bob each announced the basis chosen for each successful projection.
+	\item \brisred{Parameter Estimation} Using the information about successful events, they can calculate errors and gains to bound the knowledge of Eve and apply privacy amplification if necessary.
 \end{enumerate}
 
 \subsection{Security and Key Rates}
 
-As we are not using a true single photon source, we need to be able to bound any knowledge gained by Eve through a photon number splitting attack. This is done through decoy-state \cite{}. 
+As we are not using a true single photon source, we need to be able to bound any knowledge gained by Eve through a photon number splitting attack. This is done through decoy-state \cite{Lo2005}. 
 
 Here we used a four intensity decoy state protocol where we consider four sources: $o, x, y, z$. The $o$ source is vacuum, $x$ and $y$ are decoy pulses in the $X$ basis with average photon numbers $\mu_x$ and $\mu_x$, respectively. Finally, the $z$ source emits pulses with intensity $\mu_z$ in the $Z$ basis. 
 
@@ -65,7 +66,7 @@ Therefore, we define the upper bound of the secret key rate as
 \begin{equation}
 	\underline{R} \geq R
 \end{equation}
-for the lower and upper bounds of $Y_{11}^Z$ and $E_{11}^X$, respectively. These bounds can be found through the decoy state technique \cite{}. In essence, decoys states are measuring the loss of the channel during a key exchange to bound the knowledge that could be gain by an eavesdropper. 
+for the lower and upper bounds of $Y_{11}^Z$ and $E_{11}^X$, respectively. These bounds can be found through the decoy state technique \cite{Lo2005}. In essence, decoys states are measuring the loss of the channel during a key exchange to bound the knowledge that could be gain by an eavesdropper. 
 
 By measuring different intensities in a decoy state protocol, we can measure
 
@@ -147,7 +148,7 @@ There are many ways of improving the QKD transmitters. For example, encoding in 
 
 \subsection{Security of Transmitters}
 
-The security of the transmitters is still important \cite{makarov2019}.
+While \ac{MDI} removes all possible attacks on the detectors, there is still the possibility of Mallory gaining information by targeting the transmitters. Therefore, the security of the transmitters will still need to be characterised to ensure the security of a key exchange. Many attacks have been demonstrated on different \ac{QKD} system \cite{makarov2019}. However, to date none have been demonstrated against an integrated device.
 
 \subsection{Multiplexing}
 

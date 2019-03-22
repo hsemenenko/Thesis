@@ -17,9 +17,11 @@
 
 \section{Hong-Ou-Mandel Interference}
 
-\Ac{HOM} interference is a quantum phenomena where two single photons incident on a beam splitter will interfere and bunch. This is an important process that is fundamental is many quantum information technologies.
+\Ac{HOM} interference is a quantum phenomena where two indistinguishable single photons incident on a beam splitter will interfere and bunch. This is an important process that is fundamental is many quantum information technologies. It was first seen by Hong, Ou and Mandel in 1987 \cite{HOM}.
 
 \subsection{Coherent States on a Beam Splitter}
+
+While \ac{HOM} interference is typically considered when single photons interfere on a beam splitter, the same phenomena can be seen with coherent states.  However, the visibility of interference is limited to 50\% \cite{Rarity2005} due to multiphoton terms.
 
 Consider two coherent states, $\ket{\alpha}$ and $\ket{\beta}$, incident on a beam splitter. Before the beam splitter, the states can be written as
 
@@ -133,9 +135,13 @@ It is well understood that for two light pulses to interfere, they need to be in
 
 \subsection{Single Photon}
 
+An on-demand single photon source would be the ideal candidate for \ac{QKD}. However, it has not been possible with current technology to create single photon sources with high rates.
+
+Most single photon experiments use with \ac{sfwm} or \ac{spdc}. There have been recent advances in quantum dot single photon sources, but they are typically not at telecommunication compatible wavelengths.
+
 \subsection{Weak Coherent States}
 
-A source for \ac{QKD} will need to fulfil a few requirements listed here:
+In the absence of a single photon sources, we will instead use \acp{wcs}. A source for high-fidelity \ac{HOM}, and therefore \ac{QKD}, will need to fulfil a few requirements listed here:
 
 \begin{itemize}
 	\item Good extinction ratio
@@ -195,14 +201,24 @@ Alice (and Bob) uses a stable current sources to drive an on-chip \ac{DBR} laser
 	\label{fig:HOM}
 \end{figure}
 
+In figure \ref{fig:HOM} we demonstrate $46.5 \pm 0.8  \%$ visibility between two independent \acp{pic} by changing one transmitter's wavelength relative to the other. The transmitters we initially overlapped in time, using electronic delays; polarisation, with fibre polarisation controllers; and photon number, with digital variable optical attenuators. 
+
+We think that it is pertinent to note that during the experiment there was no active feedback to control the polarisation, pulse carving or timing which demonstrates the stability possible with an integrated platform. 
+
 \section{Phase Randomisation}
 
 As we will see in chapter \ref{chap:mdiqkd}, it will be important for the pulses to be phase randomised relative to subsequent pulses to maintain the security of a \ac{QKD} protocol. This section will describe how we can use coincidence counts between neighbouring pulses to verify that we are creating phase randomised \ac{wcp}.
 
+Laser gain switching is a technique used to cause phase randomisation by keep the laser below threshold and only applying current when a \ac{wcs} is desired. As the pulses are limited to the timing of a spontaneous emission, the timing jitter of the pulses is large. There is also a wavelength broadening meaning that filtering is required.
 
+Instead of gain switching to generate pulses, we can reverse the high speed pulse to provide a negative voltage between pulse carving. This pulses removes the carriers in the laser and makes each pulse phase randomised. 
 
 \section{Outlook}
 
 \subsection{Active Stabilisation}
+
+\subsection{Wavelength Multiplexing}
+
+As mentioned previously, there is no need to filter the pulses to see interference. This is important as it allows the transmitters to be easily wavelength tuned making it compatible with \ac{wdm}. 
 
 %=========================================================
