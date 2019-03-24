@@ -15,20 +15,22 @@
 
 Before we begin, we will need to introduce the cast of characters that will each have parts to play throughout this thesis. While the exact reasons behind each persons' role is unclear, we can be sure that they will follow their roles without question. 
 
-\brisred{Alice}, for reasons that we will not discuss here, would like to send a message to Bob without any other party knowing the message. While she has never met Bob, she wants to make sure that the message is actually being sent to Bob.
+\brisred{Alice}, for reasons that we will not discuss here, would like to send a message to Bob. The particular message is unknown publicly and she would like it to remain as such. While she has never met Bob, she wants to make sure that the message is actually being sent to Bob.
 
-\brisred{Bob} wants to receive and read the message from Alice, whom he has never met, whilst also being sure that the message is, in fact, from Alice. He also wants to ensure that the message has not been tampered with along the way.
+\brisred{Bob} wants to receive and also read the message from Alice, whom he has never met, whilst also being sure that the message is, in fact, from Alice. He also wants to ensure that the message he received is a faithful representation of the one Alice sent and has not been modified along the way.
 
-\brisred{Charlie} is a friend of Alice and Bob who acts as a mediator. His role will depend on how they are communicating, but he is often forgotten. While he is not actively trying to sabotage Alice and Bob's communication, neither is he actively protecting them.
+\brisred{Charlie} is a mutual acquaintance of Alice and Bob (despite having never met either of them) who volunteers to act as a mediator for their communication. His specific role will depend on exactly how Alice and Bob are communicating and he is often not required beyond moral support. While he is not actively trying to sabotage Alice and Bob's communication, neither is he actively protecting them.
 
-\brisred{Eve} is a very nosey individual who listens to all public communication between Alice and Bob. She is not very inventive or active so will not put very much effort into deciphering the message. Eve is often mistaken as Mallory, as they have similar intents.
+\brisred{Eve} is a very nosey individual who listens to all public communication between Alice and Bob. She is intent on reading the message sent by Alice and while very persistent, she is not very inventive so will not put very much effort into deciphering the message. Eve is often mistaken as Mallory, as they have similar intents.
 
-\brisred{Mallory} would also like to know what Alice and Bob are saying to each other, but will go to more extreme measures to discover their secrets. She has unlimited resources available (confined only by the laws of physics) and will use all possible methods within her power to crack the ciphertext. 
+\brisred{Mallory} would also like to know what Alice has sent to Bob, but will go to more extreme measures to discover their secrets. She has unlimited resources available (confined only by the laws of physics) and will use all possible methods within her power to crack the hidden message. 
 
 \section{Cryptography}
 \label{sec1:crypto}
 
-Cryptography is the process of taking a message (\brisred{plaintext}) and translating it into a \brisred{ciphertext}. Importantly, it also encompasses the reverse process of taking a ciphertext and returning the original message. The idea of obscuring messages from third-party onlookers dates back (as far as we can tell) to ancient Egypt and has played an important role in the world for the last 2 millennia. 
+Cryptography is the process of taking a message (\brisred{plaintext}) and translating it into a something that is indecipherable (\brisred{ciphertext}). Importantly, cryptography also encompasses the reverse process of taking a ciphertext and returning the original message. 
+
+The idea of obscuring messages from third-party onlookers dates back (as far as we can tell) to ancient Egypt and has played an important role in the world for the last 2 millennia. 
 
 The convenience of being able to share thoughts through written methods came with an immediate compromise to security.
 
@@ -95,8 +97,7 @@ These ciphers include what is know as a {\color{bristol-red} trapdoor function}:
 
 \subsubsection*{RSA}
 
-The RSA algorithm is named after it's inventors Ron Rivest, Adi Shamir, and Leonard Adleman 
-\footnote{It was later discovered that the RSA method had been known by Clifford Cocks during his time at GCHQ \cite{}.} and was released in 1977 \cite{}. Suppose Alice would like to send a message to Bob. The algorithm goes something like:
+The RSA algorithm is named after it's inventors Ron Rivest, Adi Shamir, and Leonard Adleman\footnote{It was later discovered that the RSA method had been known by Clifford Cocks during his time at GCHQ \cite{}.} and was released in 1977 \cite{}. Suppose Alice would like to send a message to Bob. The algorithm goes something like:
 
 \begin{enumerate}
 	\item Bob needs to first choose a secret key. He selects to large (typically 2048 bit) prime numbers, $p$ and $q$, and calculates $n = p \times q$.
@@ -159,7 +160,7 @@ Quantum mechanics can be seen as a generalised probability theory and was born o
 
 \subsubsection{No-Cloning Theorem}
 
-A fundamental theorem in quantum mechanics is the {\color{bristol-red} no-cloning theorem} which, incidentally, underpins the security of \ac{QKD}. The general principle of the theorem states that there is no physical process that copies, or clones, an arbitrary quantum state. We can state this more formally:
+A fundamental theorem in quantum mechanics is the {\color{bristol-red} no-cloning theorem} which will also underpin the security of \ac{QKD}. The general principle of the theorem states that there is no physical process that copies, or clones, an arbitrary quantum state. We can state this more formally:
 
 \begin{theo}
 	 The no-cloning theorem states that there is no quantum channel, $\mathcal{E}$, from $M(\mathbb{C}^d)$ to $M(\mathbb{C}^d) \otimes M(\mathbb{C}^d)$ such that
@@ -186,7 +187,7 @@ Exploiting quantum mechanical processes gives rise to a new information theory c
 
 \subsubsection{Time-bin Encoding}
 
-For communication protocols, we will find it useful to encode information using time and phase of quantum states.
+For communication protocols, we will find it useful to encode information using time and phase of quantum states as it is generally less susceptible to fluctuations in real-world fibres.
 
 \subsection{Quantum Computing}
 
@@ -197,9 +198,13 @@ Shor's algorithm efficiently factors composite numbers into their prime factors 
 
 \section{Quantum Key Distribution}
 
+\Acl{QKD} is a fundamentally new method of key exchange by exploiting quantum mechanics to ensure security that is guaranteed by the laws of physics. It comes under the umbrella of \brisred{quantum safe} cryptography and, together with \brisred{post-quantum} cryptography, will form a crucial part of future global networks.
+
+Unlike key exchange protocols (such as those discussed in section \ref{sec1:crypto}), it does not rely on assumed mathematically hard trapdoor functions. Instead, the security is based on the no-cloning theorem and 
+
 There are many different ways that information can be encoded on photons. This had led to quite a few different protocols. Here we will discuss 
 
-The resources available to the two parties, Alice and Bob, are a quantum communication channel that can be used to send quantum states and an authenticated, public classical channel. 
+The resources available to the two parties, Alice and Bob, are a quantum communication channel that can be used to send quantum states and an authenticated, public classical channel. Of course, we will need to be aware that Eve and Mallory are listening and trying to gain valuable secret information.
 
 \subsection{Discrete-Variable}
 
@@ -277,9 +282,9 @@ Thermal management can become an issue if too many \acp{topm} are used on a chip
 
 \subsubsection*{Electro-optic Modulation}
 
-A \ac{qcse} gives rise to high speed electro-optic modulation of up to \SI{40}{GHz}.
+A \ac{qcse} gives rise to high speed electro-optic modulation of up to \SI{40}{GHz} \cite{jeppix}.
 
-High-speed modulations can also be achieved through current injection into the material to change the refractive index. 
+High-speed modulation can also be achieved through current injection into the material to change the refractive index. 
 
 \subsubsection*{Mach-Zehnder Interferometers}
 
@@ -321,5 +326,6 @@ There are also efforts to develop cross-platform electronic integration between 
 
 \section{Summary}
 
+In this background chapter we have introduced important cryptographic techniques, quantum theory and integrated photonics that will form the foundation for the remainder of this thesis.
 
 %=========================================================

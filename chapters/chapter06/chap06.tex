@@ -14,9 +14,17 @@
 \section{QKD Transmitter Requirements}
 \label{sec:sec06}
 
+A \ac{QKD} transmitter will need to meet certain requirements as we have discussed before.
+
 \section{Laser Seeding}
 
+Laser seeding provides a method of generating \ac{QKD} states by overcoming some of the issues with gain switching lasers while also reducing certain electrical requirements.. This has been performed using fibre lasers \cite{}. In this chapter, we will demonstrate the first integrated laser seeding transmitter for time-bin encoding \ac{QKD}. 
+
 \section{Integrated Laser Seeded Transmitter}
+
+There are no circulators or isolators currently available on-chip, so other methods of laser seeding need to be considered.
+
+Figure \ref{fig:hhi_laser_seeding} shows the GDS for the integrated device. The complexity of integrated devices is 
 
 \begin{sidewaysfigure}
 	\includegraphics[width=\textwidth]{Laser_Seeding.png}
@@ -24,11 +32,17 @@
 	\label{fig:hhi_laser_seeding}
 \end{sidewaysfigure}
 
+The electrical connections for integrated devices is challenging, especially in test devices where real estate is valuable. In figure \ref{fig:hhi_pcb} we show a PCB which is required to connect most (but not all) components of the chip. 
+
 \begin{figure}[tbp]
 	\includegraphics[width=\textwidth]{HHI_PCB/HHI_PCB_render_2.png}
 	\caption[PCB breakout for an InP integrated circuit]{PCB designed to connect an \ac{InP} integrated device to control and test equipment. Packaging integrated devices remains challenging due to the small size of the chips. This is especially true when high speed connections are required.}
 	\label{fig:hhi_pcb}
 \end{figure}
+
+\section{Results}
+
+The transmitter (shown in figure \ref{fig:hhi_laser_seeding}) contains two methods possible to achieve laser seeding.
 
 \section{Outlook}
 

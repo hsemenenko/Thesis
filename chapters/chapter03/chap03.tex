@@ -215,10 +215,22 @@ Instead of gain switching to generate pulses, we can reverse the high speed puls
 
 \section{Outlook}
 
+In this experiment, we have demonstrated state-of-the-art \acl{HOM} interference between GHz clocked integrated photonic devices exploiting monolithically fabricated lasers and \acp{eopm} with a visibility of $46.5\pm 0.8\%$. As we will see in chapter \ref{chap:mdiqkd}, this result will play a crucial role in \ac{MDI} and high fidelity interference will be required to bound the knowledge of Eve and Mallory.
+
 \subsection{Active Stabilisation}
 
-\subsection{Wavelength Multiplexing}
+To maintain a high fidelity interference between the two devices over a prolonged period will require feedback as the devices will drift. 
 
-As mentioned previously, there is no need to filter the pulses to see interference. This is important as it allows the transmitters to be easily wavelength tuned making it compatible with \ac{wdm}. 
+Polarisation can be stabilised by utilising the unused arm of the \ac{pbs} to monitor counts and using an digitally controlled polarisation controller to keep the polarisation stable.
+
+Wavelength can be stabilised using the visibility of \ac{HOM} interference by minimising coincidences. By changing the current of one of the transmitters, the wavelength can be very finely tuned. While this will change the power of the laser, if only small changes in current are required then this power change will be negligible.
+
+Timing stabilisation can be achieved by looking at the time of arrival of the pulses. In particular, the \ac{FWHM} can be used to ensure that the pulses are overlapped i.e. minimising the \ac{FWHM} in the histogram of detection events means that the pulses will be maximally overlapped.
+
+Average photon number is harder to stabilise but is also the least susceptible to drifts. Having fibres glues onto chips and by using a stable current source to power the laser, it is unlikely that photon number will need often retuning.
+
+\subsection{Wavelength Division Multiplexing}
+
+As mentioned previously, there is no need to filter the pulses to see interference. This is important as it allows the transmitters to be easily wavelength tuned making it compatible with \ac{wdm} and possible classical-quantum multiplexing. 
 
 %=========================================================
