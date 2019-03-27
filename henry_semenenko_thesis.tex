@@ -37,14 +37,15 @@
 	
 %
 % Adding metadata:
-\usepackage{datetime}
+\usepackage[en-GB,calc]{datetime2}
+\DTMsavenow{now}
 \usepackage{ifpdf}
 \ifpdf
 \pdfinfo{
    /Author (Henry Semenenko)
    /Title (Advances in Chip-Based Quantum Key Distribution)
    /Keywords (integrated optics; quantum key distribution; quantum optics)
-   /CreationDate (D:\pdfdate)
+   /CreationDate (D:\pdfcreationdate)
 }
 \fi
 % When draft option is on. 
@@ -73,7 +74,7 @@
 \frenchspacing
 % Font with math support: New Century Schoolbook
 %\usepackage{fouriernc}
-\usepackage[sfdefault,light]{roboto}
+\usepackage[sfdefault,thin]{roboto}
 %\usepackage{sansmath}
 %\sansmath
 %\usepackage{sfmath}

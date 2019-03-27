@@ -1,7 +1,7 @@
 %
 % File: Title.tex
-% Author: V?ctor Bre?a-Medina
-% Description: Contains the title page
+% Author: Henry Semenenko
+% Description: Title page
 %
 % UoB guidelines:
 % 
@@ -15,34 +15,47 @@
 %
 %
 \begin{titlingpage}
+\pagecolor{bristol-red}
+\begin{SingleSpace}
+\calccentering{\unitlength} 
+\begin{adjustwidth*}{\unitlength}{-\unitlength}
+\vspace*{5mm}
+\begin{center}
+\vspace{20mm}
+%\rule[0.5ex]{\linewidth}{2pt}\vspace*{-\baselineskip}\vspace*{3.2pt}
+%\rule[0.5ex]{\linewidth}{1pt}\\[\baselineskip]
+{\HUGE \color{white} Advances in Chip-Based\\Quantum Key Distribution }\\[4mm]
+%{\Large \textit{Subtitle}}\\
+%\rule[0.5ex]{\linewidth}{1pt}\vspace*{-\baselineskip}\vspace{3.2pt}
+%\rule[0.5ex]{\linewidth}{2pt}\\
+\vspace{30mm}
+{\huge\color{white}\textsc{Henry Semenenko}}\\
+\vspace*{\fill}
+\includegraphics[scale=0.35]{logos/whitelogo}\\
+\end{center}
+\end{adjustwidth*}
+\end{SingleSpace}
+\newpage\thispagestyle{empty}
 \begin{SingleSpace}
 \calccentering{\unitlength} 
 \begin{adjustwidth*}{\unitlength}{-\unitlength}
 \vspace*{0mm}
 \begin{center}
-\includegraphics[scale=0.2]{logos/bristollogo_colour}\\
-\vspace{25mm}
-%\rule[0.5ex]{\linewidth}{2pt}\vspace*{-\baselineskip}\vspace*{3.2pt}
-%\rule[0.5ex]{\linewidth}{1pt}\\[\baselineskip]
-{\HUGE Advances in Chip-Based\\Quantum Key Distribution }\\[4mm]
-%{\Large \textit{Subtitle}}\\
-%\rule[0.5ex]{\linewidth}{1pt}\vspace*{-\baselineskip}\vspace{3.2pt}
-%\rule[0.5ex]{\linewidth}{2pt}\\
-\vspace{30mm}
-%{\large By}\\
-%\vspace{6.5mm}
-{\Large\textsc{Henry Semenenko}}\\
-\vspace{30mm}
-{\large Department of Physics\\
+\vspace{20mm}
+{\color{white}\Large Department of Physics\\
 \textsc{University of Bristol}}\\
-\vspace{15mm}
+\vspace{40mm}
 \begin{minipage}{8.5cm}
+\color{white}
 A dissertation submitted to the University of Bristol in accordance with the requirements of the degree of \textsc{Doctor of Philosophy} in the Faculty of Science.
 \end{minipage}\\
-\vspace{15mm}
-{\large\textsc{September 2019}}
-\vspace{12mm}
+\vspace*{\fill}
+{\color{white}Word count: more than 4}\\
+\vspace{20mm}
+{\color{white}\large\textsc{\DTMmonthname{\DTMfetchmonth{now}} \DTMfetchyear{now}}}
 \end{center}
 \end{adjustwidth*}
 \end{SingleSpace}
+\clearpage
+\nopagecolor
 \end{titlingpage}
