@@ -42,7 +42,7 @@ These ciphers have been widely used through history. However, with modern techno
 
 \subsection{Monoalphabetic Ciphers}
 
-The simplest ciphers are those that permute the alphabet and are known as {\color{bristol-red} monoalphabetic ciphers}. The symmetric key in these ciphers is the permutation used. There are two well known cases of monoalphabetic ciphers which we will present here. 
+The simplest ciphers are those that permute the alphabet and are known as {\color{bristol-red} monoalphabetic ciphers}. The symmetric key in these 	ciphers is the permutation used. There are two well known cases of monoalphabetic ciphers which we will present here. 
 
 \subsubsection*{Caesar Cipher}
 
@@ -87,13 +87,13 @@ The \ac{aes} cipher is by far the most used encryption method used today which s
 
 Typically, 256 bit keys are exchanged using public key cryptography which are then used in a block cipher. 
 
-
-
 \subsection{Public Key Cryptography}
 
 A more practical method of encrypting data is to employ an asymmetric scheme which allows many people to send encrypted messages to a single person. For example, customers of a bank may want an easy way to send encrypted messages about their finances.
 
-These ciphers include what is know as a {\color{bristol-red} trapdoor function}: A function that is 
+These ciphers include what is know as a {\color{bristol-red} trapdoor function}. These functions are such that they are easy to perform one way, but are difficult to inverse without a private key. 
+
+Generally, public key ciphers are computationally intensive. Therefore, they are generally used to exchange keys which can then be used in a block cipher, such as \ac{aes}.
 
 \subsubsection*{RSA}
 
@@ -191,10 +191,11 @@ For communication protocols, we will find it useful to encode information using 
 
 \subsection{Quantum Computing}
 
-To motivate the introduction of quantum-secure communication, we will introduce some concepts and protocols in quantum computing. 
+To motivate the introduction of quantum-secure communication, we will introduce some concepts and protocols in quantum computing. While quantum computing has been a big motivator for moving to new encryption, we still have no assurances that the trap-door functions we rely on for security are secure even against classical computers.
 
 Shor's algorithm efficiently factors composite numbers into their prime factors \cite{shor1994}. Both RSA and Diffie-Hellman are vulnerable to attacks from a quantum computer using Shor's algorithm.
 
+Grover's algorithm could also be used to search through keys in a block cipher protocol. However, the speed-up is only $\sqrt{n}$ which has been proven as optimal on a quantum computer \cite{Bennent1997} . Therefore, the same security in a post-quantum world can be achieved by doubling the key length i.e. moving from 128 bit to 256 bit AES.
 
 \section{Quantum Key Distribution}
 
@@ -232,9 +233,11 @@ There are still some questions about the security of \ac{cvqkd} and the practica
 
 \subsection{Hacking}
 
-While \ac{QKD} is often claimed to be ``perfectly secure'' or ``unhackable'', this is only true under certain assumptions.  Mallory, however, is quite determined to gain any knowledge of the secret key. 
+While \ac{QKD} is often claimed to be ``perfectly secure'' or ``unhackable'', this is only true under certain assumptions.  Mallory, however, is quite determined to gain any knowledge of the secret key. As the systems exist in the real world, the security of a key exchange is only as good as the security model. However, it is challenging to completely model every part of a system. This leaves side-channels, where sensitive information is leaked through uncharacterised channels such as sound or temperature.
 
-There have been numerous demonstrations that \ac{QKD} system are insecure under real world condition.
+The first demonstration of \ac{QKD} by Bennett and Brassard was flawed due to polarisation dependent sounds from the power supplies. Brassard noted that their key exchange was ``perfectly secure against any eavesdropper who happened to be deaf'' \cite{Brassard2005}. 
+
+Since then, there have been numerous demonstrations that \ac{QKD} system are insecure under real world condition. These have demonstrated vulnerabilities in all parts of both the transmitters and receivers: transmitter modulation \cite{Gisin2006}, detectors \cite{Lydersen2010,Makarov2006}. 
 
 One of the most vulnerable parts of a \ac{QKD} system are the detectors. Due to their complexity, they have been exposed to many attacks which have allows an attacker to be 
 
@@ -294,7 +297,7 @@ The layout is shown in figure \ref{fig:mzi}
 
 \subsection{Silicon}
 
-Silicon is ubiquitous in the world today and powers everything from watches to supercomputers. The advances that have been made in the trillion dollar semiconductor industry have made silicon a hugely successful platform for quantum photonics. With a band gap of $\sim 1100nm$, we can also leverage the telecommunications industry to create low-loss \acl{pic}. However, as it is an indirect band gap, it has been challenging to develop efficient light sources on-chip \cite{}. While efforts have been made to create integrated lasers and amplifiers, their performances don't match those of other integrated approaches such as III-V materials.
+Silicon is ubiquitous in the world today and powers everything from watches to supercomputers. The advances that have been made in the trillion dollar semiconductor industry have made silicon a hugely successful platform for quantum photonics. With a band gap of \SI{\sim 1100}{nm}, we can also leverage the telecommunications industry to create low-loss \acl{pic}. However, as it is an indirect band gap, it has been challenging to develop efficient light sources on-chip \cite{}. While efforts have been made to create integrated lasers and amplifiers, their performances don't match those of other integrated approaches such as III-V materials.
 
 The high index contrast in a \ac{soi} device means that very compact devices with small bend radii are possible.
 
@@ -304,11 +307,13 @@ It is not possible to realise \ac{eopm} in silicon as there is no $\chi^{(2)}$ n
 
 \subsubsection*{CMOS Compatibility}
 
-One of the major advantages of the silicon platform is the potential for integration for control electronics on the same device as the photonics.
+One of the major advantages of the silicon platform is the potential for integration for control electronics on the same device as the photonics. This could facilitate creating transmitter and receiver devices which have all of the photonic and electrical components for a key exchange. 
 
 \subsubsection*{Integrated Detectors}
 
-An important part of any communication protocol is the detection of states. Working with very weak pulses introduces 
+An important part of any communication protocol is the detection of states. As \ac{QKD} will typically be concerned with single photon states (or close to) the efficiency of detection will be crucial. The losses associated with coupling on and off of integrated devices are a big problem. By fabricating detectors onto the waveguides we gain a few benefits.
+
+Moving the detectors on-chip removes the coupling losses and the high confinement in waveguides means a strong interaction between photons and the detectors. This also means that superconducting nanowires can be made shorter which reduces the jitter and dead times.
 
 \subsection{Hybrid platforms}
 

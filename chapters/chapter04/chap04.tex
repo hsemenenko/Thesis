@@ -47,14 +47,14 @@ An outline of the protocol is shown in figure \ref{fig:mdi_protocol}. We will us
 
 \subsection{Security and Key Rates}
 
-As we are not using a true single photon source, we need to be able to bound any knowledge gained by Eve through a photon number splitting attack. This is done through decoy-state \cite{Lo2005}. 
+As we are not using a true single photon source, we need to be able to bound any knowledge gained by Eve through a photon number splitting attack. This is done through decoy-state analysis, where various intensity levels are chosen at random to bound the yield and error for single photon states \cite{Lo2005}. 
 
-Here we used a four intensity decoy state protocol where we consider four sources: $o, x, y, z$. The $o$ source is vacuum, $x$ and $y$ are decoy pulses in the $X$ basis with average photon numbers $\mu_x$ and $\mu_x$, respectively. Finally, the $z$ source emits pulses with intensity $\mu_z$ in the $Z$ basis. 
+Here we used a four intensity decoy state protocol where we consider four sources: $\nu, \sigma, \mu, z$. The $\nu$ source is vacuum, $\sigma$ and $\mu$ are decoy pulses in the $X$ basis with average photon numbers $\sigma$ and $\mu$, respectively. Finally, the $z$ source emits pulses with intensity $z$ in the $Z$ basis. In an \ac{MDI} protocol, we use the $X$ basis to bound the knowledge of Eve or Mallory and the $Z$ basis to generate key. This is due to the minimum possible error of $25\%$ in the $X$ basis \cite{Rubenok2013}.
 
 The estimate key rate of \ac{MDI} per pulse in the infinite case is given as
 
 \begin{equation}
-	R = (p_z)^2 p_{11}^Z Y_{11}^Z \left(1 - H_2(E_{11}^X)\right) - Q_{S,S}^Z f_e E_{S,S}^Z H_2(E_{\mu_s\mu_s}^Z)
+	R = (p_z)^2 Y_{11}^Z \left(1 - H_2(E_{11}^X)\right) - Q_{S,S}^Z f_e E_{S,S}^Z H_2(E_{\mu_s\mu_s}^Z)
 \end{equation}
 where $Y_{11}^Z$ and $e_{11}^X$ are the yield in the $Z$ basis and error in the $X$ basis, respectively, when Alice and Bob both sent single photons. These quantities are not directly measurable so we will need to bound them using a decoy state protocol. $Q_{S,S}^Z$ and $E_{S,S}^Z$ are the gain and error in the $Z$ basis and both can be measured directly. Finally, we introduce the error correction efficiency, $f>1$, and the binary entropy function defined as
 \begin{equation}
@@ -92,25 +92,47 @@ We can use the decoy sates in $X$ to bound the single photon events in $Z$ \cite
 
 \subsection{Shared Resources}
 
+As \ac{MDI} introduce Charlie to mediate the key exchange, this easily facilitates sharing resources by switching between users connecting to a centralised node. In a metropolitan network, each used can access the quantum network 
+
 \section{Integrated Transmitters}
+
+The \ac{InP} transmitters provide all the required components to create high fidelity BB84 states that are required for \ac{MDI}.
 
 \subsection{Pulse Carving}
 
+Using a \acl{mzi}, a \ac{CW} laser can be carved into \SI{130}{ps} pulses with an extinction ratio of up to \SI{30}{dB}.
+
 \subsection{Phase Encoding}
+
+Also using an \ac{mzi}, phase can be encoding through a "push-pull" method. By either pulsing the top or bottom \ac{eopm}, a relative $\pi$ phase can be imparted on pulses.
 
 \subsection{Phase Randomisation}
 
+A negative pulse can be used to gain switch the on-chip laser in between states to randomise the phase. 
+
 \subsection{Decoy State Preparation}
+
+The absorption due to the \ac{qcse} can be used to quickly change the intensities of states for decoy state preparation.
 
 \section{Receiver}
 
+The receiver for \ac{MDI} is a projection onto Bell states\footnote{It actually suffices to project onto a single Bell state}. Depending on the encoding, this projection looks slightly different. In a time-bin encoding scheme, a projection onto $\ket{\phi^\pm}$ depending on coincidences at the detectors.
+
 \subsection{Fibre components}
 
-\subsection{Superconducting Detectors}
+As polarisation drifts is common in fibre, we will need to ensure that the polarisation between transmitters is overlapped. 
+
+A polarisation maintaining 50:50 beam splitter is used to interfere the incoming states.
+
+\subsection{Detection}
+
+\Acs{snspd} are used for detection due to their high efficiency, low dark counts, good jitter and short dead time. Time of arrival is tagged using a Picoquant Hydraharp which is synchronised with the transmitters using an optical link.
+
+The dead time of our detectors is typically \SI{\sim 50}{ns}. In a time-bin encoding scheme, with only 2 detectors, we can only project onto $\ket{\phi^{-}}$ as the detector while still be dead when the second time bin arrives. By fanning out the arriving photons to 4 detectors means that we can now detect both Bell states. This also gives us an increase probability of projecting onto a Bell states because if a detector is dead, there is still a change that the other detector will fire. This scheme will nicely compliment the integrated receiver device in chapter \ref{chap:node}.
 
 \section{Results}
 
-
+Here we will discuss the results of the key generation between the two integrated transmitters.
 
 \subsection{Calibration}
 
@@ -126,9 +148,15 @@ As mentioned before, the \ac{MDI} protocol is very dependent on high fidelity \a
 
 \subsection{Phase Randomised Transmitters}
 
+Phase randomisation means that the clock rate needs to be reduced as the laser needs time to recover. 
+
 \subsection{2GHz Clock Rate}
 
+By relaxing the need for phase randomisation, the transmitters can be clocked at \SI{2}{GHz} which means a state repetition rate of \SI{1}{GHz}.
+
 \section{Outlook}
+
+We have demonstrated the capability of integrated transmitters for \acl{MDI} as a platform for a metropolitan scale quantum-secured network. 
 
 \subsection{Finite Key Effects}
 
@@ -149,8 +177,6 @@ There are many ways of improving the QKD transmitters. For example, encoding in 
 \subsection{Security of Transmitters}
 
 While \ac{MDI} removes all possible attacks on the detectors, there is still the possibility of Mallory gaining information by targeting the transmitters. Therefore, the security of the transmitters will still need to be characterised to ensure the security of a key exchange. Many attacks have been demonstrated on different \ac{QKD} system \cite{makarov2019}. However, to date none have been demonstrated against an integrated device.
-
-\subsection{Multiplexing}
 
 \subsection{Miniaturised Electronics}
 

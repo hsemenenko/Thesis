@@ -74,7 +74,7 @@
 \frenchspacing
 % Font with math support: New Century Schoolbook
 %\usepackage{fouriernc}
-\usepackage[sfdefault,thin]{roboto}
+\usepackage[sfdefault,light]{roboto}
 %\usepackage{sansmath}
 %\sansmath
 %\usepackage{sfmath}
@@ -224,7 +224,12 @@
 \usepackage[version=0.96]{pgf}			%PGF/TikZ is a tandem of languages for producing vector graphics from a 
 \usepackage{tikz}					%geometric/algebraic description.
 \usepackage{siunitx}				%package to format SI units
-\usetikzlibrary{arrows,shapes,snakes,
+\sisetup{
+%	detect-all = true,
+	detect-inline-family = text,
+	detect-inline-weight = text
+}
+\usetikzlibrary{arrows,shapes,decorations,
 		       automata,backgrounds,
 		       petri,topaths}				%To use diverse features from tikz			       
 \usepackage{etoolbox}				%Package to change theorem style boxes
