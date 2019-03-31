@@ -1,4 +1,4 @@
-# All files
+# Exclude all files
 *.*
 # Include latex files
 !*.tex
@@ -17,3 +17,5 @@ logos/
 # ignore TeXcount history and docs
 TeXcount/Doc
 TeXcount/History
+# Include the count image to show in README
+!TeXcount/count.pdf
