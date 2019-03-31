@@ -1,2 +1,2 @@
 # Advances in Chip-Based Quantum Key Distribution
-![Word count](./TeXcount/count.pdf)
+![Word count](./TeXcount/count.png)

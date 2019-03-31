@@ -31,4 +31,4 @@ end
 
 plot(date,[text,caption], lab = ["Text" "Captions"], w=3, legend = :topleft)
 plot!(twinx(), date, [figure, maths], lab = ["Figures" "Equations"], line=(:dot), w=3, legend = :topright)
-savefig("count.pdf")
+savefig("count.png")

@@ -18,4 +18,4 @@ logos/
 TeXcount/Doc
 TeXcount/History
 # Include the count image to show in README
-!TeXcount/count.pdf
+!TeXcount/count.png
