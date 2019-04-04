@@ -25,6 +25,8 @@ Before we begin, we will need to introduce the cast of characters that will each
 
 \brisred{Mallory} would also like to know what Alice has sent to Bob, but will go to more extreme measures to discover their secrets. She has unlimited resources available (confined only by the laws of physics) and will use all possible methods within her power to crack the hidden message. 
 
+The reader is encouraged to picture their own cast of characters in their mind's eye to being this story to life.
+
 \section{Cryptography}
 \label{sec1:crypto}
 
@@ -237,15 +239,21 @@ While \ac{QKD} is often claimed to be ``perfectly secure'' or ``unhackable'', th
 
 The first demonstration of \ac{QKD} by Bennett and Brassard was flawed due to polarisation dependent sounds from the power supplies. Brassard noted that their key exchange was ``perfectly secure against any eavesdropper who happened to be deaf'' \cite{Brassard2005}. 
 
-Since then, there have been numerous demonstrations that \ac{QKD} system are insecure under real world condition. These have demonstrated vulnerabilities in all parts of both the transmitters and receivers: transmitter modulation \cite{Gisin2006}, detectors \cite{Lydersen2010,Makarov2006}. 
+Since then, there have been numerous demonstrations that \ac{QKD} system are insecure under real world condition. These have demonstrated vulnerabilities in all parts of both the transmitters and receivers: transmitter modulation \cite{Gisin2006}. 
 
-One of the most vulnerable parts of a \ac{QKD} system are the detectors. Due to their complexity, they have been exposed to many attacks which have allows an attacker to be 
+One of the most vulnerable parts of a \ac{QKD} system are the detectors. Due to their complexity, they have been exposed to many attacks which have allows an attacker to be in complete control of a key exchange \cite{Makarov2006, Gerhardt2011a, Lydersen2010a, Lydersen2010b, Lydersen2011, Sauge2011, Makarov2009, Wiechers2011}.
+
+It has even been demonstrated that Bell violations can be experimentally faked \cite{Gerhardt2011b}.
+
+It is possible to develop methods to counter certain attacks \cite{Lydersen2010c, Yuan2010}. However, verifying the security and continually patch new exploits and vulnerabilities will be impractical for a quantum secured network.
 
 \subsection{Device-Independence}
 
-To remove potential attacks on \ac{QKD} systems, protocols have been developed to relieve some of the assumptions required for security in a key exchange. 
+To remove potential attacks on \ac{QKD} systems, protocols have been developed to relieve some of the assumptions required for security in a key exchange. \Ac{diqkd}  \cite{Acin2007, Barrett2005, Mayers1998}. 
 
 Creating accurate models for equipment is particularly challenging. By removing assumptions about their operation, full characterisation is no longer required.
+
+Fully \ac{diqkd} is practically challenging due to the requirements of the equipment. \ac{MDI} can relieve assumptions about the detector device and is possible with current technology \cite{mdi-qkd}, as we will see in chapters \ref{chap:mdiqkd} and \ref{chap:node}. 
 
 \section{Integrated Photonic Circuits}
 
