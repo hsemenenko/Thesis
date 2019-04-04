@@ -29,6 +29,6 @@ for file in filter(x -> endswith(x, "txt"), readdir("./History"))
     push!(maths, m)
 end
 
-plot(date,[text,caption], lab = ["Text" "Captions"], w=3, legend = :topleft, yaxis = ("Text and captions", (0,Inf)))
-plot!(twinx(), date, [figure, maths], lab = ["Figures" "Equations"], line=(:dot), w=3, legend = :topright, yaxis = ("Figures and Equations", (0,Inf)))
+plot(date,[text,caption], lab = ["Text" "Captions"], w=3, legend = :topleft, yaxis = ("Text and captions", (0,Inf)), linetype=:steppre)
+plot!(twinx(), date, [figure, maths], lab = ["Figures" "Equations"], line=(:dot), w=3, legend = :topright, yaxis = ("Figures and Equations", (0,Inf)), linetype=:steppre)
 savefig("count.png")
