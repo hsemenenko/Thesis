@@ -81,11 +81,10 @@
 % Font with math support: New Century Schoolbook
 %\usepackage{fouriernc}
 \usepackage[sfdefault,light]{roboto}
-%\usepackage{sansmath}
-%\sansmath
-%\usepackage{sfmath}
+\usepackage{sansmath}
+\sansmath
 %\usepackage{sansmathaccent}
-\usepackage[T1]{fontenc}
+%\usepackage[T1]{fontenc}
 %
 % UoB guidelines:
 %
@@ -194,7 +193,7 @@
 \usepackage{lipsum}
 \usepackage{braket}
 \usepackage{amsfonts} 					%Calls Amer. Math. Soc. (AMS) fonts
-\usepackage[centertags]{amsmath}			%Writes maths centred down
+\usepackage[centertags]{mathtools}			%Writes maths centred down
 \usepackage{stmaryrd}					%New AMS symbols
 \usepackage{amssymb}					%Calls AMS symbols
 \usepackage{amsthm}					%Calls AMS theorem environment
@@ -240,6 +239,11 @@
 		       petri,topaths}				%To use diverse features from tikz			       
 \usepackage{etoolbox}				%Package to change theorem style boxes
 \usepackage{changepage}				%Package to change theorem style boxes
+
+\usepackage{epstopdf}
+\epstopdfsetup{update}
+\DeclareGraphicsExtensions{.eps,.pdf,.png,.jpg,.ps}
+\epstopdfDeclareGraphicsRule{.ps}{pdf}{.pdf}{eps2pdf -dEPSCrop -dNOSAFER #1 \OutputFile}		
 		
 %%% PGFPLOTS STUFF %%%
 
@@ -487,20 +491,21 @@
 % subdirectories.
 \mainmatter
 %
+\input{test.tex}
 \import{chapters/chapter01/}{chap01.tex}
 \clearemptydoublepage
 \import{chapters/chapter02/}{chap02.tex}
 \clearemptydoublepage
-\import{chapters/chapter03/}{chap03.tex}
-\clearemptydoublepage
-\import{chapters/chapter04/}{chap04.tex}
-\clearemptydoublepage
-\import{chapters/chapter05/}{chap05.tex}
-\clearemptydoublepage
-\import{chapters/chapter06/}{chap06.tex}
-\clearemptydoublepage
-\import{chapters/chapter07/}{chap07.tex}
-\clearemptydoublepage
+%\import{chapters/chapter03/}{chap03.tex}
+%\clearemptydoublepage
+%\import{chapters/chapter04/}{chap04.tex}
+%\clearemptydoublepage
+%\import{chapters/chapter05/}{chap05.tex}
+%\clearemptydoublepage
+%\import{chapters/chapter06/}{chap06.tex}
+%\clearemptydoublepage
+%\import{chapters/chapter07/}{chap07.tex}
+%\clearemptydoublepage
 %
 %
 % And the appendix goes here
