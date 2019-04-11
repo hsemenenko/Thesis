@@ -25,7 +25,7 @@ Before we begin, we will need to introduce the cast of characters that will each
 
 \brisred{Mallory} would also like to know what Alice has sent to Bob, but will go to more extreme measures to discover their secrets. She has unlimited resources available (confined only by the laws of physics) and will use all possible methods within her power to crack the hidden message. 
 
-The reader is encouraged to picture their own cast of characters in their mind's eye to being this story to life.
+The reader is encouraged to picture their own cast of characters in their mind's eye to bring this story to life.
 
 \section{Cryptography}
 \label{sec1:crypto}
@@ -105,7 +105,7 @@ The RSA algorithm is named after it's inventors Ron Rivest, Adi Shamir, and Leon
 	\item Bob needs to first choose a secret key. He selects to large (typically 2048 bit) prime numbers, $p$ and $q$, and calculates $n = p \times q$.
 	\item He then chooses some $d < (p-1)(q-1)$ which is coprime\footnote{Two numbers are coprime if they share no common factors greater than 1.} to $(p-1)(q-1)$.
 	\item Finally, Bob calculates the inverse, $e$, of $d$ modulo $(p-1)(q-1)$ and publishes the public key $N$ and $e$ whilst keeping $p,q$ and $d$ private.
-	\item Alice breaks her message into integers $m < N$ and encrypts as $c = m^d \mathrm{modulo} N$. The ciphertext $c$ can now be sent to Bob.
+	\item Alice breaks her message into integers $m < N$ and encrypts as $c = m^d \mathrm{ mod } N$. The ciphertext $c$ can now be sent to Bob.
 	\item To decrypt Alice's message, Bob computes $m = c^d$ and the communication is complete. 
 \end{enumerate}   
 
