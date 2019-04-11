@@ -1,5 +1,6 @@
 using Dates
 using Plots
+using Plots.PlotMeasures
 gr(size=(1920,1080))
 
 date = []
@@ -15,7 +16,7 @@ i_reg = r"Number of math inlines: (.*\d)"
 d_reg = r"Number of math displayed: (.*\d)"
 
 for file in filter(x -> endswith(x, "txt"), readdir("./History"))
-    push!(date, Date(file[1:10],"y_m_d")) 
+    push!(date, Date(file[1:10],"y_m_d"))
     data = open("./History/" * file) do f
         read(f, String)
     end
@@ -29,6 +30,30 @@ for file in filter(x -> endswith(x, "txt"), readdir("./History"))
     push!(maths, m)
 end
 
-plot(date,[text,caption], lab = ["Text" "Captions"], w=3, legend = :topleft, yaxis = ("Text and captions", (0,Inf)), linetype=:steppre)
-plot!(twinx(), date, [figure, maths], lab = ["Figures" "Equations"], line=(:dot), w=3, legend = :topright, yaxis = ("Figures and Equations", (0,Inf)), linetype=:steppre)
-savefig("count.png")
+plot(date,
+   [text,caption],
+   lab = ["Text" "Captions"],
+   w=3,
+   legend = :topleft,
+   yaxis = ("Text and captions", (0,Inf)),
+   linetype=:steppre,
+   left_margin=20mm,
+   right_margin = 30mm,
+   bottom_margin=20mm,
+   xrotation = 45)
+   #fontfamily = "Roboto")
+
+
+plot!(twinx(),
+   date,
+   [figure, maths],
+   lab = ["Figures" "Equations"],
+   line=(:dot),
+   w=3,
+   legend = :topright,
+   yaxis = ("\nFigures and Equations", (0,Inf)),
+   linetype=:steppre,
+   right_margin=20mm,
+   xrotation = 45)
+
+savefig("count.eps")
