@@ -237,11 +237,10 @@
 \usepackage{etoolbox}				%Package to change theorem style boxes
 \usepackage{changepage}				%Package to change theorem style boxes
 
-\usepackage{epstopdf}
-\epstopdfsetup{update}
-\DeclareGraphicsExtensions{.eps,.pdf,.png,.jpg,.ps}
-\epstopdfDeclareGraphicsRule{.ps}{pdf}{.pdf}{eps2pdf -dEPSCrop -dNOSAFER #1 \OutputFile}		
-		
+% Hide page numbers for chapters in toc
+\usepackage{tocloft}
+\cftpagenumbersoff{chapter} 
+
 %%% PGFPLOTS STUFF %%%
 
 \usepackage{pgfplots}
