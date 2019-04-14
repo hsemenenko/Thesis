@@ -56,4 +56,4 @@ plot!(twinx(),
    right_margin=20mm,
    xrotation = 45)
 
-savefig("count.eps")
+savefig("count.png")
