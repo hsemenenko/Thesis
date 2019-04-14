@@ -78,13 +78,8 @@
 \checkandfixthelayout
 %
 \frenchspacing
-% Font with math support: New Century Schoolbook
-%\usepackage{fouriernc}
-\usepackage[sfdefault,light]{roboto}
-\usepackage{sansmath}
-\sansmath
-%\usepackage{sansmathaccent}
-%\usepackage[T1]{fontenc}
+\usepackage[sfdefault]{roboto}
+\fontseries{l}
 %
 % UoB guidelines:
 %
@@ -230,9 +225,11 @@
 \usepackage{tikz}					%geometric/algebraic description.
 \usepackage{siunitx}				%package to format SI units
 \sisetup{
-%	detect-all = true,
+%	detect-all,
+%	detect-weight,
+%	series = light,
 	detect-inline-family = text,
-	detect-inline-weight = text
+	detect-inline-weight = math
 }
 \usetikzlibrary{arrows,shapes,decorations,
 		       automata,backgrounds,
