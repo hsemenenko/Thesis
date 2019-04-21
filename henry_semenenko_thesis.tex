@@ -82,6 +82,23 @@
 \usepackage[sfdefault]{roboto}
 \fontseries{l}
 %
+
+%Defining an empty page with key graphic
+\def\emptypage{
+	\thispagestyle{empty}
+	\vspace*{\fill}
+	\vspace*{-1.5cm}
+	\begin{center}
+	\checkoddpage
+	\ifoddpage
+		\includegraphics[scale=0.5]{./logos/key_right.pdf}
+	\else
+		\includegraphics[scale=0.5]{./logos/key_left.pdf}
+	\fi
+	\end{center}     
+    \vspace{\fill} 
+}
+
 % UoB guidelines:
 %
 % Text should be in double or 1.5 line spacing, and font size should be
@@ -144,7 +161,7 @@
 			\color{gray}\chaptitlefont\raggedleft ##1\par
 		\fi
 	}
-	\renewcommand{\mempostaddchaptertotochook}{\newpage{\thispagestyle{empty}}\nopagecolor~\newpage{\suppressfloats}}
+	\renewcommand{\mempostaddchaptertotochook}{\clearpage\nopagecolor\cleartooddpage[\emptypage]}
 } 
 \makeatother 
 \chapterstyle{daleifmodif}
@@ -167,7 +184,12 @@
 % contents sections will each start on an odd-numbered page they will
 % spill over onto the even-numbered pages if extending beyond one page
 % (hopefully, this is ok).
-\newcommand{\clearemptydoublepage}{\clearpage{\thispagestyle{empty}}~\newpage{\thispagestyle{empty}\cleardoublepage}\glsresetall}
+\def\clearemptydoublepage{%
+        \clearpage%
+        \cleartoevenpage[\emptypage]
+        \clearpage
+        \cleartooddpage[\emptypage]
+    }%
 %
 %
 % Creates indexes for Table of Contents, List of Figures, List of Tables and Index
@@ -228,7 +250,6 @@
 \sisetup{
 %	detect-all,
 %	detect-weight,
-%	series = light,
 	detect-inline-family = text,
 	detect-inline-weight = math
 }
@@ -468,7 +489,7 @@
 \input{frontmatter/dedication}
 \clearemptydoublepage
 %
-\pagenumbering{roman}
+\pagenumbering{roman} 
 \renewcommand{\contentsname}{Table of Contents}
 \maxtocdepth{subsection}
 \tableofcontents*
