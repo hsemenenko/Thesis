@@ -91,9 +91,9 @@
 	\begin{center}
 	\checkoddpage
 	\ifoddpage
-		\includegraphics[scale=0.5]{./logos/key_right.pdf}
+		\includegraphics[scale=0.4]{./graphics/key_right.pdf}
 	\else
-		\includegraphics[scale=0.5]{./logos/key_left.pdf}
+		\includegraphics[scale=0.4]{./graphics/key_left.pdf}
 	\fi
 	\end{center}     
     \vspace{\fill} 
@@ -174,8 +174,8 @@
 \makeoddfoot{myvf}{}{\thepage}{} 
 \makeevenfoot{myvf}{}{\thepage}{} 
 \makeheadrule{myvf}{\textwidth}{\normalrulethickness} 
-\makeevenhead{myvf}{\small\textsc{\rightmark}}{}{} 
-\makeoddhead{myvf}{}{}{\small\textsc{\leftmark}}
+\makeevenhead{myvf}{\small\textsc{\leftmark}}{}{} 
+\makeoddhead{myvf}{}{}{\small\textsc{\rightmark}}
 \pagestyle{myvf}
 %
 % Oscar's command (it works):
@@ -523,8 +523,8 @@
 \clearemptydoublepage
 \import{chapters/chapter07/}{chap07.tex}
 \clearemptydoublepage
-%
-%
+
+
 % And the appendix goes here
 \appendix
 \import{chapters/appendices/}{app0A.tex}
@@ -536,11 +536,20 @@
 \bibliographystyle{siam}
 \refstepcounter{chapter}
 \bibliography{thesisbiblio}
-\clearemptydoublepage
 \ifdraftdoc
+	\cleartoevenpage
 \else
+	\clearpage
+	\pagestyle{empty}
+	~\clearpage
+	\pagestyle{empty}
 	\pagecolor{bristol-red}
-	\clearemptydoublepage
+	\cleartoevenpage
+	\pagestyle{empty}
+	\vspace*{\fill}
+	\begin{center}
+	\includegraphics[scale=0.25]{./graphics/skytale}
+	\end{center}
 \fi
 %
 % Add index
