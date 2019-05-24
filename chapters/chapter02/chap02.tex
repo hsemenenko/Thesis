@@ -195,7 +195,7 @@ For communication protocols, we will find it useful to encode information using 
 
 To motivate the introduction of quantum-secure communication, we will introduce some concepts and protocols in quantum computing. While quantum computing has been a big motivator for moving to new encryption, we still have no assurances that the trap-door functions we rely on for security are secure even against classical computers.
 
-Shor's algorithm efficiently factors composite numbers into their prime factors \cite{shor1994}. Both RSA and Diffie-Hellman are vulnerable to attacks from a quantum computer using Shor's algorithm.
+Shor's algorithm efficiently factors composite numbers into their prime factors \cite{shor1994}. Both RSA and Diffie-Hellman are vulnerable to attacks from a quantum computer using Shor's algorithm. The estimated number of physical qubits needed to factor RSA-2048 has reduced drastically in recent years from 1 billion \cite{mosca2018, fowler2012} to 20 million \cite{gidney2019}. While the task is still daunting, it is more reasonable.
 
 Grover's algorithm could also be used to search through keys in a block cipher protocol. However, the speed-up is only $\sqrt{n}$ which has been proven as optimal on a quantum computer \cite{Bennent1997} . Therefore, the same security in a post-quantum world can be achieved by doubling the key length i.e. moving from 128 bit to 256 bit AES.
 
