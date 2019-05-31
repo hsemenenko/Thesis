@@ -17,7 +17,38 @@
 
 \section{Hong-Ou-Mandel Interference}
 
-\Ac{HOM} interference is a quantum phenomena where two indistinguishable single photons incident on a beam splitter will interfere and bunch. This is an important process that is fundamental is many quantum information technologies. It was first seen by Hong, Ou and Mandel in 1987 \cite{HOM}.
+\Ac{HOM} interference is a quantum phenomena where two indistinguishable single photons incident on a balanced beam splitter will interfere and bunch. This is an important physical process that is fundamental to many quantum information technologies from computation to communication and sensing. It was first seen by Hong, Ou and Mandel in 1987 \cite{HOM}. 
+
+Consider two single photons indistinguishable only in their spatial modes. This can be mathematically represented as 
+
+\begin{equation}
+	\hat{a}^\dagger \hat{b}^\dagger \ket{0,0}_{a,b} = \ket{1,1}_{a,b}
+\end{equation}
+
+In general we can consider a beam splitter to have some reflection component, $r$, and some transmission component, $t$. The transformation matrix is given as 
+
+\begin{equation}
+	\left(
+	\begin{matrix}
+		t^\ast & r \\
+		-r^\ast & t
+	\end{matrix}
+	\right)
+	\quad\text{such that}\quad
+	|r|^2 + |t|^2 = 1 
+	\quad\text{and}\quad
+	r^\ast t + r t^\ast = 0
+\end{equation}
+where $|r|^2$ and $|t|^2$ are the probabilities of reflection and transmission, respectively. For a balance beam splitter, the transformation matrix becomes
+\begin{equation}
+	\text{BS}_{50:50} = \frac{1}{\sqrt{2}}
+	\left(
+	\begin{matrix}
+		1 & i \\
+		i & 1
+	\end{matrix}
+	\right)	
+\end{equation}
 
 \subsection{Coherent States on a Beam Splitter}
 
@@ -106,7 +137,7 @@ Therefore, the probability of a coincidence click, with both coherent states ove
 }
 \end{axis}
 \end{tikzpicture}
-	\caption[Coherent state photon number visibility]{Graph plotting the effect of an unbalanced beam splitter on the visibility of a HOM dip. Maximal visibility is found when the beam splitter is 50:50. Photon number also has an effect on visibility when using coherent states. Here we see average photon numbers ranging from 0.01 to 10. Both states are assumed to have equal average photon number.}
+	\caption[Coherent state photon number visibility]{Graph plotting the effect of an unbalanced beam splitter on the visibility of a HOM dip. Maximal visibility is found when the beam splitter is 50:50. Photon number also has an effect on visibility due to the increased probability of multi-photon terms. Here, we plot average photon numbers ranging from 0.01 to 5. Both states are assumed to have equal average photon number.}
 	\label{fig:HOM_BS_Vis}
 \end{figure}
 
@@ -170,18 +201,37 @@ In this section, we detail the experimental setup used to demonstrate \ac{HOM} i
 	\label{fig:hom_experiment}
 \end{figure}
 
-The experiment uses two \ac{InP} devices which will we give the usual labels: Alice and Bob. Each device measures only \SI[product-units=power]{6x2}{mm} and contains all the required photonic components to generate the required states to perform \ac{HOM} interference at GHz rates. On only needs to compare the sizes of these optical components to fibre based optics to justify the benefits of integrated devices.
+The experiment uses two \ac{InP} devices as sources of weak coherent states. We will call each device Alice and Bob, respectively. Each chip measures only \SI[product-units=power]{6x2}{mm} and contains all the required photonic components to generate the required states to perform \ac{HOM} interference at GHz rates. One only need compare the sizes of these optical components to fibre based optics to justify the benefits of integrated devices.
 
-Each devices contains a \ac{CW} laser which consists of two \acp{DBR} and a \ac{SOA} which forms a cavity to create a laser only \SI{1}{mm} in length. Typical spectra of the two transmitter lasers is shown in figure \ref{fig:spectra} which demonstrates a \SI{<30}{pm} \ac{FWHM} and a \SI{>50}{dB} sideband suppression. Notice that the linewidth here is stated as \SI{<30}{pm} \ac{FWHM} as this is limited to the precision of the \ac{OSA} used. 
+\subsection{Light Source}
+
+\begin{figure}
+	\centering
+	\includegraphics[width=0.6\textwidth]{/Chip/Oclaro_00_LASER.png}
+	\caption{Integrated laser formed of two DBRs and an SOA.}
+	\label{fig:InP_laser}
+\end{figure}
+
+As described in chapter \ref{chap:background}, a huge benefit for III-V materials such as \ac{InP} is the ability to monolithically integrate lasers onto devices. This makes the platform particularly suited for telecommunications. 
+
+The requirements for quantum communications are somewhat more stringent than that of classical communications. To this end, we need to verify the quality of the light sources to ensure that they will be able to perform high visibility interference. 
+
+Each devices contains a Fabry-P\`{e}rot \acl{CW} laser which is shown in figure{\ref{fig:InP_laser}. The \SI{1}{mm} long cavity is made from two \acp{DBR} which are tunable through current injection and allow a wavelength tuning of $\approx \SI{10}{nm}$. From the picture, we can see that the \acp{DBR} are both the same length. Typically, the rear \ac{DBR} would be longer to increase the reflectivity back into the cavity which increases the laser power. While the applications here only require weak coherent states, \ac{cvqkd} requires a bright local oscillator which needs to be considered during chip design.
+
+ which consists of two \acp{DBR} and a \ac{SOA} which forms a cavity to create a laser only \SI{1}{mm} in length. Typical spectra of the two transmitter lasers is shown in figure \ref{fig:spectra} which demonstrates a \SI{<30}{pm} \ac{FWHM} and a \SI{>50}{dB} sideband suppression. Notice that the linewidth here is stated as \SI{<30}{pm} \ac{FWHM} as this is limited to the precision of the \ac{OSA} used. 
 
 \begin{figure}[tbp]
 	\centering
 	\includegraphics[width=0.8\textwidth]{spectrum}
-	\caption[Laser spectrum]{Typical spectra of the two on-chip laser demonstrating a \ac{FWHM} of \SI{<30}{pm}.}
+	\caption[Laser spectrum]{Typical spectra of the two independent on-chip lasers. Each demonstrates a \ac{FWHM} of \SI{30}{pm} which is limited to the precision of the optical spectrum analyser used.}
 	\label{fig:spectra}
 \end{figure}
 
-We note here that the narrow linewidth of the laser means that during no experiment with the \ac{InP} chips do we need to use a wavelength filter to clean up the light or optical pulses. This is important as it removed a component that would add cost to any system but also restrict the wavelength operation of the devices. Without the need for a filter, the lasers are free to operate in a wavelength that spans more than \SI{10}{nm}. This will be crucial as it is likely that \ac{QKD} systems will needed to be wavelength-division multiplexed (WDM) to meet the demands of high-speed networks.
+\subsection{Modulation}
+
+From the laser, we will need to be able to intensity modulate our light to define time-bins for encoding. To be able to keep up with modern telecommunications, we will want the modulation to have \SI{10}{GHz} bandwidths. Our
+
+We note here that the narrow linewidth of the laser means that during no experiment with the \ac{InP} chips do we need to use a wavelength filter to clean up the light or optical pulses. This is important as it removed a component that would add cost to any system but also restrict the wavelength operation of the devices. Without the need for a filter, the lasers are free to operate in a wavelength that spans more than \SI{10}{nm}. This will be crucial as it is likely that \ac{QKD} systems will needed to be \ac{wdm} to meet the demands of high-speed networks.
 
 Alice (and Bob) uses a stable current sources to drive an on-chip \ac{DBR} laser which demonstrates a \ac{FWHM} of \SI{<30}{pm}, although this is limited by the precision of the \ac{OSA} used.
 
