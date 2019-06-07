@@ -50,6 +50,18 @@ where $|r|^2$ and $|t|^2$ are the probabilities of reflection and transmission, 
 	\right)	
 \end{equation}
 
+The beam splitter transformation can also be written as 
+\begin{equation}
+	\text{BS}_{50:50} = \frac{1}{\sqrt{2}}
+	\left(
+	\begin{matrix}
+		1 & 1 \\
+		1 & -1
+	\end{matrix}
+	\right)	
+\end{equation}
+when we do not wish to consider the relative phases of the output modes. For example, in a \ac{HOM} experiment we are typically only concerned with coincidences of the photons after the beam splitter and not their phases.
+
 \subsection{Coherent States on a Beam Splitter}
 
 While \ac{HOM} interference is typically considered when single photons interfere on a beam splitter, the same phenomena can be seen with coherent states.  However, the visibility of interference is limited to 50\% \cite{Rarity2005} due to multiphoton terms.
@@ -160,27 +172,41 @@ Using these equations, it is possible to estimate the visibility of a HOM dip gi
 \section{Sources and Requirements}
 \label{sec:sources}
 
-In this section, we discuss the main difficulties in performing	\ac{HOM} interference and some of the sources that can be used to fulfil the requirements. 
+In this section, we will discuss the main challenges in performing \ac{HOM} interference and describe some of the photons sources that can be used to fulfil the stringent requirements of high visibility interference. It is well understood that for two light pulses to interfere, they need to be indistinguishable \cite{}. Put more explicitly, for maximal interference, the two pulses need to have the same wavelength; arrive at the same time; have equal intensities; be in the same polarisation; and have the same pulse shape.
 
-It is well understood that for two light pulses to interfere, they need to be indistinguishable. That is to say, for maximum interference, the two pulses need to have the same wavelength; arrive at the same time; have equal intensities; be in the same polarisation; and have the same pulse shape.
+\subsection{Single Photons}
 
-\subsection{Single Photon}
+Typically, \acl{HOM} experiments are usually performed with a single photons. The first demonstrations used \ac{spdc} to generate pairs of single photons that were distinguishable only in path \cite{}. By delaying one of the photons before interfering on a beam splitter, \ac{HOM} interference could be demonstrated. Subsequent experiments have demonstrated interference between single photons sources from \ac{sfwm} \cite{}, quantum dots \cite{} and NV centres \cite{}.
 
-An on-demand single photon source would be the ideal candidate for \ac{QKD}. However, it has not been possible with current technology to create single photon sources with high rates.
+While there have been many advances in these types of sources through increased rates and coherence, they remain probabilistic. Therefore, it is hard to claim that they will make good candidates for scalable quantum technologies without requiring multiplexing and feed-forward which introduces a its own set of practical challenges.
 
-Most single photon experiments use with \ac{sfwm} or \ac{spdc}. There have been recent advances in quantum dot single photon sources, but they are typically not at telecommunication compatible wavelengths.
+On-demand single photon source would be the ideal candidate for many quantum technologies, including \acp{QKD}. However, the current state of the on-demand sources means limited rates that are often at wavelength incompatible with telecommunications \cite{}. 
 
 \subsection{Weak Coherent States}
 
-In the absence of a single photon sources, we will instead use \acp{wcs}. A source for high-fidelity \ac{HOM}, and therefore \ac{QKD}, will need to fulfil a few requirements listed here:
+In the absence of true single photon sources, another source of light needs to be considered for scalable quantum communication. Coherent states represent a close approximation to single photons when strongly attenuated. They are also readily available easily manipulated. In the regime of low average photon number, we will introduce \acp{wcs}. While not entirely well defined, we will consider \ac{wcs} to be when the average photon number is around 1 within a time period.
 
-\begin{itemize}
-	\item Good extinction ratio
-	\item Good timing jitter
-	\item Narrow linewidth/Long coherence
-	\item Linearly polarised
-	\item Phase randomisation
-\end{itemize}
+As previously mentioned, the requirements for high-fidelity \ac{HOM}, and therefore \ac{QKD}, are stringent. Here we discuss some of the requirements for a \ac{wcs} sources. 
+
+\subsubsection*{Extinction Ratio}
+
+The states will need to be temporally modulated to create time-bins that determine coincidence windows. While this is not necessarily required for \ac{HOM} interference, it will be important to use these states to encode quantum states for communication purposes. As we will be working with single photons states, it is important that there is a good distinction between \textit{on} and \textit{off} which we will call the extinction ratio. 
+
+\subsubsection*{Timing Jitter}
+
+In order to keep up with the data transfers on the web today, we will need to have clock speeds that are comparable. Therefore, as we need to encoding information in time, it is important that we have a low timing jitter to ensure time-bins remain separate even at GHz speeds.
+
+\subsubsection*{Coherence}
+
+For interference, we need to be sure that the state that arrives is the same as what was sent. Therefore, the coherence of the laser used needs to have a good coherence length, which means a narrow line width.
+
+\subsubsection*{Phase Randomisation}
+
+While it may seem counter-intuitive to require phase randomisation after also requiring long coherence lengths of the laser. However, phase randomisation between subsequent states is a vital part of \ac{HOM} interference with coherent states. Crucially, it is what distinguishes between the classical wave interference and the quantum \ac{HOM} interference.
+
+\subsubsection*{Linearly Polarised}
+
+As mentioned before, the states will need to be overlapped in each degree of freedom. The polarisation needs to be linear for interference.
 
 Several methods can be conceived to generate \acp{wcp}.
 
@@ -192,7 +218,7 @@ Several methods can be conceived to generate \acp{wcp}.
 
 \section{Experiment}
 
-In this section, we detail the experimental setup used to demonstrate \ac{HOM} interference at errors and speeds required to perform state-of-the-art \ac{MDI}.
+In this section, we detail the experimental setup used to demonstrate \ac{HOM} interference motivating the design with regards to the requirements set out in the previous section. 
 
 \begin{figure}[tbp]
 	\centering
@@ -212,13 +238,13 @@ The experiment uses two \ac{InP} devices as sources of weak coherent states. We 
 	\label{fig:InP_laser}
 \end{figure}
 
-As described in chapter \ref{chap:background}, a huge benefit for III-V materials such as \ac{InP} is the ability to monolithically integrate lasers onto devices. This makes the platform particularly suited for telecommunications. 
+As described in chapter \ref{chap:background}, a huge benefit for III-V materials such as \ac{InP} is the ability to monolithically integrate lasers onto devices. This makes the platform particularly suited for telecommunications and generating weak coherent states. 
 
 The requirements for quantum communications are somewhat more stringent than that of classical communications. To this end, we need to verify the quality of the light sources to ensure that they will be able to perform high visibility interference. 
 
-Each devices contains a Fabry-P\`{e}rot \acl{CW} laser which is shown in figure{\ref{fig:InP_laser}. The \SI{1}{mm} long cavity is made from two \acp{DBR} which are tunable through current injection and allow a wavelength tuning of $\approx \SI{10}{nm}$. From the picture, we can see that the \acp{DBR} are both the same length. Typically, the rear \ac{DBR} would be longer to increase the reflectivity back into the cavity which increases the laser power. While the applications here only require weak coherent states, \ac{cvqkd} requires a bright local oscillator which needs to be considered during chip design.
+Each devices contains a Fabry-P\`{e}rot \acl{CW} laser which is shown in figure{\ref{fig:InP_laser}. The \SI{1}{mm} long cavity is made from two \acp{DBR} which are tunable through current injection and allow a wavelength tuning of $\approx \SI{10}{nm}$. From the picture, we can see that the \acp{DBR} are both the same length. Typically, the rear \ac{DBR} would be longer to increase the reflectivity back into the cavity which increases the laser power. While the applications here only require weak coherent states, \ac{cvqkd} requires a bright local oscillator which needs to be considered during chip design. Subsequent chip designs should considering this design change.
 
- which consists of two \acp{DBR} and a \ac{SOA} which forms a cavity to create a laser only \SI{1}{mm} in length. Typical spectra of the two transmitter lasers is shown in figure \ref{fig:spectra} which demonstrates a \SI{<30}{pm} \ac{FWHM} and a \SI{>50}{dB} sideband suppression. Notice that the linewidth here is stated as \SI{<30}{pm} \ac{FWHM} as this is limited to the precision of the \ac{OSA} used. 
+A typical spectra of the two transmitter lasers is shown in figure \ref{fig:spectra} which demonstrates a \SI{<30}{pm} \ac{FWHM} and a \SI{>50}{dB} sideband suppression. The linewidth here is stated as \SI{<30}{pm} \ac{FWHM} as this is limited to the precision of the \ac{OSA} used. 
 
 \begin{figure}[tbp]
 	\centering
@@ -226,6 +252,8 @@ Each devices contains a Fabry-P\`{e}rot \acl{CW} laser which is shown in figure{
 	\caption[Laser spectrum]{Typical spectra of the two independent on-chip lasers. Each demonstrates a \ac{FWHM} of \SI{30}{pm} which is limited to the precision of the optical spectrum analyser used.}
 	\label{fig:spectra}
 \end{figure}
+
+In order to measure the the linewidth more accurately, a self-heterodyne measurement technique can be used \cite{}. 
 
 \subsection{Modulation}
 
