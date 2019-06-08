@@ -35,12 +35,13 @@ plot(date,
    lab = ["Text" "Captions"],
    w=3,
    legend = :topleft,
-   yaxis = ("Text and captions", (0,Inf)),
+   yaxis = ("Text and captions", (0,20000)),
    linetype=:steppost,
    left_margin=20mm,
    right_margin = 30mm,
    bottom_margin=20mm,
-   xrotation = 45)
+   xrotation = 45,
+   formatter = :plain)
    #fontfamily = "Roboto")
 
 
@@ -51,7 +52,7 @@ plot!(twinx(),
    line=(:dot),
    w=3,
    legend = :topright,
-   yaxis = ("\nFigures and Equations", (0,Inf)),
+   yaxis = ("\nFigures and Equations", (0,300)),    
    linetype=:steppost,
    right_margin=20mm,
    xrotation = 45)
