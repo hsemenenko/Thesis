@@ -1,6 +1,7 @@
 using Plots, DelimitedFiles, Plots.PlotMeasures
 
 gr(size = (800,640))
+pgfplots()
 
 #load files
 decoy_mod_file = open(".\\chapters\\chapter04\\fig04\\Electrical Signals\\250mhz-bb84-decoy-mod.csv")
@@ -47,7 +48,21 @@ pulse_mod_plt = plot(
    ylabel = "Pulse Mod"
    )
 
+labels_plt = plot(
+   annotations=([(1100,0.5, text("|0⟩", :center)),
+      (2250,0.5, text("|1⟩", :center)),
+      (3400,0.5, text("|0⟩", :center)),
+      (4600,0.5, text("|1⟩", :center)),
+      (5750,0.5, text("|+>", :center))
+   ]),
+   xlims = (0,20500),
+   ylims = (0.4999,0.501),
+   top_margin = 0cm,
+   bottom_margin = 0cm,
+   )
+
 plot(
+   labels_plt,
    decoy_plt,
    phase_enc_plt,
    phase_rand_plt,
@@ -58,12 +73,12 @@ plot(
    yaxis = false,
    leg = false,
    left_margin = 1cm,
-   layout = (4,1)
+   layout = (5,1)
    )
 
-state_lines = [100,850,1350,2100]
+state_lines = [100,750,1375,2000]
 vline!([state_lines,state_lines,state_lines,state_lines],
-      width = [2,2,2,2],
+      width = [1,1,1,1],
       seriescolor = RGB(171/255,31/255,45/255),
       line = :dash
    )
