@@ -49,11 +49,11 @@ pulse_mod_plt = plot(
    )
 
 labels_plt = plot(
-   annotations=([(1100,0.5, text("|0⟩", :center)),
-      (2250,0.5, text("|1⟩", :center)),
-      (3400,0.5, text("|0⟩", :center)),
-      (4600,0.5, text("|1⟩", :center)),
-      (5750,0.5, text("|+>", :center))
+   annotations=([(1100,0.5, text("ket{0}", :center)),
+      (2250,0.5, text("ket{0}", :center)),
+      (3400,0.5, text("ket{1}", :center)),
+      (4600,0.5, text("ket{0}", :center)),
+      (5750,0.5, text("ket{1}", :center))
    ]),
    xlims = (0,20500),
    ylims = (0.4999,0.501),
@@ -61,7 +61,7 @@ labels_plt = plot(
    bottom_margin = 0cm,
    )
 
-plot(
+plt = plot(
    labels_plt,
    decoy_plt,
    phase_enc_plt,
