@@ -162,6 +162,20 @@ Phase randomisation means that the clock rate needs to be reduced as the laser n
 
 By relaxing the need for phase randomisation, the transmitters can be clocked at \SI{2}{GHz} which means a state repetition rate of \SI{1}{GHz}.
 
+\subsection{Security Assurances}
+
+While we can remove all of the assumptions about the detectors, negating all detection side-channels, we still need to ensure that there is no information leakage from the transmitters. While device-independent schemes exist, these are not possible with current technology
+
+Working with \ac{npl}, we have begun testing the operation of the transmitters whilst using specialised electronics. In an effort to reduce the cost of a final system, specialised electronics will be preferred over the general systems currently used. However, a reduction in cost can also impact the performance of the system and introduce side-channels.
+
+\begin{figure}
+	\includegraphics[width = \linewidth]{./NPL/states.png}
+	\caption{States sent from an integrated device using specialised electronics.}
+	\label{fig:npl_states}
+\end{figure}
+
+In figure \ref{fig:npl_states} we can see states generated from a \ac{InP} transmitter operated with a specialised FPGA board. By sending different states in the system, we can start to see how inter-symbol interference has an effect in the system. While this is a well known effect in classical communication, it may have more serious impacts in quantum communication where the security may be compromised. For example, when sending a certain state we notice that a ``shoulder'' after the state exists that is \SI{2}{dB} above the noise floor. While minimal, this could be used by Eve to gain knowledge of the phase encoding in the state and remain undetected by Alice and Bob.
+
 \section{Outlook}
 
 We have demonstrated the capability of integrated transmitters for \acl{MDI} as a platform for a metropolitan scale quantum-secured network. 
@@ -181,6 +195,14 @@ There are many ways of improving the QKD transmitters. For example, encoding in 
 	\includegraphics[width=0.8\textwidth]{HHI_Transmitter}
 	\caption[Latest generation InP QKD Transmitter]{Latest generation HHI indium phosphide transmitter. The \SI[product-units=power]{6x4}{mm} chip contains a few ways to create BB84 states for QKD. Firstly, we have designs to compare \ac{dfb} and \ac{DBR} lasers. Secondly, we can use a delay line to separate the time bins. Finally, we have multiplexed lasers to pulse independently lasers for each state.}
 \end{sidewaysfigure}
+
+\subsubsection*{Multiple Laser Sources}
+
+We introduce multiple laser sources into the circuit which can each be independently gain-switched to generate the 4 BB84 states. 
+
+\subsubsection*{Delay Line Time-Bin Encoding}
+
+While the previous generation of devices included delay lines to encode timing information, they we too lossy to be used. We have included a delay line in the design of this chip which should have lower losses. This should reduce the complexity of the control electronics and make the system compatible with a gain-switch DFB laser.
 
 \subsection{Security of Transmitters}
 
