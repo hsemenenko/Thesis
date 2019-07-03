@@ -186,7 +186,7 @@ On-demand single photon source would be the ideal candidate for many quantum tec
 
 In the absence of true single photon sources, another source of light needs to be considered for scalable quantum communication. Coherent states represent a close approximation to single photons when strongly attenuated. They are also readily available easily manipulated. In the regime of low average photon number, we will introduce \acp{wcs}. While not entirely well defined, we will consider \ac{wcs} to be when the average photon number is around 1 within a time period.
 
-As previously mentioned, the requirements for high-fidelity \ac{HOM}, and therefore \ac{QKD}, are stringent. Here we discuss some of the requirements for a \ac{wcs} sources. 
+As previously mentioned, the requirements for high-fidelity \ac{HOM}, and therefore \ac{QKD}, are stringent. Here we discuss some of the requirements for a \ac{wcs} sources to be useful in a \ac{QKD} system. 
 
 \subsubsection*{Extinction Ratio}
 
@@ -194,11 +194,11 @@ The states will need to be temporally modulated to create time-bins that determi
 
 \subsubsection*{Timing Jitter}
 
-In order to keep up with the data transfers on the web today, we will need to have clock speeds that are comparable. Therefore, as we need to encoding information in time, it is important that we have a low timing jitter to ensure time-bins remain separate even at GHz speeds.
+In order to keep up with the data transfers on the web today, we will need to have clock speeds that are comparable. Therefore, as we need to encoding information in time, it is important that we have a low timing jitter to ensure time-bins remain separate, with high extinction ratios, even at GHz speeds.
 
 \subsubsection*{Coherence}
 
-For interference, we need to be sure that the state that arrives is the same as what was sent. Therefore, the coherence of the laser used needs to have a good coherence length, which means a narrow line width.
+For interference, we need to be sure that the state that arrives is the same as what was sent. Therefore, the coherence of the laser used needs to have a good coherence length, which means a narrow line width. We also need to ensure that the coherence between the time-bins is maintained within a state.
 
 \subsubsection*{Phase Randomisation}
 
@@ -206,9 +206,15 @@ While it may seem counter-intuitive to require phase randomisation after also re
 
 \subsubsection*{Linearly Polarised}
 
-As mentioned before, the states will need to be overlapped in each degree of freedom. The polarisation needs to be linear for interference.
+As mentioned before, the states will need to be overlapped in each degree of freedom. The polarisation needs to be linear for interference. While a \ac{pbs} can be used to ensure polarisation overlap for interference, this adds complexity and losses to the system. Orthogonal polarisations can also introduce side-channels into the system allows Eve to gain knowledge of the key exchange.
 
-Several methods can be conceived to generate \acp{wcp}.
+\subsubsection*{Wavelength Tunable}
+
+Modern telecommunications networks heavily rely on \acp{wdm} to maintain the data rates required. To ensure quantum compatibility with the same networks, it is likely that the wavelength of a \ac{QKD} system will need to be tunable in order to switch between the standardised frequency bands. This may also restrict the use of wavelength filters, unless they are easily tunable. Moreover, unfiltered wavelengths can introduce side-channels which could be exploited by Eve or Mallory.
+
+Several methods have been used to generate \acp{wcp} for \ac{QKD} systems. Here we discuss the benefits and drawbacks of each.
+
+While gain switched lasers offer simplicity and easily satisfy the phase randomisation constraint, they  
 
 \begin{itemize}
 	\item Gain switched lasers (filter required and timing jitter problems)
@@ -291,6 +297,8 @@ Laser gain switching is a technique used to cause phase randomisation by keep th
 
 Instead of gain switching to generate pulses, we can reverse the high speed pulse to provide a negative voltage between pulse carving. This pulses removes the carriers in the laser and makes each pulse phase randomised. The upper-state lifetime of semiconductors is very short, as is the cavity lifetime. Therefore, we can still generate states at \SI{250}{MHz} and demonstrate good state preparation.
 
+To test that the pulses are phase randomised, we can look at coincidences between neighbouring pulses, as shown in figure \ref{fig:}.  
+
 \section{Outlook}
 
 In this experiment, we have demonstrated state-of-the-art \acl{HOM} interference between GHz clocked integrated photonic devices exploiting monolithically fabricated lasers and \acp{eopm} with a visibility of $46.5\pm 0.8\%$. As we will see in chapter \ref{chap:mdiqkd}, this result will play a crucial role in \ac{MDI} and high fidelity interference will be required to bound the knowledge of Eve and Mallory.
@@ -309,6 +317,6 @@ Average photon number is harder to stabilise but is also the least susceptible t
 
 \subsection{Wavelength Division Multiplexing}
 
-As mentioned previously, there is no need to filter the pulses to see interference. This is important as it allows the transmitters to be easily wavelength tuned making it compatible with \ac{wdm} and possible classical-quantum multiplexing. 
+As mentioned previously, there is no need to filter the pulses to see interference. This is important as it allows the transmitters to be easily wavelength tuned making it compatible with \ac{wdm} and possible classical-quantum multiplexing. An interesting demonstration of this would be to multiplex the quantum signals with classical data and 
 
 %=========================================================
