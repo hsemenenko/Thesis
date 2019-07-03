@@ -1,3 +1,3 @@
 # Advances in Chip-Based Quantum Key Distribution
 
-![Image](../blob/master/TeXcount/count.png?raw=true)
+![Thesis word count](TeXcount/count.png)
