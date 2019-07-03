@@ -56,19 +56,16 @@ The estimate key rate of \ac{MDI} per pulse in the infinite case is given as
 \begin{equation}
 	R = (p_z)^2 Y_{11}^Z \left(1 - H_2(E_{11}^X)\right) - Q_{S,S}^Z f_e E_{S,S}^Z H_2(E_{\mu_s\mu_s}^Z)
 \end{equation}
-where $Y_{11}^Z$ and $e_{11}^X$ are the yield in the $Z$ basis and error in the $X$ basis, respectively, when Alice and Bob both sent single photons. These quantities are not directly measurable so we will need to bound them using a decoy state protocol. $Q_{S,S}^Z$ and $E_{S,S}^Z$ are the gain and error in the $Z$ basis and both can be measured directly. Finally, we introduce the error correction efficiency, $f>1$, and the binary entropy function defined as
+where $Y_{11}^Z$ and $e_{11}^X$ are the yield in the $Z$ basis and error in the $X$ basis, respectively, when Alice and Bob both sent single photons. These quantities are not directly measurable so we will need to bound them using a decoy state protocol. $Q_{S,S}^Z$ and $E_{S,S}^Z$ are the gain and error in the $Z$ basis and both can be measured directly. Finally, we introduce the error correction efficiency, $f_e>1$, and the binary entropy function defined as
 \begin{equation}
 	H_2(x) = -x\mathrm{log}_2(x) - (1-x)\mathrm{log}_2(1-x).
 \end{equation}
 
-Therefore, we define the upper bound of the secret key rate as
-
+As we are not using single photons, we cannot determine the single photo errors and yields exactly. Therefore, we need to use a decoy state technique \cite{Lo2005} to give lower and upper bounds of $Y_{11}^Z$ and $E_{11}^X$, respectively. We then need to define the lower bound of the secret key rate as
 \begin{equation}
 	\underline{R} \geq R
 \end{equation}
-for the lower and upper bounds of $Y_{11}^Z$ and $E_{11}^X$, respectively. These bounds can be found through the decoy state technique \cite{Lo2005}. In essence, decoys states are measuring the loss of the channel during a key exchange to bound the knowledge that could be gain by an eavesdropper. 
-
-By measuring different intensities in a decoy state protocol, we can measure
+In essence, decoys states are measuring the loss of the channel during a key exchange to bound the knowledge that could be gain by an eavesdropper.  By measuring different intensities in a decoy state protocol, we can measure
 
 \begin{equation}
 	Q_{\mu_a \mu_b}^Z = \sum_{n,m=0} e^{-(\mu_a + \mu_b)}\frac{\mu_a^n}{n!}\frac{\mu_b^m}{m!} Y_{n,m}^Z
@@ -77,7 +74,7 @@ By measuring different intensities in a decoy state protocol, we can measure
 \begin{equation}
 	Q_{\mu_{a} \mu_{b}}^X E^{X}_{\mu_{a} \mu_{b}}=\sum_{n, m=0} e^{-\left(\mu_{\mathrm{a}}+\mu_{\mathrm{b}}\right)} \frac{q_{\mathrm{a}}^{n}}{n !} \frac{q_{\mathrm{b}}^{m}}{m !} Y^{X}_{n, m} E^{X}_{n, m}
 \end{equation}
-where $\mu_a$ ($\mu_b$) are the intensities of Alice's (Bob's) pulses.
+where $\mu_a$ ($\mu_b$) are the intensities of Alice's (Bob's) pulses. The gain, $Q_{\mu\sigma}^i$, defined to be the number of successful Bell state projections when Alice and Bob send states in the basis $i$ with intensities $\mu$ and $\sigma$ respectively.
 
 \begin{equation}
 	\underline{Y_{11}^Z} = \frac{1}{\left(\mu_{\mathrm{a}}-\omega_{\mathrm{a}}\right)\left(\mu_{\mathrm{b}}-\omega_{\mathrm{b}}\right)\left(v_{\mathrm{a}}-\omega_{\mathrm{a}}\right)\left(\nu_{\mathrm{b}}-\omega_{\mathrm{b}}\right)\left(\mu_{\mathrm{a}}-v_{\mathrm{a}}\right)}
@@ -91,7 +88,7 @@ In the infinite case, $Y_{11}^Z = Y_{11}^X$ so we can use the decoy sates in $X$
 
 \subsection{Shared Resources}
 
-As \ac{MDI} introduce Charlie to mediate the key exchange, this easily facilitates sharing resources by switching between users connecting to a centralised node. In a metropolitan network, each used can access the quantum network 
+As \ac{MDI} introduce Charlie to mediate the key exchange, this easily facilitates sharing resources by switching between users connecting to a centralised node. In a metropolitan network, each used can access the quantum network with a transmitter device and through simple switching allows all users to exchange secret keys with every other user.
 
 \section{Integrated Transmitters}
 
@@ -134,13 +131,13 @@ The receiver for \ac{MDI} is a projection onto Bell states\footnote{It actually 
 
 \subsection{Fibre components}
 
-As polarisation drifts is common in fibre, we will need to ensure that the polarisation between transmitters is overlapped. 
+As polarisation drift is common in fibre, we will need to ensure that the polarisation between transmitters is overlapped. 
 
 A polarisation maintaining 50:50 beam splitter is used to interfere the incoming states.
 
 \subsection{Detection}
 
-\Acs{snspd} are used for detection due to their high efficiency, low dark counts, good jitter and short dead time. Time of arrival is tagged using a Picoquant Hydraharp which is synchronised with the transmitters using an optical link.
+\Acsp{snspd} are used for detection due to their high efficiency, low dark counts, good timing jitter and short dead time. Time of arrival is tagged using a Picoquant Hydraharp which is synchronised with the transmitters using a separate optical link.
 
 The dead time of our detectors is typically \SI{\sim 50}{ns}. In a time-bin encoding scheme, with only 2 detectors, we can only project onto $\ket{\phi^{-}}$ as the detector while still be dead when the second time bin arrives. By fanning out the arriving photons to 4 detectors means that we can now detect both Bell states. This also gives us an increase probability of projecting onto a Bell states because if a detector is dead, there is still a change that the other detector will fire. This scheme will nicely compliment the integrated receiver device in chapter \ref{chap:node}.
 
