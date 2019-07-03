@@ -255,7 +255,7 @@ A typical spectra of the two transmitter lasers is shown in figure \ref{fig:spec
 \begin{figure}[tbp]
 	\centering
 	\includegraphics[width=0.8\textwidth]{spectrum}
-	\caption[Laser spectrum]{Typical spectra of the two independent on-chip lasers. Each demonstrates a \ac{FWHM} of \SI{30}{pm} which is limited to the precision of the optical spectrum analyser used.}
+	\caption[Laser spectrum]{Typical spectra of the two independent on-chip lasers. Each demonstrates a \ac{FWHM} of \SI{30}{pm} which is limited to the precision of the optical spectrum analyser used. The two lasers are deliberately detuned so that both can be seen. }
 	\label{fig:spectra}
 \end{figure}
 
@@ -263,7 +263,15 @@ In order to measure the the linewidth more accurately, a self-heterodyne measure
 
 \subsection{Modulation}
 
+\begin{figure}[tbp]
+	\includegraphics[width = \linewidth]{./Chip/Oclaro_00_MZI_1.png}
+	\caption{Integrated \acl{mzi} made from two \acsp{mmi} and two \acsp{eopm}  which can be used for intensity modulation of light into pulses.}
+	\label{fig:InP_MZI}
+\end{figure}
+
 From the laser, we will need to be able to intensity modulate our light to define time-bins for encoding. To be able to keep up with modern telecommunications, we will want the modulation to have \SI{10}{GHz} bandwidths. Our
+
+In figure \ref{fig:InP_MZI} is a microscope image of the on-chip \ac{mzi} that is used for intensity modulation to define time-bins for the experiment.
 
 We note here that the narrow linewidth of the laser means that during no experiment with the \ac{InP} chips do we need to use a wavelength filter to clean up the light or optical pulses. This is important as it removed a component that would add cost to any system but also restrict the wavelength operation of the devices. Without the need for a filter, the lasers are free to operate in a wavelength that spans more than \SI{10}{nm}. This will be crucial as it is likely that \ac{QKD} systems will needed to be \ac{wdm} to meet the demands of high-speed networks.
 
