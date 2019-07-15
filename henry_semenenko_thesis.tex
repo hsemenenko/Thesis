@@ -236,6 +236,30 @@
 			pdfpagelayout=TwoColumnRight,			%Makes pdf two page scrolling
 			pagebackref,
 			allcolors=black]{hyperref}              %Creates hyperlinks in cross references
+
+%Changing the style of pagebackref in the bibliography
+\renewcommand*{\backref}[1]{
+		% default interface
+		% #1: backref list
+		%
+		% We want to use the alternative interface,
+		% therefore the definition is empty here.
+	}
+	\renewcommand*{\backrefalt}[4]{%
+	% alternative interface
+	% #1: number of distinct back references
+	% #2: backref list with distinct entries
+	% #3: number of back references including duplicates
+	% #4: backref list including duplicates
+	\par
+	\ifnum#3=1 %
+		Cited on page %
+	\else
+		Cited on pages %
+	\fi
+	#2.\par
+	}
+
 \usepackage{memhfixc}					%Must be used on memoir document 
 									%class after hyperref
 \usepackage{enumerate}					%For enumeration counter
