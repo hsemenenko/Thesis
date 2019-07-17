@@ -232,33 +232,6 @@
 \usepackage{url}						%Supports url commands
 \usepackage[english]{babel}		%For languages characters and hyphenation
 \usepackage{color}                    				%Creates coloured text and background
-\usepackage[colorlinks=true,
-			pdfpagelayout=TwoColumnRight,			%Makes pdf two page scrolling
-			pagebackref,
-			allcolors=black]{hyperref}              %Creates hyperlinks in cross references
-
-%Changing the style of pagebackref in the bibliography
-\renewcommand*{\backref}[1]{
-		% default interface
-		% #1: backref list
-		%
-		% We want to use the alternative interface,
-		% therefore the definition is empty here.
-	}
-	\renewcommand*{\backrefalt}[4]{%
-	% alternative interface
-	% #1: number of distinct back references
-	% #2: backref list with distinct entries
-	% #3: number of back references including duplicates
-	% #4: backref list including duplicates
-	\par
-	\ifnum#3=1 %
-		Cited on page %
-	\else
-		Cited on pages %
-	\fi
-	#2.\par
-	}
 
 \usepackage{memhfixc}					%Must be used on memoir document 
 									%class after hyperref
@@ -343,7 +316,39 @@
  		\fi
 	}
 %%% END OF GLOSSARIES STUFF %%%       
-		  
+	
+	
+%%% Define hyperref and bookmark as last packages %%%
+	
+\usepackage[colorlinks=true,
+			pdfpagelayout=TwoColumnRight,			%Makes pdf two page scrolling
+			pagebackref,
+			allcolors=black]{hyperref}              %Creates hyperlinks in cross references
+\usepackage{bookmark}
+	  
+%Changing the style of pagebackref in the bibliography
+\renewcommand*{\backref}[1]{
+		% default interface
+		% #1: backref list
+		%
+		% We want to use the alternative interface,
+		% therefore the definition is empty here.
+	}
+	\renewcommand*{\backrefalt}[4]{%
+	% alternative interface
+	% #1: number of distinct back references
+	% #2: backref list with distinct entries
+	% #3: number of back references including duplicates
+	% #4: backref list including duplicates
+	\par
+	\ifnum#3=1 %
+		Cited on page %
+	\else
+		Cited on pages %
+	\fi
+	#2.\par
+	}
+	  
 	       	
 %							
 %Reduce widows  (the last line of a paragraph at the start of a page) and orphans 
@@ -563,7 +568,7 @@
 % Apparently the guidelines don't say anything about citations or
 % bibliography styles so I guess we can use anything.
 \backmatter
-\bibliographystyle{siam}
+\bibliographystyle{ieeetr}
 \refstepcounter{chapter}
 \bibliography{./build/thesisbiblio}
 \ifdraftdoc
