@@ -227,8 +227,7 @@
 \usepackage{verbatim}					%Permits pre-formated text insertion
 \usepackage{upgreek }					%Calls other kind of greek alphabet
 \usepackage{latexsym}					%Extra symbols
-\usepackage[square,numbers,
-		     sort&compress]{natbib}		%Calls bibliography commands 
+\usepackage[square,numbers,sort]{natbib}		%Calls bibliography commands
 \usepackage{url}						%Supports url commands
 \usepackage[english]{babel}		%For languages characters and hyphenation
 \usepackage{color}                    				%Creates coloured text and background
@@ -315,10 +314,14 @@
   		\setkeys{glslink}{hyper=false}%
  		\fi
 	}
-%%% END OF GLOSSARIES STUFF %%%       
+%%% END OF GLOSSARIES STUFF %%%       	
 	
+%%% Bibliography Stuff %%%
+
+%\usepackage[style=ieee,backend=bibtex]{biblatex}
+%\addbibresource{./build/thesisbiblio.bib}	
 	
-%%% Define hyperref and bookmark as last packages %%%
+%%% Define hyperref as last package %%%
 	
 \usepackage[colorlinks=true,
 			pdfpagelayout=TwoColumnRight,			%Makes pdf two page scrolling
@@ -334,7 +337,7 @@
 		% We want to use the alternative interface,
 		% therefore the definition is empty here.
 	}
-	\renewcommand*{\backrefalt}[4]{%
+\renewcommand*{\backrefalt}[4]{%
 	% alternative interface
 	% #1: number of distinct back references
 	% #2: backref list with distinct entries
@@ -347,7 +350,7 @@
 		Cited on pages %
 	\fi
 	#2.\par
-	}
+}
 	  
 	       	
 %							
@@ -569,8 +572,8 @@
 % bibliography styles so I guess we can use anything.
 \backmatter
 \bibliographystyle{ieeetr}
-\refstepcounter{chapter}
 \bibliography{./build/thesisbiblio}
+\refstepcounter{chapter}
 \ifdraftdoc
 	\cleartoevenpage
 \else
