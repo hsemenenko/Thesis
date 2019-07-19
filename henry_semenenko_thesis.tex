@@ -225,9 +225,11 @@
 \usepackage{mathrsfs}					%Even more math symbols
 \usepackage{float}						%Helps to place figures, tables, etc. 
 \usepackage{verbatim}					%Permits pre-formated text insertion
-\usepackage{upgreek }					%Calls other kind of greek alphabet
+\usepackage{upgreek}					%Calls other kind of greek alphabet
 \usepackage{latexsym}					%Extra symbols
-\usepackage[square,numbers,sort]{natbib}		%Calls bibliography commands
+%\usepackage[square,numbers,sort]{natbib}		%Calls bibliography commands
+%\usepackage[style=ieee, backref=true, backend=bibtex]{biblatex}
+%\addbibresource{thesisbiblio.bib}
 \usepackage{url}						%Supports url commands
 \usepackage[english]{babel}		%For languages characters and hyphenation
 \usepackage{color}                    				%Creates coloured text and background
@@ -318,9 +320,6 @@
 	
 %%% Bibliography Stuff %%%
 
-%\usepackage[style=ieee,backend=bibtex]{biblatex}
-%\addbibresource{./build/thesisbiblio.bib}	
-	
 %%% Define hyperref as last package %%%
 	
 \usepackage[colorlinks=true,
@@ -345,9 +344,9 @@
 	% #4: backref list including duplicates
 	\par
 	\ifnum#3=1 %
-		Cited on page %
+		Page %
 	\else
-		Cited on pages %
+		Pages %
 	\fi
 	#2.\par
 }
@@ -572,7 +571,8 @@
 % bibliography styles so I guess we can use anything.
 \backmatter
 \bibliographystyle{ieeetr}
-\bibliography{./build/thesisbiblio}
+\bibliography{thesisbiblio}
+%\printbibliography
 \refstepcounter{chapter}
 \ifdraftdoc
 	\cleartoevenpage
