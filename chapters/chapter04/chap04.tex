@@ -22,7 +22,7 @@ In this section, we will be experimentally demonstrating \ac{MDI} \cite{mdi-qkd}
 \section{Measurement-Device-Independent Quantum Key Distribution}
 \label{sec:mdi-qkd}
 
-Unlike a traditional point-to-point key exchange, \ac{MDI} introduces third party (Charlie) who mediates the exchange by announcing correlations between pulses sent by Alice and Bob. Importantly, it improves security by removing all, current and future, side-channels on the detectors \cite{mdi-qkd}. This is an important step as the detectors are often vulnerable to attacks due to their complexity \cite{Lydersen2010a, Makarov2006}.
+Unlike a traditional point-to-point key exchange, \ac{MDI} introduces third party (Charlie) who mediates the exchange by announcing correlations between pulses sent by Alice and Bob. Importantly, it improves security by removing all, current and future, side-channels on the detectors \cite{mdi-qkd}. This is an important step as the detectors are often vulnerable to attacks due to their complexity \cite{Lydersen2010a, Makarov2006}. In this case, it doesn't need to be assumed that Charlie is a trusted party and the node could equally be operated by Eve or Mallory.
 
 Secondly, it removes the asymmetry between Alice and Bob which allows for simpler metropolitan networks without reducing security with trusted nodes. This will be discussed further in chapter \ref{chap:node}.
 
@@ -31,7 +31,7 @@ Secondly, it removes the asymmetry between Alice and Bob which allows for simple
 \begin{figure}[tbp]
 	\centering
 	\includegraphics[scale=0.25]{MDI-QKD_Protocol.png}
-	\caption[MDI-QKD protocol]{Measurement-device-independent quantum key distribution protocol.}
+	\caption[MDI-QKD protocol]{Measurement-device-independent quantum key distribution protocol. Alice and Bob act symmetrically by sending BB84 states to Charlie.}
 	\label{fig:mdi_protocol}
 \end{figure}
 
@@ -92,24 +92,24 @@ As \ac{MDI} introduce Charlie to mediate the key exchange, this easily facilitat
 
 \section{Integrated Transmitters}
 
-The \ac{InP} transmitters provide all the required components to create high fidelity BB84 states that are required for \ac{MDI}.
+The \ac{InP} transmitters provide all the required components to create high fidelity BB84 states that are required for \ac{MDI}. By using chip-based transmitters the power, size and weight of the optics needed can be dramatically reduced compared to fibre (and free-space) alternatives. It also facilitates mass production without requiring manual assembly. 
+
+It is worth noting that the technology is still maturing and optimisation of designs is still required before devices can be confidently reproduced to a required standard for secure communication. The transmitters used for this experiment (figure \ref{fig:oclaro_00}) were originally designed to operate as transceiver\footnote{A device which is capable of transmitting the quantum signal as well as receiving it.} which would allow two-way operation. However, the delay line was found to be too lossy to be useful, showing how further optimisation of designs is required.
+
+In this section, we will describe the operation of the transmitters to create weak coherent states that can be used for \acl{QKD}.
 
 \begin{figure}[tbp]
 	\centering
 	\includegraphics[width=\textwidth]{Oclaro_00_clean_small.png}
-	\caption{Microscope image of the InP transmitter devices.}
+	\caption{Microscope image of the \si[product-units=power]{6x2}{mm}indium phosphide transmitter. The complexity possible with integrated photonics is demonstrated by having two separate DBR cavity lasers, three Mach-Zehnder interferometers, a asymmetric  Mach-Zehnder interferometer and high-bandwidth photodiode.}
 	\label{fig:oclaro_00}
-\end{figure}
-
-\begin{figure}[tbp]
-	\includegraphics[width=\linewidth]{Oclaro_00_MDI.png}
-	\caption{A schematic view of the each chip used in the \ac{MDI} protocol. \textit{T. Enc} is used to intensity modulate the continuous wave laser into encode timing information, \textit{I. Mod} varies the pulse intensity for decoy state preparation and \textit{Ph. Enc} encodes phases between the time-bins.}
-	\label{fig:chip_mdi_schematic}
 \end{figure}
 
 \subsection{Pulse Carving}
 
-Using a \acl{mzi}, a \ac{CW} laser can be carved into \SI{130}{ps} pulses with an extinction ratio of up to \SI{30}{dB}.
+As for the previous chapter, time encoding the states will be done using a \acl{mzi} to carve the \ac{CW} laser into \SI{130}{ps} pulses with an extinction ratio\footnote{The ratio between the ``on'' and ``off'' powers of the \ac{mzi}} of up to \SI{30}{dB}.
+
+To encode a state in the diagonal basis, the \ac{mzi} carves two pulses in quick succession. This requires that the coherence length of the laser is longer than the pulse separation to ensure coherence within a state. 
 
 \subsection{Phase Encoding}
 
@@ -123,11 +123,27 @@ A negative pulse can be used to gain switch the on-chip laser in between states 
 
 The absorption due to the \ac{qcse} can be used to quickly change the intensities of states for decoy state preparation.
 
+\begin{figure}[tbp]
+	\includegraphics[width=\linewidth]{Oclaro_00_MDI.png}
+	\caption{A schematic view of the each chip used in the \ac{MDI} protocol. \textit{T. Enc} is used to intensity modulate the continuous wave laser into encode timing information, \textit{I. Mod} varies the pulse intensity for decoy state preparation and \textit{Ph. Enc} encodes phases between the time-bins.}
+	\label{fig:chip_mdi_schematic}
+\end{figure}
+
 \section{Control Electronics}
+
+In order to operate the transmitters, there is a selection of control devices needed. In this section we will describe them.
+
+\subsubsection*{Temperature Control}
+
+\subsubsection*{Laser Driver}
+
+\subsubsection*{Modulator Biasing}
+
+\subsubsection*{High-Speed Electronics}
 
 \section{Receiver}
 
-The receiver for \ac{MDI} is a projection onto Bell states\footnote{It actually suffices to project onto a single Bell state}. Depending on the encoding, this projection looks slightly different. In a time-bin encoding scheme, a projection onto $\ket{\phi^\pm}$ depending on coincidences at the detectors.
+The receiver for \ac{MDI} is a projection onto Bell states\footnote{It actually suffices for the receiver to project onto a single Bell state.}. Depending on the encoding, this projection looks slightly different. In a time-bin encoding scheme, a projection onto $\ket{\phi^\pm}$ depending on coincidences at the detectors.
 
 \subsection{Fibre components}
 
@@ -139,7 +155,13 @@ A polarisation maintaining 50:50 beam splitter is used to interfere the incoming
 
 \Acsp{snspd} are used for detection due to their high efficiency, low dark counts, good timing jitter and short dead time. Time of arrival is tagged using a Picoquant Hydraharp which is synchronised with the transmitters using a separate optical link.
 
-The dead time of our detectors is typically \SI{\sim 50}{ns}. In a time-bin encoding scheme, with only 2 detectors, we can only project onto $\ket{\phi^{-}}$ as the detector while still be dead when the second time bin arrives. By fanning out the arriving photons to 4 detectors means that we can now detect both Bell states. This also gives us an increase probability of projecting onto a Bell states because if a detector is dead, there is still a change that the other detector will fire. This scheme will nicely compliment the integrated receiver device in chapter \ref{chap:node}.
+The dead time of our detectors is typically \SI{\sim 50}{ns}. In a time-bin encoding scheme, with only two detectors, we can only project onto $\ket{\phi^{-}}$ as the detector while still be dead when the second time bin arrives. By fanning out the arriving photons to four detectors means that we can now detect both Bell states. This also gives us an increase probability of projecting onto a Bell states because if a detector is dead, there is still a change that the other detector will fire. This scheme will nicely compliment the integrated receiver device in chapter \ref{chap:node}.
+
+\subsection{Time Tagging}
+
+In order to correlate the detection events, time tagging is required to reconstruct the sequence of events. This experiment used a PicoQuant Hydraharp to time-tag the four detector events relative to a synchronisation signal sent from the transmitter control electronics. This can then be used to determine the time of arrival and correlate each detection event to others and to the states sent.
+
+It is important that the absolute time delay is known so that the states can be faithfully reconstructed relative to the states sent. For this experiment, the delay between transmitter channels is minimal by design. However, in a real-world key exchange this would need to be more thoroughly characterised. 
 
 \section{Results}
 
