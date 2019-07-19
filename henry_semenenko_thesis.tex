@@ -227,9 +227,7 @@
 \usepackage{verbatim}					%Permits pre-formated text insertion
 \usepackage{upgreek}					%Calls other kind of greek alphabet
 \usepackage{latexsym}					%Extra symbols
-%\usepackage[square,numbers,sort]{natbib}		%Calls bibliography commands
-%\usepackage[style=ieee, backref=true, backend=bibtex]{biblatex}
-%\addbibresource{thesisbiblio.bib}
+\usepackage{cite}
 \usepackage{url}						%Supports url commands
 \usepackage[english]{babel}		%For languages characters and hyphenation
 \usepackage{color}                    				%Creates coloured text and background
@@ -326,7 +324,6 @@
 			pdfpagelayout=TwoColumnRight,			%Makes pdf two page scrolling
 			pagebackref,
 			allcolors=black]{hyperref}              %Creates hyperlinks in cross references
-\usepackage{bookmark}
 	  
 %Changing the style of pagebackref in the bibliography
 \renewcommand*{\backref}[1]{
@@ -571,8 +568,7 @@
 % bibliography styles so I guess we can use anything.
 \backmatter
 \bibliographystyle{ieeetr}
-\bibliography{thesisbiblio}
-%\printbibliography
+\bibliography{./build/thesisbiblio}
 \refstepcounter{chapter}
 \ifdraftdoc
 	\cleartoevenpage
