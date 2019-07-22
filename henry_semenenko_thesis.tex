@@ -45,15 +45,6 @@
 % Adding metadata:
 \usepackage[en-GB,calc]{datetime2}
 \DTMsavenow{now}
-\usepackage{ifpdf}
-\ifpdf
-\pdfinfo{
-   /Author (Henry Semenenko)
-   /Title (Advances in Chip-Based Quantum Key Distribution)
-   /Keywords (integrated optics; quantum key distribution; quantum optics)
-   /CreationDate (D:\pdfcreationdate)
-}
-\fi
 % When draft option is on. 
 \ifdraftdoc 
 	\usepackage{draftwatermark}				%Sets watermarks up.
@@ -324,6 +315,17 @@
 			pdfpagelayout=TwoColumnRight,			%Makes pdf two page scrolling
 			pagebackref,
 			allcolors=black]{hyperref}              %Creates hyperlinks in cross references
+	  
+%Define the pdf info
+\hypersetup{
+	pdfinfo={
+		Title={Advances in Chip-Based Quantum Key Distribution},
+		Author={Henry Semenenko},
+		Keywords={integrated optics; quantum key distribution; quantum optics},	
+		CreationDate={D:\DTMfetchyear{now}\DTMfetchmonth{now}\DTMfetchday{now}\DTMfetchhour{now}\DTMfetchminute{now}\DTMfetchsecond{now}},
+		Subject={A thesis submitted to the University of Bristol for the degree of Doctor of Philisophy in the Faculty of Science}
+	}
+}	  
 	  
 %Changing the style of pagebackref in the bibliography
 \renewcommand*{\backref}[1]{
