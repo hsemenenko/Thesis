@@ -251,8 +251,8 @@
 \usepackage{changepage}				%Package to change theorem style boxes
 
 % Hide page numbers for chapters in toc
-\usepackage{tocloft}
-\cftpagenumbersoff{chapter} 
+%\usepackage{tocloft}
+%\cftpagenumbersoff{chapter} 
 
 %%% PGFPLOTS STUFF %%%
 
@@ -523,9 +523,6 @@
 \input{frontmatter/dedication}
 \clearemptydoublepage
 %
-\input{frontmatter/publications}
-\clearemptydoublepage
-%
 \pagenumbering{roman} 
 \renewcommand{\contentsname}{Table of Contents}
 \maxtocdepth{subsection}
@@ -539,6 +536,9 @@
 %
 \listoffigures
 \addtocontents{lof}{\par\nobreak\textbf{{\scshape Figure} \hfill Page}\par\nobreak}
+\clearemptydoublepage
+%
+\input{frontmatter/publications}
 \clearemptydoublepage
 %
 %
