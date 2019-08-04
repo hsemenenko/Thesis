@@ -552,14 +552,14 @@
 \clearemptydoublepage
 \import{chapters/chapter03/}{chap03.tex}
 \clearemptydoublepage
-\import{chapters/chapter04/}{chap04.tex}
-\clearemptydoublepage
-\import{chapters/chapter05/}{chap05.tex}
-\clearemptydoublepage
-\import{chapters/chapter06/}{chap06.tex}
-\clearemptydoublepage
-\import{chapters/chapter07/}{chap07.tex}
-\clearemptydoublepage
+%\import{chapters/chapter04/}{chap04.tex}
+%\clearemptydoublepage
+%\import{chapters/chapter05/}{chap05.tex}
+%\clearemptydoublepage
+%\import{chapters/chapter06/}{chap06.tex}
+%\clearemptydoublepage
+%\import{chapters/chapter07/}{chap07.tex}
+%\clearemptydoublepage
 
 % And the appendix goes here
 \appendix
@@ -575,13 +575,13 @@
 \ifdraftdoc
 	\cleartoevenpage
 \else
-	\clearpage
-	\pagestyle{empty}
-	\pagecolor{bristol-red} 
-	~\clearpage
-	\pagestyle{empty}
-	\cleartoevenpage
-	\pagestyle{empty}
+    \clearpage
+    \pagestyle{empty}
+    \cleartooddpage[\emptypage]
+    \clearpage
+    \pagestyle{empty}
+    \pagecolor{bristol-red} 
+    \cleartoevenpage[\pagestyle{empty}]
 	\vspace*{\fill}
 	\begin{center}
 	\includegraphics[scale=0.25]{./graphics/skytale}
