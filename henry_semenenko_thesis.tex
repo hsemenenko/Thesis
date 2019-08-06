@@ -15,14 +15,16 @@
 % http://www.ctan.org/tex-archive/macros/latex/contrib/memoir/
 %
 %
-% UoB guidelines for thesis presentation were found at:
-% http://www.bris.ac.uk/esu/pg/pgrcop11-12topic.pdf#page=49 
+% Formatting guidelines for the thesis can be found here:
+% http://www.bristol.ac.uk/academic-quality/pg/pgrcode/annex4/
 %
 % UoB guidelines:
 %
-% The dissertation must be printed on A4 white paper. Paper up to A3 may be used
-% for maps, plans, diagrams and illustrative material. Pages (apart from the
-% preliminary pages) should normally be double-sided.
+% The hard copies of the dissertation required for the examination 
+% process must be printed on A4 white paper. Paper up to A3 may 
+% be used for maps, plans, diagrams and illustrative material. 
+% Pages (apart from the preliminary pages) should normally be 
+% double-sided.
 %
 % Memoir class loads useful packages by default (see manual).
 \documentclass[a4paper,11pt,reqno,oldfontcommands]{memoir} %add 'draft' to turn draft option on (see below)
@@ -42,7 +44,7 @@
 \newcommand{\brisred}[1]{\textcolor{bristol-red}{#1}}	
 	
 %
-% Adding metadata:
+%Loading date package and saving date
 \usepackage[en-GB,calc]{datetime2}
 \DTMsavenow{now}
 % When draft option is on. 
@@ -68,6 +70,7 @@
 \setheaderspaces{*}{2\onelineskip}{*} 
 \checkandfixthelayout
 %
+% Change the font
 \frenchspacing
 \usepackage[T1]{fontenc}  
 \usepackage[sfdefault]{roboto}
@@ -92,9 +95,10 @@
 
 % UoB guidelines:
 %
-% Text should be in double or 1.5 line spacing, and font size should be
-% chosen to ensure clarity and legibility for the main text and for any
-% quotations and footnotes. Margins should allow for eventual hard binding.
+% Text should be in double or 1.5 line spacing, and 
+% font size should be chosen to ensure clarity and 
+% legibility for the main text and for any quotations 
+% and footnotes.
 %
 % Note: This is automatically set by memoir class. Nevertheless \OnehalfSpacing 
 % enables double spacing but leaves single spaced for captions for instance. 
@@ -104,9 +108,8 @@
 \setsecnumdepth{subsection} 
 \maxsecnumdepth{subsubsection}
 %
-% Chapter style (taken and slightly modified from Lars Madsen Memoir Chapter 
-% Styles document
-\usepackage{calc,soul}
+% Chapter style
+\usepackage{soul}
 \makeatletter 
 \newlength\dlf@normtxtw 
 \setlength\dlf@normtxtw{\textwidth} 
@@ -117,11 +120,6 @@
 			{\ifdraftdoc\color{gray}\else\color{white}\fi\thechapter}% 
 			}
 		}%
-%		\rotatebox{0}{% 
-%		\resizebox{%
-%			\heightof{\usebox{\feline@chapter}}+\depthof{\usebox{\feline@chapter}}}% 
-%		{!}{\color{red}\scshape\so\@chapapp}%
-%		}%
 		\quad%
 		\raisebox{\depthof{\usebox{\feline@chapter}}}{\usebox{\feline@chapter}}%
 } 
@@ -169,12 +167,8 @@
 \makeoddhead{myvf}{}{}{\small\textsc{\rightmark}}
 \pagestyle{myvf}
 %
-% Oscar's command (it works):
-% Fills blank pages until next odd-numbered page. Used to emulate single-sided
-% frontmatter. This will work for title, abstract and declaration. Though the
-% contents sections will each start on an odd-numbered page they will
-% spill over onto the even-numbered pages if extending beyond one page
-% (hopefully, this is ok).
+% Define command to create clear pages between chapters
+% This will clear to next odd page
 \def\clearemptydoublepage{%
         \clearpage%
         \cleartoevenpage[\emptypage]
@@ -244,9 +238,6 @@
 \usetikzlibrary{arrows,shapes,decorations,
 		       automata,backgrounds,			
 		       petri,topaths}				%To use diverse features from tikz	
-%\usepackage{pgfplots}
-%\usepgfplotslibrary{external} 		%enable externalisation
-%\tikzext ernalize		       		%exable externalisation. Also need to add "--shell-escape" switch to the command line
 \usepackage{etoolbox}				%Package to change theorem style boxes
 \usepackage{changepage}				%Package to change theorem style boxes
 
@@ -479,7 +470,6 @@
 % Hyphenation for some words
 %
 \hyphenation{res-pec-tively}
-\hyphenation{mono-ti-ca-lly}
 \hyphenation{hypo-the-sis}
 \hyphenation{para-me-ters}
 \hyphenation{sol-va-bi-li-ty}
