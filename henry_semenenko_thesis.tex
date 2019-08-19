@@ -40,6 +40,18 @@
 \definecolor{purple}{HTML}{806AB7}
 
 %Dark colours
+
+%Cycle colours
+\definecolor{cycle1}{HTML}{ab1f2d}
+\definecolor{cycle2}{HTML}{a01a35}
+\definecolor{cycle3}{HTML}{94143d}
+\definecolor{cycle4}{HTML}{890f44}
+\definecolor{cycle5}{HTML}{7d0a4b}
+\definecolor{cycle6}{HTML}{700552}
+\definecolor{cycle7}{HTML}{620359}
+\definecolor{cycle8}{HTML}{53025f}
+\definecolor{cycle9}{HTML}{420266}
+\definecolor{cycle10}{HTML}{2a036d}
 	
 \newcommand{\brisred}[1]{\textcolor{bristol-red}{#1}}	
 	
@@ -250,19 +262,34 @@
 \usepackage{pgfplots}
 \pgfplotsset{compat=newest}
 \usepgfplotslibrary{colorbrewer}
-\pgfplotsset{
-        % load the `cycle list' or `colormap' that contains the colors you want to use
-        cycle list/RdYlGn,
-        % define own `cycle list' by first creating a custom `colormap' where
-        % the colors are reversed ...
-        colormap={RdYlGn-reversed}{
-            indices of colormap=(
-                \pgfplotscolormaplastindexof{RdYlGn},...,0 of RdYlGn
-            )
-        },
-        % ... which then is mapped to a `cycle list'
-        cycle list/.define={RdYlGn-reversed}{[of colormap=RdYlGn-reversed]},
-    }
+
+%New cycle list
+\pgfplotscreateplotcyclelist{redpurple}{%
+	{cycle1, mark = none, thick},
+	{cycle2, mark = none, thick},
+	{cycle3, mark = none, thick},
+	{cycle4, mark = none, thick},
+	{cycle5, mark = none, thick},
+	{cycle6, mark = none, thick},
+	{cycle7, mark = none, thick},
+	{cycle8, mark = none, thick},
+	{cycle9, mark = none, thick},
+	{cycle10, mark = none, thick}
+}
+
+%\pgfplotsset{
+%        % load the `cycle list' or `colormap' that contains the colors you want to use
+%        cycle list/RdYlGn,
+%        % define own `cycle list' by first creating a custom `colormap' where
+%        % the colors are reversed ...
+%        colormap={RdYlGn-reversed}{
+%            indices of colormap=(
+%                \pgfplotscolormaplastindexof{RdYlGn},...,0 of RdYlGn
+%            )
+%        },
+%        % ... which then is mapped to a `cycle list'
+%        cycle list/.define={RdYlGn-reversed}{[of colormap=RdYlGn-reversed]},
+%    }
     
 \makeatletter \newcommand{\pgfplotsdrawaxis}{\pgfplots@draw@axis} \makeatother
 
