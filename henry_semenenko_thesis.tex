@@ -41,18 +41,6 @@
 
 %Dark colours
 
-%Cycle colours
-\definecolor{cycle1}{HTML}{ab1f2d}
-\definecolor{cycle2}{HTML}{a01a35}
-\definecolor{cycle3}{HTML}{94143d}
-\definecolor{cycle4}{HTML}{890f44}
-\definecolor{cycle5}{HTML}{7d0a4b}
-\definecolor{cycle6}{HTML}{700552}
-\definecolor{cycle7}{HTML}{620359}
-\definecolor{cycle8}{HTML}{53025f}
-\definecolor{cycle9}{HTML}{420266}
-\definecolor{cycle10}{HTML}{2a036d}
-	
 \newcommand{\brisred}[1]{\textcolor{bristol-red}{#1}}	
 	
 %
@@ -263,8 +251,18 @@
 \pgfplotsset{compat=newest}
 \usepgfplotslibrary{colorbrewer}
 
+%Cycle colours: https://gka.github.io/palettes/#/20|d|ab1f2d,ffa430|ffa430,411f78|1|1
+\definecolor{cycle1}{HTML}{ab1f2d}
+\definecolor{cycle2}{HTML}{c04730}
+\definecolor{cycle3}{HTML}{d56731}
+\definecolor{cycle4}{HTML}{ea8632}
+\definecolor{cycle5}{HTML}{d4804e}
+\definecolor{cycle6}{HTML}{a95d60}
+\definecolor{cycle7}{HTML}{7a3c6d}
+\definecolor{cycle8}{HTML}{411f78}
+	
 %New cycle list
-\pgfplotscreateplotcyclelist{redpurple}{%
+\pgfplotscreateplotcyclelist{ryp8}{%
 	{cycle1, mark = none, thick},
 	{cycle2, mark = none, thick},
 	{cycle3, mark = none, thick},
@@ -272,9 +270,7 @@
 	{cycle5, mark = none, thick},
 	{cycle6, mark = none, thick},
 	{cycle7, mark = none, thick},
-	{cycle8, mark = none, thick},
-	{cycle9, mark = none, thick},
-	{cycle10, mark = none, thick}
+	{cycle8, mark = none, thick}
 }
 
 %\pgfplotsset{
