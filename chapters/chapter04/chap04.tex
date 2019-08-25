@@ -54,7 +54,7 @@ Here we used a four intensity decoy state protocol where we consider four source
 The estimate key rate of \ac{MDI} per pulse in the infinite case is given as
 
 \begin{equation}
-	R = (p_z)^2 Y_{11}^Z \left(1 - H_2(E_{11}^X)\right) - Q_{S,S}^Z f_e E_{S,S}^Z H_2(E_{\mu_s\mu_s}^Z)
+	R = (p_z)^2 Y_{11}^Z \left(1 - H_2(E_{11}^X)\right) - Q_{s,s}^Z f_e E_{S,S}^Z H_2(E_{\mu_s\mu_s}^Z)
 \end{equation}
 where $Y_{11}^Z$ and $e_{11}^X$ are the yield in the $Z$ basis and error in the $X$ basis, respectively, when Alice and Bob both sent single photons. These quantities are not directly measurable so we will need to bound them using a decoy state protocol. $Q_{S,S}^Z$ and $E_{S,S}^Z$ are the gain and error in the $Z$ basis and both can be measured directly. Finally, we introduce the error correction efficiency, $f_e>1$, and the binary entropy function defined as
 \begin{equation}
@@ -85,6 +85,19 @@ where $\mu_a$ ($\mu_b$) are the intensities of Alice's (Bob's) pulses. The gain,
 \end{equation}
 
 In the infinite case, $Y_{11}^Z = Y_{11}^X$ so we can use the decoy sates in $X$ to bound the single photon events in $Z$ \cite{zhou2016}. 
+
+\subsection{Model}
+
+From the parameters of the system (photon numbers and errors), we can create a model to verify that the system behaves as expected. 
+
+The detectors used in this system are \acp{snspd} due to their high efficiency and low dead-time and jitter \cite{}. The detectors operate at an $80\%$ efficiency, with dead-times of \si{<100}{ns} and jitters of \si{30}{ps}.
+
+The gain of the system, $Q^{ \{X,Z\} }$, is the probability of projection onto a Bell state in either the $X$ or $Z$ basis. We can estimate the gain from the average photon number of each transmitter, the detection efficiency and the transmitters loss. We will assume that the transmission loss is the standard \si{0.2}{dB/km}, although fibre optic losses can be as a low as \textbf{FIND NUMBER} \cite{}. The gain is independent of error, so we can estimate the gain as 
+
+\begin{equation}
+	Q^{ \{X,Z\} } = \frac{3}{8}  \times \eta^2 \times( 1 - \text{exp} \left( -10^{\frac{0.2 \times L \times}{2 \times 10} \mu}  \right)  )^2 + Q^{d.c.}
+\end{equation}
+where $Q^{d.c.}$ are the successful projections that are because of dark counts in the system. As \acp{snspd} have dark counts of \si{100}{Hz} this value is typically $10^{-12}$. 
 
 \subsection{Shared Resources}
 
@@ -135,15 +148,33 @@ In order to operate the transmitters, there is a selection of control devices ne
 
 \subsubsection*{Temperature Control}
 
+Two Arroyo 6301 are used to stabilise the temperature of each transmitter independently. A \si{10}{K} thermistor is put into the base of the transmitter package as close as possible to the transmitter. Thermal paste is used to ensure a good thermal contact to the mount and the silver epoxy used for the chips provides a good thermal contact to the chip. A peltier is used to heat and cool the package through a \textbf{something} effect and can be driven with up to \si{3}{A}. The transmitters dissipate very little heat as most of the operation relies on electro-optic effects. Some heating will be caused from thermo-optic modulation and laser driving. The temperatures are chosen to be above the ambient room temperature and to also to overlap the wavelengths between the two lasers. Typical temperatures we between \si{25^\circ}{C} and \si{30^\circ}{C}, required around \si{100}{mA} from the Arroyo controller and had a stability of less than \si{0.01^\circ}{C}.
+
 \subsubsection*{Laser Driver}
+
+The same Arroyo 6301 boxes also provided stable current sources to drive the on-chip lasers. 
 
 \subsubsection*{Modulator Biasing}
 
+For the \ac{qcse}, a reverse bias over the modulator was required. Due to the lack of a negative voltage source, the ground of the chip was set to \si{10}{V} from which lower biases could be set for the modulator to create a reverse bias.
+
+Heating was also required. Up to \si{120}{mA} was used to thermo-optically modulate the light in the \acp{mzi}.
+
 \subsubsection*{High-Speed Electronics}
+
+A variety of high-speed driving electronics was used. Each transmitter requires four high-speed signals for phase randomisation, timing encoding, intensity modulation and phase encoding. Only the intensity modulation, which is used for the decoy state preparation, requires more than a two level signal. To create the signal and two decoy intensities, we will require a three level signal. 
 
 \section{Receiver}
 
 The receiver for \ac{MDI} is a projection onto Bell states\footnote{It actually suffices for the receiver to project onto a single Bell state.}. Depending on the encoding, this projection looks slightly different. In a time-bin encoding scheme, a projection onto $\ket{\phi^\pm}$ depending on coincidences at the detectors.
+
+\subsection{Time-Tagging}
+
+A PicoQuant Hydraharp was used as a time-tagger for the detectors.
+
+\subsection{Synchronisation}
+
+Hi-tech Global SMA-SFP breakout was used to optically share a clock from the transmitters driving electronics to the time-tagger. 
 
 \subsection{Fibre components}
 
