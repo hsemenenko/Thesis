@@ -1,13 +1,13 @@
 using Dates
 using Plots
 using Plots.PlotMeasures
-gr(size=(1920,1080))
+gr(size=(1024,768))
 
-date = []
-text = []
-caption = []
-figure = []
-maths = []
+date = Date[]
+text = Int64[]
+caption = Int64[]
+figure = Int64[]
+maths = Int64[]
 
 t_reg = r"Words in text: (.*\d)"
 c_reg = r"Words outside text \(captions, etc\.\): (.*\d)"
@@ -16,7 +16,7 @@ i_reg = r"Number of math inlines: (.*\d)"
 d_reg = r"Number of math displayed: (.*\d)"
 
 for file in filter(x -> endswith(x, "txt"), readdir("./History"))
-    push!(date, Date(file[1:10],"y_m_d"))
+    push!(date, Date(file[1:10],"yyyy_mm_dd"))
     data = open("./History/" * file) do f
         read(f, String)
     end
@@ -32,18 +32,15 @@ end
 
 plot(date,
    [text,caption],
-   lab = ["Text" "Captions"],
-   w=3,
-   legend = :topleft,
-   yaxis = ("Text and captions", (0,20000)),
-   linetype=:steppost,
-   left_margin=20mm,
-   right_margin = 30mm,
-   bottom_margin=20mm,
    xrotation = 45,
-   formatter = :plain)
-   #fontfamily = "Roboto")
-
+   lab = ["Text" "Captions"],
+   linetype=:steppost,
+   w=3,
+   yaxis = ("Text and captions", (0,20000)),
+   legend = :topleft,
+   left_margin = 10mm,
+   right_margin = 10mm
+   )
 
 plot!(twinx(),
    date,
@@ -52,9 +49,9 @@ plot!(twinx(),
    line=(:dot),
    w=3,
    legend = :topright,
-   yaxis = ("\nFigures and Equations", (0,300)),    
+   yaxis = ("\nFigures and Equations", (0,300)),
+   xaxis = false,
    linetype=:steppost,
-   right_margin=20mm,
    xrotation = 45)
 
 savefig("count.png")
