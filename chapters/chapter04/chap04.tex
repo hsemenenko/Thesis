@@ -109,6 +109,37 @@ To model the errors, we need to include contributions from dark counts in the sy
 	E^{\{X,Z\}}_{m,n} = \frac{\left(Q^{\{X,Z\}}_{m,n} - Q^{d.c}\right) \times \epsilon + Q^{d.c} \times 0.5}{Q^{\{X,Z\}}_{m,n}}
 \end{equation}
 
+
+\begin{figure}[tbp]
+\begin{tikzpicture}
+\begin{semilogyaxis}[
+    axis line on top,
+	xlabel = {Error (\%)},
+	ylabel = {Secret Key Rate (bps)},
+	width = 0.9\linewidth,
+	height = 0.5\linewidth,
+	cycle list name = RdYlPu-8,
+	xmin = 0,
+	xmax = 1.8,
+	xtick pos=left,
+	ytick pos=left,
+    tick align=outside,
+    grid=both,
+    grid style={line width=.1pt, draw=gray!10},
+    legend style={fill=blue!5, draw=gray!50}
+	]
+\foreach \y in {1,...,8}{
+  \addplot+[very thick] table[x index=0,y index=\y, col sep=comma] {./chapters/chapter04/fig04/error_skr.csv};
+  \temp
+}
+\legend{\SI{0}{\km},\SI{50}{\km},\SI{100}{\km},\SI{150}{\km},\SI{200}{\km},\SI{250}{\km},\SI{300}{\km},\SI{350}{\km},}
+\end{semilogyaxis}
+\end{tikzpicture}
+	\caption[Error dependence of secret key rate]{By varying the error rate in the signal $Z$ basis, while maintaining consistent errors in the $X$ basis, we can see the dependence of the quantum bit errors. As the $Z$ basis is used only to generate key, the error must be kept low, especially at longer distances.}
+	\label{fig:skr_error_dependence}
+\end{figure}
+
+
 \subsection{Shared Resources}
 
 As \ac{MDI} introduce Charlie to mediate the key exchange, this easily facilitates sharing resources by switching between users connecting to a centralised node. In a metropolitan network, each used can access the quantum network with a transmitter device and through simple switching allows all users to exchange secret keys with every other user. Such optical switches are already available commercially with less than \SI{1}{dB} insertion loss which is acceptable for \ac{QKD} system \cite{polatis}. While superconducting detectors are typically considered 
@@ -124,7 +155,7 @@ In this section, we will describe the operation of the transmitters to create we
 \begin{figure}[tbp]
 	\centering
 	\includegraphics[width=\textwidth]{Oclaro_00_clean_small.png}
-	\caption{Microscope image of the \SI[product-units=power]{6x2}{mm} indium phosphide transmitter. The complexity possible with integrated photonics is demonstrated by having two separate DBR cavity lasers, three Mach-Zehnder interferometers, an asymmetric  Mach-Zehnder interferometer and high-bandwidth photodiode.}
+	\caption[InP transmitter microscope image]{Microscope image of the \SI[product-units=power]{6x2}{mm} indium phosphide transmitter. The complexity possible with integrated photonics is demonstrated by having two separate DBR cavity lasers, three Mach-Zehnder interferometers, an asymmetric  Mach-Zehnder interferometer and high-bandwidth photodiode.}
 	\label{fig:oclaro_00}
 \end{figure}
 
@@ -148,7 +179,7 @@ The absorption due to the \ac{qcse} can be used to quickly change the intensitie
 
 \begin{figure}[tbp]
 	\includegraphics[width=\linewidth]{Oclaro_00_MDI.png}
-	\caption{A schematic view of the each chip used in the \ac{MDI} protocol. \textit{T. Enc} is used to intensity modulate the continuous wave laser into encode timing information, \textit{I. Mod} varies the pulse intensity for decoy state preparation and \textit{Ph. Enc} encodes phases between the time-bins.}
+	\caption[InP transmitter schematic]{A schematic view of the each chip used in the \ac{MDI} protocol. \textit{T. Enc} is used to intensity modulate the continuous wave laser into encode timing information, \textit{I. Mod} varies the pulse intensity for decoy state preparation and \textit{Ph. Enc} encodes phases between the time-bins.}
 	\label{fig:chip_mdi_schematic}
 \end{figure}
 
@@ -156,9 +187,16 @@ The absorption due to the \ac{qcse} can be used to quickly change the intensitie
 
 In order to operate the transmitters, there is a selection of control devices needed. In this section we will describe them.
 
+\begin{figure}
+	\centering
+	\includegraphics[width=\textwidth]{experiment_control}
+	\caption[Control electronic schematic of the \ac{MDI} experiment]{The experiment required a number of pieces of equipment to control the transmitters and provide synchronisation signals for the detection. This figure shows the ``control plane'' of the experiment.}
+	\label{fig04:exp_control}
+\end{figure}
+
 \subsubsection*{Temperature Control}
 
-Two Arroyo 6301 are used to stabilise the temperature of each transmitter independently. A \SI{10}{K} thermistor is put into the base of the transmitter package as close as possible to the transmitter. Thermal paste is used to ensure a good thermal contact to the mount and the silver epoxy used for the chips provides a good thermal contact to the chip. A peltier is used to heat and cool the package through a thermo-electric effect and can be driven with up to \SI{3}{A}. The transmitters dissipate very little heat as most of the operation relies on electro-optic effects. Some heating will be caused from thermo-optic modulation and laser driving. The temperatures are chosen to be above the ambient room temperature and to also to overlap the wavelengths between the two lasers. Typical temperatures we between \SI{25}{\celsius} and \SI{30}{\celsius}, required around \SI{100}{mA} from the Arroyo controller and had a stability of less than \SI{0.01}{\celsius}.
+Two Arroyo 6301 are used to stabilise the temperature of each transmitter independently. A \SI{10}{K} thermistor is put into the base of the transmitter package as close as possible to the transmitter. Thermal paste is used to ensure a good thermal contact to the mount and the silver epoxy used for the chips provides a good thermal contact to the chip. A peltier is used to heat and cool the package through a thermo-electric effect and can be driven with up to \SI{3}{A}. The transmitters dissipate very little heat as most of the operation relies on electro-optic effects. Some heating will be caused from thermo-optic modulation and laser driving. The temperatures are chosen to be above the ambient room temperature and to also to overlap the wavelengths between the two lasers. Typical temperatures we between \SI{25}{\celsius} and \SI{30}{\celsius}, required around \SI{100}{mA} from the Arroyo controller and had an instability of less than \SI{0.01}{\celsius}.
 
 \subsubsection*{Laser Driver}
 
@@ -176,7 +214,7 @@ A variety of high-speed driving electronics was used. Each transmitter requires 
 
 \section{Receiver}
 
-The receiver for \ac{MDI} is a projection onto Bell states\footnote{It actually suffices for the receiver to project onto a single Bell state.}. Depending on the encoding, this projection looks slightly different. In a time-bin encoding scheme, a projection onto $\ket{\phi^\pm}$ depending on coincidences at the detectors.
+The receiver for \ac{MDI} is a projection onto Bell states\footnote{It actually suffices for the receiver to project onto a single Bell state to ensure security of the key exchange.}. Depending on the encoding, this projection looks slightly different. In a time-bin encoding scheme, a projection onto $\ket{\psi^\pm}$ depending on coincidences between time-bins of the detectors.
 
 \subsection{Time-Tagging}
 
@@ -196,7 +234,62 @@ A polarisation maintaining 50:50 beam splitter is used to interfere the incoming
 
 \Acsp{snspd} are used for detection due to their high efficiency, low dark counts, good timing jitter and short dead time. Time of arrival is tagged using a Picoquant Hydraharp which is synchronised with the transmitters using a separate optical link.
 
-The dead time of our detectors is typically \SI{\sim 50}{ns}. In a time-bin encoding scheme, with only two detectors, we can only project onto $\ket{\phi^{-}}$ as the detector while still be dead when the second time bin arrives. By fanning out the arriving photons to four detectors means that we can now detect both Bell states. This also gives us an increase probability of projecting onto a Bell states because if a detector is dead, there is still a change that the other detector will fire. This scheme will nicely compliment the integrated receiver device in chapter \ref{chap:node}.
+The dead time of our detectors is typically \SI{<100}{ns}. In a time-bin encoding scheme, with only two detectors, we can only project onto $\ket{\psi^{-}}$ as the detector while still be dead when the second time bin arrives. By fanning out the arriving photons to four detectors means that we can now detect both Bell states. This also gives us an increase probability of projecting onto a Bell states because if a detector is dead, there is still a change that the other detector will fire. This scheme will nicely compliment the integrated receiver device in chapter \ref{chap:node}.
+
+\subsection{Banked detectors}
+
+In a time-bin encoded scheme, it is difficult to detect a $\ket{\psi^+}$ state as it would require a coincidence of concurrent time-bins of the same detector. In a GHz clocked system, the time-bins are separated by only \SI{1}{\ns} meaning the dead time of the detector would need to be less than this. \ac{snspd} typically have a detector recovery time on the order of \SI{100}{\ns} meaning that a coincidence between time-bins is impossible. 
+
+While superconducting detectors exist with sub-nanosecond dead time, they will typically sacrifice efficiency by reducing the length of the nanowire \cite{} or wavelength tunability by creating a photonic cavity \cite{}.
+
+In order to increase the possible rates of a time-bin encoded \ac{MDI} system, we can introduce a pseudo photon-number resolving bank of detectors. Each detection arm of the measurement beam splitter is further split to many detectors. This allows $\ket{\psi^+}$ to be detected with some probability depending on the number of detectors available. This kind of banked detection system also means that we can increase the number of events before saturation of the detectors. 
+
+\begin{figure}[tbp]
+\begin{tikzpicture}
+\begin{semilogyaxis}[
+    axis line on top,
+	xlabel = {Distance (km)},
+	ylabel = {Probability of detection},
+	width = 0.9\linewidth,
+	height = 0.7\linewidth,
+	cycle list name = RdYlPu-3,
+	xmin = 0,
+	xmax = 350,
+	ymin=1e-9,
+	ymax=0.1,
+	yminorticks=false,
+	xtick pos=left,
+	ytick pos=left,
+    tick align=outside,
+    grid=both,
+    grid style={line width=.1pt, draw=gray!10},
+    legend style={fill=blue!5, draw=gray!50}
+	]
+\foreach \y in {1,...,3}{
+  \addplot+[very thick] table[x index=0,y index=\y, col sep=comma] {./chapters/chapter04/fig04/det_eff_k=0,25,50.csv};
+  \temp
+}
+\legend{0,25,50}
+\end{semilogyaxis}
+\end{tikzpicture}
+	\caption[Detector efficiency depending on detector dead time]{Here we plot the detector efficiency depending on the distance between Alice and Bob while varying the detector dead time. }
+	\label{fig:det_eff_dead_time}
+\end{figure}
+
+First, we consider the probability of a click $\xi$, given a coherent state with average photon number, $\mu$, some detection efficiency, $\eta$, and dead time of the system, $k$. Considering that the system is unable to detect a photon for some time after a successful event. The efficiency is modelled as
+
+\begin{equation}
+	\xi = \eta \times ( 1 - P^\mu_0) ) \times (1 - \xi)^k
+\end{equation}
+
+We can model the loss of photon number as a function of the distance between Alice and Bob. We can assume \SI{0.2}{dB\per\km} in standard optical fibre so after some distance $L$, the average photon number from Alice or Bob will be
+
+\begin{equation}
+	10^{-\frac{0.2 \times L}{2 \times 10}} \mu
+\end{equation}
+where the length has been divided in two as Alice and Bob will both be sending states to a centralised location. 
+
+To compare the performance of a bank detector system, we consider a ``perfect'' system with no dead time
 
 \subsection{Time Tagging}
 
@@ -214,7 +307,7 @@ As mentioned before, the \ac{MDI} protocol is very dependent on high fidelity \a
 
 \begin{figure}[tbp]
 	\centering
-	\includegraphics[scale=0.25]{BSM_Curr_Sweep/Fit.pdf}
+	\includegraphics[width = 0.9\textwidth]{BSM_Curr_Sweep/BSM_Sweep}
 	\caption[Laser current-error sweep]{Sweeping the current on one laser changes the wavelength relative to the other. This changes the relative phases between the two pulses in the +/- states. Using this allows good calibration of wavelength.}
 	\label{fig:wavelength_cal}
 \end{figure}
@@ -225,6 +318,15 @@ As mentioned before, the \ac{MDI} protocol is very dependent on high fidelity \a
 \subsection{Phase Randomised Transmitters}
 
 Phase randomisation means that the clock rate needs to be reduced as the laser needs time to recover. 
+
+\subsection{Key Rate}
+
+\begin{figure}
+	\centering
+	\includegraphics[width=0.8\textwidth]{rates}
+	\caption[Asymptotic key rates of chip-based MDI-QKD]{From the errors and gains in the system, we can estimate an asymptotic key rate. This plot shows the key rate estimated using an emulated quantum channel.}
+	\label{fig:mdi_rates}
+\end{figure}
 
 \subsection{2 GHz Clock Rate}
 

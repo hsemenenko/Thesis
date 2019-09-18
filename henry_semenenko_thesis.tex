@@ -239,27 +239,8 @@
 \pgfplotsset{compat=newest}
 \usepgfplotslibrary{colorbrewer}
 
-%Cycle colours: https://gka.github.io/palettes/#/20|d|ab1f2d,ffa430|ffa430,411f78|1|1
-\definecolor{cycle1}{HTML}{ab1f2d}
-\definecolor{cycle2}{HTML}{c04730}
-\definecolor{cycle3}{HTML}{d56731}
-\definecolor{cycle4}{HTML}{ea8632}
-\definecolor{cycle5}{HTML}{d4804e}
-\definecolor{cycle6}{HTML}{a95d60}
-\definecolor{cycle7}{HTML}{7a3c6d}
-\definecolor{cycle8}{HTML}{411f78}
-	
-%New cycle list
-\pgfplotscreateplotcyclelist{ryp8}{%
-	{cycle1, mark = none, thick},
-	{cycle2, mark = none, thick},
-	{cycle3, mark = none, thick},
-	{cycle4, mark = none, thick},
-	{cycle5, mark = none, thick},
-	{cycle6, mark = none, thick},
-	{cycle7, mark = none, thick},
-	{cycle8, mark = none, thick}
-}
+%input the colour definitions
+\input{graphics/colours.tex}
 
 %\pgfplotsset{
 %        % load the `cycle list' or `colormap' that contains the colors you want to use
@@ -480,6 +461,13 @@
 \AfterEndEnvironment{theo}{\end{adjustwidth}}
 
 %
+% Expand tables
+%
+
+\setlength{\tabcolsep}{6pt}
+\renewcommand{\arraystretch}{1.2}
+
+%
 % Hyphenation for some words
 %
 \hyphenation{res-pec-tively}
@@ -566,7 +554,9 @@
 
 % And the appendix goes here
 \appendix
-\import{chapters/appendices/}{app0A.tex}
+\import{chapters/appendices/}{app0.tex}
+\clearemptydoublepage
+\import{chapters/appendices/}{app-tips.tex}
 \clearemptydoublepage
 %
 % Apparently the guidelines don't say anything about citations or

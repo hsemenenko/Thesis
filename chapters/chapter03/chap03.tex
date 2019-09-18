@@ -126,7 +126,7 @@ Therefore, the probability of a coincidence click, with both coherent states ove
 	ylabel = {Visibility},
 	width = 0.9\linewidth,
 	height = 0.5\linewidth,
-	cycle list name = ryp8,
+	cycle list name = RdYlPu-8,
 	xmin = 0,
 	xmax = 1,
 	ymin = 0,
@@ -259,13 +259,20 @@ A typical spectra of the two transmitter lasers is shown in figure \ref{fig:spec
 	\label{fig:spectra}
 \end{figure}
 
+\begin{figure}[tbp]
+	\centering
+	\includegraphics[width=0.8\textwidth]{DBR_sweep}
+	\caption[Laser wavelength scan with DBR current injection]{Through current injection of the \acp{DBR} we can change the wavelength of the laser due to heating effects. By sweeping the front and back \acp{DBR}, we can tune the laser \SI{10}{\nm} within the telecomms C-band.}
+	\label{fig03:DBR_sweep}
+\end{figure}
+
 In order to measure the the linewidth more accurately, a self-heterodyne measurement technique can be used \cite{self-heterodyne}. 
 
 \subsection{Modulation}
 
 \begin{figure}[tbp]
 	\includegraphics[width = \linewidth]{./Chip/Oclaro_00_MZI_1.png}
-	\caption{Integrated \acl{mzi} made from two \acsp{mmi} and two \acsp{eopm}  which can be used for intensity modulation of light into pulses.}
+	\caption[Integrated MZI microscope image]{Integrated \acl{mzi} made from two \acsp{mmi} and two \acsp{eopm}  which can be used for intensity modulation of light into pulses.}
 	\label{fig:InP_MZI}
 \end{figure}
 
@@ -299,13 +306,27 @@ We think that it is pertinent to note that during the experiment there was no ac
 
 \section{Phase Randomisation}
 
+\begin{figure}[tbp]
+	\centering
+	\includegraphics[width=\textwidth]{gain_switch.pdf}
+	\caption[Gain switching of the on-chip lasers at \SI{250}{MHz}]{By applying a negative electrical signal to the on-chip laser, we can drain the optical cavity. Lasing will then resume from spontaneous emission meaning that the phase will not be coherent with the previous lasing conditions.}
+	\label{fig:gain_switch}
+\end{figure}
+
 As we will see in chapter \ref{chap:mdiqkd}, it will be important for the pulses to be phase randomised relative to subsequent pulses to maintain the security of a \ac{QKD} protocol. This section will describe how we can use coincidence counts between neighbouring pulses to verify that we are creating phase randomised \acp{wcp}.
 
-Laser gain switching is a technique used to cause phase randomisation by keep the laser below threshold and only applying current when a \ac{wcp} is desired. As the pulses are limited to the timing of a spontaneous emission, the timing jitter of the pulses is usually large. There is also a wavelength broadening meaning that filtering is required. 
+Laser gain switching is a technique used to cause phase randomisation by keeping the laser below threshold and only applying current when a \ac{wcp} is desired. As the pulses are limited to the timing of a spontaneous emission, the timing jitter of the pulses is usually large. There is also a wavelength broadening meaning that filtering is required. 
 
 Instead of gain switching to generate pulses, we can reverse the high speed pulse to provide a negative voltage between pulse carving. This pulses removes the carriers in the laser and makes each pulse phase randomised. The upper-state lifetime of semiconductors is very short, as is the cavity lifetime. Therefore, we can still generate states at \SI{250}{MHz} and demonstrate good state preparation.
 
 To test that the pulses are phase randomised, we can look at coincidences between neighbouring pulses, as shown in figure \ref{fig:}.  
+
+\begin{figure}[tbp]
+	\centering
+	\includegraphics[width=\textwidth]{HOM_coherence.pdf}
+	\caption[HOM interference with and without phase randomisation]{\ac{HOM} interference both with and without phase randomisation between pulses. In both cases we find a fitted visibility of more than $47\%$ showing that phase randomisation doesn't reduce the fidelity of the states.}
+	\label{fig:HOM_coherence}
+\end{figure}
 
 \section{Outlook}
 
