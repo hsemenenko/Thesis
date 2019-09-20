@@ -54,8 +54,8 @@ By assigning values to each letter of the alphabet (`a' = 0, `b' = 1, etc.), the
 
 \begin{center}
 \begin{tabular}{l l}%{@{}l@{\ }l}
-	Plain:  &\quad{\tt a b c \ldots x y z} \\ 
-	Cipher: &\quad{\tt F G H \ldots C D E} \\
+	Plain:  &\quad\texttt{ a b c \ldots x y z} \\ 
+	Cipher: &\quad\texttt{ F G H \ldots C D E} \\
 \end{tabular}
 \end{center}
 
@@ -139,7 +139,7 @@ As we will see later, authentication will play a crucial role in a \ac{QKD} syst
 \subsection{Cryptanalysis}
 \label{sec1:cryptanalysis}
 
-This is the research into how encryption can be broken. Simple ciphers can easily be broken by comparing the ciphertext to the percentage of each letter used. As {\tt `e'} is the most common letter in the English language, it follows that if a monoalphabetic cipher is used, then the most common letter in a passage is likely to be decoded to {\tt `e'}.
+This is the research into how encryption can be broken. Simple ciphers can easily be broken by comparing the ciphertext to the percentage of each letter used. As \texttt{`e'} is the most common letter in the English language, it follows that if a monoalphabetic cipher is used, then the most common letter in a passage is likely to be decoded to \texttt{`e'}.
 
 \section{Quantum Theory}
 
@@ -164,13 +164,13 @@ Quantum mechanics can be seen as a generalised probability theory and was born o
 
 A fundamental theorem in quantum mechanics is the {\color{bristol-red} no-cloning theorem} which will also underpin the security of \ac{QKD}. The general principle of the theorem states that there is no physical process that copies, or clones, an arbitrary quantum state. We can state this more formally:
 
-\begin{theo}
+\begin{theorem}
 	 The no-cloning theorem states that there is no quantum channel, $\mathcal{E}$, from $M(\mathbb{C}^d)$ to $M(\mathbb{C}^d) \otimes M(\mathbb{C}^d)$ such that
 	 \begin{equation*}
 	 	\mathcal{E}(\ket{\psi}\bra{\psi}) = \ket{\psi}\bra{\psi} \otimes \ket{\psi}\bra{\psi}
 	 \end{equation*}
 	 for all states $\ket{\psi} \in \mathbb{C}^d$.
-\end{theo}
+\end{theorem}
 
 
 \subsection{Quantum Photonics}

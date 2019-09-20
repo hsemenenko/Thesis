@@ -15,6 +15,8 @@
 
 \ac{HOM} interference is a fundamental tool in any quantum engineer's toolbox. It underpins a range of quantum technologies ranging from computing to communication. While it is well understood, generating states for quantum interference at the high speeds required for modern telecommunication remains practically challenging. In this chapter, we experimentally demonstrate that \ac{InP} devices fulfil all the requirements of state-of-the-art Hong-Ou-Mandel interference while also being practically scalable. This chapter will expand on the work published in reference \cite{semenenko2019}. 
 
+A typical wave of overlapping the wavelengths of two lasers will involve interfering the two fields on a beam splitter and measuring the power output from one of the arms with a photodiode. However, by the time the laser has been coupled from the chip, the power is typically below \SI{30}{dBm}. It is challenging to create fast photodiodes that are sensitive enough to measure this power. Therefore, another method is required.
+
 \section{Hong-Ou-Mandel Interference}
 
 \Ac{HOM} interference is a quantum phenomena where two indistinguishable single photons incident on a balanced beam splitter will interfere and bunch. This is an important physical process that is fundamental to many quantum information technologies from computation to communication and sensing. It was first seen by Hong, Ou and Mandel in 1987 \cite{HOM}. 
@@ -240,7 +242,7 @@ The experiment uses two \ac{InP} devices as sources of weak coherent states. We 
 \begin{figure}
 	\centering
 	\includegraphics[width=0.6\textwidth]{/Chip/Oclaro_00_LASER.png}
-	\caption{Integrated laser formed of two DBRs and an SOA.}
+	\caption[Microscope image of the on-chip laser]{Integrated laser formed of two DBRs and an SOA. The total length is only \SI{1}{\mm}.}
 	\label{fig:InP_laser}
 \end{figure}
 
@@ -287,20 +289,64 @@ Alice (and Bob) uses a stable current sources to drive an on-chip \ac{DBR} laser
 \begin{figure}[tbp]
 	\centering
 	\includegraphics[width=0.8\textwidth]{Pulse}
-	\caption[Pulse carving]{Pulse carving showing \SI{>20}{dB} extinction ratio and a \ac{FWHM} of \SI{175}{\pico\second}.}
+	\caption[Pulse carving]{Pulse carving showing \SI{>20}{dB} extinction ratio and a \ac{FWHM} of \SI{175}{\ps}.}
 	\label{fig:pulses}
 \end{figure}
+
+\subsection{Control Electronics}
+
+In order to the drive the devices, various electronic control is required. 
+
+A DC voltage source was required to reverse bias the modulator. In lieu of a negative voltage source, a positive voltage source was used to raise the chip ground to \SI{10}{\V} relative to the other sources. The potential over modulators could then be applied using one of the other positive voltage sources.
+
+The DC signal was mixed with the RF signal using a bias-tee 
+
+Keysight 81134A pulse pattern generators were used to generate \SI{100}{\ps} \ac{FWHM} RF pulses at up to \SI{2}{\Vpp}.
+
+\subsection{Modelling}
+
+The continuous wave laser was intensity modulated into pulses using a \ac{mzi} which gave the pulse a Gaussian shape in time. Therefore, we can model the electric field of each pulse as
+\begin{equation}
+	\mathcal{E}_j^\text{in}(t) = \frac{1}{t_p\sqrt{2\pi}} \exp{\left(-\frac{t^2}{2 t_p^2}\right)} \exp{\left(i(\omega_j t + \varphi_j)\right)}
+\end{equation}
+where $j = 1,2$ are the beam splitter inputs. The pulse duration is given by $t_p$, the laser angular frequency is $\omega_j$ and $\varphi_j$ is the phase associated with the pulse.
+
+The two pulses from the transmitters interfere at the beam splitter. After the interference, the intensities at the output of each arm is given as
+After the interference through the beam splitter, the intensities of the two outputs are given by
+\begin{equation}
+	I^\text{out}_{1,2} = 1 \pm \exp{\left(-\frac{1}{2}t_p^2(\Delta\omega)^2\right)}\cos(\Delta\varphi)
+\end{equation}
+where $\pm$ distinguishes between the two output modes. The relative phases of the pulses, $\Delta\varphi = \varphi_1 - \varphi_2$, is introduced to simplify the equation.
+
+We are then able to calculate the coincidence probability by using $P(1,1) \propto \langle I_1 I_2\rangle$ \cite{Rarity2005}, where an average is taken over the relative phase, $\Delta\varphi$. As the laser pulses tune in wavelength, we can model the \ac{HOM} interaction as 
+\begin{equation}
+	P(1,1) = 1 - V \exp{\left(-t_p^2(\Delta\omega)^2\right)}
+	\label{eq:gaussian}
+\end{equation}
+where the visibility, $V$, takes into account any mismatch in the degrees of freedom between the two pulses (i.e. timing, polarisation, pulse shape or photon number).
+
+\section{Calibration}
+
+\section{Detection}
+
+\subsection{Synchronisation}
+
+As the \ac{HOM} interference is dependant on the time of arrival of the two pulses, we need to ensure that the pulses arrive at the beam splitter at the same time. It is also crucial that we can reconstruct the events using the timing electronics, meaning that we require to fully calibrate electrical delays. 
+
+To keep the transmitter electronics in sync with the detection electronics, an optical signal is used to send a reference clock. This 
+
+\subsection{Time-tagging}
 
 \section{Hong-Ou-Mandel Interference Between GHz Coherent States}
 
 \begin{figure}[tbp]
 	\centering
 	\includegraphics[width=0.8\textwidth]{HOM}
-	\caption[Hong-Ou-Mandel interference between integrated devices]{\ac{HOM} interference between two integrated devices demonstrating $46.5\pm0.8\%$ visibility.}
+	\caption[Hong-Ou-Mandel interference between integrated devices]{\ac{HOM} interference between two integrated devices demonstrating \SI{46.5(8)}{\%} visibility.}
 	\label{fig:HOM}
 \end{figure}
 
-In figure \ref{fig:HOM} we demonstrate $46.5 \pm 0.8  \%$ visibility between two independent \acp{pic} by changing one transmitter's wavelength relative to the other. The transmitters we initially overlapped in time, using electronic delays; polarisation, with fibre polarisation controllers; and photon number, with digital variable optical attenuators. 
+In figure \ref{fig:HOM} we demonstrate \SI{46.5(8)}{\%} visibility between two independent \acp{pic} by changing one transmitter's wavelength relative to the other. The transmitters we initially overlapped in time, using electronic delays; polarisation, with fibre polarisation controllers; and photon number, with digital variable optical attenuators. 
 
 We think that it is pertinent to note that during the experiment there was no active feedback to control the polarisation, pulse carving or timing which demonstrates the stability possible with an integrated platform. 
 
@@ -319,18 +365,18 @@ Laser gain switching is a technique used to cause phase randomisation by keeping
 
 Instead of gain switching to generate pulses, we can reverse the high speed pulse to provide a negative voltage between pulse carving. This pulses removes the carriers in the laser and makes each pulse phase randomised. The upper-state lifetime of semiconductors is very short, as is the cavity lifetime. Therefore, we can still generate states at \SI{250}{MHz} and demonstrate good state preparation.
 
-To test that the pulses are phase randomised, we can look at coincidences between neighbouring pulses, as shown in figure \ref{fig:}.  
+To test that the pulses are phase randomised, we can look at coincidences between neighbouring pulses, as shown in figure \ref{fig:HOM_coherence}.  
 
 \begin{figure}[tbp]
 	\centering
 	\includegraphics[width=\textwidth]{HOM_coherence.pdf}
-	\caption[HOM interference with and without phase randomisation]{\ac{HOM} interference both with and without phase randomisation between pulses. In both cases we find a fitted visibility of more than $47\%$ showing that phase randomisation doesn't reduce the fidelity of the states.}
+	\caption[HOM interference with and without phase randomisation]{\ac{HOM} interference both with and without phase randomisation between pulses. In both cases we find a fitted visibility of more than \SI{47}{\%} showing that phase randomisation doesn't reduce the fidelity of the states.}
 	\label{fig:HOM_coherence}
 \end{figure}
 
 \section{Outlook}
 
-In this experiment, we have demonstrated state-of-the-art \acl{HOM} interference between GHz clocked integrated photonic devices exploiting monolithically fabricated lasers and \acp{eopm} with a visibility of $46.5\pm 0.8\%$. As we will see in chapter \ref{chap:mdiqkd}, this result will play a crucial role in \ac{MDI} and high fidelity interference will be required to bound the knowledge of Eve and Mallory.
+In this experiment, we have demonstrated state-of-the-art \acl{HOM} interference between GHz clocked integrated photonic devices exploiting monolithically fabricated lasers and \acp{eopm} with a visibility of \SI{46.5(8)}{\%}. As we will see in chapter \ref{chap:mdiqkd}, this result will play a crucial role in \ac{MDI} and high fidelity interference will be required to bound the knowledge of Eve and Mallory.
 
 \subsection{Active Stabilisation}
 
