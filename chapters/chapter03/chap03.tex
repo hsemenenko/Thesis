@@ -178,15 +178,15 @@ In this section, we will discuss the main challenges in performing \ac{HOM} inte
 
 \subsection{Single Photons}
 
-Typically, \acl{HOM} experiments are usually performed with a single photons. The first demonstrations used \ac{spdc} to generate pairs of single photons that were distinguishable only in path \cite{}. By delaying one of the photons before interfering on a beam splitter, \ac{HOM} interference could be demonstrated. Subsequent experiments have demonstrated interference between single photons sources from \ac{sfwm} \cite{}, quantum dots \cite{} and NV centres \cite{}.
+Historically, \acl{HOM} interference experiments have been performed with a single photons. The first demonstrations used \ac{spdc} to generate pairs of single photons that were distinguishable only in path \cite{}. By delaying one of the photons before interfering on a beam splitter, \ac{HOM} interference could be demonstrated. Subsequent experiments have demonstrated interference between single photons sources from \ac{sfwm} \cite{}, quantum dots \cite{} and NV centres \cite{} \footnote{A recent review can be found at \url{http://www.rri.res.in/quic/resources/opn2019}}.
 
-While there have been many advances in these types of sources through increased rates and coherence, they remain probabilistic. Therefore, it is hard to claim that they will make good candidates for scalable quantum technologies without requiring multiplexing and feed-forward which introduces a its own set of practical challenges.
+While there have been many advances in single-photon sources through increased rates and coherence, they remain probabilistic with impractical rates for communication protocols. Therefore, it is hard to claim that in their current form they will make good candidates for scalable quantum technologies without requiring multiplexing and feed-forward techniques. Each of which introduce their own set of practical challenges. 
 
-On-demand single photon source would be the ideal candidate for many quantum technologies, including \acp{QKD}. However, the current state of the on-demand sources means limited rates that are often at wavelength incompatible with telecommunications \cite{}. 
+It is worth noting that as quantum networks evolve from simple key exchange networks it will be necessary to develop single-photon sources \cite{}. As such developments occur, they will impact the field of \ac{QKD} which would benefit from on-demand, single-photon sources provided that they fulfil the rate and loss requirements of modern communication networks. It could even be conceived that these sources would impact how we communicate our classical information \cite{}
 
 \subsection{Weak Coherent States}
 
-In the absence of true single photon sources, another source of light needs to be considered for scalable quantum communication. Coherent states represent a close approximation to single photons when strongly attenuated. They are also readily available easily manipulated. In the regime of low average photon number, we will introduce \acp{wcs}. While not entirely well defined, we will consider \ac{wcs} to be when the average photon number is around 1 within a time period.
+In the absence of true single photon sources, another source of light needs to be considered for scalable quantum encryption protocols. Coherent states represent a close approximation to single photons when strongly attenuated. They are also readily available and easily manipulated. In the regime of low average photon number, we will introduce the term \acp{wcs}. 
 
 As previously mentioned, the requirements for high-fidelity \ac{HOM}, and therefore \ac{QKD}, are stringent. Here we discuss some of the requirements for a \ac{wcs} sources to be useful in a \ac{QKD} system. 
 
@@ -224,7 +224,7 @@ While gain switched lasers offer simplicity and easily satisfy the phase randomi
 	\item Intensity modulation
 \end{itemize}
 
-\section{Experiment}
+\section{Experimental Setup}
 
 In this section, we detail the experimental setup used to demonstrate \ac{HOM} interference motivating the design with regards to the requirements set out in the previous section. 
 
@@ -237,9 +237,26 @@ In this section, we detail the experimental setup used to demonstrate \ac{HOM} i
 
 The experiment uses two \ac{InP} devices as sources of weak coherent states. We will call each device Alice and Bob, respectively. Each chip measures only \SI[product-units=power]{6x2}{mm} and contains all the required photonic components to generate the required states to perform \ac{HOM} interference at GHz rates. One only need compare the sizes of these optical components to fibre based optics to justify the benefits of integrated devices.
 
+\subsection{Packaging}
+
+\begin{figure}[tbp]
+	\centering
+	\includegraphics[width=0.8\textwidth]{Chip_PCB}
+	\caption[Chip package]{Chip packaging to breakout the bond pads on the chip to SMA and DC connections.}
+	\label{fig:chip_pcb}
+\end{figure}
+
+To be able to access the electrical and optical sections of the integrated devices, we need to create a package that is compatible with other systems. A PCB was designed to electrically connect the modulators and laser to SMA and DC pin connectors. The bottom of the chip is ground which connects to a copper block that is also connected to the ground of the PCB. Silver epoxy was used to glue the chip to the mount to ensure a good electrical connection. It also provides a fair thermal connection for 
+
+In order to maintain a good impedance match (\SI{50}{\ohm}) with small track widths, Rogers 6006ns material was chosen for its high dielectric constant of \num{6.15}. The PCB was given a gold coating using electroplating to avoid oxidation of the copper. In future iterations, a nickel layer should be applied before the gold to avoid gold diffusing into the copper. 
+
+The pads on the chip were wirebonded to the PCB with a \SI{25}{\micro\meter} ball bond and then a wedgebond onto the PCB. Silver epoxy was then applied over the wedgebond to ensure a good electrical contact with the PCB and to increase durability. 
+
+An RF signal could be applied to one side of a \ac{eopm} while the other side provided termination to minimise reflections. A capacitor blocked the DC component of the signal while a \SI{50}{\ohm} resistor terminates the AC signal. 
+
 \subsection{Light Source}
 
-\begin{figure}
+\begin{figure}[tp]
 	\centering
 	\includegraphics[width=0.6\textwidth]{/Chip/Oclaro_00_LASER.png}
 	\caption[Microscope image of the on-chip laser]{Integrated laser formed of two DBRs and an SOA. The total length is only \SI{1}{\mm}.}
@@ -272,6 +289,10 @@ In order to measure the the linewidth more accurately, a self-heterodyne measure
 
 \subsection{Modulation}
 
+\subsubsection{Quantum-Confined Stark Effect}
+
+The main modulation effect that we will use is the \ac{qcse} which has operating speeds of more than \SI{40}{GHz} \cite{qcse, smit2014}. The waveguide contains a \ac{mqw}  structure which has a tunable bandgap depending on an applied reverse bias. This causes both a phase shift and loss.
+
 \begin{figure}[tbp]
 	\includegraphics[width = \linewidth]{./Chip/Oclaro_00_MZI_1.png}
 	\caption[Integrated MZI microscope image]{Integrated \acl{mzi} made from two \acsp{mmi} and two \acsp{eopm}  which can be used for intensity modulation of light into pulses.}
@@ -293,15 +314,25 @@ Alice (and Bob) uses a stable current sources to drive an on-chip \ac{DBR} laser
 	\label{fig:pulses}
 \end{figure}
 
+\subsection{Fibre Coupling}
+
+To efficiently couple the light from the waveguide mode (\SI{100}{\nm}) to a fibre model (\SI{10}{\micro\meter}), a spot-size converter on the chip is used to expand the light mode to around \SI{3}{\micro\meter}. The spot-size converter also changes the mode to be more circular from the elliptical waveguide mode. A lensed fibre was then used to convert this mode to \SI{10}{\micro\meter}. The fibre was held in a Elliot Gold fibre launch stage with piezo actuators that gave a precision of \SI{10}{\nm} in X, Y and Z axes over a range of \SI{25}{\micro\meter}.
+
+Coupling losses were challenging to measure as the chip did not have any waveguide ``cutbacks'' to isolate the loss from components and spot-size converters.  However, loss from foundry measurements estimate that the loss from coupling to a singlemode fibre is around \SI{1.5}{dB}.
+
 \subsection{Control Electronics}
 
 In order to the drive the devices, various electronic control is required. 
 
 A DC voltage source was required to reverse bias the modulator. In lieu of a negative voltage source, a positive voltage source was used to raise the chip ground to \SI{10}{\V} relative to the other sources. The potential over modulators could then be applied using one of the other positive voltage sources.
 
-The DC signal was mixed with the RF signal using a bias-tee 
+The DC signal was mixed with the RF signal using a bias-tee with a response up to 
 
 Keysight 81134A pulse pattern generators were used to generate \SI{100}{\ps} \ac{FWHM} RF pulses at up to \SI{2}{\Vpp}.
+
+A separate current source was used to pass a small current over one side of the \ac{mzi} to achieve thermo-optic phase modulation. 
+
+A 10K thermistor was used to give feedback to a PID loop controlled by an Arroyo 6601 and a peltier under the chip mount stabilised the temperature.
 
 \subsection{Modelling}
 
@@ -327,7 +358,11 @@ where the visibility, $V$, takes into account any mismatch in the degrees of fre
 
 \section{Calibration}
 
+Digital variable optical attenuators (Oz Optics DA100) were used to vary the power of each transmitters independently. 
+
 \section{Detection}
+
+The detectors used in the experiment were \acp{snspd} from Photonspot. The detectors were housed in a closed cycle helium refrigerator that was kept at \SI{0.7}{K}.
 
 \subsection{Synchronisation}
 
@@ -337,7 +372,9 @@ To keep the transmitter electronics in sync with the detection electronics, an o
 
 \subsection{Time-tagging}
 
-\section{Hong-Ou-Mandel Interference Between GHz Coherent States}
+Detection events were time-tagged using a PicoQuant Hydraharp 400 and saved to the computer and analysed later. An optical link was used to provide a synchronisation signal from the transmitters to the time-tagger. The precision of timing events could be set by the user and could be as low as \SI{1}{\ps} and the electronic jitter is \SI{<12}{\ps}. The dead time of the tagging electronics is \SI{<80}{\ns}, which is comparable to the detector dead time so should not impact the experiment. In this experiment, \SI{16}{\ps} \textbf{CHECK THIS} bins were used. As the exact series of events could be reconstructed form the time-tags, the number of coincidences could be calculated from the saved tags provided the timing information between transmitters had been calibrated.
+
+\section{Hong-Ou-Mandel Interference Between Independent Integrated Devices}
 
 \begin{figure}[tbp]
 	\centering
@@ -350,16 +387,18 @@ In figure \ref{fig:HOM} we demonstrate \SI{46.5(8)}{\%} visibility between two i
 
 We think that it is pertinent to note that during the experiment there was no active feedback to control the polarisation, pulse carving or timing which demonstrates the stability possible with an integrated platform. 
 
-\section{Phase Randomisation}
+\section{HOM Inteferece with Actively Phase Randomised Pulses}
 
 \begin{figure}[tbp]
 	\centering
-	\includegraphics[width=\textwidth]{gain_switch.pdf}
+	\includegraphics[width=0.8\textwidth]{gain_switch.pdf}
 	\caption[Gain switching of the on-chip lasers at \SI{250}{MHz}]{By applying a negative electrical signal to the on-chip laser, we can drain the optical cavity. Lasing will then resume from spontaneous emission meaning that the phase will not be coherent with the previous lasing conditions.}
 	\label{fig:gain_switch}
 \end{figure}
 
 As we will see in chapter \ref{chap:mdiqkd}, it will be important for the pulses to be phase randomised relative to subsequent pulses to maintain the security of a \ac{QKD} protocol. This section will describe how we can use coincidence counts between neighbouring pulses to verify that we are creating phase randomised \acp{wcp}.
+
+As the lasers in previous experiment were not phase locked, we could average over the phases by taking data for long enough for the phases between the two lasers to drift.
 
 Laser gain switching is a technique used to cause phase randomisation by keeping the laser below threshold and only applying current when a \ac{wcp} is desired. As the pulses are limited to the timing of a spontaneous emission, the timing jitter of the pulses is usually large. There is also a wavelength broadening meaning that filtering is required. 
 
