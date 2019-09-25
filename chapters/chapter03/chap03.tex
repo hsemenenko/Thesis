@@ -1,4 +1,3 @@
-%
 % File: chap03.tex
 % Author: Henry Semenenko
 % Description: HOM Interference
@@ -231,7 +230,7 @@ In this section, we detail the experimental setup used to demonstrate \ac{HOM} i
 \begin{figure}[tbp]
 	\centering
 	\includegraphics[width=\textwidth]{Experiment}
-	\caption[HOM experimental setup]{Experimental setup of of the \ac{HOM} interference experiment with two identical \ac{InP} chips.}
+	\caption[Hon-Ou-Mandel interference experimental setup]{Experimental setup of of the \ac{HOM} interference experiment. Two identical \ac{InP} chips prepare quantum states of light to be interfered on a {50:50} beams splitter. On-chip \ac{CW} lasers are intensity modulated into time-bins with \acp{mzi}. The pulses are coupled into a fibre where \acp{voa} ensure matched intensities and \acp{pc} and \acp{pbs} overlap the polarisation. An optical channel (not shown) synchronises the transmitter and detector electronics.}
 	\label{fig:hom_experiment}
 \end{figure}
 
@@ -242,24 +241,24 @@ The experiment uses two \ac{InP} devices as sources of weak coherent states. We 
 \begin{figure}[tbp]
 	\centering
 	\includegraphics[width=0.8\textwidth]{Chip_PCB}
-	\caption[Chip package]{Chip packaging to breakout the bond pads on the chip to SMA and DC connections.}
+	\caption[Transmitter PCB package]{Chip packaging to breakout the electrical connection on the chip. SMA connectors were used for the high-speed connections to offer a response of more than \SI{10}{\GHz}. Capacitors and resisters were also used for termination of RF modulation signals. DC pins were used for low-speed connections.}
 	\label{fig:chip_pcb}
 \end{figure}
 
-To be able to access the electrical and optical sections of the integrated devices, we need to create a package that is compatible with other systems. A PCB was designed to electrically connect the modulators and laser to SMA and DC pin connectors. The bottom of the chip is ground which connects to a copper block that is also connected to the ground of the PCB. Silver epoxy was used to glue the chip to the mount to ensure a good electrical connection. It also provides a fair thermal connection for 
+To be able to access the electrical and optical sections of the integrated devices, we need to create a package that is compatible with other systems. A PCB was designed to electrically connect the modulators and laser to SMA and DC pin connectors. The bottom of the chip is ground which connects to a copper block that is also connected to the ground of the PCB. Silver epoxy was used to glue the chip to the mount to ensure a good electrical connection. It also provided a good thermal connection for temperature stabilisation.
 
 In order to maintain a good impedance match (\SI{50}{\ohm}) with small track widths, Rogers 6006ns material was chosen for its high dielectric constant of \num{6.15}. The PCB was given a gold coating using electroplating to avoid oxidation of the copper. In future iterations, a nickel layer should be applied before the gold to avoid gold diffusing into the copper. 
 
 The pads on the chip were wirebonded to the PCB with a \SI{25}{\micro\meter} ball bond and then a wedgebond onto the PCB. Silver epoxy was then applied over the wedgebond to ensure a good electrical contact with the PCB and to increase durability. 
 
-An RF signal could be applied to one side of a \ac{eopm} while the other side provided termination to minimise reflections. A capacitor blocked the DC component of the signal while a \SI{50}{\ohm} resistor terminates the AC signal. 
+An RF signal could be applied to one side of a \ac{eopm} while the other side provided termination to minimise electrical reflections. A capacitor blocked the DC component of the signal while a \SI{50}{\ohm} resistor terminates the AC signal. 
 
-\subsection{Light Source}
+\subsection{Laser Source}
 
 \begin{figure}[tp]
 	\centering
 	\includegraphics[width=0.6\textwidth]{/Chip/Oclaro_00_LASER.png}
-	\caption[Microscope image of the on-chip laser]{Integrated laser formed of two DBRs and an SOA. The total length is only \SI{1}{\mm}.}
+	\caption[Microscope image of the waveguide integrated Fabry-P\'{e}rot laser]{Waveguide integrated Fabry-P\'{e}rot laser formed of two \acp{DBR}, which formed a tunable optical cavity, and an \ac{SOA} for optical gain. The total length is only \SI{1}{\mm} and produces optical powers of up to \SI{1}{\milli\watt}.}
 	\label{fig:InP_laser}
 \end{figure}
 
@@ -267,22 +266,26 @@ As described in chapter \ref{chap:background}, a huge benefit for III-V material
 
 The requirements for quantum communications are somewhat more stringent than that of classical communications. To this end, we need to verify the quality of the light sources to ensure that they will be able to perform high visibility interference. 
 
-Each devices contains a Fabry-P\`{e}rot \acl{CW} laser which is shown in figure{\ref{fig:InP_laser}. The \SI{1}{mm} long cavity is made from two \acp{DBR} which are tunable through current injection and allow a wavelength tuning of $\approx \SI{10}{nm}$. From the picture, we can see that the \acp{DBR} are both the same length. Typically, the rear \ac{DBR} would be longer to increase the reflectivity back into the cavity which increases the laser power. While the applications here only require weak coherent states, \ac{cvqkd} requires a bright local oscillator which needs to be considered during chip design. Subsequent chip designs should considering this design change.
+Each devices contains a Fabry-P\'{e}rot \ac{CW} laser which is shown in figure \ref{fig:InP_laser}. The \SI{1}{mm} long cavity is made from two \acp{DBR} which are tunable through current injection and allow a wavelength tuning of \SI{10}{nm}. The laser was tested with up to \SI{100}{\mA} which was limited by the current source. The power increase in the laser is linear. However, due to heating of the cavity the wavelength hops modes at currents above around \SI{60}{\mA}.
 
-A typical spectra of the two transmitter lasers is shown in figure \ref{fig:spectra} which demonstrates a \SI{<30}{pm} \ac{FWHM} and a \SI{>50}{dB} sideband suppression. The linewidth here is stated as \SI{<30}{pm} \ac{FWHM} as this is limited to the precision of the \ac{OSA} used. 
+From the picture, we can see that the \acp{DBR} are both the same length. Typically, the rear \ac{DBR} would be longer to increase the reflectivity back into the cavity which increases the laser power. While the applications here only require weak coherent states, \ac{cvqkd} requires a bright local oscillator which needs to be considered during chip design. Subsequent chip designs should considering this design change.
+
+A typical spectra of the two transmitter lasers is shown in figure \ref{fig:spectra} which demonstrates a \SI{<30}{pm} \ac{FWHM} and a \SI{>50}{dB} sideband suppression. The linewidth here is stated as \SI{<30}{pm} \ac{FWHM} as this is limited to the precision of the \ac{OSA} used. The two lasers were deliberately offset in wavelength and the spectra show the reproducibility offered by integrated optics.
 
 \begin{figure}[tbp]
 	\centering
 	\includegraphics[width=0.8\textwidth]{spectrum}
-	\caption[Laser spectrum]{Typical spectra of the two independent on-chip lasers. Each demonstrates a \ac{FWHM} of \SI{30}{pm} which is limited to the precision of the optical spectrum analyser used. The two lasers are deliberately detuned so that both can be seen. }
+	\caption[Laser spectrum]{Typical spectra of the two independent on-chip lasers. Each demonstrates a \ac{FWHM} of \SI{30}{pm} (limited to the precision of the optical spectrum analyser) and a sideband suppression of \SI{50}{dB}. The two lasers were deliberately detuned in wavelength so both linewidths could be seen.}
 	\label{fig:spectra}
 \end{figure}
+
+In figure \ref{fig:DBR_sweep} we can see the laser tuning through current injection of the \acp{DBR}. By varying the voltage from \SI{0}{\V} to \SI{1}{\V}, the wavelength can be tuned by about \SI{10}{\nm} within the telecommunications C-band. The wavelength can also be changed by changing the temperature of the device, which could cause the cavity to expand or contract. 
 
 \begin{figure}[tbp]
 	\centering
 	\includegraphics[width=0.8\textwidth]{DBR_sweep}
 	\caption[Laser wavelength scan with DBR current injection]{Through current injection of the \acp{DBR} we can change the wavelength of the laser due to heating effects. By sweeping the front and back \acp{DBR}, we can tune the laser \SI{10}{\nm} within the telecomms C-band.}
-	\label{fig03:DBR_sweep}
+	\label{fig:DBR_sweep}
 \end{figure}
 
 In order to measure the the linewidth more accurately, a self-heterodyne measurement technique can be used \cite{self-heterodyne}. 
@@ -303,6 +306,8 @@ From the laser, we will need to be able to intensity modulate our light to defin
 
 In figure \ref{fig:InP_MZI} is a microscope image of the on-chip \ac{mzi} that is used for intensity modulation to define time-bins for the experiment.
 
+Unlike directional couplers which exhibit a drastic wavelength dependent splitting ratio, \acp{mmi} are used to ensure a good splitting for a wide range of wavelengths. 
+
 We note here that the narrow linewidth of the laser means that during no experiment with the \ac{InP} chips do we need to use a wavelength filter to clean up the light or optical pulses. This is important as it removed a component that would add cost to any system but also restrict the wavelength operation of the devices. Without the need for a filter, the lasers are free to operate in a wavelength that spans more than \SI{10}{nm}. This will be crucial as it is likely that \ac{QKD} systems will needed to be \ac{wdm} to meet the demands of high-speed networks.
 
 Alice (and Bob) uses a stable current sources to drive an on-chip \ac{DBR} laser which demonstrates a \ac{FWHM} of \SI{<30}{pm}, although this is limited by the precision of the \ac{OSA} used.
@@ -320,6 +325,22 @@ To efficiently couple the light from the waveguide mode (\SI{100}{\nm}) to a fib
 
 Coupling losses were challenging to measure as the chip did not have any waveguide ``cutbacks'' to isolate the loss from components and spot-size converters.  However, loss from foundry measurements estimate that the loss from coupling to a singlemode fibre is around \SI{1.5}{dB}.
 
+\subsection{Measurement}
+
+The pulses are coupling into fibre allowing the rest of the experiment to make use of fibre components. 
+
+In order to vary the pulse intensity, each transmitter has a digital \acp{voa}. These can be used to ensure a good match in powers between the two transmitters.
+
+Fibre polarisation controllers are used to rotate the polarisation of the pulses and a \ac{pbs} gives a known polarisation in a polarisation maintaining fibre. 
+
+A polarisation-maintaining {50:50} beam splitter is used for the interference to ensure that both transmitters are overlapped in polarisation.
+
+Well engineered fibre components means that the losses through the fibre components is minimal. Photons are then sent for detection and time tagging.
+
+\section{Detection}
+
+The detectors used in the experiment were \acp{snspd} from Photonspot for the high efficiency, small timing jitter and low recovery time. The detectors were housed in a closed cycle helium refrigerator that was kept at \SI{0.7}{K}.
+
 \subsection{Control Electronics}
 
 In order to the drive the devices, various electronic control is required. 
@@ -332,18 +353,20 @@ Keysight 81134A pulse pattern generators were used to generate \SI{100}{\ps} \ac
 
 A separate current source was used to pass a small current over one side of the \ac{mzi} to achieve thermo-optic phase modulation. 
 
-A 10K thermistor was used to give feedback to a PID loop controlled by an Arroyo 6601 and a peltier under the chip mount stabilised the temperature.
+A 10K thermistor was used to give feedback to a PID loop controlled by an Arroyo 6601 and a peltier under the chip mount stabilised the temperature. The temperature is maintained around \SI{25}{\celsius} with an instability of less than \SI{0.01}{\celsius}. 
 
 \subsection{Modelling}
 
-The continuous wave laser was intensity modulated into pulses using a \ac{mzi} which gave the pulse a Gaussian shape in time. Therefore, we can model the electric field of each pulse as
+The \ac{CW} laser was intensity modulated into pulses using an \ac{mzi} which gave the pulse a Gaussian shape in time. Therefore, we can model the electric field of each pulse as
 \begin{equation}
 	\mathcal{E}_j^\text{in}(t) = \frac{1}{t_p\sqrt{2\pi}} \exp{\left(-\frac{t^2}{2 t_p^2}\right)} \exp{\left(i(\omega_j t + \varphi_j)\right)}
 \end{equation}
-where $j = 1,2$ are the beam splitter inputs. The pulse duration is given by $t_p$, the laser angular frequency is $\omega_j$ and $\varphi_j$ is the phase associated with the pulse.
+where $j = 1,2$ are the beam splitter inputs. The pulse duration is given by $t_p$, the laser angular frequency is $\omega_j$ and $\varphi_j$ is the phase associated with the pulse. By taking the Fourier transform of the electric field, we can calculate the shape in frequency space as 
+\begin{equation}
+	\mathcal{E}_j^\text{in}(\omega_j) = A \exp{\left(-\frac{t^2}{2 t_p^2}\right)} \exp{\left(i(\omega_j t + \varphi_j)\right)}
+\end{equation}
 
 The two pulses from the transmitters interfere at the beam splitter. After the interference, the intensities at the output of each arm is given as
-After the interference through the beam splitter, the intensities of the two outputs are given by
 \begin{equation}
 	I^\text{out}_{1,2} = 1 \pm \exp{\left(-\frac{1}{2}t_p^2(\Delta\omega)^2\right)}\cos(\Delta\varphi)
 \end{equation}
@@ -354,38 +377,50 @@ We are then able to calculate the coincidence probability by using $P(1,1) \prop
 	P(1,1) = 1 - V \exp{\left(-t_p^2(\Delta\omega)^2\right)}
 	\label{eq:gaussian}
 \end{equation}
-where the visibility, $V$, takes into account any mismatch in the degrees of freedom between the two pulses (i.e. timing, polarisation, pulse shape or photon number).
+where the visibility, $V$, takes into account any mismatch in the degrees of freedom between the two pulses (i.e. timing, polarisation, pulse shape or photon number). In the case where the pulses were perfectly indistinguishable, we could have $V = 0.5$ as the visibility is limited due to the multi-photon terms in coherent states.
+
+We can distinguish this as quantum interference from a classical Mach-Zehnder fringe as the number of events in each detector will not decrease at the lasers overlap in wavelength. This difference is due to the phase randomised nature of the incoming light.
 
 \section{Calibration}
 
 Digital variable optical attenuators (Oz Optics DA100) were used to vary the power of each transmitters independently. 
 
-\section{Detection}
-
-The detectors used in the experiment were \acp{snspd} from Photonspot. The detectors were housed in a closed cycle helium refrigerator that was kept at \SI{0.7}{K}.
-
 \subsection{Synchronisation}
 
-As the \ac{HOM} interference is dependant on the time of arrival of the two pulses, we need to ensure that the pulses arrive at the beam splitter at the same time. It is also crucial that we can reconstruct the events using the timing electronics, meaning that we require to fully calibrate electrical delays. 
+As the \ac{HOM} interference is dependant on the time of arrival of the two pulses, we need to ensure that the pulses arrive at the beam splitter at the same time. It is also crucial that we can reconstruct the events using the timing electronics, meaning that we require to fully calibrate electrical delays. This meant that the pulses that deemed to match in the time-tagging electronics were actually those that interfered at the beam splitter. 
+
+By making the assumption that the total delay (optical and electronic) between the two arms of the measurement system after the beam splitter was less than \SI{50}{\ns}. This seemed reasonable as \SI{50}{\ns} in fibre equates to about \SI{12}{\m}, and is similar in the coaxial RF cables. Then the pulse generation could be slowed to send a pulse at less than \SI{10}{\MHz} so that the pulse separation was more than \SI{100}{\ns} and the pulses could be matched to the nearest coincident event. The delay between the arms of the meansurement in this experiment were found to be less than \SI{10}{\ns} which was verified through the \ac{HOM} interference.
 
 To keep the transmitter electronics in sync with the detection electronics, an optical signal is used to send a reference clock. This 
 
 \subsection{Time-tagging}
 
-Detection events were time-tagged using a PicoQuant Hydraharp 400 and saved to the computer and analysed later. An optical link was used to provide a synchronisation signal from the transmitters to the time-tagger. The precision of timing events could be set by the user and could be as low as \SI{1}{\ps} and the electronic jitter is \SI{<12}{\ps}. The dead time of the tagging electronics is \SI{<80}{\ns}, which is comparable to the detector dead time so should not impact the experiment. In this experiment, \SI{16}{\ps} \textbf{CHECK THIS} bins were used. As the exact series of events could be reconstructed form the time-tags, the number of coincidences could be calculated from the saved tags provided the timing information between transmitters had been calibrated.
+Detection events were time-tagged using a PicoQuant Hydraharp 400 and saved to a computer for later analysis. An optical link was used to provide a synchronisation signal from the transmitters to the time-tagger. The precision of timing events could be set by the user and could be as low as \SI{1}{\ps} and the electronic jitter is \SI{<12}{\ps}. The dead time of the tagging electronics is \SI{<80}{\ns}, which is comparable to the detector dead time so should not impact the experiment. In this experiment, \SI{16}{\ps} \textbf{CHECK THIS} bins were used. As the exact series of events could be reconstructed form the time-tags, the number of coincidences could be calculated from the saved tags provided the timing information between transmitters had been calibrated.
+
+The coincidence window could be varied to in the analysis after to ensure that the coincidences come from when the pulse is a Gaussian shape. As we see from figure \ref{fig:pulses}, there is a `tail' on the later edge of the pulses would cause a chirp in the pulse. This would have two effects on the \ac{HOM} interference. Firstly, if the two pulse shapes are different, this would cause a reduced interference as the photons would have different wavelengths. Secondly, this would change the shape of the \ac{HOM} dip from the Gaussian shape that will be derived later.
 
 \section{Hong-Ou-Mandel Interference Between Independent Integrated Devices}
 
 \begin{figure}[tbp]
 	\centering
-	\includegraphics[width=0.8\textwidth]{HOM}
-	\caption[Hong-Ou-Mandel interference between integrated devices]{\ac{HOM} interference between two integrated devices demonstrating \SI{46.5(8)}{\%} visibility.}
+%	\includegraphics[width=0.8\textwidth]{HOM}
+	\def\svgwidth{0.8\textwidth} 
+	\import{chapters/chapter03/fig03/}{HOM.pdf_tex}
+	\caption[Hong-Ou-Mandel interference between integrated devices]{\ac{HOM} interference between two integrated devices demonstrating \SI{46.5(8)}{\%} visibility. By changing the relative wavelength ($\Delta\lambda$) between the two lasers the lasers become indistinguishable and the number of coincidences reduced to a visibility limited to \SI{50}{\percent}.}
 	\label{fig:HOM}
 \end{figure}
 
-In figure \ref{fig:HOM} we demonstrate \SI{46.5(8)}{\%} visibility between two independent \acp{pic} by changing one transmitter's wavelength relative to the other. The transmitters we initially overlapped in time, using electronic delays; polarisation, with fibre polarisation controllers; and photon number, with digital variable optical attenuators. 
+\acl{HOM} interference was demonstrated between two independent \acp{pic} operating at \SI{431}{\MHz} by varying the relative wavelengths of the lasers. Wavelength was chosen as the distinguishing degree of freedom as all others could be overlapped manually. However, a sweep in timing or polarisation would have seen similar interference. 
 
-We think that it is pertinent to note that during the experiment there was no active feedback to control the polarisation, pulse carving or timing which demonstrates the stability possible with an integrated platform. 
+The two transmitters were initially overlapped in time, polarisation and photon number. Using ps resolution electronic delays in the pulse generation, a histogram from the \acp{spd} allowed a timing overlap between the pulses at the beam splitter. Care was taken to ensure that the pulses that were overlapped on the histogram matched with the pulses that could have interfered on the beam splitter and not a repetition rate or sync window apart. This required calibration of the relative optical and electronic delays after the beam splitter. 
+
+Similarly, the photon number of each pulse was calibrated using a histogram of the pulses. This allowed the photon number to be calibrated regardless of the detector efficiency and fibre losses, provided that the beam splitter was balanced. By looking at each transmitter independently an average photon number per pulse was calculated to be $\sim 10^-3$. The value was chosen to minimise effects from multi-photon terms in the coherent state and to be far away from saturation of the detectors, both of which would have reduced the visibility.
+
+As previously mentioned, current injection into the \ac{SOA} can be used to vary the wavelength with a precision of \SI{80}{\femto\metre}. However, this will also change the power of the laser and increase the number of photons per pulse. Therefore, a digital \ac{voa} was used to vary the attenuation during the sweep based on the sum total of detection events. 
+
+The polarisation of the transmitters was rotated using fibre polarisation controllers which was immediately sent through a \ac{pbs} after which was kept in polarisation maintaining fibre.
+
+In figure \ref{fig:HOM} we demonstrate \SI{46.5(8)}{\percent} visibility between the two devices by sweeping the relative wavelengths of the lasers. We think that it is pertinent to note that during the experiment there was no active feedback to control the polarisation, pulse carving or timing which demonstrates the stability possible with an integrated platform. 
 
 \section{HOM Inteferece with Actively Phase Randomised Pulses}
 
@@ -409,13 +444,13 @@ To test that the pulses are phase randomised, we can look at coincidences betwee
 \begin{figure}[tbp]
 	\centering
 	\includegraphics[width=\textwidth]{HOM_coherence.pdf}
-	\caption[HOM interference with and without phase randomisation]{\ac{HOM} interference both with and without phase randomisation between pulses. In both cases we find a fitted visibility of more than \SI{47}{\%} showing that phase randomisation doesn't reduce the fidelity of the states.}
+	\caption[HOM interference with and without phase randomisation]{\ac{HOM} interference both with and without phase randomisation between pulses. We show the coincidences between pulses that interfered and check the coherence with subsequent pulses. In both cases, we find a fitted visibility of more than \SI{47}{\%} showing that phase randomisation doesn't reduce the fidelity of the states.}
 	\label{fig:HOM_coherence}
 \end{figure}
 
 \section{Outlook}
 
-In this experiment, we have demonstrated state-of-the-art \acl{HOM} interference between GHz clocked integrated photonic devices exploiting monolithically fabricated lasers and \acp{eopm} with a visibility of \SI{46.5(8)}{\%}. As we will see in chapter \ref{chap:mdiqkd}, this result will play a crucial role in \ac{MDI} and high fidelity interference will be required to bound the knowledge of Eve and Mallory.
+In this experiment, we have demonstrated state-of-the-art \acl{HOM} interference between GHz clocked integrated photonic devices exploiting monolithically fabricated lasers and \acp{eopm} with a visibility of \SI{46.5(8)}{\%}. Further, we have demonstrated that gain switching the laser between pulses doesn't reduce the visibility. However, this does limit the speed of operation which will be a consideration for \ac{QKD} systems. As we will see in chapter \ref{chap:mdiqkd}, this result will play a crucial role in \ac{MDI} and high fidelity interference will be required to bound the knowledge of Eve and Mallory.
 
 \subsection{Active Stabilisation}
 
@@ -431,6 +466,10 @@ Average photon number is harder to stabilise but is also the least susceptible t
 
 \subsection{Wavelength Division Multiplexing}
 
-As mentioned previously, there is no need to filter the pulses to see interference. This is important as it allows the transmitters to be easily wavelength tuned making it compatible with \ac{wdm} and possible classical-quantum multiplexing. An interesting demonstration of this would be to multiplex the quantum signals with classical data and 
+As mentioned previously, there is no need to filter the pulses to see interference. This is important as it allows the transmitters to be easily wavelength tuned making it compatible with \ac{wdm} and possible classical-quantum multiplexing. An interesting demonstration of this would be to multiplex the quantum signals with classical data to verify that quantum interference can still be seen. This could be an important consideration for future networks.
+
+\subsection{DFB Laser}
+
+The delay caused by the laser relaxation after phase randomisation could be reduced by using a \ac{dfb} laser. \ac{DBR} lasers will take time to relax after gain switching as the cavity will support many modes until a single mode becomes dominant. This behaviour is shown in figure \ref{fig:gain_switch} where the laser oscillates before becoming more stable. 
 
 %=========================================================

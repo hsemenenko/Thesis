@@ -88,28 +88,6 @@ In the infinite case, $Y_{11}^Z = Y_{11}^X$ so we can use the decoy sates in $X$
 
 \subsection{Model}
 
-From the parameters of the system (photon numbers and errors), we can create a model to verify that the system behaves as expected. This will also allow us to predict the performance of the system at further distances without needing to gather data for days or weeks. 
-
-The detectors used in this system are \acp{snspd} due to their high efficiency and low dead-time and jitter \cite{}. The detectors operate at $80\%$ efficiency, with a dead-time of \SI{<100}{ns} and jitter of \SI{30}{ps}. The average photon number per state is calibrated before a key exchange by estimating the losses through the system and detection efficiency.
-
-The gain of the system, $Q^{ \{X,Z\} }$, is the probability of projection onto a Bell state in either the $X$ or $Z$ basis. We can estimate the gain from the average photon number of each transmitter, the detection efficiency and the transmitters loss. We will assume that the transmission loss is the standard \SI{0.2}{dB/km}, although fibre optic losses can be as a low as \SI{0.17}{dB\per\km} \cite{corningULL}. The gain is independent of error, so we can estimate the gain as 
-
-\begin{equation}
-	Q^{ \{X,Z\} } = \frac{3}{8}  \times \eta^2 \times \left( 1 - \text{exp} \left( -10^{- \frac{0.2 \times L}{2 \times 10} \mu}  \right)  \right)^2 + Q^{d.c.}
-\end{equation}
-where $Q^{d.c.}$ are the successful projections that are because of dark counts in the system. As \acp{snspd} have dark counts of \SI{100}{Hz} this value is typically $\left(10^{-6}\right)^2$. The value is quoted as squared as we are looking for coincidences between the two detectors. 
-
-The prefactor of \nicefrac{3}{8} is due to the probability of a successful projection give two random states sent by Alice and Bob. On half of the time, the states will be projected onto a Bell state that cannot be determined by the measurement device \cite{}. Of the remainder, one half will be projected successfully onto $\ket{\psi^-}$ (\nicefrac{1}{4} of the total states), while with probability \nicefrac{1}{2} they will be successfully projected onto $\ket{\psi^+}$ (\nicefrac{1}{8} of the total states). 
-
-To calculate the probability of coincidence from the coherent states, we take the (slight) simplification of one minus the probability of zero photons multiplied by the detection efficiency, $\eta$. While the true probability will vary due to multiphoton terms, the amplitude of the coherent states is sufficiently low ($\le 0.2$ at \SI{0}{\km}) the multiphoton terms will not play a large role, especially at longer distances. The attenuation on each state is calculated, assuming \SI{0.2}{dB\per\km}, a the distance between Alice and Bob, $L$, is halved as Charlie sits at a location halfway between them.
-
-To model the errors, we need to include contributions from dark counts in the system.
-
-\begin{equation}
-	E^{\{X,Z\}}_{m,n} = \frac{\left(Q^{\{X,Z\}}_{m,n} - Q^{d.c}\right) \times \epsilon + Q^{d.c} \times 0.5}{Q^{\{X,Z\}}_{m,n}}
-\end{equation}
-
-
 \begin{figure}[tbp]
 \begin{tikzpicture}
 \begin{semilogyaxis}[
@@ -139,10 +117,32 @@ To model the errors, we need to include contributions from dark counts in the sy
 	\label{fig:skr_error_dependence}
 \end{figure}
 
+From the parameters of the system (photon numbers and errors), we can create a model to verify that the system behaves as expected. This will also allow us to predict the performance of the system at further distances without needing to gather data for days or weeks. 
+
+The detectors used in this system are \acp{snspd} due to their high efficiency and low dead-time and jitter \cite{}. The detectors operate at $80\%$ efficiency, with a dead-time of \SI{<100}{ns} and jitter of \SI{30}{ps}. The average photon number per state is calibrated before a key exchange by estimating the losses through the system and detection efficiency.
+
+The gain of the system, $Q^{ \{X,Z\} }$, is the probability of projection onto a Bell state in either the $X$ or $Z$ basis. We can estimate the gain from the average photon number of each transmitter, the detection efficiency and the transmitters loss. We will assume that the transmission loss is the standard \SI{0.2}{dB/km}, although fibre optic losses can be as a low as \SI{0.17}{dB\per\km} \cite{corningULL}. The gain is independent of error, so we can estimate the gain as 
+
+\begin{equation}
+	Q^{ \{X,Z\} } = \frac{3}{8}  \times \eta^2 \times \left( 1 - \text{exp} \left( -10^{- \frac{0.2 \times L}{2 \times 10} \mu}  \right)  \right)^2 + Q^{d.c.}
+\end{equation}
+where $Q^{d.c.}$ are the successful projections that are because of dark counts in the system. As \acp{snspd} have dark counts of \SI{100}{Hz} this value is typically $\left(10^{-6}\right)^2$. The value is quoted as squared as we are looking for coincidences between the two detectors. 
+
+The prefactor of \nicefrac{3}{8} is due to the probability of a successful projection give two random states sent by Alice and Bob. On half of the time, the states will be projected onto a Bell state that cannot be determined by the measurement device \cite{}. Of the remainder, one half will be projected successfully onto $\ket{\psi^-}$ (\nicefrac{1}{4} of the total states), while with probability \nicefrac{1}{2} they will be successfully projected onto $\ket{\psi^+}$ (\nicefrac{1}{8} of the total states). 
+
+To calculate the probability of coincidence from the coherent states, we take the (slight) simplification of one minus the probability of zero photons multiplied by the detection efficiency, $\eta$. While the true probability will vary due to multiphoton terms, the amplitude of the coherent states is sufficiently low ($\le 0.2$ at \SI{0}{\km}) the multiphoton terms will not play a large role, especially at longer distances. The attenuation on each state is calculated, assuming \SI{0.2}{dB\per\km}, a the distance between Alice and Bob, $L$, is halved as Charlie sits at a location halfway between them.
+
+To model the errors, we need to include contributions from dark counts in the system.
+
+\begin{equation}
+	E^{\{X,Z\}}_{m,n} = \frac{\left(Q^{\{X,Z\}}_{m,n} - Q^{d.c}\right) \times \epsilon + Q^{d.c} \times 0.5}{Q^{\{X,Z\}}_{m,n}}
+\end{equation}
+
+
 
 \subsection{Shared Resources}
 
-As \ac{MDI} introduce Charlie to mediate the key exchange, this easily facilitates sharing resources by switching between users connecting to a centralised node. In a metropolitan network, each used can access the quantum network with a transmitter device and through simple switching allows all users to exchange secret keys with every other user. Such optical switches are already available commercially with less than \SI{1}{dB} insertion loss which is acceptable for \ac{QKD} system \cite{polatis}. While superconducting detectors are typically considered 
+As \ac{MDI} introduces Charlie to mediate the key exchange, this easily facilitates sharing resources by switching between users connecting to a centralised node. In a metropolitan network, each used can access the quantum network with a transmitter device and through simple switching allows all users to exchange secret keys with every other user. Such optical switches are already available commercially with less than \SI{1}{dB} insertion loss which is acceptable for \ac{QKD} system \cite{polatis}. While superconducting detectors are generally considered a piece of research equipment, there have been many advances in the technology of both the detector fabrication to cryogenic coolers which meant that widespread usage on \acp{snspd} should be anticipated. More advanced quantum networks will be heavily dependant on the unrivalled specifications that \acp{snspd} offer.
 
 \section{Integrated Transmitters}
 
@@ -203,17 +203,21 @@ In order to operate the transmitters, there is a selection of control devices ne
 
 \subsubsection*{Temperature Control}
 
-Two Arroyo 6301 are used to stabilise the temperature of each transmitter independently. A \SI{10}{K} thermistor is put into the base of the transmitter package as close as possible to the transmitter. Thermal paste is used to ensure a good thermal contact to the mount and the silver epoxy used for the chips provides a good thermal contact to the chip. A peltier is used to heat and cool the package through a thermo-electric effect and can be driven with up to \SI{3}{A}. The transmitters dissipate very little heat as most of the operation relies on electro-optic effects. Some heating will be caused from thermo-optic modulation and laser driving. The temperatures are chosen to be above the ambient room temperature and to also to overlap the wavelengths between the two lasers. Typical temperatures we between \SI{25}{\celsius} and \SI{30}{\celsius}, required around \SI{100}{mA} from the Arroyo controller and had an instability of less than \SI{0.01}{\celsius}.
+Two Arroyo 6301 are used to stabilise the temperature of each transmitter independently. A \SI{10}{K} thermistor is put into the base of the transmitter package as close as possible to the transmitter. Thermal paste is used to ensure a good thermal contact to the mount and the silver epoxy used for the chips provides a good thermal contact to the chip. A peltier is used to heat and cool the package through a thermo-electric effect and can be driven with up to \SI{3}{A} of current. The transmitters dissipate very little heat as most of the operation relies on electro-optic effects. Some heating is caused by thermo-optic modulation and laser driving. The temperatures are chosen to be above the ambient room temperature and to also to overlap the wavelengths between the two lasers. Typical temperatures we between \SI{25}{\celsius} and \SI{30}{\celsius}, required around \SI{100}{mA} from the Arroyo controller and had an instability of less than \SI{0.01}{\celsius}. Good temperature stability of the chips is important as much of the optical circuit is vert temperature sensitive. A change in temperature will cause the cavity to expand or contract to change the wavelength. It can also cause a change in the operating conditions of the \acp{mzi} due to phase differences in the top and bottom arms and  
 
 \subsubsection*{Laser Driver}
 
-The same Arroyo 6301 boxes also provided stable current sources to drive the on-chip lasers. The lasers show a threshold current of \SI{12}{mA} and can be driven with voltages above \SI{100}{mA}. As well as an increase in power, an increase in current will provide a wavelength shift due to heating in the cavity. With a current precision of \SI{0.01}{mA}, the wavelength of the laser can be controlled in steps of \SI{80}{fm}. This provides the find control for high-fidelity overlap between independently operated transmitters. 
+The same Arroyo 6301 boxes also provided stable current sources to drive the on-chip lasers. The lasers show a threshold current of \SI{12}{mA} and can be driven with voltages above \SI{100}{mA}. As well as an increase in power, an increase in current will provide a wavelength shift due to heating in the cavity. With a current precision of \SI{0.01}{mA}, the wavelength of the laser can be controlled in steps of \SI{80}{fm} through heating and carrier effects in the \ac{SOA}. This provides the find control for high-fidelity overlap between independently operated transmitters. 
 
 \subsubsection*{Modulator Biasing}
 
 For the \ac{qcse}, a reverse bias over the modulator was required. Due to the lack of a negative voltage source, the ground of the chip was set to \SI{10}{V} from which lower biases could be set for the modulator to create a reverse bias.
 
 Heating was also required. Up to \SI{120}{mA} was used to thermo-optically modulate the light in the \acp{mzi}.
+
+\subsubsection*{Thermo-optic modulation}
+
+Ideally, the light in a \ac{mzi} would experience the same phase in both arms. However, due to fabrication tolerances, the light in each arm accumulates a different phase, meaning that the output is no longer minimised. While this could be corrected using the \ac{qcse}, the phase dependent loss mean that the extinction ratio would be reduced as the intensity of light would be different in each arm. Instead, we can exploit an imperfection in the \acp{eopm} which causes a resistance of around \SI{10}{\ohm}. By passing a current through the modulator on one arm of a \ac{mzi}, we can adjust the relative phase which will minimise the \ac{mzi} output intensity.
 
 \subsubsection*{High-Speed Electronics}
 
@@ -226,6 +230,19 @@ The receiver for \ac{MDI} is a projection onto Bell states\footnote{It actually 
 \subsection{Time-Tagging}
 
 A PicoQuant Hydraharp was used as a time-tagger due to the small timing resolution (\SI{1}{ps}) and synchronisation.
+
+\subsection{Qubit Binning}
+
+\begin{figure}[tbp]
+	\centering
+	\includegraphics[width = \textwidth]{SKR_coin_window/window_width_sweep_25km}
+	\caption[Qubit window width sweep]{By changing the window that we accept a successful measurement, the error rate, gain and secret key rate will be affected. The error rate will increase exponentially while the gain will plateau. From this, we can find an optimal point of around \SI{250}{\ps} window width.}
+	\label{fig:window_sweep}
+\end{figure}
+
+From time of arrival relative to the sync signal, the detection events are binned into pre-determined windows which correspond to the early and late time-bins of the qubits. The window width was varied as there will be a trade-off between the detection probability and the error rate. As shown in figure \ref{fig:skr_error_dependence}, there is a limit to the error rate that the decoy protocol can tolerate to generate a positive key rate.
+
+As the detection events are first-in first out, we only need to check for coincidences when we know that the event was in the late time-bin of the qubit. This is because both $\ket{\psi^\pm}$ have a click in both the early and late time-bins. This will reduce the number of unnecessary 
 
 \subsection{Synchronisation}
 
@@ -362,6 +379,10 @@ We have demonstrated the capability of integrated transmitters for \acl{MDI} as 
 As this demonstration was focussed towards the technology, we have not included analysis of finite key effects. The optimal method of including finite key effects is given in Ref. \cite{zhou2016}.
 
 Statistical fluctuations in the measurements mean that the values used to estimate the single photon cases are not infinitely accurate. 
+
+\subsection{State Randomisation}
+
+In this proof-of-principle demonstration, the states were not randomisation. In a secure demonstration, a \ac{qrng} should be used to generate on-the-fly randomness which would determine the states that Alice and Bob would send. 
 
 \subsection{Improved Transmitters}
 

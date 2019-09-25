@@ -27,7 +27,8 @@ There are no circulators or isolators currently available on-chip, so other meth
 Figure \ref{fig:hhi_laser_seeding} shows the GDS for the integrated device. The complexity of integrated devices is 
 
 \begin{sidewaysfigure}
-	\includegraphics[width=\textwidth]{Laser_Seeding.png}
+	\centering
+	\includegraphics[width=0.9\textwidth]{Laser_Seeding.png}
 	\caption[InP laser seeding transmitter with QRNG]{This shows the layout of the laser seeded transmitter device fabricated by HHI. The chip measures \SI[product-units=power]{6x4}{mm} and contains two laser seeding prototype circuits, a homodyne \ac{qrng} and test structure to measure laser and waveguide performances. This demonstrates the complexity and compactness possible in the integrated platform.}
 	\label{fig:hhi_laser_seeding}
 \end{sidewaysfigure}
@@ -35,6 +36,7 @@ Figure \ref{fig:hhi_laser_seeding} shows the GDS for the integrated device. The 
 The electrical connections for integrated devices is challenging, especially in test devices where real estate is valuable. In figure \ref{fig:hhi_pcb} we show a PCB which is required to connect most (but not all) components of the chip. 
 
 \begin{figure}[tbp]
+	\centering
 	\includegraphics[width=\textwidth]{HHI_PCB/HHI_PCB_render_2.png}
 	\caption[PCB breakout for an InP integrated circuit]{PCB designed to connect an \ac{InP} integrated device to control and test equipment. Packaging integrated devices remains challenging due to the small size of the chips. This is especially true when high speed connections are required.}
 	\label{fig:hhi_pcb}
