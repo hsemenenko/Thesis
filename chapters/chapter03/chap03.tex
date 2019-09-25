@@ -245,11 +245,11 @@ The experiment uses two \ac{InP} devices as sources of weak coherent states. We 
 	\label{fig:chip_pcb}
 \end{figure}
 
-To be able to access the electrical and optical sections of the integrated devices, we need to create a package that is compatible with other systems. A PCB was designed to electrically connect the modulators and laser to SMA and DC pin connectors. The bottom of the chip is ground which connects to a copper block that is also connected to the ground of the PCB. Silver epoxy was used to glue the chip to the mount to ensure a good electrical connection. It also provided a good thermal connection for temperature stabilisation.
+To be able to access the electrical and optical sections of the integrated devices, we need to create a package to transfer the signals from the driving electronics to the chip . A PCB was designed to electrically connect the modulators and laser to SMA and DC pin connectors. The bottom of the chip is ground which connects to a copper block that is also connected to the ground of the PCB. Silver epoxy was used to glue the chip to the mount to ensure a good electrical connection. It also provided a good thermal connection for temperature stabilisation.
 
-In order to maintain a good impedance match (\SI{50}{\ohm}) with small track widths, Rogers 6006ns material was chosen for its high dielectric constant of \num{6.15}. The PCB was given a gold coating using electroplating to avoid oxidation of the copper. In future iterations, a nickel layer should be applied before the gold to avoid gold diffusing into the copper. 
+In order to maintain a good impedance match (\SI{50}{\ohm}) with small track widths, Rogers 6006ns material was chosen for its high dielectric constant of \num{6.15}. The tracks were designed and then laser etched into the copper on the substrate. The PCB was given a gold coating using electroplating to avoid oxidation of the copper and to help with gold wirebonding. In future iterations, a nickel layer should be applied before the gold to avoid gold diffusing into the copper. SMA, DC pins, capacitors and resistors were then soldered onto the PCB using a low temperature solder paste.
 
-The pads on the chip were wirebonded to the PCB with a \SI{25}{\micro\meter} ball bond and then a wedgebond onto the PCB. Silver epoxy was then applied over the wedgebond to ensure a good electrical contact with the PCB and to increase durability. 
+The pads on the chip were wirebonded to the PCB with a \SI{25}{\micro\meter} ball bond and then a wedgebond onto the PCB. Silver epoxy was then applied over the wedgebond to ensure a good electrical contact with the PCB and to increase durability. The PCB was designed such that the length of the RF wirebonds was minimised so that capacitance and resistance of the gold wire were reduced. Such effects can be detrimental for high-speed operation.
 
 An RF signal could be applied to one side of a \ac{eopm} while the other side provided termination to minimise electrical reflections. A capacitor blocked the DC component of the signal while a \SI{50}{\ohm} resistor terminates the AC signal. 
 
@@ -315,13 +315,15 @@ Alice (and Bob) uses a stable current sources to drive an on-chip \ac{DBR} laser
 \begin{figure}[tbp]
 	\centering
 	\includegraphics[width=0.8\textwidth]{Pulse}
-	\caption[Pulse carving]{Pulse carving showing \SI{>20}{dB} extinction ratio and a \ac{FWHM} of \SI{175}{\ps}.}
+	\caption[On-chip intensity modulation of coherent states]{Histogram of intensity modulation after pulse carving with an \ac{mzi}. We find an extinction ratio of just over \SI{20}{dB} and a \ac{FWHM} of \SI{175}{\ps}. The pulse is not corrected for detector or time-tagging jitter.}
 	\label{fig:pulses}
 \end{figure}
 
 \subsection{Fibre Coupling}
 
-To efficiently couple the light from the waveguide mode (\SI{100}{\nm}) to a fibre model (\SI{10}{\micro\meter}), a spot-size converter on the chip is used to expand the light mode to around \SI{3}{\micro\meter}. The spot-size converter also changes the mode to be more circular from the elliptical waveguide mode. A lensed fibre was then used to convert this mode to \SI{10}{\micro\meter}. The fibre was held in a Elliot Gold fibre launch stage with piezo actuators that gave a precision of \SI{10}{\nm} in X, Y and Z axes over a range of \SI{25}{\micro\meter}.
+To efficiently couple the light from the waveguide mode (\SI{2}{\micro\metre}) to a fibre model (\SI{10}{\micro\metre}), a spot-size converter on the chip is used to expand the light mode to around \SI{3}{\micro\meter}. The spot-size converter also changes the mode to be more circular from the elliptical waveguide mode. A lensed fibre was then used to convert this mode to \SI{10}{\micro\meter}. The fibre was held in a Elliot Gold fibre launch stage with piezo actuators that gave a precision of \SI{10}{\nm} in X, Y and Z axes over a range of \SI{25}{\micro\meter}.
+
+To reduce reflection back into the waveguide, the facet of the spot-size converter is at an angle relative to the edge of the chip. On these devices, the waveguides are at \SI{7}{\degree} to the edge which (using Snell's law given that the waveguide refractive index is around 3.26) we can calculate that the fibre should be at \SI{23}{\degree} to the edge of the chip.
 
 Coupling losses were challenging to measure as the chip did not have any waveguide ``cutbacks'' to isolate the loss from components and spot-size converters.  However, loss from foundry measurements estimate that the loss from coupling to a singlemode fibre is around \SI{1.5}{dB}.
 
@@ -339,7 +341,7 @@ Well engineered fibre components means that the losses through the fibre compone
 
 \section{Detection}
 
-The detectors used in the experiment were \acp{snspd} from Photonspot for the high efficiency, small timing jitter and low recovery time. The detectors were housed in a closed cycle helium refrigerator that was kept at \SI{0.7}{K}.
+The detectors used in the experiment were \acp{snspd} from Photonspot. Superconducting detectors were chosen over other single-photon detectors for their high efficiency (\SI{>80}{\percent}), small timing jitter (\SI{30}{\ps}) and short recovery time (\SI{100}{\ns}). The detectors were housed in a closed cycle helium refrigerator that was kept at \SI{0.7}{K}. A successful event was indicated by an RF signal of around \SI{10}{\mV} which was amplified with low-noise amplifier to around \SI{200}{\mV} which could then be time-tagged.
 
 \subsection{Control Electronics}
 
@@ -349,9 +351,9 @@ A DC voltage source was required to reverse bias the modulator. In lieu of a neg
 
 The DC signal was mixed with the RF signal using a bias-tee with a response up to 
 
-Keysight 81134A pulse pattern generators were used to generate \SI{100}{\ps} \ac{FWHM} RF pulses at up to \SI{2}{\Vpp}.
+To generate the RF signals, a Keysight 81134A \ac{ppg} was used which had a maximum output voltage of up to \SI{2}{\Vpp}. A \ac{ppg} over a more general arbitrary waveform generator as only two levels were required for operation of the device for this test. The minimum pulse width that could be set was \SI{100}{\ps} which when measured on an oscilloscope (Keysight DSA91304A) were around \SI{120}{\ps} \ac{FWHM}. The maximum speed of the \ac{ppg} was \SI{3.35}{\GHz}. However, for this experiment the system clock was set to \SI{1.72}{\GHz}. A pulse was sent ever 4 clock cycles for a state repetition rate of \SI{431}{\MHz}.
 
-A separate current source was used to pass a small current over one side of the \ac{mzi} to achieve thermo-optic phase modulation. 
+A separate voltage source was used to pass a small current over one side of the \ac{mzi} to achieve thermo-optic phase modulation. The voltage could be set with a precision of \SI{1}{\mV} with typically \SIrange{200}{700}{\mV} being required for modulation. These values depended heavily on the fabrication of the device as well as packaging.
 
 A 10K thermistor was used to give feedback to a PID loop controlled by an Arroyo 6601 and a peltier under the chip mount stabilised the temperature. The temperature is maintained around \SI{25}{\celsius} with an instability of less than \SI{0.01}{\celsius}. 
 
@@ -363,7 +365,7 @@ The \ac{CW} laser was intensity modulated into pulses using an \ac{mzi} which ga
 \end{equation}
 where $j = 1,2$ are the beam splitter inputs. The pulse duration is given by $t_p$, the laser angular frequency is $\omega_j$ and $\varphi_j$ is the phase associated with the pulse. By taking the Fourier transform of the electric field, we can calculate the shape in frequency space as 
 \begin{equation}
-	\mathcal{E}_j^\text{in}(\omega_j) = A \exp{\left(-\frac{t^2}{2 t_p^2}\right)} \exp{\left(i(\omega_j t + \varphi_j)\right)}
+	\mathcal{E}_j^\text{in}(\omega_j) = A \exp{\left(-\frac{t^2}{2 \omega_p^2}\right)} \exp{\left(i(\omega_j t + \varphi_j)\right)}
 \end{equation}
 
 The two pulses from the transmitters interfere at the beam splitter. After the interference, the intensities at the output of each arm is given as
@@ -416,9 +418,9 @@ The two transmitters were initially overlapped in time, polarisation and photon 
 
 Similarly, the photon number of each pulse was calibrated using a histogram of the pulses. This allowed the photon number to be calibrated regardless of the detector efficiency and fibre losses, provided that the beam splitter was balanced. By looking at each transmitter independently an average photon number per pulse was calculated to be $\sim 10^-3$. The value was chosen to minimise effects from multi-photon terms in the coherent state and to be far away from saturation of the detectors, both of which would have reduced the visibility.
 
-As previously mentioned, current injection into the \ac{SOA} can be used to vary the wavelength with a precision of \SI{80}{\femto\metre}. However, this will also change the power of the laser and increase the number of photons per pulse. Therefore, a digital \ac{voa} was used to vary the attenuation during the sweep based on the sum total of detection events. 
+As previously mentioned, current injection into the \ac{SOA} can be used to vary the wavelength with a precision of \SI{80}{\femto\metre}. However, this will also change the power of the laser and increase the number of photons per pulse. Therefore, a digital \ac{voa} was used to vary the attenuation during the sweep based on the sum total of detection events. The assumption was made that the power (coupling or otherwise) did not vary during the experiment. 
 
-The polarisation of the transmitters was rotated using fibre polarisation controllers which was immediately sent through a \ac{pbs} after which was kept in polarisation maintaining fibre.
+The polarisation of the transmitters was rotated using fibre polarisation controllers which was immediately sent through a \ac{pbs} after which was kept in polarisation maintaining fibre. The beam splitter used polarisation maintaining fibre to ensure that the polarisation did not change after the beam splitter. After the interference, the polarisation maintaining fibre was no longer required as only the time of arrival of photons was important at the detectors.
 
 In figure \ref{fig:HOM} we demonstrate \SI{46.5(8)}{\percent} visibility between the two devices by sweeping the relative wavelengths of the lasers. We think that it is pertinent to note that during the experiment there was no active feedback to control the polarisation, pulse carving or timing which demonstrates the stability possible with an integrated platform. 
 
