@@ -10,6 +10,10 @@
 \label{chap:hom}
 %=======
 
+\section*{Statement of Work}
+
+The photonic chips were initially conceived by Mark Thompson and Mark Godfrey. The chip mask was designed by Mark Godfrey and fabricated by Oclaro. The experiment was initially design by Chris Erven and Philip Sibson and the chips were characterised by Philip Sibson. I modified the initial experimental design and modified the PCB design for chip packaging. Experimental setup, coding and analysis was supported by Philip Sibson. 
+
 \section{Introduction}
 
 \ac{HOM} interference is a fundamental tool in any quantum engineer's toolbox. It underpins a range of quantum technologies ranging from computing to communication. While it is well understood, generating states for quantum interference at the high speeds required for modern telecommunication remains practically challenging. In this chapter, we experimentally demonstrate that \ac{InP} devices fulfil all the requirements of state-of-the-art Hong-Ou-Mandel interference while also being practically scalable. This chapter will expand on the work published in reference \cite{semenenko2019}. 
@@ -170,6 +174,37 @@ The visibility of the HOM dip can be calculated as
 
 Using these equations, it is possible to estimate the visibility of a HOM dip given a beam splitter that is not 50:50. The effects of this will be seen in a reduced visibility. The average photon number of the pulses used will also affect the visibility as the detectors are threshold. In figure \ref{fig:HOM_BS_Vis} the effect of varying the photon number and using an unbalanced beam splitter on the visibility of interference.
 
+\subsection{Modelling}
+
+The \ac{CW} laser was intensity modulated into pulses using an \ac{mzi} which gave the pulse a Gaussian shape in time. Therefore, we can model the electric field of each pulse as
+\begin{equation}
+	\mathcal{E}_j^\text{in}(t) = \frac{1}{t_p\sqrt{2\pi}} \exp{\left(-\frac{t^2}{2 t_p^2}\right)} \exp{\left(i(\omega_j t + \varphi_j)\right)}
+\end{equation}
+where $j = 1,2$ are the beam splitter inputs. The pulse duration is given by $t_p$, the laser angular frequency is $\omega_j$ and $\varphi_j$ is the phase associated with the pulse. By taking the Fourier transform of the electric field, we can calculate the shape in frequency space as 
+\begin{equation}
+	\mathcal{E}_j^\text{in}(\omega_j) = A \exp{\left(-\frac{t^2}{2 \omega_p^2}\right)} \exp{\left(i(\omega_j t + \varphi_j)\right)}
+\end{equation}
+
+To find the overlap, we calculate the convolution of the two functions in frequency space which will be our degree of indistinguishability. The convolution is 
+\begin{equation}
+	(f \ast g)(t) = \int^{\inf}_{\inf} f(\tau)g(t - \tau) \text{d}\tau
+\end{equation}  
+
+The two pulses from the transmitters interfere at the beam splitter. After the interference, the intensities at the output of each arm is given as
+\begin{equation}
+	I^\text{out}_{1,2} = 1 \pm \exp{\left(-\frac{1}{2}t_p^2(\Delta\omega)^2\right)}\cos(\Delta\varphi)
+\end{equation}
+where $\pm$ distinguishes between the two output modes. The relative phases of the pulses, $\Delta\varphi = \varphi_1 - \varphi_2$, is introduced to simplify the equation.
+
+We are then able to calculate the coincidence probability by using $P(1,1) \propto \langle I_1 I_2\rangle$ \cite{Rarity2005}, where an average is taken over the relative phase, $\Delta\varphi$. As the laser pulses tune in wavelength, we can model the \ac{HOM} interaction as 
+\begin{equation}
+	P(1,1) = 1 - V \exp{\left(-t_p^2(\Delta\omega)^2\right)}
+	\label{eq:gaussian}
+\end{equation}
+where the visibility, $V$, takes into account any mismatch in the degrees of freedom between the two pulses (i.e. timing, polarisation, pulse shape or photon number). In the case where the pulses were perfectly indistinguishable, we could have $V = 0.5$ as the visibility is limited due to the multi-photon terms in coherent states.
+
+We can distinguish this as quantum interference from a classical Mach-Zehnder fringe as the number of events in each detector will not decrease at the lasers overlap in wavelength. This difference is due to the phase randomised nature of the incoming light.
+
 \section{Sources and Requirements}
 \label{sec:sources}
 
@@ -223,18 +258,7 @@ While gain switched lasers offer simplicity and easily satisfy the phase randomi
 	\item Intensity modulation
 \end{itemize}
 
-\section{Experimental Setup}
-
-In this section, we detail the experimental setup used to demonstrate \ac{HOM} interference motivating the design with regards to the requirements set out in the previous section. 
-
-\begin{figure}[tbp]
-	\centering
-	\includegraphics[width=\textwidth]{Experiment}
-	\caption[Hon-Ou-Mandel interference experimental setup]{Experimental setup of of the \ac{HOM} interference experiment. Two identical \ac{InP} chips prepare quantum states of light to be interfered on a {50:50} beams splitter. On-chip \ac{CW} lasers are intensity modulated into time-bins with \acp{mzi}. The pulses are coupled into a fibre where \acp{voa} ensure matched intensities and \acp{pc} and \acp{pbs} overlap the polarisation. An optical channel (not shown) synchronises the transmitter and detector electronics.}
-	\label{fig:hom_experiment}
-\end{figure}
-
-The experiment uses two \ac{InP} devices as sources of weak coherent states. We will call each device Alice and Bob, respectively. Each chip measures only \SI[product-units=power]{6x2}{mm} and contains all the required photonic components to generate the required states to perform \ac{HOM} interference at GHz rates. One only need compare the sizes of these optical components to fibre based optics to justify the benefits of integrated devices.
+\section{Integrated Transmitters}
 
 \subsection{Packaging}
 
@@ -274,8 +298,10 @@ A typical spectra of the two transmitter lasers is shown in figure \ref{fig:spec
 
 \begin{figure}[tbp]
 	\centering
-	\includegraphics[width=0.8\textwidth]{spectrum}
-	\caption[Laser spectrum]{Typical spectra of the two independent on-chip lasers. Each demonstrates a \ac{FWHM} of \SI{30}{pm} (limited to the precision of the optical spectrum analyser) and a sideband suppression of \SI{50}{dB}. The two lasers were deliberately detuned in wavelength so both linewidths could be seen.}
+%	\includegraphics[width=0.8\textwidth]{spectrum}
+	\def\svgwidth{0.8\textwidth} 
+	\import{chapters/chapter03/fig03/}{spectrum.pdf_tex}
+	\caption[On-chip laser spectra]{Typical spectra of the two independent on-chip lasers. Each demonstrates a \ac{FWHM} of \SI{30}{pm} (limited to the precision of the optical spectrum analyser) and a sideband suppression of \SI{50}{dB}. The two lasers were deliberately detuned in wavelength so both linewidths could be seen.}
 	\label{fig:spectra}
 \end{figure}
 
@@ -292,12 +318,13 @@ In order to measure the the linewidth more accurately, a self-heterodyne measure
 
 \subsection{Modulation}
 
-\subsubsection{Quantum-Confined Stark Effect}
+\subsubsection{Electro-Optic Phase Modulation}
 
 The main modulation effect that we will use is the \ac{qcse} which has operating speeds of more than \SI{40}{GHz} \cite{qcse, smit2014}. The waveguide contains a \ac{mqw}  structure which has a tunable bandgap depending on an applied reverse bias. This causes both a phase shift and loss.
 
 \begin{figure}[tbp]
-	\includegraphics[width = \linewidth]{./Chip/Oclaro_00_MZI_1.png}
+	\centering
+	\includegraphics[width = 0.8\linewidth]{./Chip/Oclaro_00_MZI_1.png}
 	\caption[Integrated MZI microscope image]{Integrated \acl{mzi} made from two \acsp{mmi} and two \acsp{eopm}  which can be used for intensity modulation of light into pulses.}
 	\label{fig:InP_MZI}
 \end{figure}
@@ -319,6 +346,10 @@ Alice (and Bob) uses a stable current sources to drive an on-chip \ac{DBR} laser
 	\label{fig:pulses}
 \end{figure}
 
+\subsubsection{Thermo-Optic Phase Modulation}
+
+In order to correct for imperfections in the fabrication of the devices, a thermo-optic effect can be used. While not design for thermo-optic modulation, the \acp{eopm} have a resistance of around \SI{10}{\ohm} which can be used to vary the phase.
+
 \subsection{Fibre Coupling}
 
 To efficiently couple the light from the waveguide mode (\SI{2}{\micro\metre}) to a fibre model (\SI{10}{\micro\metre}), a spot-size converter on the chip is used to expand the light mode to around \SI{3}{\micro\meter}. The spot-size converter also changes the mode to be more circular from the elliptical waveguide mode. A lensed fibre was then used to convert this mode to \SI{10}{\micro\meter}. The fibre was held in a Elliot Gold fibre launch stage with piezo actuators that gave a precision of \SI{10}{\nm} in X, Y and Z axes over a range of \SI{25}{\micro\meter}.
@@ -327,7 +358,16 @@ To reduce reflection back into the waveguide, the facet of the spot-size convert
 
 Coupling losses were challenging to measure as the chip did not have any waveguide ``cutbacks'' to isolate the loss from components and spot-size converters.  However, loss from foundry measurements estimate that the loss from coupling to a singlemode fibre is around \SI{1.5}{dB}.
 
-\subsection{Measurement}
+\section{Fibre Optic Transmitter}
+
+\subsection{State Preparation}
+
+A \ac{CW} fibre laser was used (Yenista t100s-hp) with a wide tuning around the C-band in steps of \SI{1}{\pm}. This meant that the laser could be sweep very precisely compared with the integrated laser, which would remain fixed.
+
+The lithium niobate modulator was from ThorLabs and required a \SI{5}{\Vpp} pulse meaning that amplification of the signal from the \ac{ppg} was needed. The amplifier used was an SHF 810 with \SI{29}{dB} gain and up to \SI{40}{\GHz} operation. 
+
+
+\section{Measurement}
 
 The pulses are coupling into fibre allowing the rest of the experiment to make use of fibre components. 
 
@@ -339,51 +379,11 @@ A polarisation-maintaining {50:50} beam splitter is used for the interference to
 
 Well engineered fibre components means that the losses through the fibre components is minimal. Photons are then sent for detection and time tagging.
 
-\section{Detection}
+\subsection{Detection}
 
 The detectors used in the experiment were \acp{snspd} from Photonspot. Superconducting detectors were chosen over other single-photon detectors for their high efficiency (\SI{>80}{\percent}), small timing jitter (\SI{30}{\ps}) and short recovery time (\SI{100}{\ns}). The detectors were housed in a closed cycle helium refrigerator that was kept at \SI{0.7}{K}. A successful event was indicated by an RF signal of around \SI{10}{\mV} which was amplified with low-noise amplifier to around \SI{200}{\mV} which could then be time-tagged.
 
-\subsection{Control Electronics}
-
-In order to the drive the devices, various electronic control is required. 
-
-A DC voltage source was required to reverse bias the modulator. In lieu of a negative voltage source, a positive voltage source was used to raise the chip ground to \SI{10}{\V} relative to the other sources. The potential over modulators could then be applied using one of the other positive voltage sources.
-
-The DC signal was mixed with the RF signal using a bias-tee with a response up to 
-
-To generate the RF signals, a Keysight 81134A \ac{ppg} was used which had a maximum output voltage of up to \SI{2}{\Vpp}. A \ac{ppg} over a more general arbitrary waveform generator as only two levels were required for operation of the device for this test. The minimum pulse width that could be set was \SI{100}{\ps} which when measured on an oscilloscope (Keysight DSA91304A) were around \SI{120}{\ps} \ac{FWHM}. The maximum speed of the \ac{ppg} was \SI{3.35}{\GHz}. However, for this experiment the system clock was set to \SI{1.72}{\GHz}. A pulse was sent ever 4 clock cycles for a state repetition rate of \SI{431}{\MHz}.
-
-A separate voltage source was used to pass a small current over one side of the \ac{mzi} to achieve thermo-optic phase modulation. The voltage could be set with a precision of \SI{1}{\mV} with typically \SIrange{200}{700}{\mV} being required for modulation. These values depended heavily on the fabrication of the device as well as packaging.
-
-A 10K thermistor was used to give feedback to a PID loop controlled by an Arroyo 6601 and a peltier under the chip mount stabilised the temperature. The temperature is maintained around \SI{25}{\celsius} with an instability of less than \SI{0.01}{\celsius}. 
-
-\subsection{Modelling}
-
-The \ac{CW} laser was intensity modulated into pulses using an \ac{mzi} which gave the pulse a Gaussian shape in time. Therefore, we can model the electric field of each pulse as
-\begin{equation}
-	\mathcal{E}_j^\text{in}(t) = \frac{1}{t_p\sqrt{2\pi}} \exp{\left(-\frac{t^2}{2 t_p^2}\right)} \exp{\left(i(\omega_j t + \varphi_j)\right)}
-\end{equation}
-where $j = 1,2$ are the beam splitter inputs. The pulse duration is given by $t_p$, the laser angular frequency is $\omega_j$ and $\varphi_j$ is the phase associated with the pulse. By taking the Fourier transform of the electric field, we can calculate the shape in frequency space as 
-\begin{equation}
-	\mathcal{E}_j^\text{in}(\omega_j) = A \exp{\left(-\frac{t^2}{2 \omega_p^2}\right)} \exp{\left(i(\omega_j t + \varphi_j)\right)}
-\end{equation}
-
-The two pulses from the transmitters interfere at the beam splitter. After the interference, the intensities at the output of each arm is given as
-\begin{equation}
-	I^\text{out}_{1,2} = 1 \pm \exp{\left(-\frac{1}{2}t_p^2(\Delta\omega)^2\right)}\cos(\Delta\varphi)
-\end{equation}
-where $\pm$ distinguishes between the two output modes. The relative phases of the pulses, $\Delta\varphi = \varphi_1 - \varphi_2$, is introduced to simplify the equation.
-
-We are then able to calculate the coincidence probability by using $P(1,1) \propto \langle I_1 I_2\rangle$ \cite{Rarity2005}, where an average is taken over the relative phase, $\Delta\varphi$. As the laser pulses tune in wavelength, we can model the \ac{HOM} interaction as 
-\begin{equation}
-	P(1,1) = 1 - V \exp{\left(-t_p^2(\Delta\omega)^2\right)}
-	\label{eq:gaussian}
-\end{equation}
-where the visibility, $V$, takes into account any mismatch in the degrees of freedom between the two pulses (i.e. timing, polarisation, pulse shape or photon number). In the case where the pulses were perfectly indistinguishable, we could have $V = 0.5$ as the visibility is limited due to the multi-photon terms in coherent states.
-
-We can distinguish this as quantum interference from a classical Mach-Zehnder fringe as the number of events in each detector will not decrease at the lasers overlap in wavelength. This difference is due to the phase randomised nature of the incoming light.
-
-\section{Calibration}
+\subsection{Calibration}
 
 Digital variable optical attenuators (Oz Optics DA100) were used to vary the power of each transmitters independently. 
 
@@ -401,7 +401,44 @@ Detection events were time-tagged using a PicoQuant Hydraharp 400 and saved to a
 
 The coincidence window could be varied to in the analysis after to ensure that the coincidences come from when the pulse is a Gaussian shape. As we see from figure \ref{fig:pulses}, there is a `tail' on the later edge of the pulses would cause a chirp in the pulse. This would have two effects on the \ac{HOM} interference. Firstly, if the two pulse shapes are different, this would cause a reduced interference as the photons would have different wavelengths. Secondly, this would change the shape of the \ac{HOM} dip from the Gaussian shape that will be derived later.
 
+\section{Control Electronics}
+
+In order to the drive the devices, various electronic control is required. 
+
+A DC voltage source was required to reverse bias the modulator. In lieu of a negative voltage source, a positive voltage source was used to raise the chip ground to \SI{10}{\V} relative to the other sources. The potential over modulators could then be applied using one of the other positive voltage sources.
+
+The DC signal was mixed with the RF signal using a bias-tee with a response up to 
+
+To generate the RF signals, a Keysight 81134A \ac{ppg} was used which had a maximum output voltage of up to \SI{2}{\Vpp}. A \ac{ppg} over a more general arbitrary waveform generator as only two levels were required for operation of the device for this test. The minimum pulse width that could be set was \SI{100}{\ps} which when measured on an oscilloscope (Keysight DSA91304A) were around \SI{120}{\ps} \ac{FWHM}. The maximum speed of the \ac{ppg} was \SI{3.35}{\GHz}. However, for this experiment the system clock was set to \SI{1.72}{\GHz}. A pulse was sent ever 4 clock cycles for a state repetition rate of \SI{431}{\MHz}.
+
+A separate voltage source was used to pass a small current over one side of the \ac{mzi} to achieve thermo-optic phase modulation. The voltage could be set with a precision of \SI{1}{\mV} with typically \SIrange{200}{700}{\mV} being required for modulation. These values depended heavily on the fabrication of the device as well as packaging.
+
+A 10K thermistor was used to give feedback to a PID loop controlled by an Arroyo 6601 and a peltier under the chip mount stabilised the temperature. The temperature is maintained around \SI{25}{\celsius} with an instability of less than \SI{0.01}{\celsius}. 
+
+\section{Fibre Optic Hong-Ou-Mandel Demonstration}
+
+To simplify the first tests of the integrated devices, a transmitter was setup using a fibre laser and lithium niobate intensity modulator so that \ac{HOM} interference could be demonstrated with a tested source. 
+
+\subsection{State Preparation}
+
+A \ac{CW} fibre laser was used (Yenista t100s-hp) with a wide tuning around the C-band in steps of \SI{1}{\pm}. This meant that the laser could be sweep very precisely compared with the integrated laser, which would remain fixed.
+
+The lithium niobate modulator was from ThorLabs and required a \SI{5}{\Vpp} pulse meaning that amplification of the signal from the \ac{ppg} was needed. The amplifier used was an SHF 810 with \SI{29}{dB} gain and up to \SI{40}{\GHz} operation. 
+
 \section{Hong-Ou-Mandel Interference Between Independent Integrated Devices}
+
+\subsection{Experimental Setup}
+
+In this section, we detail the experimental setup used to demonstrate \ac{HOM} interference motivating the design with regards to the requirements set out in the previous section. 
+
+\begin{figure}[tbp]
+	\centering
+	\includegraphics[width=\textwidth]{Experiment}
+	\caption[Hon-Ou-Mandel interference experimental setup]{Experimental setup of of the \ac{HOM} interference experiment. Two identical \ac{InP} chips prepare quantum states of light to be interfered on a {50:50} beams splitter. On-chip \ac{CW} lasers are intensity modulated into time-bins with \acp{mzi}. The pulses are coupled into a fibre where \acp{voa} ensure matched intensities and \acp{pc} and \acp{pbs} overlap the polarisation. An optical channel (not shown) synchronises the transmitter and detector electronics.}
+	\label{fig:hom_experiment}
+\end{figure}
+
+The experiment uses two \ac{InP} devices as sources of weak coherent states. We will call each device Alice and Bob, respectively. Each chip measures only \SI[product-units=power]{6x2}{mm} and contains all the required photonic components to generate the required states to perform \ac{HOM} interference at GHz rates. One only need compare the sizes of these optical components to fibre based optics to justify the benefits of integrated devices.
 
 \begin{figure}[tbp]
 	\centering
@@ -424,7 +461,7 @@ The polarisation of the transmitters was rotated using fibre polarisation contro
 
 In figure \ref{fig:HOM} we demonstrate \SI{46.5(8)}{\percent} visibility between the two devices by sweeping the relative wavelengths of the lasers. We think that it is pertinent to note that during the experiment there was no active feedback to control the polarisation, pulse carving or timing which demonstrates the stability possible with an integrated platform. 
 
-\section{HOM Inteferece with Actively Phase Randomised Pulses}
+\section{HOM Interference with Actively Phase Randomised Pulses}
 
 \begin{figure}[tbp]
 	\centering

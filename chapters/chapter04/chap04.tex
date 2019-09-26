@@ -10,6 +10,10 @@
 \chapter[Chip-Based Measurement-Device-Independent QKD]{Chip-Based Measurement-Device-Independent Quantum Key Distribution}
 \label{chap:mdiqkd}
 
+\section*{Statement of Work}
+
+Again, this chapter made used of devices conceived and design by Mark Thompson and Mark Godfrey that were fabricated by Oclaro. The experimental setup was modified from the previous chapter with support from Philip Sibson. FPGA and RF electronic design was supported by Andy Hart. 
+
 \section{Introduction}
 
 Advances in \ac{QKD} have seen many protocols developed for different purposes and security levels. The emerging quantum hacking community has exposed discrepancies between security theory and practical implementations. 
@@ -159,6 +163,12 @@ In this section, we will describe the operation of the transmitters to create we
 	\label{fig:oclaro_00}
 \end{figure}
 
+\begin{figure}[tbp]
+	\includegraphics[width=\linewidth]{Oclaro_00_MDI.png}
+	\caption[InP transmitter schematic]{A schematic view of the each chip used in the MDI-QKD protocol. \textit{T. Enc} is used to intensity modulate the continuous wave laser into encode timing information, \textit{I. Mod} varies the pulse intensity for decoy state preparation and \textit{Ph. Enc} encodes phases between the time-bins.}
+	\label{fig:chip_mdi_schematic}
+\end{figure}
+
 \subsection{Pulse Carving}
 
 As for the previous chapter, time encoding the states will be done using a \acl{mzi} to carve the \ac{CW} laser into \SI{130}{ps} pulses with an extinction ratio\footnote{The ratio between the ``on'' and ``off'' powers of the \ac{mzi}} of up to \SI{30}{dB}.
@@ -182,17 +192,21 @@ A negative pulse can be used to gain switch the on-chip laser in between states 
 
 \subsection{Decoy State Preparation}
 
-The absorption due to the \ac{qcse} can be used to quickly change the intensities of states for decoy state preparation.
+While the absoption of the \ac{qcse} is an issue when encoding phase, it can be used to vary the intensity for decoy state preparation. The effect has a bandwidth of \SI{>10}{\GHz}. By biasing a modulator in the circuit to \SI{9}{\V} below the chip ground, we can quickly modulator with around \SI{2}{\Vpp} to vary the intensity by \SI{15}{dB}. We are also able to choose whether we pulse the intensity \ac{mzi} which creates the pulses which can be useful for encoding a vacuum state with an intensity of \SI{30}{dB} below that of signal states.
 
-\begin{figure}[tbp]
-	\includegraphics[width=\linewidth]{Oclaro_00_MDI.png}
-	\caption[InP transmitter schematic]{A schematic view of the each chip used in the MDI-QKD protocol. \textit{T. Enc} is used to intensity modulate the continuous wave laser into encode timing information, \textit{I. Mod} varies the pulse intensity for decoy state preparation and \textit{Ph. Enc} encodes phases between the time-bins.}
-	\label{fig:chip_mdi_schematic}
-\end{figure}
+As the intensities of the decoy states is not fix, we will need to model how these intensities will vary the secret key rate. It has been previously shown that reducing the intensity of decoy states will increase the secret key rate \cite{Chan2014}. However, we will still 
+
+\subsection{State Choice}
+
+In a \ac{QKD} system, the states should be chosen randomly. However, for simplicity in this proof-of-principle experiment the states send by Alice and Bob are a fixed pattern chosen to gather statistics of all of the possible combination of states required for key rate estimation. States that play no part in key rate estimation (for example when Alice sends a state in $X$ and Bob in $Z$) are deliberately removed. In the asymptotic limit, sending these states would not impact the key rate. We will discuss later how these sorts of states would need to be considered in a finite key rate estimation.
 
 \section{Control Electronics}
 
 In order to operate the transmitters, there is a selection of control devices needed. In this section we will describe them.
+
+For each transmitter, we require four RF signals with different requirements. For example, the decoy state analysis requires multiple levels while the phase randomisation only requires two levels, but needs to be very stable.
+
+To synchronise the equipment, one AWG provided a clock that could be shared. The FPGA received a \SI{250}{\MHz} clock and each \ac{ppg} received a \SI{2}{\GHz} from the AWG. 
 
 \begin{figure}[tbp]
 	\centering
@@ -215,13 +229,20 @@ For the \ac{qcse}, a reverse bias over the modulator was required. Due to the la
 
 Heating was also required. Up to \SI{120}{mA} was used to thermo-optically modulate the light in the \acp{mzi}.
 
-\subsubsection*{Thermo-optic modulation}
+\subsubsection*{Thermo-Optic modulation}
 
 Ideally, the light in a \ac{mzi} would experience the same phase in both arms. However, due to fabrication tolerances, the light in each arm accumulates a different phase, meaning that the output is no longer minimised. While this could be corrected using the \ac{qcse}, the phase dependent loss mean that the extinction ratio would be reduced as the intensity of light would be different in each arm. Instead, we can exploit an imperfection in the \acp{eopm} which causes a resistance of around \SI{10}{\ohm}. By passing a current through the modulator on one arm of a \ac{mzi}, we can adjust the relative phase which will minimise the \ac{mzi} output intensity.
 
 \subsubsection*{High-Speed Electronics}
 
 A variety of high-speed driving electronics was used. Each transmitter requires four high-speed signals for phase randomisation, timing encoding, intensity modulation and phase encoding. Only the intensity modulation, which is used for the decoy state preparation, requires more than a two level signal. To create the signal and two decoy intensities, we will require a three level signal. 
+
+\begin{figure}[tbp]
+	\centering
+	\includegraphics[width = \textwidth]{Electrical_Signals/plot.png}
+	\caption[Electrical signals for BB84 states]{Oscilloscope data of the electrical signals required for the BB84 states. }
+	\label{fig:elec_signals}
+\end{figure}
 
 \section{Receiver}
 
@@ -243,6 +264,8 @@ A PicoQuant Hydraharp was used as a time-tagger due to the small timing resoluti
 From time of arrival relative to the sync signal, the detection events are binned into pre-determined windows which correspond to the early and late time-bins of the qubits. The window width was varied as there will be a trade-off between the detection probability and the error rate. As shown in figure \ref{fig:skr_error_dependence}, there is a limit to the error rate that the decoy protocol can tolerate to generate a positive key rate.
 
 As the detection events are first-in first out, we only need to check for coincidences when we know that the event was in the late time-bin of the qubit. This is because both $\ket{\psi^\pm}$ have a click in both the early and late time-bins. This will reduce the number of unnecessary 
+
+For this experiment, a gating window of \SI{240}{\ps} was chosen to maximise gain whilst also minimising the error at longer distances. From figure \ref{fig:skr_error_dependence}, we can see that at longer distances a lower $Z$ basis error is required.
 
 \subsection{Synchronisation}
 

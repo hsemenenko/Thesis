@@ -37,7 +37,7 @@ plot(date,
    linetype=:steppost,
    w=3,
    yaxis = ("Text and captions", (0,20000)),
-   xformatter = :plain,
+   yformatter = :plain,
    legend = :topleft,
    left_margin = 10mm,
    right_margin = 10mm

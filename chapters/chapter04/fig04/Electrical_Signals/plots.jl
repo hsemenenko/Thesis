@@ -1,13 +1,12 @@
 using Plots, DelimitedFiles, Plots.PlotMeasures
 
-gr(size = (800,640))
-pgfplots()
+gr(size = (1024,640))
 
 #load files
-decoy_mod_file = open(".\\chapters\\chapter04\\fig04\\Electrical Signals\\250mhz-bb84-decoy-mod.csv")
-phase_enc_file = open(".\\chapters\\chapter04\\fig04\\Electrical Signals\\250mhz-bb84-phase-enc.csv")
-phase_rand_file = open(".\\chapters\\chapter04\\fig04\\Electrical Signals\\250mhz-bb84-phase-rand.csv")
-pulse_mod_file = open(".\\chapters\\chapter04\\fig04\\Electrical Signals\\250mhz-bb84-pulse-mod.csv")
+decoy_mod_file = open(".\\chapters\\chapter04\\fig04\\Electrical_Signals\\250mhz-bb84-decoy-mod.csv")
+phase_enc_file = open(".\\chapters\\chapter04\\fig04\\Electrical_Signals\\250mhz-bb84-phase-enc.csv")
+phase_rand_file = open(".\\chapters\\chapter04\\fig04\\Electrical_Signals\\250mhz-bb84-phase-rand.csv")
+pulse_mod_file = open(".\\chapters\\chapter04\\fig04\\Electrical_Signals\\250mhz-bb84-pulse-mod.csv")
 
 #open files
 decoy_mod = readdlm(decoy_mod_file, ',')
@@ -62,7 +61,6 @@ labels_plt = plot(
    )
 
 plt = plot(
-   labels_plt,
    decoy_plt,
    phase_enc_plt,
    phase_rand_plt,
@@ -73,7 +71,8 @@ plt = plot(
    yaxis = false,
    leg = false,
    left_margin = 1cm,
-   layout = (5,1)
+   layout = (4,1),
+   size = (1000,600)
    )
 
 state_lines = [100,750,1375,2000]
