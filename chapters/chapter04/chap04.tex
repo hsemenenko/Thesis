@@ -49,6 +49,17 @@ An outline of the protocol is shown in figure \ref{fig:mdi_protocol}. We will us
 	\item \brisred{Parameter Estimation} Using the information about successful events, they can calculate errors and gains to bound the knowledge of Eve and apply privacy amplification if necessary.
 \end{enumerate}
 
+\begin{table}[tbp]
+\centering
+\begin{tabular}{@{}cccc@{}}
+\textbf{Basis}      & $\ket{\psi^-}$     & $\ket{\psi^+}$        \\
+$Z$              & Bit flip           & Bit flip                \\
+$X$              & Bit flip           & \multicolumn{1}{c}{-}   \\
+\end{tabular}
+\caption[Measurement outcomes in MDI-QKD]{Post-selection rules of measurement outcomes in different bases. If Alice and Bob sent states in the same basis, one of them will have to bit-flip unless the both chose the X basis and the result was $\ket{\psi^+}$.}
+\label{tab:mdi-outcomes}
+\end{table}
+
 \subsection{Security and Key Rates}
 
 As we are not using a true single photon source, we need to be able to bound any knowledge gained by Eve through a photon number splitting attack. This is done through decoy-state analysis, where various intensity levels are chosen at random to bound the yield and error for single photon states \cite{Lo2005}. 
@@ -157,6 +168,104 @@ It is worth noting that the technology is still maturing and optimisation of des
 In this section, we will describe the operation of the transmitters to create weak coherent states that can be used for \acl{QKD}.
 
 \begin{figure}[tbp]
+\centering
+\begin{tikzpicture}
+%%X basis
+\node[left] at (-0.5, 3.8) {\large $X$ Basis};
+%%+
+\node[] at (0,4.3) {\large $\ket{+}$};
+\begin{axis}[xshift = 0.5cm,yshift=4cm,axis lines=none,width=2.5cm, height = 2.3cm]
+\addplot[
+purple,
+domain=-3:3,
+samples=201,
+line width=2pt
+]
+{exp(-x^2 / 2) / (1* sqrt(2*pi))};
+\end{axis}
+\draw[->] (1.1,4.65) arc (120:60:0.75);
+\node[] at (1.45,4.85) {\tiny $\phi = 0$};
+\begin{axis}[xshift = 1.5cm,yshift=4cm,axis lines=none,width=2.5cm, height = 2.3cm]
+\addplot[
+purple,
+domain=-3:3,
+samples=201,
+line width=2pt
+]
+{exp(-x^2 / 2) / (1* sqrt(2*pi))};
+\end{axis}
+%%-
+\node[] at (0,3.3) {\large $\ket{-}$};
+\begin{axis}[xshift = 0.5cm,yshift=3cm,axis lines=none,width=2.5cm, height = 2.3cm]
+\addplot[
+purple,
+domain=-3:3,
+samples=201,
+line width=2pt
+]
+{exp(-x^2 / 2) / (1* sqrt(2*pi))};
+\end{axis}
+\draw[->] (1.1,3.65) arc (120:60:0.75);
+\node[] at (1.45,3.85) {\tiny $\phi = \pi$};
+\begin{axis}[xshift = 1.5cm,yshift=3cm,axis lines=none,width=2.5cm, height = 2.3cm]
+\addplot[
+purple,
+domain=-3:3,
+samples=201,
+line width=2pt
+]
+{exp(-x^2 / 2) / (1* sqrt(2*pi))};
+\end{axis}
+%%Z basis
+\node[left] at (-5.5, 3.8) {\large $Z$ Basis};
+%%+0
+\node[] at (-5,4.3) {\large $\ket{0}$};
+\begin{axis}[xshift = -4.5cm,yshift=4cm,axis lines=none,width=2.5cm, height = 2.3cm]
+\addplot[
+purple,
+domain=-3:3,
+samples=201,
+line width=2pt
+]
+{exp(-x^2 / 2) / (1* sqrt(2*pi))};
+\end{axis}
+\begin{axis}[xshift = -3.5cm,yshift=3.7cm,axis lines=none,width=2.5cm, height = 2.3cm]
+\addplot[
+purple,
+domain=-3:3,
+samples=201,
+line width=2pt
+]
+{0};
+\end{axis}
+%%1
+\node[] at (-5,3.3) {\large $\ket{1}$};
+\begin{axis}[xshift = -4.5cm,yshift=2.7cm,axis lines=none,width=2.5cm, height = 2.3cm]
+\addplot[
+purple,
+domain=-3:3,
+samples=201,
+line width=2pt
+]
+{0};
+\end{axis}
+\begin{axis}[xshift = -3.5cm,yshift=3cm,axis lines=none,width=2.5cm, height = 2.3cm]
+\addplot[
+purple,
+domain=-3:3,
+samples=201,
+line width=2pt
+]
+{exp(-x^2 / 2) / (1* sqrt(2*pi))};
+\end{axis}
+\draw[<->, line width = 0.25mm] (-4,4.8) -- (-3,4.8);
+\node[] at (-3.5,5) {$\Delta t$};
+\end{tikzpicture}
+\caption{BB84 states in a time-bin encoded scheme. Pulses are separated by a time $\Delta t$ where the timing forms the computational basis. A late pulse indicates a $\ket{0}$ while an early pulse indicates a $\ket{1}$. $\ket{+}$ and $\ket{-}$ states can be realised through superpositions of early and late pulses with relative phases.}
+\label{fig:BB84_time_bin}
+\end{figure}
+
+\begin{figure}[tbp]
 	\centering
 	\includegraphics[width=\textwidth]{Oclaro_00_clean_small.png}
 	\caption[InP transmitter microscope image]{Microscope image of the \SI[product-units=power]{6x2}{mm} indium phosphide transmitter. The complexity possible with integrated photonics is demonstrated by having two separate DBR cavity lasers, three Mach-Zehnder interferometers, an asymmetric  Mach-Zehnder interferometer and high-bandwidth photodiode.}
@@ -185,7 +294,8 @@ A negative pulse can be used to gain switch the on-chip laser in between states 
 
 \begin{figure}[tbp]
 	\centering
-	\includegraphics[width=\textwidth]{states}
+	\def\svgwidth{\textwidth} 
+	\import{chapters/chapter04/fig04/}{states.pdf_tex}
 	\caption[BB84 states generated from the InP transmitters]{BB84 states generated from the InP transmitters using cascaded \acp{mzi}. They demonstrate a \SI{30}{dB} extinction ratio and a \SI{130}{\ps} \ac{FWHM} which includes broadening due to detector jitter.}
 	\label{fig:states}
 \end{figure}
@@ -239,7 +349,6 @@ A variety of high-speed driving electronics was used. Each transmitter requires 
 
 \begin{figure}[tbp]
 	\centering
-%	\includegraphics[width = \textwidth]{Electrical_Signals/plot.png}
 	\def\svgwidth{0.9\textwidth} 
 	\import{chapters/chapter04/fig04/Electrical_Signals/}{plot.pdf_tex}
 	\caption[Electrical signals for BB84 states]{Oscilloscope data of the electrical signals required for the BB84 states. P. Mod is used to create the pulses, Ph. Rand for gain switching the laser, Ph. Enc. for phase encoding and Int. Mod for decoy state preparation.}

@@ -275,7 +275,12 @@
 %%% END %%%
 		  
 %%% GLOSSARIES STUFF %%%
-	\usepackage[acronym,toc,symbols,section,nogroupskip,shortcuts=ac]{glossaries-extra}
+	\usepackage[acronym,
+							toc,
+							symbols,
+							section,
+							nogroupskip,
+							shortcuts=ac]{glossaries-extra}
 	\setabbreviationstyle{long-short}
 	\setabbreviationstyle[acronym]{long-short}
 	\loadglsentries{glossaryEntries}
@@ -361,37 +366,8 @@
 \advance\dimen0-0.2\ht0
 \setbox2=\hbox{\vrule height\ht0 depth -\dimen0}%
 {\box0\lower0.4pt\box2}}
-%
-% My caption style
-%\newcommand{\mycaption}[2][\@empty]{
-%	\captionnamefont{\scshape} 
-%	\changecaptionwidth
-%	\captionwidth{0.9\linewidth}
-%	\captiondelim{.\:} 
-%	\indentcaption{0.75cm}
-%	\captionstyle[\centering]{}
-%	\setlength{\belowcaptionskip}{10pt}
-%	\ifx \@empty#1 \caption{#2}\else \caption[#1]{#2}
-%}
-%%
-%% My subcaption style
-%\newcommand{\mysubcaption}[2][\@empty]{
-%	\subcaptionsize{\small}
-%	\hangsubcaption
-%	\subcaptionlabelfont{\rmfamily}
-%	\sidecapstyle{\raggedright}
-%	\setlength{\belowcaptionskip}{10pt}
-%	\ifx \@empty#1 \subcaption{#2}\else \subcaption[#1]{#2}
-%}
-%%
-%%An initial of the very first character of the content
-%\usepackage{lettrine}
-%\newcommand{\initial}[1]{%
-%	\lettrine[lines=3,lhang=0.33,nindent=0em]{
-%		\color{gray}
-%     		{\textsc{#1}}}{}}
-%
-% Theorem styles used in my thesis
+
+% Theorem styles
 %
 \theoremstyle{plain}
 \newtheorem{theorem}{Theorem}[chapter]
@@ -467,6 +443,8 @@
 \listoffigures
 \addtocontents{lof}{\par\nobreak\textbf{{\scshape Figure} \hfill Page}\par\nobreak}
 \clearemptydoublepage
+%\printglossary[type=\acronymtype,title={List of Acronyms}]
+%\clearemptydoublepage
 %
 \input{frontmatter/publications}
 \clearemptydoublepage
