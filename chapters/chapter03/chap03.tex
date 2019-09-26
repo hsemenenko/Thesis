@@ -314,6 +314,14 @@ In figure \ref{fig:DBR_sweep} we can see the laser tuning through current inject
 	\label{fig:DBR_sweep}
 \end{figure}
 
+\begin{figure}[tbp]
+	\centering
+	\def\svgwidth{\textwidth} 
+	\import{chapters/chapter03/fig03/Laser_current_sweep/}{plot.pdf_tex}
+	\caption[Laser wavelength current sweep]{By changing the driving current of the on-chip laser, we can change the wavelength through heating and carrier effects. This will also vary the power. As the laser current source can be varied in steps of \SI{10}{\nA}, we can see that the control of the laser wavelength through this effect can be very precise.}
+	\label{fig:curr_sweep}
+\end{figure}
+
 In order to measure the the linewidth more accurately, a self-heterodyne measurement technique can be used \cite{self-heterodyne}. 
 
 \subsection{Modulation}
@@ -325,7 +333,7 @@ The main modulation effect that we will use is the \ac{qcse} which has operating
 \begin{figure}[tbp]
 	\centering
 	\includegraphics[width = 0.8\linewidth]{./Chip/Oclaro_00_MZI_1.png}
-	\caption[Integrated MZI microscope image]{Integrated \acl{mzi} made from two \acsp{mmi} and two \acsp{eopm}  which can be used for intensity modulation of light into pulses.}
+	\caption[Microscope image of an integrated Mach-Zehnder interferometer]{Integrated \acl{mzi} made from two \acsp{mmi} and two \acsp{eopm}  which can be used for intensity modulation of light into pulses. The \ac{mzi} measures only around \SI{1}{\mm} in length and around \SI{350}{\micro\metre} in width.}
 	\label{fig:InP_MZI}
 \end{figure}
 
@@ -341,7 +349,8 @@ Alice (and Bob) uses a stable current sources to drive an on-chip \ac{DBR} laser
 
 \begin{figure}[tbp]
 	\centering
-	\includegraphics[width=0.8\textwidth]{Pulse}
+	\def\svgwidth{\textwidth} 
+	\import{chapters/chapter03/fig03/}{pulse.pdf_tex}
 	\caption[On-chip intensity modulation of coherent states]{Histogram of intensity modulation after pulse carving with an \ac{mzi}. We find an extinction ratio of just over \SI{20}{dB} and a \ac{FWHM} of \SI{175}{\ps}. The pulse is not corrected for detector or time-tagging jitter.}
 	\label{fig:pulses}
 \end{figure}
@@ -465,8 +474,9 @@ In figure \ref{fig:HOM} we demonstrate \SI{46.5(8)}{\percent} visibility between
 
 \begin{figure}[tbp]
 	\centering
-	\includegraphics[width=0.8\textwidth]{gain_switch.pdf}
-	\caption[Gain switching of the on-chip lasers at \SI{250}{MHz}]{By applying a negative electrical signal to the on-chip laser, we can drain the optical cavity. Lasing will then resume from spontaneous emission meaning that the phase will not be coherent with the previous lasing conditions.}
+	\def\svgwidth{0.9\textwidth} 
+	\import{chapters/chapter03/fig03/}{gain_switch.pdf_tex}
+	\caption[Gain switching of the on-chip lasers at \SI{250}{MHz}]{By applying a negative electrical signal to the on-chip laser, we can drain the optical cavity. Lasing will then resume from spontaneous emission meaning that the phase will not be coherent with the previous lasing conditions. It takes around \SI{1}{\ns} for the laser to relax into a continuous operation from which states can be encoded.}
 	\label{fig:gain_switch}
 \end{figure}
 
