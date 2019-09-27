@@ -367,7 +367,10 @@ A PicoQuant Hydraharp was used as a time-tagger due to the small timing resoluti
 
 \begin{figure}[tbp]
 	\centering
-	\includegraphics[width = \textwidth]{SKR_coin_window/window_width_sweep_25km}
+	\tiny
+%	\includegraphics[width = \textwidth]{SKR_coin_window/window_width_sweep_25km}
+	\def\svgwidth{\textwidth} 
+	\import{chapters/chapter04/fig04/SKR_coin_window/}{window_width_sweep_25km.pdf_tex}
 	\caption[Qubit window width sweep]{By changing the window that we accept a successful measurement, the error rate, gain and secret key rate will be affected. The error rate will increase exponentially while the gain will plateau. From this, we can find an optimal point of around \SI{250}{\ps} window width.}
 	\label{fig:window_sweep}
 \end{figure}

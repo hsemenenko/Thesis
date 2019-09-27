@@ -25,7 +25,7 @@ Before we begin, we will need to introduce the cast of characters that will each
 
 \brisred{Mallory} would also like to know what Alice has sent to Bob, but will go to more extreme measures to discover their secrets. She has unlimited resources available (confined only by the laws of physics) and will use all possible methods within her power to crack the hidden message. 
 
-The reader is encouraged to picture their own cast of characters in their mind's eye to bring this story to life.
+The reader is encouraged to picture their own cast of characters in their mind's eye to bring this story to life. Any likeness of characters to any persons, real or imaginary, is purely coincidental.
 
 \section{Cryptography}
 \label{sec1:crypto}
@@ -136,6 +136,14 @@ As we have mentioned before, Alice and Bob have never met. However, they would l
 
 As we will see later, authentication will play a crucial role in a \ac{QKD} system.
 
+\subsection{Post-Quantum Cryptography}
+
+Post-quantum cryptography falls under the umbrella term of \brisred{quantum-safe} cryptography which encompasses key exchange protocols which are though (or proven) to be secure against attacks that use a quantum computer. Instead of relying on problems such as discrete logarithm or factoring, which are known to be efficiently solved with Shor's algorithm, the protocols utilise problems that are thought to be hard even on a quantum processor. However, much like a proof of RSA's security in classical computing has eluded mathematicians, proof of security for post-quantum algorithms in both quantum and classical regimes has not yet been established.
+
+There are a number of examples in which quantum algorithms that were thought to be hard against quantum computers turned out to be broken using classical computers \checkthis{Can't remember the algorithm}. The National Institute of Standards and Technology (NIST) in the US has been developing standards for public-key algorithms for security against quantum computers and processors.
+
+Some interest proposals were made with RSA that would be easy for a classical computer but hard for a quantum computer. The protocol aimed to exploit the difficulty in loading data into a quantum machine which would bottleneck the operation. However, the scheme used many small RSA number making it easy to break on a classical computer \checkthis{Find this protocol and analysis}.
+
 \subsection{Cryptanalysis}
 \label{sec1:cryptanalysis}
 
@@ -171,7 +179,6 @@ A fundamental theorem in quantum mechanics is the {\color{bristol-red} no-clonin
 	 \end{equation*}
 	 for all states $\ket{\psi} \in \mathbb{C}^d$.
 \end{theorem}
-
 
 \subsection{Quantum Photonics}
 
