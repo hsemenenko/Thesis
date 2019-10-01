@@ -261,7 +261,7 @@ line width=2pt
 \draw[<->, line width = 0.25mm] (-4,4.8) -- (-3,4.8);
 \node[] at (-3.5,5) {$\Delta t$};
 \end{tikzpicture}
-\caption{BB84 states in a time-bin encoded scheme. Pulses are separated by a time $\Delta t$ where the timing forms the computational basis. A late pulse indicates a $\ket{0}$ while an early pulse indicates a $\ket{1}$. $\ket{+}$ and $\ket{-}$ states can be realised through superpositions of early and late pulses with relative phases.}
+\caption[BB84 time-bin encoding]{BB84 states in a time-bin encoded scheme. Pulses are separated by a time $\Delta t$ where the timing forms the computational basis. A late pulse indicates a $\ket{0}$ while an early pulse indicates a $\ket{1}$. $\ket{+}$ and $\ket{-}$ states can be realised through superpositions of early and late pulses with relative phases.}
 \label{fig:BB84_time_bin}
 \end{figure}
 
@@ -459,6 +459,13 @@ In order to correlate the detection events, time tagging is required to reconstr
 It is important that the absolute time delay is known so that the states can be faithfully reconstructed relative to the states sent. For this experiment, the delay between transmitter channels is minimal by design. However, in a real-world key exchange this would need to be more thoroughly characterised. 
 
 \section{Results}
+
+\begin{figure}[tp]
+	\centering
+	\includegraphics[width = \textwidth]{MDI-Schematic.png}
+	\caption[Chip-based MDI-QKD experimental schematic]{Schematic of the \ac{MDI} scheme. Alice and Bob each operate and integrated transmitter and send BB84 states over quantum channels to Charlie. The states are projected in the Bell basis using a banked detection device.}
+	\label{fig:mdi-schem}
+\end{figure}
 
 Here we will discuss the results of the key generation between the two integrated transmitters.
 
