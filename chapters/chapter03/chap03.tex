@@ -480,23 +480,19 @@ Coupling losses were challenging to measure as the chip did not have any wavegui
 
 To be able to access the electrical components of the integrated devices, we need to create a package to transfer the signals from the driving electronics to the chip . A PCB was designed to electrically connect the modulators and laser to SMA and DC pin connectors. A render is shown in figure \ref{fig:chip_pcb}. The bottom of the chip is ground which connects to a copper block that is also connected to the ground of the PCB. Silver epoxy was used to glue the chip to the mount to ensure a good electrical connection. It also provided a good thermal connection for temperature stabilisation.
 
-In order to maintain a good signal integrity the impedance of the tracks needs to match the electronics. As the devices require a number of RF connections to a small area, using standard FR-4 material would not be practical. Instead, Rogers 6006ns material was chosen for its high dielectric constant of \num{6.15} meaning that thin coplanar waveguides with ground could still maintain \SI{50}{\ohm} impedance.
-
-The characteristic impedance of a coplanar waveguide with ground can be approimated by \cite{wadell1991}
+In order to maintain a good signal integrity the impedance of the tracks needs to match the electronics. As the devices require a number of RF connections to a small area, using standard FR-4 material would not be sufficient. Instead, Rogers 6006ns material was chosen for its high dielectric constant of \num{6.15} meaning that thin grounded coplanar waveguides with ground could still maintain \SI{50}{\ohm} impedance. A schematic of the waveguides is shown in figure \ref{fig:GSG_waveguide}. The characteristic impedance of a grounded coplanar waveguide can be approximated by \cite{wadell1991}
 \begin{equation}
 	Z_0 = \frac{60\pi}{\sqrt{E_\text{eff}}}\frac{1}{\frac{K(k)}{K(k')} + \frac{K(k_l)}{K(k_l')}}
 \end{equation}
-where
+where, for a track of width $a$, waveguide of width $b$ and substrate of height $h$,
 \begin{align}
-	k &= \frac{a}{b}\\
-	k' &= \sqrt{1 - k^2}\\
-	k_l' &= \sqrt{1 - k_l^2}\\
-	k_l &= \frac{\tanh\left(\frac{\pi a}{4 h}\right)}{\tanh\left(\frac{\pi b}{4 h}\right)}
+	k &= \frac{a}{b} &&k' = \sqrt{1 - k^2}\\
+	k_l &= \frac{\tanh\left(\frac{\pi a}{4 h}\right)}{\tanh\left(\frac{\pi b}{4 h}\right)} &&k_l' = \sqrt{1 - k_l^2}
 \end{align}
-and
 \begin{equation}
 	E_\text{eff} = \frac{1 + E_r \frac{K(k')}{K(k)} \frac{K(k_l)}{K(k_l')}}{1 + \frac{K(k')}{K(k)} \frac{K(k_l)}{K(k_l')}}
 \end{equation}
+where $K(k)$ is the elliptic integral of the first kind. The thickness of the substrate used was \SI{250}{\um} so a track of width \SI{260}{\um} with a spacing of \SI{100}{\um} (giving a total waveguide width of \SI{460}{\um}) has a characteristic impedance of \SI{50}{\ohm}. Ideally, to avoid microstrip line modes the design should have $h \gg b$ and the ground plane should extend away from the waveguide more than $b$\cite{riaziat1987}. In this design, these restrictions will be relaxed due to space restraints. However, through operation we will see that the waveguide can support speeds up to \SI{10}{GHz}.
 
 The tracks were designed and then laser etched into the copper on the substrate. The PCB was given a gold coating using electroplating to avoid oxidation of the copper and to help with gold wirebonding. In future iterations, a nickel layer should be applied before the gold to avoid gold diffusing into the copper. SMA, DC pins, capacitors and resistors were then soldered onto the PCB using a low temperature solder paste.
 
@@ -505,7 +501,7 @@ The tracks were designed and then laser etched into the copper on the substrate.
 	\Large
 	\def\svgwidth{0.6\textwidth} 
 	\import{chapters/chapter03/fig03/}{GSG_Waveguide.pdf_tex}
-	\caption[Ground-Signal-Ground coplanar waveguide]{Ground-Signal-Ground coplanar waveguide}
+	\caption[Grounded coplanar waveguide structure]{Grounded coplanar waveguide for RF signal transmission. $a$ is the width of the waveguide while $b$ is the width of the waveguide plus the space between ground. $h$ is the thickness of the substrate and $E_r$ is the dielectric constant.}
 	\label{fig:GSG_waveguide}
 \end{figure}
 
@@ -695,12 +691,15 @@ Laser gain switching is a technique used to cause phase randomisation by keeping
 
 Instead of gain switching to generate pulses, we can reverse the high speed pulse to provide a negative voltage between pulse carving. This pulses removes the carriers in the laser and makes each pulse phase randomised. The upper-state lifetime of semiconductors is very short, as is the cavity lifetime. Therefore, we can still generate states at \SI{250}{MHz} and demonstrate good state preparation.
 
+In figure \ref{fig:gain_switch}, we demonstrate gain switching the on-chip laser by providing a \SI{-1.5}{V} RF signal. This drains the cavity so that when lasing resumes the phase will come from a spontaneous emission and will be random compared with the previous window. 
+
+After the negative pulses, the lasing oscilates before returning to a continuous (and useful) lasing mode. These oscillations can be attributed to mode competition in the laser cavity and also RF signal ringing.  
+
 To test that the pulses are phase randomised, we can look at coincidences between neighbouring pulses, as shown in figure \ref{fig:HOM_coherence}.  
 
 \begin{figure}[tbp]
 	\centering
 	\tiny
-%	\includegraphics[width=\textwidth]{HOM_coherence.pdf}
 	\def\svgwidth{\textwidth} 
 	\import{chapters/chapter03/fig03/}{HOM_coherence.pdf_tex}
 	\caption[HOM interference with and without phase randomisation]{\ac{HOM} interference both with and without phase randomisation between pulses. We show the coincidences between pulses that interfered and check the coherence with subsequent pulses. In both cases, we find a fitted visibility of more than \SI{47}{\%} showing that phase randomisation doesn't reduce the fidelity of the states.}
@@ -709,9 +708,11 @@ To test that the pulses are phase randomised, we can look at coincidences betwee
 
 \section{Outlook}
 
-In this experiment, we have demonstrated state-of-the-art \acl{HOM} interference between GHz clocked integrated photonic devices exploiting monolithically fabricated lasers and \acp{eopm} with a visibility of \SI{46.5(8)}{\%}. Further, we have demonstrated that gain switching the laser between pulses doesn't reduce the visibility. However, this does limit the speed of operation which will be a consideration for \ac{QKD} systems. As we will see in chapter \ref{chap:mdiqkd}, this result will play a crucial role in \ac{MDI} and high fidelity interference will be required to bound the knowledge of Eve and Mallory.
+In this experiment, we have demonstrated state-of-the-art \acl{HOM} interference between GHz clocked integrated photonic devices exploiting monolithically fabricated lasers and \acp{eopm} with a visibility of \SI{46.5(8)}{\%}. Further, we have demonstrated that gain switching the laser between pulses doesn't reduce the visibility. However, this does limit the speed of operation which will be a consideration for \ac{QKD} systems. As we will see in chapter \ref{chap:mdiqkd}, this result will play a crucial role in \ac{MDI} and high fidelity interference will be required to bound the knowledge that could be gained by Mallory.
 
 \subsection{Active Stabilisation}
+
+Performing this experiment in a controlled laboratory environment is obviously favourable for prolonged operation over several hours. However, as the aim will be to create devices that can deployed on real-world networks, the systems will need to compensate for drifts in the fibres and electronic control.
 
 To maintain a high fidelity interference between the two devices over a prolonged period will require feedback as the devices will drift. 
 
