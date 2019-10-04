@@ -194,7 +194,7 @@ Using these equations, it is possible to estimate the visibility of a HOM dip gi
 
 The \ac{CW} laser was intensity modulated into pulses using an \ac{mzi} which gave the pulse a Gaussian shape in time. We will assume that the linewidth is much smaller than the frequency broadening due to pulse modulation so that the electric field can be modelled as a single frequency. We will also assume that effects from chirp are negligible. Therefore, we can model the normalised electric field of each pulse as
 \begin{equation}
-	\mathcal{E}_j^\text{in}(t, t_p, \omega_j, \phi_j) = \sqrt{\frac{2 \sqrt{\ln(2)}}{t_p\sqrt{\pi}}} \exp{\left(-\frac{2t^2\ln(2)}{t_p^2}\right)} \exp{\left(i(\omega_j t + \varphi_j)\right)}
+	\mathcal{E}_j^\text{in}(t, t_p, \omega_j, \phi_j) = \sqrt{\frac{2 \sqrt{2\ln(2)}}{t_p\sqrt{\pi}}} \exp{\left(-\frac{4 \ln(2) t^2}{t_p^2}\right)} \exp{\left(i(\omega_j t + \varphi_j)\right)}
 \end{equation}
 where $j = 1,2$ are the beam splitter inputs, $t_p$ is the \ac{FWHM} of the pulse (assumed the same for both inputs), $\ln(x)$ is the natural logarithm and $\omega_j$ and $\phi_j$ are the frequency and phase, respectively. To calculate the interaction, we can used the beam splitter relations for electric fields,
 
@@ -203,30 +203,28 @@ where $j = 1,2$ are the beam splitter inputs, $t_p$ is the \ac{FWHM} of the puls
 	\mathcal{E}^\text{out}_2 &= \frac{1}{\sqrt{2}}\left(\mathcal{E}_1^\text{in} - \mathcal{E}_2^\text{in} \right)
 \end{align}
 
-By substituting the Gaussian pulses from above into the beam splitter relationships to get the electric fields after interference. After integrating over the pulses in time, we can calculate the intensities of the output electric fields
+By substituting the Gaussian pulses from above into the beam splitter relationships to get the electric fields after interference. After integrating over the pulses in time (which is equivalent to the convolution of the two functions in frequency space), we can calculate the intensities of the output electric fields
 
 \begin{align}
-	\mathcal{I}^\text{out}_1 &= 1 + \exp\left(-\frac{t_p^2(\omega_1 - \omega_2)^2}{16\ln(2)}\right)\cos(\Delta\phi)\\
-	\mathcal{I}^\text{out}_2 &= 1 - \exp\left(-\frac{t_p^2(\omega_1 - \omega_2)^2}{16\ln(2)}\right)\cos(\Delta\phi)
+	\mathcal{I}^\text{out}_1 &= 1 + \exp\left(-\frac{t_p^2(\omega_1 - \omega_2)^2}{32\ln(2)}\right)\cos(\Delta\phi)\\
+	\mathcal{I}^\text{out}_2 &= 1 - \exp\left(-\frac{t_p^2(\omega_1 - \omega_2)^2}{32\ln(2)}\right)\cos(\Delta\phi)
 \end{align}
 where we can introduce $\Delta\phi = \phi_1 - \phi_2$ to represent the relative phase between the two input fields. When the intensities of the fields are low the probability of coincidence is proportional to the product of the intensities averaged over the relative phase \cite{Rarity2005}. Explicitly, we want to find
 
 \begin{equation}
 	P(1,1) \propto \langle \mathcal{I}^\text{out}_1 \mathcal{I}^\text{out}_2\rangle
 \end{equation}
-
-From the intensities above, and averaging $\Delta\phi$ over $2\pi$, we find
+Multiplying the intensities calculated above and averaging $\Delta\phi$ over $2\pi$, we find
 
 \begin{equation}
-	\langle \mathcal{I}^\text{out}_1 \mathcal{I}^\text{out}_2\rangle = \frac{1}{2\pi}\int_0^{2\pi} 1 - \exp\left(-\frac{t_p^2 \Delta\omega^2}{8\ln(2)}\right)\cos(\Delta\phi)^2 d(\Delta\phi)
+	\langle \mathcal{I}^\text{out}_1 \mathcal{I}^\text{out}_2\rangle = \frac{1}{2\pi}\int_0^{2\pi} 1 - \exp\left(-\frac{t_p^2 \Delta\omega^2}{16\ln(2)}\right)\cos(\Delta\phi)^2 d(\Delta\phi)
 \end{equation} 
 which gives the shape of the interference in terms of the relative frequencies of the two incoming pulses as
 
 \begin{equation}
-	P(1,1) = 1 - \frac{V}{2} \exp\left( -\frac{t_p^2(\omega_1 - \omega_2)^2}{8\ln(2)} \right)
+	P(1,1) = 1 - \frac{V}{2} \exp\left( -\frac{t_p^2(\Delta\omega)^2}{16\ln(2)} \right)
 \end{equation}
 where $\Delta\omega = \omega_1 - \omega_2$. We also introduce $0 \le V \le 1$ to account for distinguishability between the pulses in degrees of freedom other than frequency. 
-
 
 %the laser angular frequency is $\omega_j$ and $\varphi_j$ is the phase associated with the pulse. By taking the Fourier transform of the electric field, we can calculate the shape in frequency space as 
 %\begin{equation}
@@ -322,22 +320,7 @@ While gain switched lasers offer simplicity and easily satisfy the phase randomi
 
 \section{Integrated Transmitters}
 
-\subsection{Packaging}
-
-\begin{figure}[tbp]
-	\centering
-	\includegraphics[width=0.8\textwidth]{Chip_PCB}
-	\caption[Transmitter PCB package]{Chip packaging to breakout the electrical connection on the chip. SMA connectors were used for the high-speed connections to offer a response of more than \SI{10}{\GHz}. Capacitors and resisters were also used for termination of RF modulation signals. DC pins were used for low-speed connections.}
-	\label{fig:chip_pcb}
-\end{figure}
-
-To be able to access the electrical and optical sections of the integrated devices, we need to create a package to transfer the signals from the driving electronics to the chip . A PCB was designed to electrically connect the modulators and laser to SMA and DC pin connectors. The bottom of the chip is ground which connects to a copper block that is also connected to the ground of the PCB. Silver epoxy was used to glue the chip to the mount to ensure a good electrical connection. It also provided a good thermal connection for temperature stabilisation.
-
-In order to maintain a good impedance match (\SI{50}{\ohm}) with small track widths, Rogers 6006ns material was chosen for its high dielectric constant of \num{6.15}. The tracks were designed and then laser etched into the copper on the substrate. The PCB was given a gold coating using electroplating to avoid oxidation of the copper and to help with gold wirebonding. In future iterations, a nickel layer should be applied before the gold to avoid gold diffusing into the copper. SMA, DC pins, capacitors and resistors were then soldered onto the PCB using a low temperature solder paste.
-
-The pads on the chip were wirebonded to the PCB with a \SI{25}{\micro\meter} ball bond and then a wedgebond onto the PCB. Silver epoxy was then applied over the wedgebond to ensure a good electrical contact with the PCB and to increase durability. The PCB was designed such that the length of the RF wirebonds was minimised so that capacitance and resistance of the gold wire were reduced. Such effects can be detrimental for high-speed operation.
-
-An RF signal could be applied to one side of a \ac{eopm} while the other side provided termination to minimise electrical reflections. A capacitor blocked the DC component of the signal while a \SI{50}{\ohm} resistor terminates the AC signal. 
+In this sections we will describe the integrated transmitters that we will use for generating weak coherent states. Each transmitter is \ac{InP} device, measuring \SI{6x2}{mm}, that was fabricated by Oclaro. 
 
 \subsection{Laser Source}
 
@@ -363,6 +346,10 @@ The requirements for quantum communications are somewhat more stringent than tha
 
 Each devices contains a Fabry-P\'{e}rot \ac{CW} laser which is shown in figure \ref{fig:InP_laser}. The \SI{1}{mm} long cavity is made from two \acp{DBR} gratings which are tunable through current injection and allow a wavelength tuning of around \SI{10}{nm}. The \ac{DBR} gratings themselves are periodic structures of differing refractive index. The peak reflected wavelength ($\lambda_\text{DBR}$) is dependent on the grating pitch ($\Lambda$) and effective refractive index ($n_\text{eff}$) of the waveguide and is given by $\lambda_\text{DBR} = 2\Lambda n_\text{eff}$. From this, we find that changes in the refractive index will linearly change the reflection peak. The grating pitch is chosen to be \SI{237.7}{nm} giving a peak reflected wavelength of \SI{1550}{nm}, where $n_\text{eff} = 3.26$.
 
+From the picture, we can see that the \acp{DBR} are both the same length. Typically, the rear \ac{DBR} would be longer to increase the reflectivity back into the cavity which increases the laser power. While the applications here only require weak coherent states, \ac{cvqkd} requires a bright local oscillator which needs to be considered during chip design. Subsequent chip designs should considering this design change.
+
+The \ac{SOA} is a single-mode, ridge waveguide structure that is optimised for TE polarisation. An electrical current is used to pump the carriers for a population inversion. The laser was tested with up to \SI{80}{\mA} which was limited by the current source. Figure \ref{fig:las_curr_volt} shows the characteristics of the laser showing a threshold current of \SI{14}{\mA} and a diode voltage around \SI{0.7}{V}. The optical power is shown to be linear with applied laser current and voltage. Operating the laser at higher currents (more than around \SI{60}{\mA}) can have detrimental effects on the stability as heating within the cavity can cause the laser to mode-hop. Operating the laser at lower currents resolves this issue.
+
 \begin{figure}[t]
 	\centering
 	\small
@@ -372,14 +359,9 @@ Each devices contains a Fabry-P\'{e}rot \ac{CW} laser which is shown in figure \
 	\label{fig:spectra}
 \end{figure}
 
-From the picture, we can see that the \acp{DBR} are both the same length. Typically, the rear \ac{DBR} would be longer to increase the reflectivity back into the cavity which increases the laser power. While the applications here only require weak coherent states, \ac{cvqkd} requires a bright local oscillator which needs to be considered during chip design. Subsequent chip designs should considering this design change.
+A typical spectra of the two transmitter lasers is shown in figure \ref{fig:spectra} which demonstrates a \SI{<30}{pm} \ac{FWHM} and a \SI{>50}{dB} sideband suppression. The linewidth here is stated as \SI{<30}{pm} \ac{FWHM} as this is limited to the precision of the \ac{OSA} used. The two lasers were deliberately offset in wavelength and the spectra show the reproducibility offered by integrated optics. Typically, we would expect the linewidth of a Fabry-P\'{e}rot laser to be Lorentzian \cite{Ismail16}. 
 
-The \ac{SOA} is a single-mode, ridge waveguide structure that is optimised for TE polarisation. An electrical current is used to pump the carriers for a population inversion. The laser was tested with up to \SI{80}{\mA} which was limited by the current source. Figure \ref{fig:las_curr_volt} shows the characteristics of the laser showing a threshold current of \SI{14}{\mA} and a diode voltage around \SI{0.7}{V}. The optical power is shown to be linear with applied laser current and voltage. Operating the laser at higher currents (more than around \SI{60}{\mA}) can have detrimental effects on the stability as the 
-
-
-However, due to heating of the cavity the wavelength hops modes at currents above around \SI{60}{\mA}.
-
-A typical spectra of the two transmitter lasers is shown in figure \ref{fig:spectra} which demonstrates a \SI{<30}{pm} \ac{FWHM} and a \SI{>50}{dB} sideband suppression. The linewidth here is stated as \SI{<30}{pm} \ac{FWHM} as this is limited to the precision of the \ac{OSA} used. The two lasers were deliberately offset in wavelength and the spectra show the reproducibility offered by integrated optics. These lasers have demonstrated a coherence time of \SI{1.5}{ns} \cite{Sibson2017InP} which corresponds to a \ac{FWHM} of \SI{1.7}{pm}. We will see later that partial coherence can be seen at \SI{4}{ns} in fibre which provides a lower bound on the \ac{FWHM} of around \SI{1}{pm}\footnote{The coherence length of the laser can be calculated from the linewidth by $L_\text{coh} = \frac{c}{\pi\Delta v}$ where $\Delta v$ is the \ac{FWHM} of the laser in frequency.}.
+These lasers have demonstrated a coherence time of \SI{1.5}{ns} \cite{Sibson2017InP} which corresponds to a \ac{FWHM} of \SI{1.7}{pm}. We will see later that partial coherence can be seen at \SI{4}{ns} which provides a lower bound on the \ac{FWHM} of around \SI{0.7}{pm}\footnote{The coherence length of the laser can be calculated from the linewidth by $L_\text{coh} = \frac{c}{\pi\Delta v}$ where $\Delta v$ is the \ac{FWHM} of the laser in frequency.}.
 
 In figure \ref{fig:DBR_sweep} we show laser tuning through current injection of the \acp{DBR} which will change the reflection peak through heating effects. By varying the voltage from \SI{0}{\V} to \SI{1}{\V}, the wavelength can be tuned by about \SI{10}{\nm} within the telecommunications C-band. Both the front and rear \acp{DBR} need to be have similar voltage applied to maintain a good cavity mode for lasing. The wavelength can also be changed by changing the temperature of the device, which could cause the cavity to expand or contract. 
 
@@ -486,6 +468,50 @@ To efficiently couple the light from the waveguide mode (\SI{2}{\micro\metre}) t
 To reduce reflection back into the waveguide, the facet of the spot-size converter is at an angle relative to the edge of the chip. On these devices, the waveguides are at \SI{7}{\degree} to the edge which we can calculate that the fibre should be at \SI{23}{\degree} to the edge of the chip\footnote{This is calculated using Snell's law given that the waveguide refractive index is around 3.26.}.
 
 Coupling losses were challenging to measure as the chip did not have any waveguide ``cutbacks'' to isolate the loss from components and spot-size converters.  However, loss from foundry measurements estimate that the loss from coupling to a singlemode fibre is around \SI{1.5}{dB}.
+
+\subsection{Packaging}
+
+\begin{figure}[tbp]
+	\centering
+	\includegraphics[width=0.8\textwidth]{Chip_PCB}
+	\caption[Transmitter PCB package]{Chip packaging to breakout the electrical connection on the chip. SMA connectors were used for the high-speed connections to offer a response of more than \SI{10}{\GHz}. Capacitors and resisters were also used for termination of RF modulation signals. DC pins were used for low-speed connections.}
+	\label{fig:chip_pcb}
+\end{figure}
+
+To be able to access the electrical components of the integrated devices, we need to create a package to transfer the signals from the driving electronics to the chip . A PCB was designed to electrically connect the modulators and laser to SMA and DC pin connectors. A render is shown in figure \ref{fig:chip_pcb}. The bottom of the chip is ground which connects to a copper block that is also connected to the ground of the PCB. Silver epoxy was used to glue the chip to the mount to ensure a good electrical connection. It also provided a good thermal connection for temperature stabilisation.
+
+In order to maintain a good signal integrity the impedance of the tracks needs to match the electronics. As the devices require a number of RF connections to a small area, using standard FR-4 material would not be practical. Instead, Rogers 6006ns material was chosen for its high dielectric constant of \num{6.15} meaning that thin coplanar waveguides with ground could still maintain \SI{50}{\ohm} impedance.
+
+The characteristic impedance of a coplanar waveguide with ground can be approimated by \cite{wadell1991}
+\begin{equation}
+	Z_0 = \frac{60\pi}{\sqrt{E_\text{eff}}}\frac{1}{\frac{K(k)}{K(k')} + \frac{K(k_l)}{K(k_l')}}
+\end{equation}
+where
+\begin{align}
+	k &= \frac{a}{b}\\
+	k' &= \sqrt{1 - k^2}\\
+	k_l' &= \sqrt{1 - k_l^2}\\
+	k_l &= \frac{\tanh\left(\frac{\pi a}{4 h}\right)}{\tanh\left(\frac{\pi b}{4 h}\right)}
+\end{align}
+and
+\begin{equation}
+	E_\text{eff} = \frac{1 + E_r \frac{K(k')}{K(k)} \frac{K(k_l)}{K(k_l')}}{1 + \frac{K(k')}{K(k)} \frac{K(k_l)}{K(k_l')}}
+\end{equation}
+
+The tracks were designed and then laser etched into the copper on the substrate. The PCB was given a gold coating using electroplating to avoid oxidation of the copper and to help with gold wirebonding. In future iterations, a nickel layer should be applied before the gold to avoid gold diffusing into the copper. SMA, DC pins, capacitors and resistors were then soldered onto the PCB using a low temperature solder paste.
+
+\begin{figure}[t]
+	\centering
+	\Large
+	\def\svgwidth{0.6\textwidth} 
+	\import{chapters/chapter03/fig03/}{GSG_Waveguide.pdf_tex}
+	\caption[Ground-Signal-Ground coplanar waveguide]{Ground-Signal-Ground coplanar waveguide}
+	\label{fig:GSG_waveguide}
+\end{figure}
+
+The pads on the chip were wirebonded to the PCB with a \SI{25}{\micro\meter} ball bond and then a wedgebond onto the PCB. Silver epoxy was then applied over the wedgebond to ensure a good electrical contact with the PCB and to increase durability. The PCB was designed such that the length of the RF wirebonds was minimised so that capacitance and resistance of the gold wire were reduced. Such effects can be detrimental for high-speed operation.
+
+An RF signal could be applied to one side of a \ac{eopm} while the other side provided termination to minimise electrical reflections. A capacitor blocked the DC component of the signal while a \SI{50}{\ohm} resistor terminates the AC signal. 
 
 \section{Fibre Optic Transmitter}
 
@@ -630,6 +656,12 @@ The experiment uses two \ac{InP} devices as sources of weak coherent states. We 
 
 \subsection{HOM Interference}
 
+\acl{HOM} interference was demonstrated between two independent \acp{pic} operating at \SI{431}{\MHz} by varying the relative wavelengths of the lasers. Wavelength was chosen as the distinguishing degree of freedom as all others could be overlapped manually. However, a sweep in timing or polarisation would have seen similar interference. 
+
+The two transmitters were initially overlapped in time, polarisation and photon number. Using ps resolution electronic delays in the pulse generation, a histogram from the \acp{spd} allowed a timing overlap between the pulses at the beam splitter. Care was taken to ensure that the pulses that were overlapped on the histogram matched with the pulses that could have interfered on the beam splitter and not a repetition rate or sync window apart. This required calibration of the relative optical and electronic delays after the beam splitter. 
+
+Similarly, the photon number of each pulse was calibrated using a histogram of the pulses. This allowed the photon number to be calibrated regardless of the detector efficiency and fibre losses, provided that the beam splitter was balanced. By looking at each transmitter independently an average photon number per pulse was calculated to be $\sim 10^-3$. The value was chosen to minimise effects from multi-photon terms in the coherent state and to be far away from saturation of the detectors, both of which would have reduced the visibility.
+
 \begin{figure}[t]
 	\centering
 %	\includegraphics[width=0.8\textwidth]{HOM}
@@ -638,12 +670,6 @@ The experiment uses two \ac{InP} devices as sources of weak coherent states. We 
 	\caption[Hong-Ou-Mandel interference between integrated devices]{\ac{HOM} interference between two integrated devices demonstrating \SI{46.5(8)}{\%} visibility. By changing the relative wavelength ($\Delta\lambda$) between the two lasers the lasers become indistinguishable and the number of coincidences reduced to a visibility limited to \SI{50}{\percent}.}
 	\label{fig:HOM}
 \end{figure}
-
-\acl{HOM} interference was demonstrated between two independent \acp{pic} operating at \SI{431}{\MHz} by varying the relative wavelengths of the lasers. Wavelength was chosen as the distinguishing degree of freedom as all others could be overlapped manually. However, a sweep in timing or polarisation would have seen similar interference. 
-
-The two transmitters were initially overlapped in time, polarisation and photon number. Using ps resolution electronic delays in the pulse generation, a histogram from the \acp{spd} allowed a timing overlap between the pulses at the beam splitter. Care was taken to ensure that the pulses that were overlapped on the histogram matched with the pulses that could have interfered on the beam splitter and not a repetition rate or sync window apart. This required calibration of the relative optical and electronic delays after the beam splitter. 
-
-Similarly, the photon number of each pulse was calibrated using a histogram of the pulses. This allowed the photon number to be calibrated regardless of the detector efficiency and fibre losses, provided that the beam splitter was balanced. By looking at each transmitter independently an average photon number per pulse was calculated to be $\sim 10^-3$. The value was chosen to minimise effects from multi-photon terms in the coherent state and to be far away from saturation of the detectors, both of which would have reduced the visibility.
 
 As previously mentioned, current injection into the \ac{SOA} can be used to vary the wavelength with a precision of \SI{80}{\femto\metre}. However, this will also change the power of the laser and increase the number of photons per pulse. Therefore, a digital \ac{voa} was used to vary the attenuation during the sweep based on the sum total of detection events. The assumption was made that the power (coupling or otherwise) did not vary during the experiment. 
 
