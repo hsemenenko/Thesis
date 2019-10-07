@@ -1,6 +1,6 @@
 % Require the latest version of pdf and compress
-\pdfminorversion		= 7
-\pdfobjcompresslevel	= 9
+%\pdfminorversion		= 7
+%\pdfobjcompresslevel	= 9
 %
 %\title{University of Bristol Thesis Template}
 \RequirePackage[l2tabu]{nag}		% Warns for incorrect (obsolete) LaTeX usage
@@ -447,11 +447,13 @@
 \addtocontents{toc}{\par\nobreak \mbox{}\hfill{\textbf{Page}}\par\nobreak}
 \clearemptydoublepage
 %
-\listoftables
+\listoftables*
 \addtocontents{lot}{\par\nobreak\textbf{{\scshape Table} \hfill Page}\par\nobreak}
+\phantomsection
+\addcontentsline{toc}{chapter}{List of Tables and Figures}
 %\clearemptydoublepage
 %
-\listoffigures
+\listoffigures*
 \addtocontents{lof}{\par\nobreak\textbf{{\scshape Figure} \hfill Page}\par\nobreak}
 \clearemptydoublepage
 %\printglossary[type=\acronymtype,title={List of Acronyms}]

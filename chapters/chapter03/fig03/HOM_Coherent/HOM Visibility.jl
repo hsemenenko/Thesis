@@ -58,7 +58,7 @@ display(plot(xrange,
 xrange = 0:0.005:π
 xrange_c = (cos.(xrange/2)).^2
 xrange_s = (sin.(xrange/2)).^2
-phot_nums = [0.01 2 3 4 5 6 7 8 9 10]
+phot_nums = [1 3 5]
 yrange = zeros(length(xrange),length(phot_nums))
 for i in 1:length(phot_nums)
     yrange[:,i] = V_g.(phot_nums[i],phot_nums[i],η1,η2,xrange_c,xrange_s)
@@ -77,7 +77,7 @@ display(plot(xrange_c,
             linealpha = 0.8,
             left_margin=[10mm 10mm],
             bottom_margin=10mm,
-            color_palette = :auto
+            color = RdYlPu3
         ))
 
 data = Array{Any}(length(xrange_c) + 1, length(phot_nums) + 1)

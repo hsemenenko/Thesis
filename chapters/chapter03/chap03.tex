@@ -12,7 +12,7 @@
 
 \section*{Statement of Work}
 
-The photonic chips were initially conceived by Mark Thompson and Mark Godfrey. The chip mask was designed by Mark Godfrey and fabricated by Oclaro. The experiment was initially design by Chris Erven and Philip Sibson and the chips were characterised by Philip Sibson. I modified the initial experimental design and modified the PCB design for chip packaging. Experimental setup, coding and analysis was supported by Philip Sibson. This chapter will expand on the work previously published in reference \cite{semenenko2019}.
+The photonic chips were initially conceived by Mark Thompson and Mark Godfrey. The chip mask was designed by Mark Godfrey and fabricated by Oclaro. The experiment was initially design by Chris Erven and Philip Sibson and initial testing of the chips performed by Philip Sibson. I modified the initial experimental design and packaged the devices for electrical and optical connections. I performed the experiment and analysed the data with support from Philip Sibson. This chapter will expand on the work previously published in reference \cite{semenenko2019}.
 
 \section{Introduction}
 
@@ -24,23 +24,23 @@ Secure communication protocols have been the focus of much academic research sin
 
 At the heart of the \Ac{MDI} protocol is \ac{HOM} interference \cite{HOM}, a quantum phenomenon where indistinguishable single photons incident on a beam splitter interfere and bunch. \ac{HOM} interference is a fundamental phenomenon in quantum optics which describes an important interaction between photons \cite{HOM}. It underpins a range of quantum technologies spanning computing \cite{}, sensing \cite{} and communication \cite{}. While the phenomenon itself is well understood, generating states for quantum interference at the high speeds required for modern telecommunication is practically challenging.
 
+A typical method of overlapping the wavelengths of two lasers will involve interfering the two fields on a beam splitter and measuring the power output from one of the arms with a photodiode. However, by the time the laser has been coupled from the chip, the power is typically below \SI{30}{dBm}. It is challenging to create fast photodiodes that are sensitive enough to measure this power. Therefore, another method is required.
+
 %\ac{HOM} interference between independent sources remains challenging due to the requirement of the photons being indistinguishable in all degrees of freedom \cite{Xu2013}. It is possible to perform \ac{HOM}-like interference using weak coherent states. However, due to the multi-photon nature of coherent states, the maximum visibility of a HOM dip is reduced to $50\%$ \cite{Rarity2005}.
 
-Integrated quantum photonics has facilitated a drastic increase in complexity of experiments simply not possible with alternatives. The inherent phase stability is a vital resource for quantum experiments that are much more sensitive 
+Integrated quantum photonics has facilitated a drastic increase in complexity of experiments simply not possible with alternatives. The inherent phase stability is a vital resource for quantum experiments that are much more sensitive to small fluctuations. 
 
 \Ac{QKD} systems have historically been bulky and expensive which has limited their practicality and has slowed their commercial adoption. Recent developments on \ac{InP} photonic integrated devices have established them as a promising platform for telecommunications \cite{smit2014}. The platform fulfils all of the requirements to perform \ac{QKD} at state-of-the-art rates \cite{Sibson2017InP}. The monolithic inclusion of laser sources provides an easy method of producing weak coherent states that can be used in a decoy-state QKD protocol \cite{mdi-qkd}. Efficient and fast phase modulation can be performed through a \ac{qcse} with a bandwidth up to \SI{40}{GHz} \cite{smit2014}. The possibility of mass production means that \ac{InP} devices are an excellent candidate to reduce the access cost of a \ac{QKD} network and allow wide adoption \cite{JeppixRoadmap}.
 
-In this chapter, we experimentally demonstrate that \ac{InP} devices fulfil all the requirements of state-of-the-art \ac{HOM} interference while also being a practical platform for future quantum networks. We measured a visibility of \SI{46.5(8)}{\percent} using \acp{wcp} generated from independent devices clocked at \SI{431}{MHz}. This visibility is comparable to other demonstrations \cite{Yuan2014, Rubenok2013, Comandar2016} with the benefit of being performed with integrated devices. Crucially, this level of interference demosntrates \ac{InP} devices as a key contender as an \ac{MDI} system.
+In this chapter, we experimentally demonstrate that \ac{InP} devices fulfil all the requirements of state-of-the-art \ac{HOM} interference while also being a practical platform for future quantum networks. We measured a visibility of \SI{46.5(8)}{\percent} using \acp{wcp} generated from independent devices clocked at \SI{431}{MHz}. Through gain switching, we show that the same interference is possible at \SI{250}{MHz}. This visibility is comparable to other demonstrations \cite{Yuan2014, Rubenok2013, Comandar2016} with the benefit of being performed with integrated devices. Crucially, this level of interference demosntrates \ac{InP} devices as a key contender as an \ac{MDI} system.
 
 %In this letter, we extend the application of InP devices as a QKD platform by demonstrating the required control to interfere two independent InP transmitters producing weak coherent states.  This experiment paves the way for a more practical, accessible and affordable metropolitan QKD networks.
 
 \section{Hong-Ou-Mandel Interference}
 
-\Ac{HOM} interference is a quantum phenomena where two indistinguishable single photons incident on a balanced beam splitter will interfere and bunch. This is an important physical process that is fundamental to many quantum information technologies from computation to communication and sensing. It was first seen by Hong, Ou and Mandel in 1987 \cite{HOM}. 
+\Ac{HOM} interference is a quantum phenomena where two indistinguishable single photons incident on a balanced beam splitter will interfere and bunch. This important physical process is fundamental to many quantum information technologies from computation to communication and sensing. It was first seen by Hong, Ou and Mandel in 1987 \cite{HOM}. 
 
-A typical way of overlapping the wavelengths of two lasers will involve interfering the two fields on a beam splitter and measuring the power output from one of the arms with a photodiode. However, by the time the laser has been coupled from the chip, the power is typically below \SI{30}{dBm}. It is challenging to create fast photodiodes that are sensitive enough to measure this power. Therefore, another method is required.
-
-Consider two single photons indistinguishable only in their spatial modes. This can be mathematically represented as 
+Conceptually, the experiment is simple. We first consider two single photons that are indistinguishable only in their spatial modes. This can be mathematically represented as 
 
 \begin{equation}
 	\hat{a}^\dagger \hat{b}^\dagger \ket{0,0}_{a,b} = \ket{1,1}_{a,b}
@@ -51,8 +51,8 @@ In general we can consider a beam splitter to have some reflection component, $r
 \begin{equation}
 	\left(
 	\begin{matrix}
-		t^\ast & r \\
-		-r^\ast & t
+		t & r \\
+		r & t
 	\end{matrix}
 	\right)
 	\quad\text{such that}\quad
@@ -70,7 +70,7 @@ where $|r|^2$ and $|t|^2$ are the probabilities of reflection and transmission, 
 	\end{matrix}
 	\right)	
 \end{equation}
-where the $-1$ is physically represented as a relative $\pi$ phase being applied between the two reflected paths. In an operator formalism, the creation operators will transform as
+where the {-1} is physically represented as a relative $\pi$ phase being applied between the two reflected paths. In an operator formalism, the creation operators will transform as
 
 \begin{equation}
 	\hat{a}^\dagger \rightarrow \frac{\hat{c}^\dagger + \hat{d}^\dagger}{\sqrt{2}} \quad \text{and} \quad \hat{b}^\dagger \rightarrow \frac{\hat{c}^\dagger - \hat{d}^\dagger}{\sqrt{2}}
@@ -105,7 +105,7 @@ For generality, we can consider a beam splitter in terms of reflections, $r$, an
 	\left(
 	\begin{matrix}
 		t & r \\
-		-r & t
+		r & t
 	\end{matrix}
 	\right)
 	\quad\text{such that}\quad
@@ -139,38 +139,46 @@ Therefore, the probability of a coincidence click, with both coherent states ove
 	&= \left(1 - e^{-|\alpha r + \beta t|^2 \eta_1}\right)\left(1 - e^{-|\alpha t - \beta r|^2 \eta_2}\right)
 \end{align}
 
-\begin{figure}[tbp]
-\begin{tikzpicture}
-\begin{axis}[
-    axis line on top,
-	xlabel = {Reflectivity/Transmission},
-	ylabel = {Visibility},
-	width = 0.9\linewidth,
-	height = 0.5\linewidth,
-	cycle list name = RdYlPu-8,
-	xmin = 0,
-	xmax = 1,
-	ymin = 0,
-	ymax = 0.55,
-	xtick pos=left,
-	ytick pos=left,
-	xtick = {0,0.25,0.5,0.75,1},
-	ytick = {0,0.25,0.5},
-    tick align=outside,
-    grid=both,
-    grid style={line width=.1pt, draw=gray!10},
-    legend style={fill=blue!5, draw=gray!50}
-	]
-\addplot+[very thick] table[x index=0, y index = 1, col sep=comma] {./chapters/chapter03/fig03/HOM_Coherent/HOM_Bs_vis.dat};
-\addlegendentry{0.01};
-\foreach \y in {2,...,8}{
-  \edef\temp{\noexpand\addlegendentry{\y}}
-  \addplot+[very thick] table[x index=0,y index=\y, col sep=comma] {./chapters/chapter03/fig03/HOM_Coherent/HOM_Bs_vis.dat};
-  \temp
-}
-\end{axis}
-\end{tikzpicture}
-	\caption[Coherent state photon number visibility]{Graph plotting the effect of an unbalanced beam splitter on the visibility of a HOM dip. Maximal visibility is found when the beam splitter is 50:50. Photon number also has an effect on visibility due to the increased probability of multi-photon terms. Here, we plot average photon numbers ranging from 0.01 to 8. Both states are assumed to have equal average photon number.}
+%\begin{figure}[tbp]
+%\begin{tikzpicture}
+%\begin{axis}[
+%    axis line on top,
+%	xlabel = {Reflectivity/Transmission},
+%	ylabel = {Visibility},
+%	width = 0.9\linewidth,
+%	height = 0.5\linewidth,
+%	cycle list name = RdYlPu-8,
+%	xmin = 0,
+%	xmax = 1,
+%	ymin = 0,
+%	ymax = 0.55,
+%	xtick pos=left,
+%	ytick pos=left,
+%	xtick = {0,0.25,0.5,0.75,1},
+%	ytick = {0,0.25,0.5},
+%    tick align=outside,
+%    grid=both,
+%    grid style={line width=.1pt, draw=gray!10},
+%    legend style={fill=blue!5, draw=gray!50}
+%	]
+%\addplot+[very thick] table[x index=0, y index = 1, col sep=comma] {./chapters/chapter03/fig03/HOM_Coherent/HOM_Bs_vis.dat};
+%\addlegendentry{0.01};
+%\foreach \y in {2,...,8}{
+%  \edef\temp{\noexpand\addlegendentry{\y}}
+%  \addplot+[very thick] table[x index=0,y index=\y, col sep=comma] {./chapters/chapter03/fig03/HOM_Coherent/HOM_Bs_vis.dat};
+%  \temp
+%}
+%\end{axis}
+%\end{tikzpicture}
+
+%\end{figure}
+
+\begin{figure}[t]
+	\centering
+	\small
+	\def\svgwidth{0.8\textwidth} 
+	\import{chapters/chapter03/fig03/HOM_Coherent/}{HOM_BS_Vis.pdf_tex}
+	\caption[Coherent state photon number visibility]{Graph plotting the effect of an unbalanced beam splitter on the visibility of a HOM dip. Maximal visibility is found when the beam splitter is 50:50. Photon number also has an effect on visibility due to the increased probability of multi-photon terms. Here, we plot average photon numbers ranging from 1 to 5. Both states are assumed to have equal average photon number.}
 	\label{fig:HOM_BS_Vis}
 \end{figure}
 
@@ -188,7 +196,7 @@ The visibility of the HOM dip can be calculated as
 	\text{Visibility} = 1 - \frac{\text{P}_\text{HOM}}{\text{P}_\text{ind}}
 \end{equation}
 
-Using these equations, it is possible to estimate the visibility of a HOM dip given a beam splitter that is not 50:50. The effects of this will be seen in a reduced visibility. The average photon number of the pulses used will also affect the visibility as the detectors are threshold. In figure \ref{fig:HOM_BS_Vis} the effect of varying the photon number and using an unbalanced beam splitter on the visibility of interference.
+Using these equations, it is possible to estimate the visibility of a \ac{HOM} dip given a variable reflectivity beam splitter. The effects of this will be seen in a reduced visibility. The average photon number of the pulses used will also affect the visibility as the detectors are threshold. In figure \ref{fig:HOM_BS_Vis}, the effect of varying the photon number and using an variable reflection beam splitter on the visibility of interference. By increasing the photon number during the interference, we find that the visibility decreases with an increase in multi-photon terms.
 
 \subsection{Modelling}
 
@@ -363,7 +371,7 @@ A typical spectra of the two transmitter lasers is shown in figure \ref{fig:spec
 
 These lasers have demonstrated a coherence time of \SI{1.5}{ns} \cite{Sibson2017InP} which corresponds to a \ac{FWHM} of \SI{1.7}{pm}. We will see later that partial coherence can be seen at \SI{4}{ns} which provides a lower bound on the \ac{FWHM} of around \SI{0.7}{pm}\footnote{The coherence length of the laser can be calculated from the linewidth by $L_\text{coh} = \frac{c}{\pi\Delta v}$ where $\Delta v$ is the \ac{FWHM} of the laser in frequency.}.
 
-In figure \ref{fig:DBR_sweep} we show laser tuning through current injection of the \acp{DBR} which will change the reflection peak through heating effects. By varying the voltage from \SI{0}{\V} to \SI{1}{\V}, the wavelength can be tuned by about \SI{10}{\nm} within the telecommunications C-band. Both the front and rear \acp{DBR} need to be have similar voltage applied to maintain a good cavity mode for lasing. The wavelength can also be changed by changing the temperature of the device, which could cause the cavity to expand or contract. 
+In figure \ref{fig:DBR_sweep}, we show laser tuning through current injection of the \acp{DBR} which will change the reflection peak through heating effects. By varying the voltage from \SI{0}{\V} to \SI{1}{\V}, the wavelength can be tuned by about \SI{10}{\nm} within the telecommunications C-band. Both the front and rear \acp{DBR} need to be have similar voltage applied to maintain a good cavity mode for lasing. The wavelength can also be changed by changing the temperature of the device, which could cause the cavity to expand or contract. 
 
 \begin{figure}[t]
 	\centering
@@ -383,7 +391,9 @@ In figure \ref{fig:DBR_sweep} we show laser tuning through current injection of 
 	\label{fig:curr_sweep}
 \end{figure}
 
-We note here that the narrow linewidth of the laser means that during no experiment with the \ac{InP} chips do we need to use a wavelength filter to clean up the light or optical pulses. This is important as it removed a component that would add cost to any system but also restrict the wavelength operation of the devices. Without the need for a filter, the lasers are free to operate in a wavelength that spans more than \SI{10}{nm}. This will be crucial as it is likely that \ac{QKD} systems will needed to be \ac{wdm} to meet the demands of high-speed networks.
+The wavelength of the lasers can also be finely tuned through current injection of the \ac{SOA} itself. This is shown in figure \ref{fig:curr_sweep} where changing the driving current from \SIrange{20}{28}{mA} sees an increase in wavelength of around \SI{100}{pm} due to heating effects in the cavity. Also with with a wavelength change, this will also change the intensity of the laser. As we saw above, the photon number is an important aspect to control during a \ac{HOM} interference. Therefore, when using \ac{SOA} current injection to sweep the wavelength some attenuation will also be required. 
+
+We note here that the narrow linewidth of the laser means that during no experiment with the \ac{InP} chips do we need to use a wavelength filter to clean up the light or optical pulses. This is important as it removed a component that would add cost to any system but also restrict the wavelength operation of the devices. Without the need for a filter, the lasers are free to operate in a wavelength that spans more than \SI{10}{nm}. This will be crucial as it is likely that \ac{QKD} systems will needed to be \ac{wdm} to meet the demands of high-speed networks for increased rates or quantum-classical multiplexing.
 
 In order to measure the the linewidth more accurately, a self-heterodyne measurement technique can be used \cite{self-heterodyne}. 
 
@@ -451,7 +461,7 @@ In order to correct for imperfections in the fabrication of the devices, a therm
 
 Figure \ref{fig:mzi_heating} demonstrates how heating effects can change the characteristics of an \ac{mzi}. $\Phi_2$ is kept fixed at \SI{2}{V}, while $\Phi_1$ is swept over the range \SIrange{0}{-10}{V}. We can then compare the difference in DC modulation with and without heating. Without heating, the absorption effects mean that the extinction ratio possible are reduced to only around \SI{15}{dB}. However, by correcting for the phase difference in the two arms, the extinction ratio can be increase to around \SI{30}{dB} with similar voltage swing requirements. 
 
-Using this heating technique, we can apply RF modulation to the \ac{mzi} to create \acp{wcp}, as shown in figure \ref{fig:pulses}. Without correcting for detector and timing electronic timing uncertainty, the \ac{FWHM} is \SI{175}{ps}. We also find an extinction ratio of more than \SI{20}{dB} with only \SI{2}{\Vpp}.
+Using this heating technique, we can apply RF modulation to the \ac{mzi} to create \acp{wcp}, as shown in figure \ref{fig:pulses}. Without correcting for detector and timing electronic timing uncertainty, the \ac{FWHM} is \SI{175}{ps}. We also find an extinction ratio of more than \SI{20}{dB} with only \SI{2}{\Vpp} swing.
 
 \begin{figure}[tbp]
 	\centering
