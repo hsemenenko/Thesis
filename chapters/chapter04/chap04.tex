@@ -16,17 +16,35 @@ Again, this chapter made used of devices conceived and design by Mark Thompson a
 
 \section{Introduction}
 
-Advances in \ac{QKD} have seen many protocols developed for different purposes and security levels. The emerging quantum hacking community has exposed discrepancies between security theory and practical implementations. 
+Quantum technologies promise a paradigm shift compared to their classical counterparts that will undermine our current methods of secure communication \cite{shor1994}. It will soon become necessary to deploy key exchange systems that are immune to such increases in computing power. \ac{QKD} is one such approach which exploits quantum phenomena to exchange secret keys between distant parties without relying on assumed computationally hard problems \cite{BB84, E91}. However, the stringent requirements for precise control has predominately limited \ac{QKD} systems to small networks and laboratories. To realise ubiquitous quantum devices, new platforms are required for robust operation in harsh environments. 
 
-Technological advances require scalability. All currently available commercial \ac{QKD} systems are big, bulky and fibre-based. To encourage widespread adoption beyond commercial and military applications, an integrated platform it required to require manufacturing costs, as well as the size, weight and power requirements. \ac{QKD} transmitters have been demonstrated in both \ac{InP} \cite{Sibson2017InP} and silicon \cite{Sibson2017Si}.
+Integrated photonics has seen vast improvements in recent years and represents a promising platform for mass-adoption of quantum technologies \cite{thompson2011}. In particular, \ac{InP} offers crucial benefits for communication in a robust, phase-stable and compact platform. Lasers can be monolithically integrated with mW powers and narrow linewidths, fast electro-optic phase modulation can reach bandwidths of \SI{40}{GHz} and low-loss waveguides allow efficient routing \cite{smit2014}. Such components mean that it is well suited for quantum communication protocols \cite{Sibson2017InP}. 
 
-In this section, we will be experimentally demonstrating \ac{MDI} \cite{mdi-qkd} using integrated \ac{InP} transmitter devices. We will first outline the \ac{MDI} protocol before describing the experiment and showing our results. We will then discuss potential improvements to the experiment and further work.
+\Acl{QKD} has been a leading quantum technology since its advent \cite{BB84, E91} and has seen many proof-of-principle demonstrations, networks and commercial systems \cite{yin2016, Rubenok2013, Comandar2016, zhang2018, commercial}. However, implementation security of these systems is an active area of research due to potential information leakage that is not considered in security proofs. Such side-channels may allow an eavesdropper to gain sensitive information during a key exchange \cite{Lo2014} or an attacker to manipulate a system and determine the secret key through classical means \cite{Lydersen2010b}. 
+
+To counter these attacks from a malicious adversary through uncharacterised side-channels, device-independent \ac{QKD} schemes have been developed to limit the number of assumptions required for security \cite{Masanes2011}. One such vulnerability is with single-photon detectors, for which \ac{MDI} has been proposed. This approach removes all possible attacks against the detection system \cite{mdi-qkd}.
+
+In this section, we experimentally demonstrate \ac{MDI} using cost-effective, mass-manufacturable, chip-based transmitters that could facilitate commercial quantum-secured communication. We show that\SI{1}{kbps} of secret key can be exchanged at  \SI{100}{km} and predict positive key rates at more than \SI{350}{km}. The system removes detector vulnerabilities and represents a viable solution for near-term metropolitan quantum networks.
+
+%Advances in \ac{QKD} have seen many protocols developed for different purposes and security levels. The emerging quantum hacking community has exposed discrepancies between security theory and practical implementations. 
+
+%Technological advances require scalability. All currently available commercial \ac{QKD} systems are big, bulky and fibre-based. To encourage widespread adoption beyond commercial and military applications, an integrated platform it required to require manufacturing costs, as well as the size, weight and power requirements. \ac{QKD} transmitters have been demonstrated in both \ac{InP} \cite{Sibson2017InP} and silicon \cite{Sibson2017Si}.
+
+%In this section, we will be experimentally demonstrating \ac{MDI} \cite{mdi-qkd} using integrated \ac{InP} transmitter devices. We will first outline the \ac{MDI} protocol before describing the experiment and showing our results. We will then discuss potential improvements to the experiment and further work.
 
 %=======
 \section{Measurement-Device-Independent Quantum Key Distribution}
 \label{sec:mdi-qkd}
 
-Unlike a traditional point-to-point key exchange, \ac{MDI} introduces third party (Charlie) who mediates the exchange by announcing correlations between pulses sent by Alice and Bob. Importantly, it improves security by removing all, current and future, side-channels on the detectors \cite{mdi-qkd}. This is an important step as the detectors are often vulnerable to attacks due to their complexity \cite{Lydersen2010a, Makarov2006}. In this case, it doesn't need to be assumed that Charlie is a trusted party and the node could equally be operated by Eve or Mallory.
+\Ac{MDI} removes all potential side channels on the detection system which could be exploited by a malicious adversary \cite{mdi-qkd}. A schematic of the experiment is shown in figure~\ref{fig:chip-mdi}. Unlike traditional point-to-point protocols, Alice and Bob act symmetrically by sending BB84 states to a third party, Charlie. Upon receipt of the states, Charlie measures the states in the Bell basis and publicly announces all successful events. The outcomes indicate quantum correlations between states but, without encoding knowledge known only by Alice and Bob, reveal no information about the secret key. This allows Charlie to be completely untrusted and it could even be assumed that an adversary is operating the receiver without compromising the security. By sharing the basis information for each state, Alice and Bob are able to infer a secret key which can be used in a symmetric key algorithm. 
+
+As we use a weak coherent source we need to estimate the number of single-photon events. We employ a four-intensity decoy state analysis \cite{zhou2016} to bound the single-photon errors and yields. In this protocol, the $Z$ basis is used to generate key while the $X$ basis bounds the knowledge of an eavesdropper. 
+
+While\Ac{MDI} typically offers a lower key rate at short distances when compared with point-to-point systems \cite{Sibson2017InP}, it can generate key rate at greater distances \cite{yin2016} as the errors are proportional to the square of the dark count probability. It also offers the potential for the measurement equipment to be shared between multiple parties through optical switching without compromising security.
+
+Unlike a traditional point-to-point key exchange, \ac{MDI} introduces third party (Charlie) who mediates the exchange by announcing correlations between pulses sent by Alice and Bob. Importantly, the scheme removes unnecessary assumptions about the characteristics of the detection system meaning that 
+
+it improves security by removing all, current and future, side-channels on the detectors \cite{mdi-qkd}. This is an important step as the detectors are often vulnerable to attacks due to their complexity \cite{Lydersen2010a, Makarov2006}. In this case, it doesn't need to be assumed that Charlie is a trusted party and the node could equally be operated by Eve or Mallory. Any interference at the detections by a malicious attacker will only reduce the possible key rate, so is equivalent to a denial of service attack.
 
 Secondly, it removes the asymmetry between Alice and Bob which allows for simpler metropolitan networks without reducing security with trusted nodes. This will be discussed further in chapter \ref{chap:node}.
 
@@ -35,7 +53,7 @@ Secondly, it removes the asymmetry between Alice and Bob which allows for simple
 \begin{figure}[tbp]
 	\centering
 	\includegraphics[scale=0.25]{MDI-QKD_Protocol.png}
-	\caption[MDI-QKD protocol]{Measurement-device-independent quantum key distribution protocol. Alice and Bob act symmetrically by sending BB84 states to Charlie.}
+	\caption[MDI-QKD protocol]{Measurement-device-independent quantum key distribution protocol schematic for time-bin encoding. Alice and Bob act symmetrically by sending BB84 states to a third party, Charlie, who projects the states in the Bell basis. Charlie announces all successful events from which Alice and Bob can infer a key after sharing state basis information.}
 	\label{fig:mdi_protocol}
 \end{figure}
 
