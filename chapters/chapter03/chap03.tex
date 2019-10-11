@@ -784,15 +784,15 @@ We have previously discussed that, to demonstrate quantum interference over the 
 
 %As we will see in chapter \ref{chap:mdiqkd}, it will be important for the pulses to be phase randomised relative to subsequent pulses to maintain the security of a \ac{QKD} protocol. 
 
-Laser gain-switching is a technique used to cause phase randomisation by keeping the laser below threshold and only applying current when a \ac{wcp} is desired. As the pulses are limited to the timing of a spontaneous emission, the timing jitter of the pulses is usually large. There is also a wavelength broadening meaning that filtering is required. 
+Laser gain-switching is a technique used to cause phase randomisation by keeping the laser below threshold and only applying current when a \ac{wcp} is desired. As the pulses are limited to the timing of a spontaneous emission, the timing jitter of the pulses is usually large. There is also a wavelength broadening meaning that filtering is required for \ac{HOM} interference \cite{Agnesi2019}. 
 
-Instead of gain switching to generate pulses, we can reverse the high speed pulse to provide a negative voltage between pulse carving. This pulses removes the carriers in the laser and makes each pulse phase randomised. The upper-state lifetime of semiconductors is very short, as is the cavity lifetime. Therefore, we can still generate states at \SI{250}{MHz} and demonstrate good state preparation.
+Instead of gain switching to generate pulses, we can reverse the high speed pulse to provide a negative voltage between pulse carving. This pulses removes the carriers in the diode and allows the optical cavity to empty to make phase randomised windows. The upper-state lifetime of semiconductors is very short, as is the cavity lifetime, meaning this can still be done relatively quickly. 
 
-In figure \ref{fig:gain_switch}, we demonstrate gain switching the on-chip laser by providing a \SI{-1.5}{V} RF signal. This drains the cavity so that when lasing resumes the phase will come from a spontaneous emission and will be random compared with the previous window. 
+In figure \ref{fig:gain_switch}, we demonstrate gain switching the on-chip laser by providing a \SI{-1.5}{V} RF signal. This drains the cavity so that when lasing resumes the phase will come from a spontaneous emission and will be random compared with the previous window. The clock of the \ac{ppg} was set to \SI{2}{GHz} for this experiment, with a pulse being sent by each transmitter every 8 clock cycles. 
 
-After the negative pulses, the lasing oscilates before returning to a continuous (and useful) lasing mode. These oscillations can be attributed to mode competition in the laser cavity and also ringing in the RF signal.  
+After the negative signals, the lasing oscillates before returning to a continuous (and useful) lasing mode. These oscillations can be attributed to mode competition in the laser cavity and also ringing in the RF signal. Therefore, we can still generate states at \SI{250}{MHz} and demonstrate good state preparation through intensity modulation.
 
-To test that the pulses are phase randomised, we can look at coincidences between neighbouring pulses, as shown in figure \ref{fig:HOM_coherence}.  
+To test that the pulses are phase randomised, we can look at coincidences between neighbouring pulses. If the laser is phase randomised, we would not expect to see any relation between subsequent pulses. In figure \ref{fig:HOM_coherence}, we demonstrate two \ac{HOM} fringes with and without phase randomisation. Both experiments see a visibility of \SI{47}{\percent}. When the pulses are coherent, we see a partial relationship between the pulses as the relative wavelength between the lasers changes. If there was complete coherence, this would be a sinusoidal fringe as subsequent pulses tune in and out of phase. After phase randomisation, we find no relationship between coincidences of subsequent pulses.
 
 \begin{figure}[tp]
 	\centering
@@ -803,6 +803,8 @@ To test that the pulses are phase randomised, we can look at coincidences betwee
 	\label{fig:HOM_coherence}
 \end{figure}
 
+We have demonstrated that by combing gain-switching and intensity modulation of an integrated \ac{CW} laser can produce phase randomised \acp{wcp}. The states are capable of \ac{HOM} interference maintaining a comparable visibility to state-of-the-art without requiring any external wavelength filtering.
+
 \section{Outlook}
 
 In this experiment, we have demonstrated state-of-the-art \acl{HOM} interference between GHz clocked integrated photonic devices exploiting monolithically fabricated lasers and \acp{eopm} with a visibility of \SI{46.5(8)}{\%}. Further, we have demonstrated that gain switching the laser between pulses doesn't reduce the visibility. However, this does limit the speed of operation which will be a consideration for \ac{QKD} systems. As we will see in chapter \ref{chap:mdiqkd}, this result will play a crucial role in \ac{MDI} and high fidelity interference will be required to bound the knowledge that could be gained by Mallory.
@@ -811,15 +813,19 @@ In this experiment, we have demonstrated state-of-the-art \acl{HOM} interference
 
 Performing this experiment in a controlled laboratory environment is obviously favourable for prolonged operation over several hours. However, as the aim will be to create devices that can deployed on real-world networks, the systems will need to compensate for drifts in the fibres and electronic control.
 
-To maintain a high fidelity interference between the two devices over a prolonged period will require feedback as the devices will drift. 
+%To maintain a high fidelity interference between the two devices over a prolonged period will require feedback as the devices will drift. 
 
-Polarisation can be stabilised by utilising the unused arm of the \ac{pbs} to monitor counts and using an digitally controlled polarisation controller to keep the polarisation stable.
+Polarisation can be stabilised by utilising the unused arm of the \ac{pbs} to monitor counts and using an electrically controlled polarisation controller to keep the polarisation stable.
 
 Wavelength can be stabilised using the visibility of \ac{HOM} interference by minimising coincidences. By changing the current of one of the transmitters, the wavelength can be very finely tuned. While this will change the power of the laser, if only small changes in current are required then this power change will be negligible.
 
 Timing stabilisation can be achieved by looking at the time of arrival of the pulses. In particular, the \ac{FWHM} can be used to ensure that the pulses are overlapped i.e. minimising the \ac{FWHM} in the histogram of detection events means that the pulses will be maximally overlapped.
 
-Average photon number is harder to stabilise but is also the least susceptible to drifts. Having fibres glues onto chips and by using a stable current source to power the laser, it is unlikely that photon number will need often retuning.
+Given a good current source to dive the laser, the average photon number is unlikely to change dramatically. On-chip fast photodiodes can be used to locally monitor the power to provide any required feedback. Having fibres fixed to the chips with UV cured glue will remove any change of loss from fibre coupling.
+
+%However, using on-chip photodiodes allows local feedback. 
+%
+%is harder to stabilise but is also the least susceptible to drifts. Having fibres glues onto chips and by using a stable current source to power the laser, it is unlikely that photon number will need often retuning.
 
 \subsection{Wavelength Division Multiplexing}
 
