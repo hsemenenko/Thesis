@@ -60,8 +60,8 @@ Secondly, it removes the asymmetry between Alice and Bob which allows for simple
 An outline of the protocol is shown in figure \ref{fig:mdi_protocol}. We will use a four decoy state protocol \cite{zhou2016} which treats the $Z$ and $X$ bases separately. The $Z$ basis is used entirely to generate keys, while the $X$ basis is used to bound knowledge gained by an eavesdropper. This is optimal for the symmetric case. The asymmetric case needs to be dealt with slightly differently \cite{wang2018}.
 
 \begin{enumerate}
-	\item \brisred{Preparation} Alice and Bob independently and randomly choose \acp{wcs} from the BB84 states. 
-	\item \brisred{Measurement} Charlie performs joint Bell state projections on states from Alice and Bob
+	\item \brisred{Preparation} Alice and Bob, independently and randomly, choose \acp{wcs} from the four BB84 states: $\ket{0}, \ket{1}, \ket{+}, \ket{-}$. Both the basis and bit choice should remain secret at this stage. These states are then sent to Charlie. 
+	\item \brisred{Measurement} Upon receipt of the states from Alice and Bob, Charlie performs a joint Bell state projection. This projection will depend on the encoding used. Using linear optics, it is only possible to project onto two of the four Bell states. However, security can be guaranteed even if only one Bell state projection is possible.
 	\item \brisred{Announcement} Each successful projection is publicly announced by Charlie, along with timing information.
 	\item \brisred{Basis Discussion} Alice and Bob each announced the basis chosen for each successful projection.
 	\item \brisred{Parameter Estimation} Using the information about successful events, they can calculate errors and gains to bound the knowledge of Eve and apply privacy amplification if necessary.
@@ -78,7 +78,7 @@ $X$              & Bit flip           & \multicolumn{1}{c}{-}   \\
 \label{tab:mdi-outcomes}
 \end{table}
 
-\subsection{Security and Key Rates}
+\subsection{Security and Key Rate Estimation}
 
 As we are not using a true single photon source, we need to be able to bound any knowledge gained by Eve through a photon number splitting attack. This is done through decoy-state analysis, where various intensity levels are chosen at random to bound the yield and error for single photon states \cite{Lo2005}. 
 
@@ -87,17 +87,20 @@ Here we used a four intensity decoy state protocol where we consider four source
 The estimate key rate of \ac{MDI} per pulse in the infinite case is given as
 
 \begin{equation}
-	R = (p_z)^2 Y_{11}^Z \left(1 - H_2(E_{11}^X)\right) - Q_{s,s}^Z f_e E_{S,S}^Z H_2(E_{\mu_s\mu_s}^Z)
+	R = (p_z)^2 Y_{11}^Z \left(1 - H_2(E_{11}^X)\right) - Q_{s,s}^Z f_e H_2(E_{\mu_s\mu_s}^Z)
 \end{equation}
-where $Y_{11}^Z$ and $e_{11}^X$ are the yield in the $Z$ basis and error in the $X$ basis, respectively, when Alice and Bob both sent single photons. These quantities are not directly measurable so we will need to bound them using a decoy state protocol. $Q_{S,S}^Z$ and $E_{S,S}^Z$ are the gain and error in the $Z$ basis and both can be measured directly. Finally, we introduce the error correction efficiency, $f_e>1$, and the binary entropy function defined as
+where $Y_{11}^Z$ and $e_{11}^X$ are the yield in the $Z$ basis and error in the $X$ basis, respectively, when Alice and Bob both sent single photons. These quantities are not directly measurable so we will need to bound them using a decoy state protocol. $Q_{S,S}^Z$ and $E_{S,S}^Z$ are the gain and error in the $Z$ basis and both can be measured directly. Finally, we introduce the error correction inefficiency, $f_e>1$, and the binary entropy function defined as
+
 \begin{equation}
-	H_2(x) = -x\mathrm{log}_2(x) - (1-x)\mathrm{log}_2(1-x).
+	H_2(x) = -x \mathrm{log}_2(x) - (1-x) \mathrm{log}_2(1-x).
 \end{equation}
 
 As we are not using single photons, we cannot determine the single photo errors and yields exactly. Therefore, we need to use a decoy state technique \cite{Lo2005} to give lower and upper bounds of $Y_{11}^Z$ and $E_{11}^X$, respectively. We then need to define the lower bound of the secret key rate as
+
 \begin{equation}
 	\underline{R} \geq R
 \end{equation}
+
 In essence, decoys states are measuring the loss of the channel during a key exchange to bound the knowledge that could be gain by an eavesdropper.  By measuring different intensities in a decoy state protocol, we can measure
 
 \begin{equation}
@@ -109,15 +112,19 @@ In essence, decoys states are measuring the loss of the channel during a key exc
 \end{equation}
 where $\mu_a$ ($\mu_b$) are the intensities of Alice's (Bob's) pulses. The gain, $Q_{\mu\sigma}^i$, defined to be the number of successful Bell state projections when Alice and Bob send states in the basis $i$ with intensities $\mu$ and $\sigma$ respectively.
 
-\begin{equation}
-	\underline{Y_{11}^Z} = \frac{1}{\left(\mu_{\mathrm{a}}-\omega_{\mathrm{a}}\right)\left(\mu_{\mathrm{b}}-\omega_{\mathrm{b}}\right)\left(v_{\mathrm{a}}-\omega_{\mathrm{a}}\right)\left(\nu_{\mathrm{b}}-\omega_{\mathrm{b}}\right)\left(\mu_{\mathrm{a}}-v_{\mathrm{a}}\right)}
-\end{equation}
 
 \begin{equation}
-	\overline{E_{11}^Z} = \frac{1}{\left(v_{\mathrm{a}}-\omega_{\mathrm{a}}\right)\left(v_{\mathrm{b}}-\omega_{\mathrm{b}}\right) \underline{Y^{X}_{1,1}}}
+	Y^X_{11} \ge \frac{P^\mu_1 P^\mu_2 (Q_{\omega\omega}^{X} - P^\omega_0 ( Q_{\nu\omega}^X + Q_{\omega\nu}^X) + (P^\omega_0)^2 Q_{\nu\nu}^X) - P^\omega_1 P^\omega_2(Q_{\mu\mu}^{X} - P^\mu_0 ( Q_{\nu\mu}^X + Q_{\mu\nu}^X) + (P^\mu_0)^2 Q_{\nu\nu}^X)}{P^\mu_1 P^\omega_1 ( P^\omega_1  P^\omega_2 - P^\mu_1 P^\omega_2)}
 \end{equation}
+where $P_i^m$ is the probability a coherent state with intensity $m$ contains $i$ photons. In the asymptotic limit $Y^Z_{11} =  Y^X_{11}$, which we can use in the key rate formula. We can then calculate an upper bound for the single-photon errors as 
 
-In the infinite case, $Y_{11}^Z = Y_{11}^X$ so we can use the decoy sates in $X$ to bound the single photon events in $Z$ \cite{zhou2016}. 
+\begin{equation}
+	e^X_{11} \le \frac{e^X_{\omega\omega}Q^X_{\omega\omega} - P^\omega_0\left(e^X_{\nu\omega}Q^X_{\nu\omega} + e^X_{\omega\nu}Q^X_{\omega\nu}\right) - (P^\omega_0)^2e^X_{\nu\nu}Q^X_{\nu\nu}}{(P^\omega_1)^2 Y^X_{11}}
+\end{equation}
+where the lower bound of $Y^X_{11}$ from above is used. Both the single-photon yield and error is calculated from experimental values (such as those provided below) to determine an estimated key rate.
+
+%In the infinite case, $Y_{11}^Z = Y_{11}^X$ so we can use the decoy sates in $X$ to bound the single photon events in $Z$ \cite{zhou2016}. 
+
 
 \subsection{Model}
 
@@ -304,7 +311,34 @@ To encode a state in the diagonal basis, the \ac{mzi} carves two pulses in quick
 
 \subsection{Phase Encoding}
 
-Also using an \ac{mzi}, phase can be encoding through a "push-pull" method. By either pulsing the top or bottom \ac{eopm}, a relative $\pi$ phase can be imparted on pulses.
+Typical phase encoding would be performed using an fast phase modulator. However, the losses associated with the \ac{qcse} mean that applying a $\pi$ phase between early and late time-bins would also cause a dramatic change in intensity. This could compromise security as the intensities between $\ket{+}$ and $\ket{-}$ states would be different. 
+
+Therefore, instead of using a single modulator to encode phases between time-bins, we can using an \ac{mzi} in a push-pull method. Consider an \ac{mzi} with $\theta$ phase on the top arm and $\phi$ phase on the bottom. The output will then be 
+
+\begin{equation}
+	\psi^\mathrm{out} =  \left(e^{i\theta} - e^{i\phi}\right) \psi^\mathrm{in}
+\end{equation}
+
+We can consider applying two sets of phases to the modulators. Firstly, if we apply $\vartheta$ to the top modulator, but no phase to the bottom, the output becomes
+
+\begin{equation}
+	\psi^\mathrm{out} =  \left(e^{i\vartheta} -1\right) \psi^\mathrm{in}
+\end{equation}
+
+While, if we were to reverse how the phases were applied, and have no phase on the top modulator and $\vartheta$ on the bottom, we would get
+
+\begin{equation}
+	\psi^\mathrm{out} =  \left(1 - e^{i\vartheta}\right) \psi^\mathrm{in}
+\end{equation}
+
+By taking the ratio of the outputs, we can compare their relative phases. Explicitly, we find
+
+\begin{equation}
+	\frac{e^{i\vartheta} -1}{1 - e^{i\vartheta}} = e^{i\pi}
+\end{equation}
+which represents a $\pi$ phase shift between the two outcomes. Therefore, to apply a phase shift to encode the $\ket{-}$, we should switch between the two cases for the early and late time-bins.
+
+%Also using an \ac{mzi}, phase can be encoding through a "push-pull" method. By either pulsing the top or bottom \ac{eopm}, a relative $\pi$ phase can be imparted on pulses.
 
 \subsection{Phase Randomisation}
 
@@ -312,6 +346,7 @@ A negative pulse can be used to gain switch the on-chip laser in between states 
 
 \begin{figure}[tbp]
 	\centering
+	\small
 	\def\svgwidth{\textwidth} 
 	\import{chapters/chapter04/fig04/}{states.pdf_tex}
 	\caption[BB84 states generated from the InP transmitters]{BB84 states generated from the InP transmitters using cascaded \acp{mzi}. They demonstrate a \SI{30}{dB} extinction ratio and a \SI{130}{\ps} \ac{FWHM} which includes broadening due to detector jitter.}
@@ -367,9 +402,9 @@ A variety of high-speed driving electronics was used. Each transmitter requires 
 
 \begin{figure}[tbp]
 	\centering
-	\def\svgwidth{0.9\textwidth} 
+	\def\svgwidth{\textwidth} 
 	\import{chapters/chapter04/fig04/Electrical_Signals/}{plot.pdf_tex}
-	\caption[Electrical signals for BB84 states]{Oscilloscope data of the electrical signals required for the BB84 states. P. Mod is used to create the pulses, Ph. Rand for gain switching the laser, Ph. Enc. for phase encoding and Int. Mod for decoy state preparation.}
+	\caption[Electrical signals for BB84 state generation]{Oscilloscope data of the electrical signals required for the BB84 states. P. Mod is used to create the pulses, Ph. Rand for gain switching the laser, Ph. Enc. for phase encoding and Int. Mod for decoy state preparation.}
 	\label{fig:elec_signals}
 \end{figure}
 
