@@ -83,7 +83,7 @@ An outline of the protocol is shown in figure \ref{fig:mdi_protocol}. We will us
 $Z$              & Bit flip           & Bit flip                \\
 $X$              & Bit flip           & \multicolumn{1}{c}{-}   \\
 \end{tabular}
-\caption[Measurement outcomes in MDI-QKD]{Post-selection rules of measurement outcomes in different bases. If Alice and Bob sent states in the same basis, either Alice of Bob of them will have to flip their bit unless the both chose the X basis and the result was $\ket{\psi^+}$.}
+\caption[Measurement outcomes in MDI-QKD]{Post-selection rules of measurement outcomes in different bases. If Alice and Bob sent states in the same basis, one of them will have to bit-flip unless the both chose the X basis and the result was $\ket{\psi^+}$.}
 \label{tab:mdi-outcomes}
 \end{table}
 
@@ -102,15 +102,6 @@ A given detection system will have a probability of dark count that we will call
 then the system will no longer be able to generate a positive key rate as the dark counts will dramatically increase the error rate in the system.
 
 In comparison, an \ac{MDI} system looks for coincidence measurements between detectors to indicate successful events. Therefore, for the same distance of fibre between Alice and Bob, the limit will be on the square of the dark count rate i.e.  $(p_{d.c})^2$. While the requirement for coincidences for a projection will also limit the number of successful events, the quadratic reduction in errors will allow key generation at much further distances.
-
-\subsection{Bell State Projection}
-
-To understand how the states are projected in the Bell basis, consider the entangled states
-
-\begin{equation}
-	\ket{\psi^\pm} = \frac{1}{\sqrt{2}}\left(a^\dagger_e b^\dagger_l \pm a^\dagger_l b^\dagger_e\right)\ket{0}
-\end{equation}
-in a time bin encoding where $e$ and $l$ refer to early and late time-bins of the state. This states are shown in figure \ref{fig:bell_state_projections}.
 
 \subsection{Security and Key Rate Estimation}
 
