@@ -24,7 +24,7 @@ Integrated photonics has seen vast improvements in recent years and represents a
 
 To counter these attacks from a malicious adversary through uncharacterised side-channels, device-independent \ac{QKD} schemes have been developed to limit the number of assumptions required for security \cite{Masanes2011}. One such vulnerability is with single-photon detectors, for which \ac{MDI} has been proposed. This approach removes all possible attacks against the detection system \cite{mdi-qkd}.
 
-In this section, we experimentally demonstrate \ac{MDI} using cost-effective, mass-manufacturable, chip-based transmitters that could facilitate commercial quantum-secured communication. We show that\SI{1}{kbps} of secret key can be exchanged at  \SI{100}{km} and predict positive key rates at more than \SI{350}{km}. The system removes detector vulnerabilities and represents a viable solution for near-term metropolitan quantum networks.
+In this section, we experimentally demonstrate \ac{MDI} using cost-effective, mass-manufacturable, chip-based transmitters that could facilitate commercial quantum-secured communication. We show that \SI{1}{kbps} of secret key can be exchanged at  \SI{100}{km} and predict positive key rates at more than \SI{350}{km}. The system removes detector vulnerabilities and represents a viable solution for near-term metropolitan quantum networks.
 
 %Advances in \ac{QKD} have seen many protocols developed for different purposes and security levels. The emerging quantum hacking community has exposed discrepancies between security theory and practical implementations. 
 
@@ -40,7 +40,7 @@ In this section, we experimentally demonstrate \ac{MDI} using cost-effective, ma
 
 As we use a weak coherent source we need to estimate the number of single-photon events. We employ a four-intensity decoy state analysis \cite{zhou2016} to bound the single-photon errors and yields. In this protocol, the $Z$ basis is used to generate key while the $X$ basis bounds the knowledge of an eavesdropper. 
 
-While\Ac{MDI} typically offers a lower key rate at short distances when compared with point-to-point systems \cite{Sibson2017InP}, it can generate key rate at greater distances \cite{yin2016} as the errors are proportional to the square of the dark count probability. It also offers the potential for the measurement equipment to be shared between multiple parties through optical switching without compromising security.
+While \ac{MDI} typically offers a lower key rate at short distances when compared with point-to-point systems \cite{Sibson2017InP}, it can generate key rate at greater distances \cite{yin2016} as the errors are proportional to the square of the dark count probability. It also offers the potential for the measurement equipment to be shared between multiple parties through optical switching without compromising security.
 
 Unlike a traditional point-to-point key exchange, \ac{MDI} introduces third party (Charlie) who mediates the exchange by announcing correlations between pulses sent by Alice and Bob. Importantly, the scheme removes unnecessary assumptions about the characteristics of the detection system meaning that 
 
@@ -60,9 +60,9 @@ Secondly, it removes the asymmetry between Alice and Bob which allows for simple
 An outline of the protocol is shown in figure \ref{fig:mdi_protocol}. We will use a four decoy state protocol \cite{zhou2016} which treats the $Z$ and $X$ bases separately. The $Z$ basis is used entirely to generate keys, while the $X$ basis is used to bound knowledge gained by an eavesdropper. This is optimal for the symmetric case. The asymmetric case needs to be dealt with slightly differently \cite{wang2018}.
 
 \begin{enumerate}
-	\item \brisred{Preparation} Alice and Bob, independently and randomly, choose \acp{wcs} from the four BB84 states: $\ket{0}, \ket{1}, \ket{+}, \ket{-}$. Both the basis and bit choice should remain secret at this stage. These states are then sent to Charlie. 
-	\item \brisred{Measurement} Upon receipt of the states from Alice and Bob, Charlie performs a joint Bell state projection. This projection will depend on the encoding used. Using linear optics, it is only possible to project onto two of the four Bell states. However, security can be guaranteed even if only one Bell state projection is possible.
-	\item \brisred{Announcement} Each successful projection is publicly announced by Charlie, along with timing information.
+	\item \brisred{Preparation} Alice and Bob, independently and randomly, choose \acp{wcs} from the four BB84 states: $\ket{0}, \ket{1}, \ket{+}, \ket{-}$. They will also choose an intensity, at random, to satisfy a decoy state protocol. The bases choices do not need to be equally weighted and the optimal choices will depend on the gains and errors in a finite key regime. Both the state and intensity choice should remain secret at this stage. These states are then sent to Charlie. 
+	\item \brisred{Measurement} Upon receipt of the states from Alice and Bob, Charlie performs a joint Bell state projection. This projection will depend on the encoding used. In a time-bin encoding scheme, coincidences between early and late clicks of two detectors indicates $\ket{\psi^\pm}$ projections. Using linear optics, it is only possible to project onto two of the four Bell states. However, security can be guaranteed even if only one Bell state projection is possible.
+	\item \brisred{Announcement} Each successful projection is publicly announced by Charlie, along with timing information. Unsuccessful events (those that are not coincidence clicks) are not required for the key exchange. However, they can be useful as feedback to Alice and Bob to adjust their systems.
 	\item \brisred{Basis Discussion} Alice and Bob each announced the basis chosen for each successful projection.
 	\item \brisred{Parameter Estimation} Using the information about successful events, they can calculate errors and gains to bound the knowledge of Eve and apply privacy amplification if necessary.
 \end{enumerate}
@@ -77,6 +77,27 @@ $X$              & Bit flip           & \multicolumn{1}{c}{-}   \\
 \caption[Measurement outcomes in MDI-QKD]{Post-selection rules of measurement outcomes in different bases. If Alice and Bob sent states in the same basis, one of them will have to bit-flip unless the both chose the X basis and the result was $\ket{\psi^+}$.}
 \label{tab:mdi-outcomes}
 \end{table}
+
+\Ac{MDI} has been used to demonstrate key rates at distances much further than those possible with traditional point-to-point systems \cite{yin2016}. This is due to how the signal rate compares with the error rate. The distance limitation of a \ac{QKD} system is when the probability of a successful event becomes on the order of a error due to the dark count rate of the system. In a point-to-point system, we only need to compare the probability of a pulse being transmitter over an optical fibre and being detected by the system. So for some \ac{wcs} with intensity $\mu$ and detector with efficiency $\eta$, we have the probability of a successful event being
+
+\begin{equation}
+	1 - e^{-10^{\nicefrac{0.2 L}{10}} \times \mu \times \eta}
+\end{equation}
+for some distance $L$ between Alice and Bob and assuming \SI{0.2}{dB\per\km} loss from optical fibres.
+
+A given detection system will have a probability of dark count that we will call $p_{d.c}$. So when we have
+
+\begin{equation}
+	p_{d.c.} \approx 1 - e^{-10^{\nicefrac{0.2 L}{10}} \times \mu \times \eta}
+\end{equation}
+then the system will no longer be able to generate a positive key rate as the dark counts will dramatically increase the error rate in the system.
+
+However, when we compare this to an \ac{MDI} system, we need to consider that Alice and Bob will be sending their states to a centralised location. Therefore, the distance travelled will be halved. So the probability that there will be a successful event is
+
+\begin{equation}
+	\left(1 - e^{-10^{\nicefrac{0.2 L}{20}} \times \mu \times \eta}\right)^2
+\end{equation}
+where we assume that Charlie will be half way between Alice and Bob so the loss can be halved for the same distance as before.
 
 \subsection{Security and Key Rate Estimation}
 
@@ -192,102 +213,13 @@ It is worth noting that the technology is still maturing and optimisation of des
 
 In this section, we will describe the operation of the transmitters to create weak coherent states that can be used for \acl{QKD}.
 
-\begin{figure}[tbp]
-\centering
-\begin{tikzpicture}
-%%X basis
-\node[left] at (-0.5, 3.8) {\large $X$ Basis};
-%%+
-\node[] at (0,4.3) {\large $\ket{+}$};
-\begin{axis}[xshift = 0.5cm,yshift=4cm,axis lines=none,width=2.5cm, height = 2.3cm]
-\addplot[
-purple,
-domain=-3:3,
-samples=201,
-line width=2pt
-]
-{exp(-x^2 / 2) / (1* sqrt(2*pi))};
-\end{axis}
-\draw[->] (1.1,4.65) arc (120:60:0.75);
-\node[] at (1.45,4.85) {\tiny $\phi = 0$};
-\begin{axis}[xshift = 1.5cm,yshift=4cm,axis lines=none,width=2.5cm, height = 2.3cm]
-\addplot[
-purple,
-domain=-3:3,
-samples=201,
-line width=2pt
-]
-{exp(-x^2 / 2) / (1* sqrt(2*pi))};
-\end{axis}
-%%-
-\node[] at (0,3.3) {\large $\ket{-}$};
-\begin{axis}[xshift = 0.5cm,yshift=3cm,axis lines=none,width=2.5cm, height = 2.3cm]
-\addplot[
-purple,
-domain=-3:3,
-samples=201,
-line width=2pt
-]
-{exp(-x^2 / 2) / (1* sqrt(2*pi))};
-\end{axis}
-\draw[->] (1.1,3.65) arc (120:60:0.75);
-\node[] at (1.45,3.85) {\tiny $\phi = \pi$};
-\begin{axis}[xshift = 1.5cm,yshift=3cm,axis lines=none,width=2.5cm, height = 2.3cm]
-\addplot[
-purple,
-domain=-3:3,
-samples=201,
-line width=2pt
-]
-{exp(-x^2 / 2) / (1* sqrt(2*pi))};
-\end{axis}
-%%Z basis
-\node[left] at (-5.5, 3.8) {\large $Z$ Basis};
-%%+0
-\node[] at (-5,4.3) {\large $\ket{0}$};
-\begin{axis}[xshift = -4.5cm,yshift=4cm,axis lines=none,width=2.5cm, height = 2.3cm]
-\addplot[
-purple,
-domain=-3:3,
-samples=201,
-line width=2pt
-]
-{exp(-x^2 / 2) / (1* sqrt(2*pi))};
-\end{axis}
-\begin{axis}[xshift = -3.5cm,yshift=3.7cm,axis lines=none,width=2.5cm, height = 2.3cm]
-\addplot[
-purple,
-domain=-3:3,
-samples=201,
-line width=2pt
-]
-{0};
-\end{axis}
-%%1
-\node[] at (-5,3.3) {\large $\ket{1}$};
-\begin{axis}[xshift = -4.5cm,yshift=2.7cm,axis lines=none,width=2.5cm, height = 2.3cm]
-\addplot[
-purple,
-domain=-3:3,
-samples=201,
-line width=2pt
-]
-{0};
-\end{axis}
-\begin{axis}[xshift = -3.5cm,yshift=3cm,axis lines=none,width=2.5cm, height = 2.3cm]
-\addplot[
-purple,
-domain=-3:3,
-samples=201,
-line width=2pt
-]
-{exp(-x^2 / 2) / (1* sqrt(2*pi))};
-\end{axis}
-\draw[<->, line width = 0.25mm] (-4,4.8) -- (-3,4.8);
-\node[] at (-3.5,5) {$\Delta t$};
-\end{tikzpicture}
-\caption[BB84 time-bin encoding]{BB84 states in a time-bin encoded scheme. Pulses are separated by a time $\Delta t$ where the timing forms the computational basis. A late pulse indicates a $\ket{0}$ while an early pulse indicates a $\ket{1}$. $\ket{+}$ and $\ket{-}$ states can be realised through superpositions of early and late pulses with relative phases.}
-\label{fig:BB84_time_bin}
+\begin{figure}[tp]
+	\centering
+	\small
+	\def\svgwidth{\textwidth} 
+	\import{chapters/chapter04/fig04/}{time_bin_states.pdf_tex}
+	\caption[BB84 time-bin encoding]{BB84 states in a time-bin encoded scheme. Pulses are separated by a time $\Delta t$ where the timing forms the computational basis. A late pulse indicates a $\ket{0}$ while an early pulse indicates a $\ket{1}$. $\ket{+}$ and $\ket{-}$ states can be realised through superposition of early and late pulses with relative phases. The intensities of the pulse in the X basis is halved so that the average photon number over the states remains constant between bases.}
+	\label{fig:BB84_time_bin}
 \end{figure}
 
 \begin{figure}[tbp]
@@ -549,9 +481,15 @@ Phase randomisation means that the clock rate needs to be reduced as the laser n
 	\label{fig:mdi_rates}
 \end{figure}
 
-\subsection{2 GHz Clock Rate}
+In figure \ref{fig:mdi_rates}, we show the asymptotic limit of the chip-based system. We demonstrate that the system can generate \SI{12.7}{kbps} at \SI{25}{\km} and show positive key generation up to \SI{200}{\km}. At \SI{100}{\km}, the system is capable of generating \SI{1}{kbps}. Using the error rates demonstrated at shorter distances, we can estimate the performance of the system at further distances. We are able to show that the key rate would remain positive beyond \SI{350}{\km}.
 
-By relaxing the need for phase randomisation, the transmitters can be clocked at \SI{2}{GHz} which means a state repetition rate of \SI{1}{GHz}.
+While positive key rates are possible, it is impractical to estimate the key rates at these distances. As the channel loss increases, the probability of getting a successful event decreases exponentially. This means that in order to get a meaningful number of events to estimate the error rates and gains, data acquisition time increases exponentially. 
+
+At \SI{200}{\km}, data is acquired for one hour to generate enough statistics to estimate the errors and gains. Using the model, we can estimate how long we would need to acquire data at \SI{350}{\km} to get a similar number of events. We find that data would need to be taken for more than 23 days. 
+
+%\subsection{2 GHz Clock Rate}
+%
+%By relaxing the need for phase randomisation, the transmitters can be clocked at \SI{2}{GHz} which means a state repetition rate of \SI{1}{GHz}.
 
 \subsection{Security Assurances}
 
