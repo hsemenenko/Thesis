@@ -4,7 +4,7 @@ using Plots.PlotMeasures
 gr(size=(1024,768))
 
 date = Date[]
-text = Int64[]
+texts = Int64[]
 caption = Int64[]
 figure = Int64[]
 maths = Int64[]
@@ -25,7 +25,7 @@ for file in filter(x -> endswith(x, "txt"), readdir("./History"))
         read(f, String)
     end
     t = parse(Int, collect(eachmatch(t_reg, data))[end][1])
-    push!(text, t)
+    push!(texts, t)
     c = parse(Int, collect(eachmatch(c_reg, data))[end][1])
     push!(caption, c)
     f = parse(Int, collect(eachmatch(f_reg, data))[end][1])
@@ -36,37 +36,47 @@ for file in filter(x -> endswith(x, "txt"), readdir("./History"))
     push!(words, w)
 end
 
-plot(date,
-   [text,caption,words],
+plot([date[66],date[66]],
+        [0, words[66]],
+        st = :path,
+        label = ["Chapter 3 Draft"],
+        yformatter = :plain,
+        w=4,
+        color = :purple,
+        yforeground_color_grid = :white,
+        xforeground_color_grid = :white
+        )
+
+plot!(date,
+   [words,texts,caption],
    xrotation = 45,
-   lab = ["Text" "Captions" "Total"],
+   lab = ["Total" "Text" "Captions"],
    linetype=:steppost,
    w=3,
    yaxis = ("Text and captions", (0,25000)),
    yformatter = :plain,
    legend = :topleft,
+   color = [:green :blue :blue],
+   linestyle = [:solid :dash :dot],
    left_margin = 10mm,
-   right_margin = 10mm
+   right_margin = 10mm,
+   ygridlinewidth = 0
    )
-
-plot!([date[66],date[66]],
-        [0, words[66]],
-        st = :path,
-        label = ["Chapter 3 Draft"],
-        yformatter = :plain,
-        w=2,
-        color = :purple)
 
 plot!(twinx(),
    date,
-   [figure, maths],
-   lab = ["Figures" "Equations"],
-   line=(:dot),
+   [maths, figure],
+   lab = [ "Equations" "Figures"],
    w=3,
    legend = :topright,
-   yaxis = ("\nFigures and Equations", (0,300)),
+   yaxis = ("\nFigures and Equations", (0,400)),
    xaxis = false,
+   linestyle = [:solid :dot],
+   color = :orange,
    linetype=:steppost,
-   xrotation = 45)
+   xrotation = 45,
+   yforeground_color_grid = :white,
+   xforeground_color_grid = :white
+   )
 
 savefig("count.png")
