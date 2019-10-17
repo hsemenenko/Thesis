@@ -258,11 +258,15 @@ To generate \acp{wcs}, we will utilise the on-chip laser from chapter \ref{chap:
 
 \subsection{Timing Encoding}
 
-The early and late time-bins of the state will be the logical $\ket{0}$ and $\ket{1}$ states. 
+The early and late time-bins of the state will be the logical $\ket{0}$ and $\ket{1}$ states. Therefore, we need to be able to create distinct pulses in either time-bin i.e. there should be a good extinction ratio between the two time-bins. As we are using a \ac{CW} laser as our light source, it will need to be intensity modulated to encode time.
 
-As for the previous chapter, time encoding the states will be done using a \acl{mzi} to carve the \ac{CW} laser into \SI{130}{ps} pulses with an extinction ratio\footnote{The ratio between the ``on'' and ``off'' powers of the \ac{mzi}} of up to \SI{30}{dB}.
+As in the previous chapter, time encoding the states will be done using an \acl{mzi} to carve the \ac{CW} laser into \SI{130}{ps} pulses with an extinction ratio
+
+%\footnote{The ratio between the ``on'' and ``off'' powers of the \ac{mzi}} of up to \SI{30}{dB}.
 
 To encode a state in the diagonal basis, the \ac{mzi} carves two pulses in quick succession. This requires that the coherence length of the laser is longer than the pulse separation to ensure coherence within a state. 
+
+The reduction in intensity for the diagonal basis could be realised by reducing the voltage of the RF signal driving the \ac{mzi}. However, this would introduce more errors as the extinction ratio would be reduced.
 
 \subsection{Phase Encoding}
 
@@ -297,16 +301,20 @@ which represents a $\pi$ phase shift between the two outcomes. Therefore, to app
 
 \subsection{Phase Randomisation}
 
-A negative pulse can be used to gain switch the on-chip laser in between states to randomise the phase. 
+For the security of the protocol, we need to ensure that the states are phase randomised so that the output photon statistics are Poissonian for decoy state estimation. We can used the gain switching demonstrated in chapter \ref{chap:hom}. By  
+
+A negative pulse can be used to gain switch the on-chip laser in between states to randomise the phase. This RF signal allows the cavity and conduction band time to empty meaning that lasing will continue from a spontaneous emission.  
 
 \begin{figure}[tbp]
 	\centering
 	\small
 	\def\svgwidth{\textwidth} 
 	\import{chapters/chapter04/fig04/}{states.pdf_tex}
-	\caption[BB84 states generated from the InP transmitters]{BB84 states generated from the InP transmitters using cascaded \acp{mzi}. They demonstrate a \SI{30}{dB} extinction ratio and a \SI{130}{\ps} \ac{FWHM} which includes broadening due to detector jitter.}
+	\caption[BB84 states generated from the InP transmitters]{BB84 states generated from the \ac{InP} transmitters using cascaded \acp{mzi}. They demonstrate a \SI{30}{dB} extinction ratio and a \SI{130}{\ps} \ac{FWHM} which includes broadening due to detector jitter.}
 	\label{fig:states}
 \end{figure}
+
+In figure \ref{fig:states}, we show histograms of the four time-bin encoded BB84 states generated from the \ac{InP} devices. We demonstrate a \SI{500}{ps} separation, \SI{130}{ps} \ac{FWHM} pulses with an extinction ratio of more than \SI{30}{dB}. For the diagonal states, the intensity between early and time-bins remains constant. The intensities are arbitrary and the intensities of the diagonal states will be determined through the decoy state preparation in the next section.
 
 \subsection{Decoy State Preparation}
 
