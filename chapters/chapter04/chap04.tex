@@ -203,24 +203,28 @@ To model the errors, we need to include contributions from dark counts in the sy
 
 \subsection{Shared Resources}
 
-As \ac{MDI} introduces Charlie to mediate the key exchange, this easily facilitates sharing resources by switching between users connecting to a centralised node. In a metropolitan network, each used can access the quantum network with a transmitter device and through simple switching allows all users to exchange secret keys with every other user. Such optical switches are already available commercially with less than \SI{1}{dB} insertion loss which is acceptable for \ac{QKD} system \cite{polatis}. While superconducting detectors are generally considered a piece of research equipment, there have been many advances in the technology of both the detector fabrication to cryogenic coolers which meant that widespread usage on \acp{snspd} should be anticipated. More advanced quantum networks will be heavily dependant on the unrivalled specifications that \acp{snspd} offer.
+As \ac{MDI} introduces Charlie to mediate the key exchange, this easily facilitates sharing resources by switching between users connecting to a centralised node. In a metropolitan network, each used can access the quantum network with a transmitter device and through simple switching allows all users to exchange secret keys with every other user. Such optical switches are already available commercially with less than \SI{1}{dB} insertion loss which is acceptable for \ac{QKD} system \cite{polatis}. 
+
+While superconducting detectors are currently considered research equipment, there have been many advances in the technology of both the detector fabrication and cryogenic coolers which means that widespread adoption of \acp{snspd} should be anticipated. More advanced quantum networks will be heavily dependant on the unrivalled specifications that \acp{snspd} offer. Moreover, the potential for waveguide integrated detectors \cite{sprengers2011, vetter2016, yun2019}, fast modulation at cryogenic temperatures \cite{eltes2019} and wavelength demultiplexing \cite{sugita2000} means that an \ac{MDI} system could benefit from further photonic integration.
 
 \section{Integrated Transmitters}
+
+\begin{figure}[tp]
+	\centering
+	\small
+	\def\svgwidth{0.9\textwidth} 
+	\import{chapters/chapter04/fig04/}{time_bin_states.pdf_tex}
+	\caption[BB84 time-bin encoding]{BB84 states in a time-bin encoded scheme. Pulses are separated by a time $\Delta t$ where the timing forms the computational basis. A late pulse indicates a $\ket{0}$ while an early pulse indicates a $\ket{1}$. $\ket{+}$ and $\ket{-}$ states can be realised through superposition of early and late pulses with relative phases. The intensities of the pulse in the X basis is halved so that the average photon number over the states remains constant between bases.}
+	\label{fig:BB84_time_bin}
+\end{figure}
 
 The \ac{InP} transmitters provide all the required components to create high fidelity BB84 states that are required for \ac{MDI}. By using chip-based transmitters the power, size and weight of the optics needed can be dramatically reduced compared to fibre (and free-space) alternatives. It also facilitates mass production without requiring manual assembly. 
 
 It is worth noting that the technology is still maturing and optimisation of designs is still required before devices can be confidently reproduced to a required standard for secure communication. The transmitters used for this experiment (figure \ref{fig:oclaro_00}) were originally designed to operate as transceiver\footnote{A device which is capable of transmitting the quantum signal as well as receiving it.} which would allow two-way operation. However, the delay line was found to be too lossy to be useful, showing how further optimisation of designs is required.
 
-In this section, we will describe the operation of the transmitters to create weak coherent states that can be used for \acl{QKD}.
+We will encode our quantum states in a time-bin encoding scheme. The four BB84 states are shown in figure \ref{fig:BB84_time_bin}. The early and late time-bins of the states will be our $\ket{0}$ and $\ket{1}$ states where a superposition of these creates more complicated states. A relative phase can be applied between the time-bins for a full encoding. We will define the $\ket{+}$ state to be when the two time-bins are in phase. Then to encode a $\ket{-}$ state, we need to apply a $\pi$ phase shift between time-bins. 
 
-\begin{figure}[tp]
-	\centering
-	\small
-	\def\svgwidth{\textwidth} 
-	\import{chapters/chapter04/fig04/}{time_bin_states.pdf_tex}
-	\caption[BB84 time-bin encoding]{BB84 states in a time-bin encoded scheme. Pulses are separated by a time $\Delta t$ where the timing forms the computational basis. A late pulse indicates a $\ket{0}$ while an early pulse indicates a $\ket{1}$. $\ket{+}$ and $\ket{-}$ states can be realised through superposition of early and late pulses with relative phases. The intensities of the pulse in the X basis is halved so that the average photon number over the states remains constant between bases.}
-	\label{fig:BB84_time_bin}
-\end{figure}
+In this section, we will describe the operation of the transmitters to create weak coherent states that can be used for \acl{QKD}.
 
 \begin{figure}[tbp]
 	\centering
@@ -235,7 +239,13 @@ In this section, we will describe the operation of the transmitters to create we
 	\label{fig:chip_mdi_schematic}
 \end{figure}
 
-\subsection{Pulse Carving}
+\subsection{Integrated Light Source}
+
+To generate \acp{wcs}, we will utilise the on-chip laser from chapter \ref{chap:hom}. This will provide the coherent continuous wave light from which we can encode quantum states in a time-bin encoding. The laser linewidth allows for coherence between time-bins and precise wavelength tuning.  
+
+\subsection{Timing Encoding}
+
+The early and late time-bins of the state will be the logical $\ket{0}$ and $\ket{1}$ states. 
 
 As for the previous chapter, time encoding the states will be done using a \acl{mzi} to carve the \ac{CW} laser into \SI{130}{ps} pulses with an extinction ratio\footnote{The ratio between the ``on'' and ``off'' powers of the \ac{mzi}} of up to \SI{30}{dB}.
 
@@ -287,7 +297,7 @@ A negative pulse can be used to gain switch the on-chip laser in between states 
 
 \subsection{Decoy State Preparation}
 
-While the absoption of the \ac{qcse} is an issue when encoding phase, it can be used to vary the intensity for decoy state preparation. The effect has a bandwidth of \SI{>10}{\GHz}. By biasing a modulator in the circuit to \SI{9}{\V} below the chip ground, we can quickly modulator with around \SI{2}{\Vpp} to vary the intensity by \SI{15}{dB}. We are also able to choose whether we pulse the intensity \ac{mzi} which creates the pulses which can be useful for encoding a vacuum state with an intensity of \SI{30}{dB} below that of signal states.
+While the absorption of the \ac{qcse} is an issue when encoding phase, it can be used to vary the intensity for decoy state preparation. The effect has a bandwidth of \SI{>10}{\GHz}. By biasing a modulator in the circuit to \SI{9}{\V} below the chip ground, we can quickly modulator with around \SI{2}{\Vpp} to vary the intensity by \SI{15}{dB}. We are also able to choose whether we pulse the intensity \ac{mzi} which creates the pulses which can be useful for encoding a vacuum state with an intensity of \SI{30}{dB} below that of signal states.
 
 As the intensities of the decoy states is not fix, we will need to model how these intensities will vary the secret key rate. It has been previously shown that reducing the intensity of decoy states will increase the secret key rate \cite{Chan2014}. However, we will still 
 
