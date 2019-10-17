@@ -42,29 +42,38 @@ As we use a weak coherent source we need to estimate the number of single-photon
 
 While \ac{MDI} typically offers a lower key rate at short distances when compared with point-to-point systems \cite{Sibson2017InP}, it can generate key rate at greater distances \cite{yin2016} as the errors are proportional to the square of the dark count probability. It also offers the potential for the measurement equipment to be shared between multiple parties through optical switching without compromising security.
 
-Unlike a traditional point-to-point key exchange, \ac{MDI} introduces third party (Charlie) who mediates the exchange by announcing correlations between pulses sent by Alice and Bob. Importantly, the scheme removes unnecessary assumptions about the characteristics of the detection system meaning that 
-
-it improves security by removing all, current and future, side-channels on the detectors \cite{mdi-qkd}. This is an important step as the detectors are often vulnerable to attacks due to their complexity \cite{Lydersen2010a, Makarov2006}. In this case, it doesn't need to be assumed that Charlie is a trusted party and the node could equally be operated by Eve or Mallory. Any interference at the detections by a malicious attacker will only reduce the possible key rate, so is equivalent to a denial of service attack.
+Unlike a traditional point-to-point key exchange, \ac{MDI} introduces third party (Charlie) who mediates the exchange by announcing correlations between pulses sent by Alice and Bob. Importantly, the scheme removes unnecessary assumptions about the characteristics of the detection system meaning that it improves security by removing all, current and future, side-channels on the detectors \cite{mdi-qkd}. This is an important step as the detectors are often vulnerable to attacks due to their complexity \cite{Lydersen2010a, Makarov2006}. In this case, it doesn't need to be assumed that Charlie is a trusted party and the node could equally be operated by Eve or Mallory. Any interference at the detectors by a malicious attacker will only reduce the possible key rate, so is equivalent to a denial of service attack.
 
 Secondly, it removes the asymmetry between Alice and Bob which allows for simpler metropolitan networks without reducing security with trusted nodes. This will be discussed further in chapter \ref{chap:node}.
 
 \subsection{Protocol}
 
-\begin{figure}[tbp]
+\begin{figure}[tp]
 	\centering
-	\includegraphics[scale=0.25]{MDI-QKD_Protocol.png}
-	\caption[MDI-QKD protocol]{Measurement-device-independent quantum key distribution protocol schematic for time-bin encoding. Alice and Bob act symmetrically by sending BB84 states to a third party, Charlie, who projects the states in the Bell basis. Charlie announces all successful events from which Alice and Bob can infer a key after sharing state basis information.}
+	\small
+	\def\svgwidth{\textwidth} 
+	\import{chapters/chapter04/fig04/}{MDI-QKD_Protocol.pdf_tex}
+	\caption[Measure-device-independent quantum key distribution time-bin encoded protocol]{Measurement-device-independent quantum key distribution protocol schematic for time-bin encoding. Alice and Bob act symmetrically by generating BB84 states and sending them to Charlie, an untrusted third party, over quantum channels. Charlie projects the states in the Bell basis and announces all successful events. Alice and Bob can then infer a key after sharing state basis information over a public channel.}
 	\label{fig:mdi_protocol}
 \end{figure}
 
 An outline of the protocol is shown in figure \ref{fig:mdi_protocol}. We will use a four decoy state protocol \cite{zhou2016} which treats the $Z$ and $X$ bases separately. The $Z$ basis is used entirely to generate keys, while the $X$ basis is used to bound knowledge gained by an eavesdropper. This is optimal for the symmetric case. The asymmetric case needs to be dealt with slightly differently \cite{wang2018}.
 
+\begin{figure}[tp]
+	\centering
+	\huge
+	\def\svgwidth{0.8\textwidth} 
+	\import{chapters/chapter04/fig04/}{Bell_state_projections.pdf_tex}
+	\caption[Bell state projections for time-bin encoding]{Coincidences between detectors for successful Bell state projections in a time-bin encoding. Both $\ket{\psi^+}$ (purple) and $\ket{\psi^-}$ (red) are shown as coincidences between time-bins of the detectors. $t^i_j$ corresponds to a detection event in the $i$th detector, where $j$ is either an early ($e$) or late ($l$) time-bin. }
+	\label{fig:bell_state_projections}
+\end{figure}
+
 \begin{enumerate}
 	\item \brisred{Preparation} Alice and Bob, independently and randomly, choose \acp{wcs} from the four BB84 states: $\ket{0}, \ket{1}, \ket{+}, \ket{-}$. They will also choose an intensity, at random, to satisfy a decoy state protocol. The bases choices do not need to be equally weighted and the optimal choices will depend on the gains and errors in a finite key regime. Both the state and intensity choice should remain secret at this stage. These states are then sent to Charlie. 
 	\item \brisred{Measurement} Upon receipt of the states from Alice and Bob, Charlie performs a joint Bell state projection. This projection will depend on the encoding used. In a time-bin encoding scheme, coincidences between early and late clicks of two detectors indicates $\ket{\psi^\pm}$ projections. Using linear optics, it is only possible to project onto two of the four Bell states. However, security can be guaranteed even if only one Bell state projection is possible.
 	\item \brisred{Announcement} Each successful projection is publicly announced by Charlie, along with timing information. Unsuccessful events (those that are not coincidence clicks) are not required for the key exchange. However, they can be useful as feedback to Alice and Bob to adjust their systems.
-	\item \brisred{Basis Discussion} Alice and Bob each announced the basis chosen for each successful projection.
-	\item \brisred{Parameter Estimation} Using the information about successful events, they can calculate errors and gains to bound the knowledge of Eve and apply privacy amplification if necessary.
+	\item \brisred{Basis Discussion} Alice and Bob each announced the basis chosen for each successful projection. When their bases choices were the same, they can use the rules in table \ref{tab:mdi-outcomes} to 
+	\item \brisred{Parameter Estimation} Using the information about  events, Alice and Bob can calculate error rates and gains to bound the knowledge of Eve and apply privacy amplification if necessary.
 \end{enumerate}
 
 \begin{table}[tbp]
@@ -78,26 +87,21 @@ $X$              & Bit flip           & \multicolumn{1}{c}{-}   \\
 \label{tab:mdi-outcomes}
 \end{table}
 
-\Ac{MDI} has been used to demonstrate key rates at distances much further than those possible with traditional point-to-point systems \cite{yin2016}. This is due to how the signal rate compares with the error rate. The distance limitation of a \ac{QKD} system is when the probability of a successful event becomes on the order of a error due to the dark count rate of the system. In a point-to-point system, we only need to compare the probability of a pulse being transmitter over an optical fibre and being detected by the system. So for some \ac{wcs} with intensity $\mu$ and detector with efficiency $\eta$, we have the probability of a successful event being
+\Ac{MDI} has been used to demonstrate key rates at distances much further than those possible with traditional point-to-point systems \cite{yin2016}. This is due to how the signal rate compares with the error rate. The distance limitation of a \ac{QKD} system is when the probability of a successful event becomes on the order of a error due to the dark count rate of the system. In a \ac{QKD} system, we  need to compare the probability of a pulse being transmitted over an optical fibre and being detected by the system. So for some \ac{wcs} with intensity $\mu$ and detector with efficiency $\eta$, we have the probability of a successful event being
 
 \begin{equation}
 	1 - e^{-10^{\nicefrac{0.2 L}{10}} \times \mu \times \eta}
 \end{equation}
 for some distance $L$ between Alice and Bob and assuming \SI{0.2}{dB\per\km} loss from optical fibres.
 
-A given detection system will have a probability of dark count that we will call $p_{d.c}$. So when we have
+A given detection system will have a probability of dark count that we will call $p_{d.c}$. So for a protocol such as BB84, when we have
 
 \begin{equation}
-	p_{d.c.} \approx 1 - e^{-10^{\nicefrac{0.2 L}{10}} \times \mu \times \eta}
+	p_{d.c.} \approx 1 - \mathrm{exp}\left(-10^{\nicefrac{0.2 L}{10}} \times \mu \times \eta\right)
 \end{equation}
 then the system will no longer be able to generate a positive key rate as the dark counts will dramatically increase the error rate in the system.
 
-However, when we compare this to an \ac{MDI} system, we need to consider that Alice and Bob will be sending their states to a centralised location. Therefore, the distance travelled will be halved. So the probability that there will be a successful event is
-
-\begin{equation}
-	\left(1 - e^{-10^{\nicefrac{0.2 L}{20}} \times \mu \times \eta}\right)^2
-\end{equation}
-where we assume that Charlie will be half way between Alice and Bob so the loss can be halved for the same distance as before.
+In comparison, an \ac{MDI} system looks for coincidence measurements between detectors to indicate successful events. Therefore, for the same distance of fibre between Alice and Bob, the limit will be on the square of the dark count rate i.e.  $(p_{d.c})^2$. While the requirement for coincidences for a projection will also limit the number of successful events, the quadratic reduction in errors will allow key generation at much further distances.
 
 \subsection{Security and Key Rate Estimation}
 
@@ -189,7 +193,7 @@ The gain of the system, $Q^{ \{X,Z\} }$, is the probability of projection onto a
 \end{equation}
 where $Q^{d.c.}$ are the successful projections that are because of dark counts in the system. As \acp{snspd} have dark counts of \SI{100}{Hz} this value is typically $\left(10^{-6}\right)^2$. The value is quoted as squared as we are looking for coincidences between the two detectors. 
 
-The prefactor of \nicefrac{3}{8} is due to the probability of a successful projection give two random states sent by Alice and Bob. On half of the time, the states will be projected onto a Bell state that cannot be determined by the measurement device \cite{}. Of the remainder, one half will be projected successfully onto $\ket{\psi^-}$ (\nicefrac{1}{4} of the total states), while with probability \nicefrac{1}{2} they will be successfully projected onto $\ket{\psi^+}$ (\nicefrac{1}{8} of the total states). 
+The prefactor of \nicefrac{3}{8} is due to the probability of a successful projection give two random states sent by Alice and Bob. One half of the time, the states will be projected onto a Bell state that cannot be determined by the measurement device \cite{}. Of the remainder, one half will be projected successfully onto $\ket{\psi^-}$ (\nicefrac{1}{4} of the total states), while with probability \nicefrac{1}{2} they will be successfully projected onto $\ket{\psi^+}$ (\nicefrac{1}{8} of the total states). 
 
 To calculate the probability of coincidence from the coherent states, we take the (slight) simplification of one minus the probability of zero photons multiplied by the detection efficiency, $\eta$. While the true probability will vary due to multiphoton terms, the amplitude of the coherent states is sufficiently low ($\le 0.2$ at \SI{0}{\km}) the multiphoton terms will not play a large role, especially at longer distances. The attenuation on each state is calculated, assuming \SI{0.2}{dB\per\km}, a the distance between Alice and Bob, $L$, is halved as Charlie sits at a location halfway between them.
 
@@ -218,9 +222,9 @@ While superconducting detectors are currently considered research equipment, the
 	\label{fig:BB84_time_bin}
 \end{figure}
 
-The \ac{InP} transmitters provide all the required components to create high fidelity BB84 states that are required for \ac{MDI}. By using chip-based transmitters the power, size and weight of the optics needed can be dramatically reduced compared to fibre (and free-space) alternatives. It also facilitates mass production without requiring manual assembly. 
+\Ac{InP} transmitters provide all the required optical components to create high fidelity BB84 states as required for \ac{MDI}. By using chip-based transmitters the power, size and weight of the optics needed can be dramatically reduced compared to fibre (and free-space) alternatives. It also facilitates mass production without requiring manual assembly. 
 
-It is worth noting that the technology is still maturing and optimisation of designs is still required before devices can be confidently reproduced to a required standard for secure communication. The transmitters used for this experiment (figure \ref{fig:oclaro_00}) were originally designed to operate as transceiver\footnote{A device which is capable of transmitting the quantum signal as well as receiving it.} which would allow two-way operation. However, the delay line was found to be too lossy to be useful, showing how further optimisation of designs is required.
+It is worth noting that the technology is still maturing and optimisation of designs is still required before devices can be confidently reproduced to a required standard for secure communication. The transmitters used for this experiment (figure \ref{fig:oclaro_00}) were originally designed to operate as transceiver modules which would allow two-way operation. The delay line in the centre of the device could be used for encoding and decoding time-bin encoded states. However, the waveguides were found to be too lossy to be useful, showing how further optimisation of designs is required.
 
 We will encode our quantum states in a time-bin encoding scheme. The four BB84 states are shown in figure \ref{fig:BB84_time_bin}. The early and late time-bins of the states will be our $\ket{0}$ and $\ket{1}$ states where a superposition of these creates more complicated states. A relative phase can be applied between the time-bins for a full encoding. We will define the $\ket{+}$ state to be when the two time-bins are in phase. Then to encode a $\ket{-}$ state, we need to apply a $\pi$ phase shift between time-bins. 
 
