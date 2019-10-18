@@ -53,20 +53,11 @@ Secondly, it removes the asymmetry between Alice and Bob which allows for simple
 	\small
 	\def\svgwidth{\textwidth} 
 	\import{chapters/chapter04/fig04/}{MDI-QKD_Protocol.pdf_tex}
-	\caption[Measure-device-independent quantum key distribution time-bin encoded protocol]{Measurement-device-independent quantum key distribution protocol schematic for time-bin encoding. Alice and Bob act symmetrically by generating BB84 states and sending them to Charlie, an untrusted third party, over quantum channels. Charlie projects the states in the Bell basis and announces all successful events. Alice and Bob can then infer a key after sharing state basis information over a public channel.}
+	\caption[Measure-device-independent quantum key distribution time-bin encoded protocol]{Measurement-device-independent quantum key distribution protocol schematic for time-bin encoding. Alice and Bob act symmetrically by generating BB84 states and sending them to Charlie, an untrusted third party, over quantum channels. Charlie projects the states in the Bell basis and announces all successful events. Alice and Bob can then infer a key after sharing state basis information over an authenticated classical channel which can be public.}
 	\label{fig:mdi_protocol}
 \end{figure}
 
 An outline of the protocol is shown in figure \ref{fig:mdi_protocol}. We will use a four decoy state protocol \cite{zhou2016} which treats the $Z$ and $X$ bases separately. The $Z$ basis is used entirely to generate keys, while the $X$ basis is used to bound knowledge gained by an eavesdropper. This is optimal for the symmetric case. The asymmetric case needs to be dealt with slightly differently \cite{wang2018}.
-
-\begin{figure}[tp]
-	\centering
-	\huge
-	\def\svgwidth{0.8\textwidth} 
-	\import{chapters/chapter04/fig04/}{Bell_state_projections.pdf_tex}
-	\caption[Bell state projections for time-bin encoding]{Coincidences between detectors for successful Bell state projections in a time-bin encoding. Both $\ket{\psi^+}$ (purple) and $\ket{\psi^-}$ (red) are shown as coincidences between time-bins of the detectors. $t^i_j$ corresponds to a detection event in the $i$th detector, where $j$ is either an early ($e$) or late ($l$) time-bin. }
-	\label{fig:bell_state_projections}
-\end{figure}
 
 \begin{enumerate}
 	\item \brisred{Preparation} Alice and Bob, independently and randomly, choose \acp{wcs} from the four BB84 states: $\ket{0}, \ket{1}, \ket{+}, \ket{-}$. They will also choose an intensity, at random, to satisfy a decoy state protocol. The bases choices do not need to be equally weighted and the optimal choices will depend on the gains and errors in a finite key regime. Both the state and intensity choice should remain secret at this stage. These states are then sent to Charlie. 
@@ -107,6 +98,15 @@ This is only a limiting factor if the dark count rate of the detector system is 
 
 \subsection{Bell State Projection}
 
+\begin{figure}[tp]
+	\centering
+	\huge
+	\def\svgwidth{0.8\textwidth} 
+	\import{chapters/chapter04/fig04/}{Bell_state_projections.pdf_tex}
+	\caption[Bell state projections for time-bin encoding]{Coincidences between detectors for successful Bell state projections in a time-bin encoding. Both $\ket{\psi^+}$ (purple) and $\ket{\psi^-}$ (red) are shown as coincidences between time-bins of the detectors. $t^i_j$ corresponds to a detection event in the $i$th detector, where $j$ is either an early ($e$) or late ($l$) time-bin. }
+	\label{fig:bell_state_projections}
+\end{figure}
+
 To understand how the states are projected in the Bell basis, consider the entangled states
 
 \begin{equation}
@@ -125,16 +125,16 @@ The estimate key rate of \ac{MDI} per pulse in the infinite case is given as
 \begin{equation}
 	R = (p_z)^2 Y_{11}^Z \left(1 - H_2(E_{11}^X)\right) - Q_{s,s}^Z f_e H_2(E_{\mu_s\mu_s}^Z)
 \end{equation}
-where $Y_{11}^Z$ and $e_{11}^X$ are the yield in the $Z$ basis and error in the $X$ basis, respectively, when Alice and Bob both sent single photons. These quantities are not directly measurable so we will need to bound them using a decoy state protocol. $Q_{S,S}^Z$ and $E_{S,S}^Z$ are the gain and error in the $Z$ basis and both can be measured directly. Finally, we introduce the error correction inefficiency, $f_e>1$, and the binary entropy function defined as
+where $Y_{11}^Z$ and $e_{11}^X$ are the yield in the $Z$ basis and error in the $X$ basis, respectively, when Alice and Bob both sent single photons. These quantities are not directly measurable so we will need to bound them using a decoy state protocol. $Q_{S,S}^Z$ and $E_{S,S}^Z$ are the gain and error in the $Z$ basis and both can be measured directly. $p_z$  is the probability that Alice and Bob choose to send a state in the $Z$ basis. In a bias basis scheme, this can be chosen arbitrarily to maximise key rate provided that finite key effects are accounted for. In the asymptotic limit, this will be set to 1. Finally, we introduce the error correction inefficiency, $f_e>1$, and the binary entropy function defined as
 
 \begin{equation}
-	H_2(x) = -x \mathrm{log}_2(x) - (1-x) \mathrm{log}_2(1-x).
+	H_2(x) = -x \log_2(x) - (1-x) \log_2(1-x).
 \end{equation}
 
-As we are not using single photons, we cannot determine the single photo errors and yields exactly. Therefore, we need to use a decoy state technique \cite{Lo2005} to give lower and upper bounds of $Y_{11}^Z$ and $E_{11}^X$, respectively. We then need to define the lower bound of the secret key rate as
+As we are not using single photons, we cannot determine the single photon errors and yields exactly. Therefore, we need to use a decoy state technique \cite{Lo2005} to give lower and upper bounds of $Y_{11}^Z$ and $E_{11}^X$, respectively. We then need to define the lower bound of the secret key rate as
 
 \begin{equation}
-	\underline{R} \geq R
+	\underline{R} \leq R
 \end{equation}
 
 In essence, decoys states are measuring the loss of the channel during a key exchange to bound the knowledge that could be gain by an eavesdropper.  By measuring different intensities in a decoy state protocol, we can measure
@@ -195,12 +195,12 @@ where the lower bound of $Y^X_{11}$ from above is used. Both the single-photon y
 
 From the parameters of the system (photon numbers and errors), we can create a model to verify that the system behaves as expected. This will also allow us to predict the performance of the system at further distances without needing to gather data for days or weeks. 
 
-The detectors used in this system are \acp{snspd} due to their high efficiency and low dead-time and jitter \cite{}. The detectors operate at $80\%$ efficiency, with a dead-time of \SI{<100}{ns} and jitter of \SI{30}{ps}. The average photon number per state is calibrated before a key exchange by estimating the losses through the system and detection efficiency.
+The detectors used in this system are \acp{snspd} due to their high efficiency and low dead-time and jitter \cite{sprengers2011}. The detectors operate at $80\%$ efficiency, with a dead-time of \SI{<100}{ns} and jitter of \SI{30}{ps}. The average photon number per state is calibrated before a key exchange by estimating the losses through the system and detection efficiency.
 
-The gain of the system, $Q^{ \{X,Z\} }$, is the probability of projection onto a Bell state in either the $X$ or $Z$ basis. We can estimate the gain from the average photon number of each transmitter, the detection efficiency and the transmitters loss. We will assume that the transmission loss is the standard \SI{0.2}{dB/km}, although fibre optic losses can be as a low as \SI{0.17}{dB\per\km} \cite{corningULL}. The gain is independent of error, so we can estimate the gain as 
+The gain of the system, $Q^{ \{X,Z\} }_{\mu_a,\mu_b}$, is the probability of projection onto a Bell state in either the $X$ or $Z$ basis. We can estimate the gain from the average photon number of each transmitter, the detection efficiency and the transmitters loss. We will assume that the transmission loss is the standard \SI{0.2}{dB/km}, although fibre optic losses can be as a low as \SI{0.17}{dB\per\km} \cite{corningULL}. The gain is independent of error, so we can estimate the gain as 
 
 \begin{equation}
-	Q^{ \{X,Z\} } = \frac{3}{8}  \times \eta^2 \times \left( 1 - \text{exp} \left( -10^{- \frac{0.2 \times L}{2 \times 10} \mu}  \right)  \right)^2 + Q^{d.c.}
+	Q^{ \{X,Z\} }_{\mu_a,\mu_b} = \frac{3}{8}  \times \eta^2 \times \left( 1 - \text{exp} \left( -10^{- \frac{0.2 \times L}{2 \times 10} \mu}  \right)  \right)^2 + Q^{d.c.}
 \end{equation}
 where $Q^{d.c.}$ are the successful projections that are because of dark counts in the system. As \acp{snspd} have dark counts of \SI{100}{Hz} this value is typically $\left(10^{-6}\right)^2$. The value is quoted as squared as we are looking for coincidences between the two detectors. 
 
@@ -208,13 +208,12 @@ The prefactor of \nicefrac{3}{8} is due to the probability of a successful proje
 
 To calculate the probability of coincidence from the coherent states, we take the (slight) simplification of one minus the probability of zero photons multiplied by the detection efficiency, $\eta$. While the true probability will vary due to multiphoton terms, the amplitude of the coherent states is sufficiently low ($\le 0.2$ at \SI{0}{\km}) the multiphoton terms will not play a large role, especially at longer distances. The attenuation on each state is calculated, assuming \SI{0.2}{dB\per\km}, a the distance between Alice and Bob, $L$, is halved as Charlie sits at a location halfway between them.
 
-To model the errors, we need to include contributions from dark counts in the system.
+To model the errors, we need to include contributions from dark counts in the system which will have an error probability of \SI{50}{\percent}. Therefore, the corrected error rate will be
 
 \begin{equation}
-	E^{\{X,Z\}}_{m,n} = \frac{\left(Q^{\{X,Z\}}_{m,n} - Q^{d.c}\right) \times \epsilon + Q^{d.c} \times 0.5}{Q^{\{X,Z\}}_{m,n}}
+	E^{\{X,Z\}}_{m,n} = \frac{\left(Q^{\{X,Z\}}_{m,n} - Q^{d.c}\right) \times \epsilon^{\{X,Z\}}_{m,n} + Q^{d.c} \times 0.5}{Q^{\{X,Z\}}_{m,n}}
 \end{equation}
-
-
+where $\epsilon^{\{X,Z\}}_{m,n}$ is the 
 
 \subsection{Shared Resources}
 
