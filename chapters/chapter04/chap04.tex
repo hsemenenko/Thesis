@@ -363,7 +363,9 @@ Ideally, the light in a \ac{mzi} would experience the same phase in both arms. H
 
 \subsubsection*{High-Speed Electronics}
 
-A variety of high-speed driving electronics was used. Each transmitter requires four high-speed signals for phase randomisation, timing encoding, intensity modulation and phase encoding. Only the intensity modulation, which is used for the decoy state preparation, requires more than a two level signal. To create the signal and two decoy intensities, we will require a three level signal. 
+Each transmitter requires four high-speed signals for phase randomisation, timing encoding, intensity modulation and phase encoding. Only the intensity modulation, which is used for the decoy state preparation, requires more than a two level signal. To create the signal and two decoy intensities, we will require a three level signal. We will also need a signal for the synchronisation to the timetagger for reconstruction of the events. 
+
+In order to generate enough synchronised signals, an \ac{awg} provided a \SI{250}{\MHz} clock to two \acp{ppg} and an FPGA. 
 
 \begin{figure}[tbp]
 	\centering
@@ -487,7 +489,7 @@ It is important that the absolute time delay is known so that the states can be 
 
 Here we will discuss the results of the key generation between the two integrated transmitters.
 
-\subsection{Calibration}
+\subsection{Calibration and Optimisation}
 
 As mentioned before, the \ac{MDI} protocol is very dependent on high fidelity \ac{HOM} interference. Therefore, we must make sure that the two different transmitters have a good overlap in all degrees of freedom. In this section we will discuss method used to create indistinguishable pulses.
 
@@ -498,8 +500,9 @@ As mentioned before, the \ac{MDI} protocol is very dependent on high fidelity \a
 	\label{fig:wavelength_cal}
 \end{figure}
 
+Phase encoding was the most challenging to calibrate as this would require an independently calibrated reference. For example, we could use an \ac{amzi} and compare the output between $\ket{+}$ and $\ket{-}$ input states. However, this added complexity to the receiver would either require optical switching or increased losses. 
 
-\subsection{Optimisation}
+Alternative, we can create $\ket{\pm}$ states with one transmitter, and tune the other transmitter to minimise the error rate. Through the \ac{mzi} phase encoding, we can create an approximate $\pi$ phase just by looking at the intensities of the early and late pulses. When the intensities are the same, we should expect a good phase. This will depend on the time encoding states being the same for the early and late time-bins. However, \ac{isi} can cause the electrical driving voltages to change depending on the bit string meaning that the intensities can vary. This is shown in figure \ref{fig:elec_signals} where the P. Mod. pulses change height throughout the sequence. This can also introduce side-channels and will be discussed later.
 
 \subsection{Phase Randomised Transmitters}
 
