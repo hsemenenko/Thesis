@@ -35,8 +35,12 @@
 \end{center}
 \end{adjustwidth*}
 \end{SingleSpace}
-\newpage\thispagestyle{empty}
+\clearpage%
+\cleartoevenpage[\thispagestyle{plain}]
+\clearpage
+\cleartooddpage[\thispagestyle{plain}]
 \begin{SingleSpace}
+\thispagestyle{plain}
 \calccentering{\unitlength} 
 \begin{adjustwidth*}{\unitlength}{-\unitlength}
 \vspace*{0mm}
@@ -60,4 +64,5 @@ A dissertation submitted to the University of Bristol in accordance with the req
 \end{SingleSpace}
 \clearpage
 \nopagecolor
+\cleartooddpage[\emptypage]
 \end{titlingpage}
