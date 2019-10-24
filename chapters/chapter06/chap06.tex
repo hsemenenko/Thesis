@@ -54,7 +54,7 @@ The chip was angled at \SI{7}{\degree} so that the spot-size converters were per
 
 A section of the PCB was partial milled out the thickness of the chip so that the top of the chip and top of the PCB would be flush. This makes wirebonding the chip easier and allows wirebond length to be minimised. Thermal vias were drilled through the chip and plated for thermal management and stabilisation. 
 
-Again, the PCB substrate was Rogers 6006 and tracks designed for \SI{50}{\ohm} impedance. Due to the number of connections required for the chip, DC connections near the chip were routed through plated and capped vias. These were then routed to an FFC connector. In total, 33 wirebonds were required for this test.
+Again, the PCB substrate was Rogers 6006 and tracks designed for \SI{50}{\ohm} impedance. RF lines were shield with vias to ground to increase the performance for high-speed operation. Due to the number of connections required for the chip, DC connections near the chip were routed through plated and capped vias. These were then routed to an FFC connector. In total, 33 wirebonds were required for this test.
 
 The PIN photodiode was given a separate ground from the rest of the chip to electrically isolate it for testing.
 
@@ -73,6 +73,34 @@ The \ac{vga} was held using a vacuum chuck and moved using a 6-axis micro-positi
 UV cured index matched glue was used to attach the \ac{vga} to the chip. The make and model was Dymax OP-4-20632.
 
 \section{Results}
+
+\section{Laser Operation}
+
+A current sweep of the laser \ac{SOA} was performed to see threshold and power characteristics. Two different lasers were tested on chip with \num{300} and \SI{500}{\um} \ac{SOA} lengths to see the different in performance. The rear \ac{DBR} and phase modulator were \SI{300}{\um} and \SI{50}{\um}, respectively, for both lasers. However, the front \ac{DBR} was only \SI{50}{\um} for the \SI{500}{\um} laser, while the other was \SI{150}{\um}.
+
+The sweeps are show in figure \ref{fig:hhi_soa_sweep}. Both lasers show a lasing threshold of around \SI{30}{\mA}. Fluctuations in power at higher driving current is likely attributed to mode competition. At very high currents, the \SI{300}{\um} \ac{SOA} laser starts to decrease in power. This will be due to the efficiency of the laser diode at higher temperatures.
+
+\begin{figure}[tp]
+	\centering
+	\small	
+	\def\svgwidth{\textwidth} 
+	\import{chapters/chapter06/fig06/I_sweep/}{current_sweep.pdf_tex}
+	\caption[Current sweep of HHI laser SOA]{Sweeping laser current. Threshold of \SI{30}{\mA} for both. Fluctuations in power likely due to the mode competition in the cavity. Reduction in power for \SI{300}{mA} attributed to heating of the diode reducing efficiency.}
+	\label{fig:hhi_soa_sweep}
+\end{figure}
+
+Laser spectrum shows multi-modal operation. Sidebands can be suppressed through current injection of the tunable \acp{DBR}. However, they are still only around \SIrange{30}{40}{dB} below the peak. 
+
+\begin{figure}[tp]
+	\centering
+	\small	
+	\def\svgwidth{\textwidth} 
+	\import{chapters/chapter06/fig06/Spectra/}{spectra.pdf_tex}
+	\caption[Wavelength sweep through current injection of tunable DBRs]{Current injection of the tunable \acp{DBR} causing a change of peak reflected wavelength. The lasers show multi-modal operation and a sideband suppression of only \SI{35}{dB}.}
+	\label{fig:hhi_dbr_sweep}
+\end{figure}
+
+The wavelength can be tuned but around \SI{3}{nm} by current injection of the tunable \acp{DBR}. Typical values are less than \SI{2}{V}. High driving current can cause heating of the cavity causing the wavelength to increase. 
 
 The transmitter (shown in figure \ref{fig:hhi_laser_seeding}) contains two methods possible to achieve laser seeding.
 
