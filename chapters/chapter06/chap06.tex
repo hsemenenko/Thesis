@@ -37,7 +37,9 @@ Figure \ref{fig:hhi_laser_seeding} shows the GDS for the integrated device. The 
 	\label{fig:hhi_laser_seeding}
 \end{sidewaysfigure}
 
-The electrical connections for integrated devices is challenging, especially in test devices where real estate is valuable. In figure \ref{fig:hhi_pcb} we show a PCB which is required to connect most (but not all) components of the chip. 
+\section{Optical and Electrical Packaging}
+
+\section{PCB Design}
 
 \begin{figure}[tbp]
 	\centering
@@ -45,6 +47,30 @@ The electrical connections for integrated devices is challenging, especially in 
 	\caption[PCB breakout for an InP integrated circuit]{PCB designed to connect an \ac{InP} integrated device to control and test equipment. Packaging integrated devices remains challenging due to the small size of the chips. This is especially true when high speed connections are required.}
 	\label{fig:hhi_pcb}
 \end{figure}
+
+The electrical connections for integrated devices is challenging, especially in test devices where real estate is valuable. In figure \ref{fig:hhi_pcb} we show a PCB which is required to connect most (but not all) components of the chip. 
+
+The chip was angled at \SI{7}{\degree} so that the spot-size converters were perpendicular to the side of the PCB. The \ac{vga} could then be polished at a \SI{7}{\degree} in the opposite direction to compensate and maximise coupling.
+
+A section of the PCB was partial milled out the thickness of the chip so that the top of the chip and top of the PCB would be flush. This makes wirebonding the chip easier and allows wirebond length to be minimised. Thermal vias were drilled through the chip and plated for thermal management and stabilisation. 
+
+Again, the PCB substrate was Rogers 6006 and tracks designed for \SI{50}{\ohm} impedance. Due to the number of connections required for the chip, DC connections near the chip were routed through plated and capped vias. These were then routed to an FFC connector. In total, 33 wirebonds were required for this test.
+
+The PIN photodiode was given a separate ground from the rest of the chip to electrically isolate it for testing.
+
+A section of the PCB was cut out to allow for a \ac{vga} to be held during the glue process described later. A section towards the edge of the chip was also milled out \SI{1}{mm} in depth so that the fibres from the \ac{vga} could be glued to the PCB for strain relief.
+
+Pads for a thermistor were placed as close to the chip as possible with via routing to the bottom of the chip to provide good thermal conductivity.
+
+\section{Chip Gluing}
+
+There is no need to electrically connect the bottom of the chip to ground, as was with the case with devices fabricated from Oclaro. Silver epoxy was still used for its good thermal conductivity. The plated vias provided a good thermal connection to the bottom of the PCB so that a peltier could be used for thermal stabilisation using feedback from the thermistor.
+
+\section{Optical connection}
+
+The \ac{vga} was held using a vacuum chuck and moved using a 6-axis micro-positioner (NanoMax). The on-chip lasers provided a light source for alignment. 
+
+UV cured index matched glue was used to attach the \ac{vga} to the chip. The make and model was Dymax OP-4-20632.
 
 \section{Results}
 
