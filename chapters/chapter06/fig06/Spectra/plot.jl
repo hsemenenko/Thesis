@@ -23,3 +23,24 @@ plot([w_a,w_b,w_c],
     )
 
 savefig("spectra.pdf")
+
+close(file)
+
+
+file = open("LAS1_300um_SOA_gain_switch\\spectra.csv")
+
+data = readdlm(file,',')
+
+close(file)
+
+w_gs = Float64.(data[98:end,1])
+p_gs = Float64.(data[98:end,2].*8e5)
+
+plot(w_gs,
+    p_gs,
+    yaxis = ("Power (dB)", :log10,(5e-4,1.5e-0)),
+    xaxis = ("Wavelength (nm)", (1552.75,1554.75)),
+    leg=false,
+    w = 1.2,
+    color = [RdYlPu33 RdYlPu33 RdYlPu32]
+    )

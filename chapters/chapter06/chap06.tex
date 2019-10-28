@@ -7,14 +7,33 @@
 \graphicspath{{./chapters/chapter06/fig06/}}
 
 \let\textcircled=\pgftextcircled
-\chapter{Integrated Laser Seeded Transmitter with Quantum Random Number Generation}
-\label{chap:laser-seeding}
+\chapter{Future Generation Integrated Transmitters}
+\label{chap:future}
 
 \section*{Statement of Work}
 
-Philip Sibson and I design the photonic chips that were fabricated by Fraunhofer HHI. I design the PCB for RF operation and characterised the initial performance of the devices. The packaging was supported by Graham Marshall and Alasdair Price.
+Philip Sibson and I design the photonic chips that were fabricated by Fraunhofer HHI. I design the PCB for RF operation and optical connection with packaging supported by Alasdair Price and Graham Marshall. I characterised the initial DC and RF performance of the devices.
 
 %=======
+\subsection{Improved Transmitters}
+
+There are many ways of improving the QKD transmitters. For example, encoding in time-bin using a delay line to separate the pulses or generating different states using independent lasers.
+
+\begin{sidewaysfigure}
+	\centering
+	\includegraphics[width=0.8\textwidth]{HHI_Transmitter}
+	\caption[Latest generation InP QKD Transmitter]{Latest generation HHI indium phosphide transmitter. The \SI[product-units=power]{6x4}{mm} chip contains a few ways to create BB84 states for QKD. Firstly, we have designs to compare \ac{dfb} and \ac{DBR} lasers. Secondly, we can use a delay line to separate the time bins. Finally, we have multiplexed lasers to pulse independently lasers for each state.}
+\end{sidewaysfigure}
+
+\subsubsection*{Multiple Laser Sources}
+
+We introduce multiple laser sources into the circuit which can each be independently gain-switched to generate the 4 BB84 states. 
+
+\subsubsection*{Delay Line Time-Bin Encoding}
+
+While the previous generation of devices included delay lines to encode timing information, they we too lossy to be used. We have included a delay line in the design of this chip which should have lower losses. This should reduce the complexity of the control electronics and make the system compatible with a gain-switch DFB laser.
+
+
 \section{QKD Transmitter Requirements}
 \label{sec:sec06}
 
@@ -32,7 +51,7 @@ Figure \ref{fig:hhi_laser_seeding} shows the GDS for the integrated device. The 
 
 \begin{sidewaysfigure}
 	\centering
-	\includegraphics[width=0.9\textwidth]{Laser_Seeding.png}
+	\includegraphics[width=0.9\textwidth]{Laser_Seeding_gds.png}
 	\caption[InP laser seeding transmitter with QRNG]{This shows the layout of the laser seeded transmitter device fabricated by HHI. The chip measures \SI[product-units=power]{6x4}{mm} and contains two laser seeding prototype circuits, a homodyne \ac{qrng} and test structure to measure laser and waveguide performances. This demonstrates the complexity and compactness possible in the integrated platform.}
 	\label{fig:hhi_laser_seeding}
 \end{sidewaysfigure}
@@ -48,7 +67,7 @@ Figure \ref{fig:hhi_laser_seeding} shows the GDS for the integrated device. The 
 	\label{fig:hhi_pcb}
 \end{figure}
 
-The electrical connections for integrated devices is challenging, especially in test devices where real estate is valuable. In figure \ref{fig:hhi_pcb} we show a PCB which is required to connect most (but not all) components of the chip. 
+The electrical connections for integrated devices is challenging, especially in test devices where real estate is valuable. In figure \ref{fig:hhi_pcb} we show a PCB which is required to connect most (but not all) components of the chip shown in figure \ref{fig:hhi_laser_seeding}. 
 
 The chip was angled at \SI{7}{\degree} so that the spot-size converters were perpendicular to the side of the PCB. The \ac{vga} could then be polished at a \SI{7}{\degree} in the opposite direction to compensate and maximise coupling.
 
@@ -62,24 +81,26 @@ A section of the PCB was cut out to allow for a \ac{vga} to be held during the g
 
 Pads for a thermistor were placed as close to the chip as possible with via routing to the bottom of the chip to provide good thermal conductivity.
 
-\section{Chip Gluing}
+\section{Chip Mounting}
 
 There is no need to electrically connect the bottom of the chip to ground, as was with the case with devices fabricated from Oclaro. Silver epoxy was still used for its good thermal conductivity. The plated vias provided a good thermal connection to the bottom of the PCB so that a peltier could be used for thermal stabilisation using feedback from the thermistor.
 
-\section{Optical connection}
+\section{Optical Connection}
 
 The \ac{vga} was held using a vacuum chuck and moved using a 6-axis micro-positioner (NanoMax). The on-chip lasers provided a light source for alignment. 
 
 UV cured index matched glue was used to attach the \ac{vga} to the chip. The make and model was Dymax OP-4-20632.
 
+The \ac{vga} was aligned using the on-chip laser. Then a small amount of glue could be applied along the connection. The \ac{vga} was then pressed against the chip. A UV LED lamp illuminated the area to allow for drying. This was left for 12 hours to cure. Silicon was applied to the fibres 
+
+A photograph of the packaged chip under the steriliser is shown in figure \ref{fig:hhi_photo}. The fibre strain relief is shown in the left with silicone to secure the fibre to the PCB. 
+
 \begin{figure}
 	\centering
 	\includegraphics[width = 0.8\textwidth]{hhi_packaged}
-	\caption[Photo of packaged HHI chip]{Photograph of packaged HHI chip showing glued \ac{vga} with fibre strain relief.}
+	\caption[Photograph of packaged HHI transmitter]{The \ac{InP} device is glued to the centre of the PCB with the \ac{vga} glued to the edge couplers. Fibre strain relief is shown to the left were the bare fibres from the \ac{vga} are attached to the PCB.}
 	\label{fig:hhi_photo}
 \end{figure}
-
-\section{Results}
 
 \section{Laser Operation}
 
@@ -90,7 +111,7 @@ The sweeps are show in figure \ref{fig:hhi_soa_sweep}. Both lasers show a lasing
 \begin{figure}[tp]
 	\centering
 	\small	
-	\def\svgwidth{\textwidth} 
+	\def\svgwidth{0.9\textwidth} 
 	\import{chapters/chapter06/fig06/I_sweep/}{current_sweep.pdf_tex}
 	\caption[Current sweep of HHI laser SOA]{Sweeping laser current. Threshold of \SI{30}{\mA} for both. Fluctuations in power likely due to the mode competition in the cavity. Reduction in power for \SI{300}{mA} attributed to heating of the diode reducing efficiency.}
 	\label{fig:hhi_soa_sweep}
@@ -101,7 +122,7 @@ Laser spectrum shows multi-modal operation. Sidebands can be suppressed through 
 \begin{figure}[tp]
 	\centering
 	\small	
-	\def\svgwidth{\textwidth} 
+	\def\svgwidth{0.9\textwidth} 
 	\import{chapters/chapter06/fig06/Spectra/}{spectra.pdf_tex}
 	\caption[Wavelength sweep through current injection of tunable DBRs]{Current injection of the tunable \acp{DBR} causing a change of peak reflected wavelength. The lasers show multi-modal operation and a sideband suppression of only \SI{35}{dB}.}
 	\label{fig:hhi_dbr_sweep}
@@ -111,11 +132,53 @@ The wavelength can be tuned but around \SI{3}{nm} by current injection of the tu
 
 The transmitter (shown in figure \ref{fig:hhi_laser_seeding}) contains two methods possible to achieve laser seeding.
 
+\section{Gain Switching}
+
+We can characterise the on-chip laser ability to gain switch, which is important for phase randomisation in \ac{QKD}. 
+
+\begin{figure}[tp]
+	\centering
+	\small	
+	\def\svgwidth{\textwidth} 
+	\import{chapters/chapter06/fig06/laser_gain_switch/}{gain_switch_test.pdf_tex}
+	\caption[Gain switching test of the HHI on-chip lasers]{\SI{20}{mA} (left), \SI{30}{\mA} (middle), \SI{40}{\mA} (right). \SI{1}{GHz} \SI{2}{\Vpp} square wave from \ac{ppg}. Laser threshold around \SI{30}{mA}. Pulses are around \SI{120}{ps} \ac{FWHM}.}
+	\label{fig:gain_switch_test}
+\end{figure}
+
+\begin{figure}[tp]
+	\centering
+	\small	
+	\def\svgwidth{0.9\textwidth} 
+	\import{chapters/chapter06/fig06/Spectra/}{spectrum_gain_switch.pdf_tex}
+	\caption[Spectrum of the gain switched laser]{Spectral broadening due to the laser gain switching. \SI{30}{mA} current, \SI{2}{\Vpp} \SI{1}{\GHz} square wave.}
+	\label{fig:gain_switch_spectrum}
+\end{figure}
+
+\section{Laser Seeding}
+
+
+\begin{figure}[tp]
+	\centering	
+	\def\svgwidth{0.9\textwidth} 
+	\import{chapters/chapter06/fig06/schematics/}{laser_seeding.pdf_tex}
+	\caption[Schematic of on-chip laser seeding]{Schematic of on-chip laser seeding. As there is no non-linearity to exploit for a circulator, the usual method of laser seeding cannot be achieved in integrated photonics. These are the simplest conceivable circuits to attempted it in an integrated platform}
+	\label{fig:las_seed_schem}
+\end{figure}
+
+
+\begin{figure}[tp]
+	\centering	
+	\def\svgwidth{0.8\textwidth} 
+	\import{chapters/chapter06/fig06/}{laser_seeding_test.pdf_tex}
+	\caption[Integrated laser seeding test]{By applying \SI{1}{GHz} square waves to both lasers, we can get pulses that should be phase randomised. However,  this will need testing. Pulses show \SI{120}{ps} \ac{FWHM}.}
+	\label{fig:las_seed_test}
+\end{figure}
+
 \section{Outlook}
 
 This chapter has extended the use of integrated devices for \acl{QKD}.
 
-\subsection{Transmitter and QRNG}
+\subsection{Quantum Random Number Generation}
 
 Random numbers are required for many parts of \ac{QKD}. One way of generating this randomness is with \acp{qrng} which has been demonstrated on \ac{InP} \cite{FrancescoThesis,Abellan2016}. However, there has not yet been a single device which fulfils both the requirements for quantum random number generation \textit{and} quantum key generation.
 

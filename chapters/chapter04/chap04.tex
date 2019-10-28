@@ -36,7 +36,18 @@ In this section, we experimentally demonstrate \ac{MDI} using cost-effective, ma
 \section{Measurement-Device-Independent Quantum Key Distribution}
 \label{sec:mdi-qkd}
 
-\Ac{MDI} removes all potential side channels on the detection system which could be exploited by a malicious adversary \cite{mdi-qkd}. A schematic of the experiment is shown in figure~\ref{fig:chip-mdi}. Unlike traditional point-to-point protocols, Alice and Bob act symmetrically by sending BB84 states to a third party, Charlie. Upon receipt of the states, Charlie measures the states in the Bell basis and publicly announces all successful events. The outcomes indicate quantum correlations between states but, without encoding knowledge known only by Alice and Bob, reveal no information about the secret key. This allows Charlie to be completely untrusted and it could even be assumed that an adversary is operating the receiver without compromising the security. By sharing the basis information for each state, Alice and Bob are able to infer a secret key which can be used in a symmetric key algorithm. 
+\Ac{diqkd} protocols were invented out of a necessity to counter developments by the quantum hacking community. Systems that were thought to be secure could actually leak information quite readily to an adversary \cite{}. While there are proven methods of removing these attacks from a system \cite{}, the attacks must first be publicly known. Also, these countermeasures to quantum hacks will not ensure that future attacks will be found against a system. Therefore, we need a 
+
+\Ac{diqkd} removes all unnecessary assumptions above the physical system. This means that only two assumptions are required about the system:
+
+\begin{enumerate}
+	\item Alice and Bob has their own device that is spatial isolated
+	\item All parties (Alice, Bob, Eve and Mallory) are bound by the laws of quantum mechanics
+\end{enumerate}
+
+The assumptions don't require Alice or Bob to trust the devices they are given, and it could be 
+
+removes all potential side channels on the detection system which could be exploited by a malicious adversary \cite{mdi-qkd}. A schematic of the experiment is shown in figure~\ref{fig:chip-mdi}. Unlike traditional point-to-point protocols, Alice and Bob act symmetrically by sending BB84 states to a third party, Charlie. Upon receipt of the states, Charlie measures the states in the Bell basis and publicly announces all successful events. The outcomes indicate quantum correlations between states but, without encoding knowledge known only by Alice and Bob, reveal no information about the secret key. This allows Charlie to be completely untrusted and it could even be assumed that an adversary is operating the receiver without compromising the security. By sharing the basis information for each state, Alice and Bob are able to infer a secret key which can be used in a symmetric key algorithm. 
 
 As we use a weak coherent source we need to estimate the number of single-photon events. We employ a four-intensity decoy state analysis \cite{zhou2016} to bound the single-photon errors and yields. In this protocol, the $Z$ basis is used to generate key while the $X$ basis bounds the knowledge of an eavesdropper. 
 
@@ -98,6 +109,22 @@ This is only a limiting factor if the dark count rate of the detector system is 
 
 \subsection{Bell State Projection}
 
+To understand how the states are projected in the Bell basis, consider the entangled states in a time bin encoding 
+
+\begin{align}
+	\ket{\psi^\pm} &= \frac{1}{\sqrt{2}}\left(a^\dagger_e b^\dagger_l \pm a^\dagger_l b^\dagger_e\right)\ket{00}\\
+	\ket{\Phi^\pm} &= \frac{1}{\sqrt{2}}\left(a^\dagger_e b^\dagger_e \pm a^\dagger_l b^\dagger_l\right)\ket{00}
+\end{align}
+where $e$ and $l$ refer to early and late time-bins of the state. Considering the Bell states incident on a beam splitter, we find
+
+\begin{align}
+	\ket{\Phi^\pm} &\rightarrow \frac{1}{2}(c^\dagger_e c^\dagger_e - d^\dagger_e d^\dagger_e \pm c^\dagger_l c^\dagger_l \mp d^\dagger_l d^\dagger_l)\ket{00}\\
+	\ket{\psi^+} &\rightarrow \frac{1}{\sqrt{2}}(c^\dagger_e c^\dagger_l - d^\dagger_e d^\dagger_l) \ket{00}\\
+	\ket{\psi^-} &\rightarrow \frac{1}{\sqrt{2}}(c^\dagger_e d^\dagger_l - c^\dagger_l d^\dagger_e) \ket{00}
+\end{align}
+
+So we find that by just using a beam splitter and threshold detectors, it isn't possible to distinguish $\ket{\Phi^\pm}$ states. We can actually go further with this statement to say that only two of the four Bell states can be detected simultaneous with linear optics \cite{walborn2003, Mattle1996}. However, through coincidences between time of arrival of the photons at the detectors, we can project onto $\ket{\psi^\pm}$ states. These projections are shown in figure \ref{fig:bell_state_projections} where the photons interfere on a {50:50} beam splitter and timing information of successful detections can be correlated.
+
 \begin{figure}[tp]
 	\centering
 	\huge
@@ -107,20 +134,37 @@ This is only a limiting factor if the dark count rate of the detector system is 
 	\label{fig:bell_state_projections}
 \end{figure}
 
-To understand how the states are projected in the Bell basis, consider the entangled states
+%We can consider 4 different cases for the Bell state projections \cite{russell2017}.
+%
+%\subsubsection*{Case 1: $\ket{00}$ or $\ket{11}$}
+%
+%$a^\dagger_e b^\dagger_e \ket{00} \rightarrow \frac{1}{\sqrt{2}}(c^\dagger_e c^\dagger_e - d^\dagger_e d^\dagger_e) \ket{00}$
+%
+%This cannot be distinguished with threshold detectors.
+%
+%\subsubsection*{Case 2: $\ket{01}$ or $\ket{10}$}
+%
+%$a^\dagger_e b^\dagger_e \ket{00} \rightarrow \frac{1}{\sqrt{2}}(\ket{\psi^+} + \ket{\psi^-})$
+%
+%So when either Alice or Bob need to flip their bit when there is a successful event.
+%
+%\subsubsection*{Case 3: $\ket{++}$ or $\ket{--}$}
+%
+%$\frac{1}{2}(a^\dagger_e + a^\dagger_l)(b^\dagger_e + b^\dagger_l) \ket{00} \rightarrow $
+%and similarly for $\ket{--}$. 
+%
+%The states from Alice and Bob will bunch from \ac{HOM} interference. Half events will give $\ket{\psi^+}$ while the other half will give $\ket{\Phi^\pm}$. A successful event doesn't require a bit flip.
+%
+%\subsubsection*{Case 4: $\ket{+-}$ or $\ket{-+}$}
+%
+%$\frac{1}{2}()() \ket{00} \rightarrow $
+%
+%States will be projected onto $\ket{psi^-}$ and $\ket{\Phi^\pm}$
 
-\begin{equation}
-	\ket{\psi^\pm} = \frac{1}{\sqrt{2}}\left(a^\dagger_e b^\dagger_l \pm a^\dagger_l b^\dagger_e\right)\ket{0}
-\end{equation}
-in a time bin encoding where $e$ and $l$ refer to early and late time-bins of the state. The measurement of these states is shown in figure \ref{fig:bell_state_projections}.
 
 \subsection{Security and Key Rate Estimation}
 
-As we are not using a true single photon source, we need to be able to bound any knowledge gained by Eve through a photon number splitting attack. This is done through decoy-state analysis, where various intensity levels are chosen at random to bound the yield and error for single photon states \cite{Lo2005}. 
-
-Here we used a four intensity decoy state protocol where we consider four sources: $\nu, \sigma, \mu, z$. The $\nu$ source is vacuum, $\sigma$ and $\mu$ are decoy pulses in the $X$ basis with average photon numbers $\sigma$ and $\mu$, respectively. Finally, the $z$ source emits pulses with intensity $z$ in the $Z$ basis. In an \ac{MDI} protocol, we use the $X$ basis to bound the knowledge of Eve or Mallory and the $Z$ basis to generate key. This is due to the minimum possible error of $25\%$ in the $X$ basis \cite{Rubenok2013}.
-
-The estimate key rate of \ac{MDI} per pulse in the infinite case is given as
+The estimate key rate of \ac{MDI} per pulse in the asymptotic case is given as
 
 \begin{equation}
 	R = (p_z)^2 Y_{11}^Z \left(1 - H_2(E_{11}^X)\right) - Q_{s,s}^Z f_e H_2(E_{\mu_s\mu_s}^Z)
@@ -131,28 +175,36 @@ where $Y_{11}^Z$ and $e_{11}^X$ are the yield in the $Z$ basis and error in the 
 	H_2(x) = -x \log_2(x) - (1-x) \log_2(1-x).
 \end{equation}
 
+%As we are not using a true single photon source, we need to be able to bound any knowledge gained by Eve through a photon number splitting attack. This is done through decoy-state analysis, where various intensity levels are chosen at random to bound the yield and error for single photon states \cite{Lo2005}. 
+
 As we are not using single photons, we cannot determine the single photon errors and yields exactly. Therefore, we need to use a decoy state technique \cite{Lo2005} to give lower and upper bounds of $Y_{11}^Z$ and $E_{11}^X$, respectively. We then need to define the lower bound of the secret key rate as
 
 \begin{equation}
 	\underline{R} \leq R
 \end{equation}
 
-In essence, decoys states are measuring the loss of the channel during a key exchange to bound the knowledge that could be gain by an eavesdropper.  By measuring different intensities in a decoy state protocol, we can measure
+In essence, decoys states are measuring the loss of the channel during a key exchange to bound the knowledge that could be gain by an eavesdropper.  By Alice and Bob sending different intensities in a decoy state protocol, they can measure
 
 \begin{equation}
-	Q_{\mu_a \mu_b}^Z = \sum_{n,m=0} e^{-(\mu_a + \mu_b)}\frac{\mu_a^n}{n!}\frac{\mu_b^m}{m!} Y_{n,m}^Z
+	Q_{\mu_a \mu_b}^{X, Z} = \sum_{n,m} e^{-(\mu_a + \mu_b)}\frac{\mu_a^n}{n!}\frac{\mu_b^m}{m!} Y_{n,m}^{X, Z}
 \end{equation}
 
 \begin{equation}
-	Q_{\mu_{a} \mu_{b}}^X E^{X}_{\mu_{a} \mu_{b}}=\sum_{n, m=0} e^{-\left(\mu_{\mathrm{a}}+\mu_{\mathrm{b}}\right)} \frac{q_{\mathrm{a}}^{n}}{n !} \frac{q_{\mathrm{b}}^{m}}{m !} Y^{X}_{n, m} E^{X}_{n, m}
+	Q_{\mu_{a} \mu_{b}}^{X, Z} E^{X, Z}_{\mu_{a} \mu_{b}}=\sum_{n, m} e^{-\left(\mu_{\mathrm{a}}+\mu_{\mathrm{b}}\right)} \frac{\mu_{\mathrm{a}}^{n}}{n !} \frac{\mu_{\mathrm{b}}^{m}}{m !} Y^{X, Z}_{n, m} E^{X, Z}_{n, m}
 \end{equation}
-where $\mu_a$ ($\mu_b$) are the intensities of Alice's (Bob's) pulses. The gain, $Q_{\mu\sigma}^i$, defined to be the number of successful Bell state projections when Alice and Bob send states in the basis $i$ with intensities $\mu$ and $\sigma$ respectively.
+where $\mu_a$ ($\mu_b$) are the intensities of Alice's (Bob's) pulses. The gain, $Q_{\mu\sigma}^i$, defined to be the number of successful Bell state projections when Alice and Bob send states in the basis $i$ with intensities $\mu$ and $\sigma$ respectively. These measurable values provide a set of linear equations which can be used to bound the yield and errors for single photon events.
 
+In this experiment, we used a four intensity decoy state protocol \cite{zhou2016} where we consider four sources: $\nu, \sigma, \mu, s$. The $\nu$ source is vacuum, $\sigma$ and $\mu$ are decoy pulses in the $X$ basis with average photon numbers $\sigma$ and $\mu$, respectively. Finally, the $s$ source emits pulses with intensity $s$ in the $Z$ basis only. In an \ac{MDI} protocol, we use the $X$ basis to bound the knowledge of Eve or Mallory and the $Z$ basis to generate key. This is due to the minimum possible error of $25\%$ in the $X$ basis \cite{Rubenok2013} which in turn is due to the reduce \ac{HOM} visibility with coherent states \cite{Rarity2005}.
+
+From the measurable equations above, we can put an upper bound on the single photon yield in the $X$ basis as
 
 \begin{equation}
-	Y^X_{11} \ge \frac{P^\mu_1 P^\mu_2 (Q_{\omega\omega}^{X} - P^\omega_0 ( Q_{\nu\omega}^X + Q_{\omega\nu}^X) + (P^\omega_0)^2 Q_{\nu\nu}^X) - P^\omega_1 P^\omega_2(Q_{\mu\mu}^{X} - P^\mu_0 ( Q_{\nu\mu}^X + Q_{\mu\nu}^X) + (P^\mu_0)^2 Q_{\nu\nu}^X)}{P^\mu_1 P^\omega_1 ( P^\omega_1  P^\omega_2 - P^\mu_1 P^\omega_2)}
+	\begin{split}
+	Y^X_{11} \ge \frac{1}{P^\mu_1 P^\omega_1 ( P^\omega_1  P^\omega_2 - P^\mu_1 P^\omega_2)} \Big(&P^\mu_1 P^\mu_2 (Q_{\omega\omega}^{X} - P^\omega_0 ( Q_{\nu\omega}^X + Q_{\omega\nu}^X) + (P^\omega_0)^2 Q_{\nu\nu}^X) \\
+	&- P^\omega_1 P^\omega_2(Q_{\mu\mu}^{X} - P^\mu_0 ( Q_{\nu\mu}^X + Q_{\mu\nu}^X) + (P^\mu_0)^2 Q_{\nu\nu}^X)\Big)
+	\end{split}
 \end{equation}
-where $P_i^m$ is the probability a coherent state with intensity $m$ contains $i$ photons. In the asymptotic limit $Y^Z_{11} =  Y^X_{11}$, which we can use in the key rate formula. We can then calculate an upper bound for the single-photon errors as 
+where $P_i^m$ is the probability a coherent state with intensity $m$ contains $i$ photons. In the asymptotic limit $Y^Z_{11} =  Y^X_{11}$, which we can use in the key rate formula \cite{Comandar2016}. We can then calculate an upper bound for the single-photon errors as 
 
 \begin{equation}
 	e^X_{11} \le \frac{e^X_{\omega\omega}Q^X_{\omega\omega} - P^\omega_0\left(e^X_{\nu\omega}Q^X_{\nu\omega} + e^X_{\omega\nu}Q^X_{\omega\nu}\right) - (P^\omega_0)^2e^X_{\nu\nu}Q^X_{\nu\nu}}{(P^\omega_1)^2 Y^X_{11}}
@@ -164,56 +216,40 @@ where the lower bound of $Y^X_{11}$ from above is used. Both the single-photon y
 
 \subsection{Model}
 
-\begin{figure}[tbp]
-\begin{tikzpicture}
-\begin{semilogyaxis}[
-    axis line on top,
-	xlabel = {Error (\%)},
-	ylabel = {Secret Key Rate (bps)},
-	width = 0.9\linewidth,
-	height = 0.5\linewidth,
-	cycle list name = RdYlPu-8,
-	xmin = 0,
-	xmax = 1.8,
-	xtick pos=left,
-	ytick pos=left,
-    tick align=outside,
-    grid=both,
-    grid style={line width=.1pt, draw=gray!10},
-    legend style={fill=blue!5, draw=gray!50}
-	]
-\foreach \y in {1,...,8}{
-  \addplot+[very thick] table[x index=0,y index=\y, col sep=comma] {./chapters/chapter04/fig04/error_skr.csv};
-  \temp
-}
-\legend{\SI{0}{\km},\SI{50}{\km},\SI{100}{\km},\SI{150}{\km},\SI{200}{\km},\SI{250}{\km},\SI{300}{\km},\SI{350}{\km},}
-\end{semilogyaxis}
-\end{tikzpicture}
-	\caption[Error dependence of secret key rate]{By varying the error rate in the signal $Z$ basis, while maintaining consistent errors in the $X$ basis, we can see the dependence of the quantum bit errors. As the $Z$ basis is used only to generate key, the error must be kept low, especially at longer distances.}
-	\label{fig:skr_error_dependence}
-\end{figure}
-
 From the parameters of the system (photon numbers and errors), we can create a model to verify that the system behaves as expected. This will also allow us to predict the performance of the system at further distances without needing to gather data for days or weeks. 
 
-The detectors used in this system are \acp{snspd} due to their high efficiency and low dead-time and jitter \cite{sprengers2011}. The detectors operate at $80\%$ efficiency, with a dead-time of \SI{<100}{ns} and jitter of \SI{30}{ps}. The average photon number per state is calibrated before a key exchange by estimating the losses through the system and detection efficiency.
+The detectors used in this system are \acp{snspd} due to their high efficiency and low recovery-time and jitter \cite{sprengers2011}. The detectors operate at $80\%$ efficiency, with a dead-time of \SI{<100}{ns} and jitter of \SI{30}{ps}. The average photon number per state is calibrated before a key exchange by estimating the losses through the system and detection efficiency.
 
-The gain of the system, $Q^{ \{X,Z\} }_{\mu_a,\mu_b}$, is the probability of projection onto a Bell state in either the $X$ or $Z$ basis. We can estimate the gain from the average photon number of each transmitter, the detection efficiency and the transmitters loss. We will assume that the transmission loss is the standard \SI{0.2}{dB/km}, although fibre optic losses can be as a low as \SI{0.17}{dB\per\km} \cite{corningULL}. The gain is independent of error, so we can estimate the gain as 
+The gain of the system, $Q^{ \{X,Z\} }_{\mu_a,\mu_b}$, is the probability of projection onto a Bell state in either the $X$ or $Z$ basis. We can estimate the gain from the average photon number of each transmitter, the detection efficiency and the transmitters loss. We will assume that the transmission loss is the standard \SI{0.2}{dB/km}, although fibre optic losses can be as a low as \SI{0.14}{dB\per\km} \cite{tamura2018} while fibres with \SI{0.17}{dB\per\km} loss are commercially available \cite{corningULL}. The gain is independent of error, so we can estimate the gain as 
 
 \begin{equation}
-	Q^{ \{X,Z\} }_{\mu_a,\mu_b} = \frac{3}{8}  \times \eta^2 \times \left( 1 - \text{exp} \left( -10^{- \frac{0.2 \times L}{2 \times 10} \mu}  \right)  \right)^2 + Q^{d.c.}
+	Q^{ \{X,Z\} }_{\mu_a,\mu_b} = \frac{3}{8}  \eta^2 \times \left( 1 - \text{exp} \left( -10^{- \frac{0.2 \times L}{2 \times 10} \mu_a \eta}  \right)  \right) \times \left( 1 - \text{exp} \left( -10^{- \frac{0.2 \times L}{2 \times 10} \mu_b \eta}  \right)  \right) + Q^{d.c.}
 \end{equation}
 where $Q^{d.c.}$ are the successful projections that are because of dark counts in the system. As \acp{snspd} have dark counts of \SI{100}{Hz} this value is typically $\left(10^{-6}\right)^2$. The value is quoted as squared as we are looking for coincidences between the two detectors. 
 
-The prefactor of \nicefrac{3}{8} is due to the probability of a successful projection give two random states sent by Alice and Bob. One half of the time, the states will be projected onto a Bell state that cannot be determined by the measurement device \cite{}. Of the remainder, one half will be projected successfully onto $\ket{\psi^-}$ (\nicefrac{1}{4} of the total states), while with probability \nicefrac{1}{2} they will be successfully projected onto $\ket{\psi^+}$ (\nicefrac{1}{8} of the total states). 
+The \nicefrac{3}{8} pre-factor is due to the probability of a successful projection give two random states sent by Alice and Bob. One half of the time, the states will be projected onto a Bell state that cannot be determined by the measurement device \cite{walborn2003, Mattle1996}. Of the remainder, one half will be projected successfully onto $\ket{\psi^-}$ (\nicefrac{1}{4} of the total states), while with probability \nicefrac{1}{2} they will be successfully projected onto $\ket{\psi^+}$ (\nicefrac{1}{8} of the total states). We will see later that by increasing the number of detectors in the receiver, this can be increased closer to the maximum of \nicefrac{1}{2}.
 
-To calculate the probability of coincidence from the coherent states, we take the (slight) simplification of one minus the probability of zero photons multiplied by the detection efficiency, $\eta$. While the true probability will vary due to multiphoton terms, the amplitude of the coherent states is sufficiently low ($\le 0.2$ at \SI{0}{\km}) the multiphoton terms will not play a large role, especially at longer distances. The attenuation on each state is calculated, assuming \SI{0.2}{dB\per\km}, a the distance between Alice and Bob, $L$, is halved as Charlie sits at a location halfway between them.
+To calculate the probability of coincidence from the coherent states, we will use the same derivation from chapter \ref{chap:hom}. However, here the distance $L$, which measures the distance between Alice and Bob, is halved. This is because Charlie will sit at a centralised location. We will assume that this is half way between Alice and Bob, so the \acp{wcp} from Alice and Bob need to only travel half the distance. 
+
+%While the true probability will vary due to multiphoton terms, the amplitude of the coherent states is sufficiently low ($\le 0.2$ at \SI{0}{\km}) the multiphoton terms will not play a large role, especially at longer distances. The attenuation on each state is calculated, assuming \SI{0.2}{dB\per\km}, a the distance between Alice and Bob, $L$, is halved as Charlie sits at a location halfway between them.
 
 To model the errors, we need to include contributions from dark counts in the system which will have an error probability of \SI{50}{\percent}. Therefore, the corrected error rate will be
 
 \begin{equation}
-	E^{\{X,Z\}}_{m,n} = \frac{\left(Q^{\{X,Z\}}_{m,n} - Q^{d.c}\right) \times \epsilon^{\{X,Z\}}_{m,n} + Q^{d.c} \times 0.5}{Q^{\{X,Z\}}_{m,n}}
+	E^{\{X,Z\}}_{\mu_a,\mu_b} = \frac{\left(Q^{\{X,Z\}}_{\mu_a,\mu_b} - Q^{d.c}\right) \times \epsilon^{\{X,Z\}}_{\mu_a,\mu_b} + Q^{d.c} \times 0.5}{Q^{\{X,Z\}}_{\mu_a,\mu_b}}
 \end{equation}
-where $\epsilon^{\{X,Z\}}_{m,n}$ is the 
+where $\epsilon^{\{X,Z\}}_{m,n}$ are the errors rates during a key exchange which will need to estimate from an experiment for an accurate model of the system. In the equation, the dark events are subtracted from the gain which can then be multiplied by the system error rate. The dark count errors can then be considered separately. We will assume that the errors due to dark counts are randomly assigned, so will have a \SI{50}{\percent} error.
+
+\begin{figure}[tp]
+	\centering
+	\small
+	\def\svgwidth{0.9\textwidth} 
+	\import{chapters/chapter04/fig04/Z_error_skr/}{error_skr.pdf_tex}
+	\caption[Error dependence of secret key rate]{By varying the error rate in the signal $Z$ basis, while maintaining consistent errors in the $X$ basis, we can see the dependence of the quantum bit errors. As the $Z$ basis is used only to generate key, the error must be kept low, especially at longer distances.}
+	\label{fig:skr_error_dependence}
+\end{figure}
+
+
 
 \subsection{Shared Resources}
 
@@ -376,11 +412,23 @@ In order to generate enough synchronised signals, an \ac{awg} provided a \SI{250
 
 \section{Receiver}
 
-The receiver for \ac{MDI} is a projection onto Bell states\footnote{It actually suffices for the receiver to project onto a single Bell state to ensure security of the key exchange.}. Depending on the encoding, this projection looks slightly different. In a time-bin encoding scheme, a projection onto $\ket{\psi^\pm}$ depending on coincidences between time-bins of the detectors.
+The receiver that Charlie will use for \ac{MDI} is a projection onto Bell states. Depending on the encoding, this device used for projection will be slightly different. In a time-bin encoding scheme, a projection onto $\ket{\psi^\pm}$ depending on coincidences between time-bins of the detectors.
+
+\subsection{Fibre components}
+
+The schematic of the Bell state measurements is simple. However, other fibre optic components were required to ensure 
+
+As polarisation drift is common in fibre, we will need to ensure that the polarisation between transmitters is overlapped. 
+
+A polarisation maintaining 50:50 beam splitter is used to interfere the incoming states.
 
 \subsection{Time-Tagging}
 
 A PicoQuant Hydraharp was used as a time-tagger due to the small timing resolution (\SI{1}{ps}) and synchronisation.
+
+\subsection{Synchronisation}
+
+To be able to reconstruct the measurements and match them with the transmitters, a synchronisation signal as provided to the time tagger. The time tagger was then able to provide exact timing of events for later analysis. An RF signal from one of the \acp{ppg} was sent to an SFP to SMA breakout board (Hi-tech Global SMA-SFP) which converted the electrical signal to optical. A fibre was used to send the signal to the receiver system and another breakout used to provide the electrical signal to the time tagger. 
 
 \subsection{Qubit Binning}
 
@@ -400,16 +448,6 @@ As the detection events are first-in first out, we only need to check for coinci
 
 For this experiment, a gating window of \SI{240}{\ps} was chosen to maximise gain whilst also minimising the error at longer distances. From figure \ref{fig:skr_error_dependence}, we can see that at longer distances a lower $Z$ basis error is required.
 
-\subsection{Synchronisation}
-
-Hi-tech Global SMA-SFP breakout was used to optically share a clock from the transmitters driving electronics to the time-tagger. 
-
-\subsection{Fibre components}
-
-As polarisation drift is common in fibre, we will need to ensure that the polarisation between transmitters is overlapped. 
-
-A polarisation maintaining 50:50 beam splitter is used to interfere the incoming states.
-
 \subsection{Detection}
 
 \Acsp{snspd} are used for detection due to their high efficiency, low dark counts, good timing jitter and short dead time. Time of arrival is tagged using a Picoquant Hydraharp which is synchronised with the transmitters using a separate optical link.
@@ -420,7 +458,7 @@ The dead time of our detectors is typically \SI{<100}{ns}. In a time-bin encodin
 
 In a time-bin encoded scheme, it is difficult to detect a $\ket{\psi^+}$ state as it would require a coincidence of concurrent time-bins of the same detector. In a GHz clocked system, the time-bins are separated by only \SI{1}{\ns} meaning the dead time of the detector would need to be less than this. \ac{snspd} typically have a detector recovery time on the order of \SI{100}{\ns} meaning that a coincidence between time-bins is impossible. 
 
-While superconducting detectors exist with sub-nanosecond dead time, they will typically sacrifice efficiency by reducing the length of the nanowire \cite{} or wavelength tunability by creating a photonic cavity \cite{}.
+While superconducting detectors exist with sub-nanosecond dead time, they will typically sacrifice efficiency by reducing the length of the nanowire or wavelength tunability by creating a photonic cavity \cite{vetter2016, yun2019}.
 
 In order to increase the possible rates of a time-bin encoded \ac{MDI} system, we can introduce a pseudo photon-number resolving bank of detectors. Each detection arm of the measurement beam splitter is further split to many detectors. This allows $\ket{\psi^+}$ to be detected with some probability depending on the number of detectors available. This kind of banked detection system also means that we can increase the number of events before saturation of the detectors. 
 
@@ -555,24 +593,6 @@ Statistical fluctuations in the measurements mean that the values used to estima
 In this proof-of-principle demonstration, the states were not randomisation. In a secure demonstration, a \ac{qrng} should be used to generate on-the-fly randomness which would determine the states that Alice and Bob would send. 
 
 With monolithic integrated of fast photodiodes in \ac{InP}, quantum random number generations can be performed on the same optical chip. Then all the optical components for a \ac{QKD} transmitter could be contained in a single device.
-
-\subsection{Improved Transmitters}
-
-There are many ways of improving the QKD transmitters. For example, encoding in time-bin using a delay line to separate the pulses or generating different states using independent lasers.
-
-\begin{sidewaysfigure}
-	\centering
-	\includegraphics[width=0.8\textwidth]{HHI_Transmitter}
-	\caption[Latest generation InP QKD Transmitter]{Latest generation HHI indium phosphide transmitter. The \SI[product-units=power]{6x4}{mm} chip contains a few ways to create BB84 states for QKD. Firstly, we have designs to compare \ac{dfb} and \ac{DBR} lasers. Secondly, we can use a delay line to separate the time bins. Finally, we have multiplexed lasers to pulse independently lasers for each state.}
-\end{sidewaysfigure}
-
-\subsubsection*{Multiple Laser Sources}
-
-We introduce multiple laser sources into the circuit which can each be independently gain-switched to generate the 4 BB84 states. 
-
-\subsubsection*{Delay Line Time-Bin Encoding}
-
-While the previous generation of devices included delay lines to encode timing information, they we too lossy to be used. We have included a delay line in the design of this chip which should have lower losses. This should reduce the complexity of the control electronics and make the system compatible with a gain-switch DFB laser.
 
 \subsection{Security of Transmitters}
 
