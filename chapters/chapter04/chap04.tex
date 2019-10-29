@@ -24,7 +24,7 @@ Integrated photonics has seen vast improvements in recent years and represents a
 
 To counter these attacks from a malicious adversary through uncharacterised side-channels, device-independent \ac{QKD} schemes have been developed to limit the number of assumptions required for security \cite{Masanes2011}. One such vulnerability is with single-photon detectors, for which \ac{MDI} has been proposed. This approach removes all possible attacks against the detection system \cite{mdi-qkd}.
 
-In this section, we experimentally demonstrate \ac{MDI} using cost-effective, mass-manufacturable, chip-based transmitters that could facilitate commercial quantum-secured communication. We show that \SI{1}{kbps} of secret key can be exchanged at  \SI{100}{km} and predict positive key rates at more than \SI{350}{km}. The system removes detector vulnerabilities and represents a viable solution for near-term metropolitan quantum networks.
+In this section, we experimentally demonstrate \ac{MDI} using cost effective, mass manufacturable, chip-based transmitters that could facilitate commercial quantum-secured communication. We show that \SI{1}{kbps} of secret key can be exchanged at  \SI{100}{km} and predict positive key rates at more than \SI{350}{km}. The system removes detector vulnerabilities and represents a viable solution for near-term metropolitan quantum networks.
 
 %Advances in \ac{QKD} have seen many protocols developed for different purposes and security levels. The emerging quantum hacking community has exposed discrepancies between security theory and practical implementations. 
 
@@ -45,9 +45,9 @@ In this section, we experimentally demonstrate \ac{MDI} using cost-effective, ma
 	\item All parties (Alice, Bob, Eve and Mallory) are bound by the laws of quantum mechanics
 \end{enumerate}
 
-The assumptions don't require Alice or Bob to trust the devices they are given, and it could be 
+The assumptions don't require Alice or Bob to trust the devices they are given, and it could be assumed that an adversary was preparing the quantum states. Through a Bell test, Alice and Bob can verify that their protocol was secure, regardless of trusting the equipment. While \ac{diqkd} maximises security, the difficulties of performing a loophole free bell test mean that proposed protocols are not yet a practical method of key exchange. Loophole-free tests have been performed but require short distances and high detection efficiency \cite{hensen2015, shalm2015, Giustina2015}. 
 
-removes all potential side channels on the detection system which could be exploited by a malicious adversary \cite{mdi-qkd}. A schematic of the experiment is shown in figure~\ref{fig:chip-mdi}. Unlike traditional point-to-point protocols, Alice and Bob act symmetrically by sending BB84 states to a third party, Charlie. Upon receipt of the states, Charlie measures the states in the Bell basis and publicly announces all successful events. The outcomes indicate quantum correlations between states but, without encoding knowledge known only by Alice and Bob, reveal no information about the secret key. This allows Charlie to be completely untrusted and it could even be assumed that an adversary is operating the receiver without compromising the security. By sharing the basis information for each state, Alice and Bob are able to infer a secret key which can be used in a symmetric key algorithm. 
+To increase security in a practical way, new device-independent protocols were developed. \ac{MDI} removes all potential side channels on the detection system which could be exploited by a malicious adversary \cite{mdi-qkd}. A schematic of the experiment is shown in figure~\ref{fig:chip-mdi}. Unlike traditional point-to-point protocols, Alice and Bob act symmetrically by sending BB84 states to a third party, Charlie. Upon receipt of the states, Charlie measures the states in the Bell basis and publicly announces all successful events. The outcomes indicate quantum correlations between states but, without encoding knowledge known only by Alice and Bob, reveal no information about the secret key. This allows Charlie to be completely untrusted and it could even be assumed that an adversary is operating the receiver without compromising the security. By sharing the basis information for each state, Alice and Bob are able to infer a secret key which can be used in a symmetric key algorithm. 
 
 As we use a weak coherent source we need to estimate the number of single-photon events. We employ a four-intensity decoy state analysis \cite{zhou2016} to bound the single-photon errors and yields. In this protocol, the $Z$ basis is used to generate key while the $X$ basis bounds the knowledge of an eavesdropper. 
 
@@ -194,7 +194,7 @@ In essence, decoys states are measuring the loss of the channel during a key exc
 \end{equation}
 where $\mu_a$ ($\mu_b$) are the intensities of Alice's (Bob's) pulses. The gain, $Q_{\mu\sigma}^i$, defined to be the number of successful Bell state projections when Alice and Bob send states in the basis $i$ with intensities $\mu$ and $\sigma$ respectively. These measurable values provide a set of linear equations which can be used to bound the yield and errors for single photon events.
 
-In this experiment, we used a four intensity decoy state protocol \cite{zhou2016} where we consider four sources: $\nu, \sigma, \mu, s$. The $\nu$ source is vacuum, $\sigma$ and $\mu$ are decoy pulses in the $X$ basis with average photon numbers $\sigma$ and $\mu$, respectively. Finally, the $s$ source emits pulses with intensity $s$ in the $Z$ basis only. In an \ac{MDI} protocol, we use the $X$ basis to bound the knowledge of Eve or Mallory and the $Z$ basis to generate key. This is due to the minimum possible error of $25\%$ in the $X$ basis \cite{Rubenok2013} which in turn is due to the reduce \ac{HOM} visibility with coherent states \cite{Rarity2005}.
+In this experiment, we used a four intensity decoy state protocol \cite{zhou2016} where we consider four sources: $\nu, \sigma, \mu, s$. The $\nu$ source is vacuum, $\sigma$ and $\mu$ are decoy pulses in the $X$ basis with average photon numbers $\sigma$ and $\mu$, respectively. Finally, the $s$ source emits pulses with intensity $s$ in the $Z$ basis only. In an \ac{MDI} protocol, we use the $X$ basis to bound the knowledge of Eve or Mallory and the $Z$ basis to generate key. This is due to the minimum possible error of $25\%$ in the $X$ basis \cite{Rubenok2013} which in turn is due to the reduce \ac{HOM} visibility with coherent states \cite{Rarity2005}. This can be understood by separating the possible cases into those that interfere, and those that didn't. Of those that interfered, we would expect no errors. Of those that didn't interfere, there is a \SI{50}{\percent} chance of error. 
 
 From the measurable equations above, we can put an upper bound on the single photon yield in the $X$ basis as
 
@@ -223,7 +223,7 @@ The detectors used in this system are \acp{snspd} due to their high efficiency a
 The gain of the system, $Q^{ \{X,Z\} }_{\mu_a,\mu_b}$, is the probability of projection onto a Bell state in either the $X$ or $Z$ basis. We can estimate the gain from the average photon number of each transmitter, the detection efficiency and the transmitters loss. We will assume that the transmission loss is the standard \SI{0.2}{dB/km}, although fibre optic losses can be as a low as \SI{0.14}{dB\per\km} \cite{tamura2018} while fibres with \SI{0.17}{dB\per\km} loss are commercially available \cite{corningULL}. The gain is independent of error, so we can estimate the gain as 
 
 \begin{equation}
-	Q^{ \{X,Z\} }_{\mu_a,\mu_b} = \frac{3}{8}  \eta^2 \times \left( 1 - \text{exp} \left( -10^{- \frac{0.2 \times L}{2 \times 10} \mu_a \eta}  \right)  \right) \times \left( 1 - \text{exp} \left( -10^{- \frac{0.2 \times L}{2 \times 10} \mu_b \eta}  \right)  \right) + Q^{d.c.}
+	Q^{ \{X,Z\} }_{\mu_a,\mu_b} = \frac{3}{8} \times \left( 1 - \text{exp} \left( -10^{- \frac{0.2 \times L}{2 \times 10} \mu_a \eta}  \right)  \right) \times \left( 1 - \text{exp} \left( -10^{- \frac{0.2 \times L}{2 \times 10} \mu_b \eta}  \right)  \right) + Q^{d.c.}
 \end{equation}
 where $Q^{d.c.}$ are the successful projections that are because of dark counts in the system. As \acp{snspd} have dark counts of \SI{100}{Hz} this value is typically $\left(10^{-6}\right)^2$. The value is quoted as squared as we are looking for coincidences between the two detectors. 
 
@@ -238,7 +238,21 @@ To model the errors, we need to include contributions from dark counts in the sy
 \begin{equation}
 	E^{\{X,Z\}}_{\mu_a,\mu_b} = \frac{\left(Q^{\{X,Z\}}_{\mu_a,\mu_b} - Q^{d.c}\right) \times \epsilon^{\{X,Z\}}_{\mu_a,\mu_b} + Q^{d.c} \times 0.5}{Q^{\{X,Z\}}_{\mu_a,\mu_b}}
 \end{equation}
-where $\epsilon^{\{X,Z\}}_{m,n}$ are the errors rates during a key exchange which will need to estimate from an experiment for an accurate model of the system. In the equation, the dark events are subtracted from the gain which can then be multiplied by the system error rate. The dark count errors can then be considered separately. We will assume that the errors due to dark counts are randomly assigned, so will have a \SI{50}{\percent} error.
+where $\epsilon^{\{X,Z\}}_{m,n}$ are the errors rates during a key exchange which will need to estimate from an experiment for an accurate model of the system. In the equation, the dark events are subtracted from the gain which can then be multiplied by the system error rate. The dark count errors can then be considered separately. We will assume that the errors due to dark counts are randomly assigned, so will have a \SI{50}{\percent} error. Positive key rate should be possible until the signal gain is on the order of the dark counts.
+
+\begin{table}[tp]
+	\centering
+	\begin{tabular}{lccc}
+		$E^X_{\mu_a\mu_b}$ & $\mu$ & $\sigma$ & $\nu$ \\
+		$\mu$             	& 30\%  	& 40\%                      	& 50\%                      \\
+		$\sigma$    		& 40\%  	& 30\%                      	& 50\%                      \\
+		$\nu$              	& 50\%  	& 50\%                       	& 50\%                   
+	\end{tabular}
+	\caption[Table of estimated errors]{Estimated errors we can used to characterise the Z basis errors}
+	\label{tab:x-errors}
+\end{table}
+
+By using this model, we can start to understand how the system should behave. As we have shown that we can control independent devices well enough to show good \ac{HOM} interference, the rest of the errors will come from encoding the states. From similar papers, we can estimate what we would expect the X basis errors to be. These are given in table \ref{tab:x-errors}. Setting the photon numbers to \num{0.2} in the Z basis and \num{0.1} and \num{0.01} for the X basis decoy states, we can model what error rates are required in the Z basis.
 
 \begin{figure}[tp]
 	\centering
@@ -249,7 +263,7 @@ where $\epsilon^{\{X,Z\}}_{m,n}$ are the errors rates during a key exchange whic
 	\label{fig:skr_error_dependence}
 \end{figure}
 
-
+In figure \ref{fig:skr_error_dependence}, we show the dependence of Z basis errors on the key rate at varying distances. By using predicted values for the X basis, we can vary the Z basis error to find the limit of positive key generation. We find that to generate positive key rates at more than \SI{100}{\km} we will require that the error must be below \SI{1}{\percent}. This means that we will need to improve the extinction ratio of the pulses in chapter \ref{chap:hom} to reduce the timing error.
 
 \subsection{Shared Resources}
 
@@ -259,13 +273,11 @@ While superconducting detectors are currently considered research equipment, the
 
 \section{Integrated Transmitters}
 
-\begin{figure}[tp]
+\begin{figure}[tbp]
 	\centering
-	\small
-	\def\svgwidth{0.9\textwidth} 
-	\import{chapters/chapter04/fig04/}{time_bin_states.pdf_tex}
-	\caption[BB84 time-bin encoding]{BB84 states in a time-bin encoded scheme. Pulses are separated by a time $\Delta t$ where the timing forms the computational basis. A late pulse indicates a $\ket{0}$ while an early pulse indicates a $\ket{1}$. $\ket{+}$ and $\ket{-}$ states can be realised through superposition of early and late pulses with relative phases. The intensities of the pulse in the X basis is halved so that the average photon number over the states remains constant between bases.}
-	\label{fig:BB84_time_bin}
+	\includegraphics[width=\textwidth]{Oclaro_00_clean_small.png}
+	\caption[Microscope image of the InP QKD transmitter devices]{Microscope image of the \SI{6x2}{mm} indium phosphide transmitter. The complexity possible with integrated photonics is demonstrated by having two separate DBR cavity lasers, three Mach-Zehnder interferometers, an asymmetric  Mach-Zehnder interferometer and high-bandwidth photodiode.}
+	\label{fig:oclaro_00}
 \end{figure}
 
 \Ac{InP} transmitters provide all the required optical components to create high fidelity BB84 states as required for \ac{MDI}. By using chip-based transmitters the power, size and weight of the optics needed can be dramatically reduced compared to fibre (and free-space) alternatives. It also facilitates mass production without requiring manual assembly. 
@@ -277,27 +289,29 @@ We will encode our quantum states in a time-bin encoding scheme. The four BB84 s
 In this section, we will describe the operation of the transmitters to create weak coherent states that can be used for \acl{QKD}.
 
 \begin{figure}[tbp]
-	\centering
-	\includegraphics[width=\textwidth]{Oclaro_00_clean_small.png}
-	\caption[InP transmitter microscope image]{Microscope image of the \SI[product-units=power]{6x2}{mm} indium phosphide transmitter. The complexity possible with integrated photonics is demonstrated by having two separate DBR cavity lasers, three Mach-Zehnder interferometers, an asymmetric  Mach-Zehnder interferometer and high-bandwidth photodiode.}
-	\label{fig:oclaro_00}
-\end{figure}
-
-\begin{figure}[tbp]
 	\includegraphics[width=\linewidth]{Oclaro_00_MDI.png}
-	\caption[InP transmitter schematic]{A schematic view of the each chip used in the MDI-QKD protocol. \textit{T. Enc} is used to intensity modulate the continuous wave laser into encode timing information, \textit{I. Mod} varies the pulse intensity for decoy state preparation and \textit{Ph. Enc} encodes phases between the time-bins.}
+	\caption[InP transmitter schematic]{A schematic view of the each chip used in the MDI-QKD protocol. \textit{T. Enc} is used to intensity modulate the continuous wave laser into encode timing information, \textit{I. Mod} varies the pulse intensity for decoy state preparation and \textit{Ph. Enc} encodes phases between the time-bins. A fast photodiode (PD) can be used for feedback.}
 	\label{fig:chip_mdi_schematic}
 \end{figure}
 
-\subsection{Integrated Light Source}
+\begin{figure}[tp]
+	\centering
+	\small
+	\def\svgwidth{0.9\textwidth} 
+	\import{chapters/chapter04/fig04/}{time_bin_states.pdf_tex}
+	\caption[BB84 time-bin encoding]{BB84 states in a time-bin encoded scheme. Pulses are separated by a time $\Delta t$ where the timing forms the computational basis. A late pulse indicates a $\ket{0}$ while an early pulse indicates a $\ket{1}$. $\ket{+}$ and $\ket{-}$ states can be realised through superposition of early and late pulses with relative phases. The intensities of the pulse in the X basis is halved so that the average photon number over the states remains constant between bases.}
+	\label{fig:BB84_time_bin}
+\end{figure}
 
-To generate \acp{wcs}, we will utilise the on-chip laser from chapter \ref{chap:hom}. This will provide the coherent continuous wave light from which we can encode quantum states in a time-bin encoding. The laser linewidth allows for coherence between time-bins and precise wavelength tuning.  
+\subsection{Integrated Laser}
+
+To generate \acp{wcs}, we will utilise the on-chip laser that was described in chapter \ref{chap:hom}. The Fabry-P\'{e}rot laser demonstrates a narrow linewidth to ensure coherence within a time-bin encoded state. The wavelength tunability of the laser through \ac{DBR} current injection, temperature and \ac{SOA} current injection will allow the wavelengths of separate devices to be precisely overlapped. We will also be able to exploit the short upper state and cavity lifetimes to create phase randomised pulses.
 
 \subsection{Timing Encoding}
 
-The early and late time-bins of the state will be the logical $\ket{0}$ and $\ket{1}$ states. Therefore, we need to be able to create distinct pulses in either time-bin i.e. there should be a good extinction ratio between the two time-bins. As we are using a \ac{CW} laser as our light source, it will need to be intensity modulated to encode time.
+The early and late time-bins of the state will be the logical $\ket{0}$ and $\ket{1}$ states, respectively. Therefore, we need to be able to create distinct pulses in either time-bin i.e. there should be a good extinction ratio between the two time-bins. As we are using a \ac{CW} laser as our light source, it will need to be intensity modulated to encode time. From the previous section, we have seen that the error of the timing encoding will need to have a very low error to ensure positive key generation at long distances.
 
-As in the previous chapter, time encoding the states will be done using an \acl{mzi} to carve the \ac{CW} laser into \SI{130}{ps} pulses with an extinction ratio
+As in the previous chapter, time encoding the states will be performed using an \acl{mzi} to carve the \ac{CW} laser into \SI{130}{ps} pulses. To increase the extinction ratio of the pulses compared to the previous experiment, a amplified was added to the \ac{ppg} to increase the possible voltage. 
 
 %\footnote{The ratio between the ``on'' and ``off'' powers of the \ac{mzi}} of up to \SI{30}{dB}.
 
@@ -463,51 +477,42 @@ While superconducting detectors exist with sub-nanosecond dead time, they will t
 In order to increase the possible rates of a time-bin encoded \ac{MDI} system, we can introduce a pseudo photon-number resolving bank of detectors. Each detection arm of the measurement beam splitter is further split to many detectors. This allows $\ket{\psi^+}$ to be detected with some probability depending on the number of detectors available. This kind of banked detection system also means that we can increase the number of events before saturation of the detectors. 
 
 \begin{figure}[tbp]
-\begin{tikzpicture}
-\begin{semilogyaxis}[
-    axis line on top,
-	xlabel = {Distance (km)},
-	ylabel = {Probability of detection},
-	width = 0.9\linewidth,
-	height = 0.7\linewidth,
-	cycle list name = RdYlPu-3,
-	xmin = 0,
-	xmax = 350,
-	ymin=1e-9,
-	ymax=0.1,
-	yminorticks=false,
-	xtick pos=left,
-	ytick pos=left,
-    tick align=outside,
-    grid=both,
-    grid style={line width=.1pt, draw=gray!10},
-    legend style={fill=blue!5, draw=gray!50}
-	]
-\foreach \y in {1,...,3}{
-  \addplot+[very thick] table[x index=0,y index=\y, col sep=comma] {./chapters/chapter04/fig04/det_eff_k=0,25,50.csv};
-  \temp
-}
-\legend{0,25,50}
-\end{semilogyaxis}
-\end{tikzpicture}
-	\caption[Detector efficiency depending on detector dead time]{Here we plot the detector efficiency depending on the distance between Alice and Bob while varying the detector dead time. }
+	\centering
+	\tiny
+	\def\svgwidth{\textwidth} 
+	\import{chapters/chapter04/fig04/banked_detectors/}{det_dead_time.pdf_tex}
+	\caption[Effect of detector dead time and banked detectors]{\textbf{a} We plot the effect of the probability of detection, given a detector dead time (in number of cycles) against distance. \textbf{b} The probability of coincidence is plotted against time with varied number of detectors in a receiver bank. A photon number of 0.2 is assumed in both cases. }
 	\label{fig:det_eff_dead_time}
 \end{figure}
 
-First, we consider the probability of a click $\xi$, given a coherent state with average photon number, $\mu$, some detection efficiency, $\eta$, and dead time of the system, $k$. Considering that the system is unable to detect a photon for some time after a successful event. The efficiency is modelled as
+First, we consider the probability of a click, $\xi$, given a coherent state with average photon number, $\mu$, some detection efficiency, $\eta$, and dead time of the system, $k$. Consider that that the system is unable to detect a photon for some time after a successful event and that the probability of detection is the same for each clock cycle. The efficiency is then modelled as
 
 \begin{equation}
-	\xi = \eta \times ( 1 - P^\mu_0) ) \times (1 - \xi)^k
+	\xi = ( 1 - \exp(10^{-\frac{0.2 \times L}{2 \times 10}} \eta \mu) ) \times (1 - \xi)^k
 \end{equation}
+where $k$ is the number of cycles that the detector is dead. For example, given a \SI{250}{\MHz} clock rate and a dead time of \SI{100}{ns}, we would have $k=25$. The loss from Alice and Bob to Charlie is estimate in the usual way with \SI{0.2}{dB\per\km} and $L$ is the distance between Alice and Bob. For large dead times, this model has no analytical solution. However, we can numerical estimate what we would expect the efficiency to be.
 
-We can model the loss of photon number as a function of the distance between Alice and Bob. We can assume \SI{0.2}{dB\per\km} in standard optical fibre so after some distance $L$, the average photon number from Alice or Bob will be
+First, we consider the effect of dead time against the probability of a detection event as shown in figure \ref{fig:det_eff_dead_time}a. We find that at short distances, the number of dead cycles has a drastic impact on the probability of detection as the detector is required to recover. If we were to consider a \SI{1}{GHz} system and detectors with \SI{100}{ns} recovery time, the probability of a successful event is reduced by about ten times when compared to a system with no dead time. 
+
+In an \ac{MDI} system, we will be concerned with detection coincidences to determine successful Bell state projections. We can use the same model above, but square the probability of a single event assuming that both detectors have the same dead time. We will only look for events where exactly two detectors click. Therefore, for a bank of $m$ detectors, we can model the probability of coincidence as
 
 \begin{equation}
-	10^{-\frac{0.2 \times L}{2 \times 10}} \mu
+	\left(\frac{m}{2}\right)^2 \xi^2 (1-\xi)^{m-2}
 \end{equation}
-where the length has been divided in two as Alice and Bob will both be sending states to a centralised location. 
+where $\xi$ is the efficiency of a single click from above. 
 
-To compare the performance of a bank detector system, we consider a ``perfect'' system with no dead time
+By changing the number of detectors in the bank, we can see how this will affect the coincidence probability as a function of distance. This is shown in figure \ref{fig:det_eff_dead_time}b. For short distances, introducing a bank detection system can increase the probability of detection when compared to two detectors.
+
+This model doesn't take into account detection saturation effects, increased probability of $\ket{\psi^+}$ or losses induced through the optical network for detector banking.
+
+%We can model the loss of photon number as a function of the distance between Alice and Bob. We can assume \SI{0.2}{dB\per\km} in standard optical fibre so after some distance $L$, the average photon number from Alice or Bob will be
+%
+%\begin{equation}
+%	10^{-\frac{0.2 \times L}{2 \times 10}} \mu
+%\end{equation}
+%where the length has been divided in two as Alice and Bob will both be sending states to a centralised location. 
+
+%To compare the performance of a bank detector system, we consider a ``perfect'' system with no dead time. In figure \ref{fig:det_eff_dead_time}, we show the effect of dead time against probability of a detection event 
 
 \subsection{Time Tagging}
 
@@ -524,16 +529,20 @@ It is important that the absolute time delay is known so that the states can be 
 	\label{fig:mdi-schem}
 \end{figure}
 
-Here we will discuss the results of the key generation between the two integrated transmitters.
+Here, we will discuss the results of the key generation between the two integrated transmitters. A schematic of the experiment is shown in figure \ref{fig:mdi-schem}. Two \ac{InP} transmitters independently generate weak coherent BB84 states. These are sent over quantum channels to the receiver, Charlie. In this experiment, the states are projected in the Bell basis using a beam splitter. Banked detectors are used to determine successful events which can be publicly announced. 
 
 \subsection{Calibration and Optimisation}
 
 As mentioned before, the \ac{MDI} protocol is very dependent on high fidelity \ac{HOM} interference. Therefore, we must make sure that the two different transmitters have a good overlap in all degrees of freedom. In this section we will discuss method used to create indistinguishable pulses.
 
+The states from each transmitter are polarised using a two \ac{pbs} and timing can be controlled using picosecond delays in the RF driving electronics. Photon number is calibrated from the detectors, where fibre loss and detection efficiency had been calibrated. 
+
 \begin{figure}[tbp]
 	\centering
-	\includegraphics[width = 0.9\textwidth]{BSM_Curr_Sweep/BSM_Sweep}
-	\caption[Laser current-error sweep]{Sweeping the current on one laser changes the wavelength relative to the other. This changes the relative phases between the two pulses in the +/- states. Using this allows good calibration of wavelength.}
+	\small
+	\def\svgwidth{0.9\textwidth} 
+	\import{chapters/chapter04/fig04/BSM_Curr_Sweep/}{BSM_Sweep.pdf_tex}
+	\caption[Bell state error against laser current]{To overlap the two transmitters in wavelength, we can prepare BB84 states and tune the relative wavelength of the lasers. The change in wavelength will cause \ac{HOM} interference. However, this will also cause changes in the relative phases between early and late time-bins. This causes a sinusoidal fringe as the lasers become indistinguishable.}
 	\label{fig:wavelength_cal}
 \end{figure}
 
@@ -547,9 +556,11 @@ Phase randomisation means that the clock rate needs to be reduced as the laser n
 
 \subsection{Key Rate}
 
-\begin{figure}
+\begin{figure}[tbp]
 	\centering
-	\includegraphics[width=0.8\textwidth]{rates}
+	\small
+	\def\svgwidth{0.9\textwidth} 
+	\import{chapters/chapter04/fig04/}{rates.pdf_tex}
 	\caption[Asymptotic key rates of chip-based MDI-QKD]{From the errors and gains in the system, we can estimate an asymptotic key rate. This plot shows the key rate estimated using an emulated quantum channel.}
 	\label{fig:mdi_rates}
 \end{figure}
@@ -576,7 +587,7 @@ Working with \ac{npl}, we have begun testing the operation of the transmitters w
 	\label{fig:npl_states}
 \end{figure}
 
-In figure \ref{fig:npl_states} we can see states generated from a \ac{InP} transmitter operated with a specialised FPGA board. By sending different states in the system, we can start to see how inter-symbol interference has an effect in the system. While this is a well known effect in classical communication, it may have more serious impacts in quantum communication where the security may be compromised. For example, when sending a certain state we notice that a ``shoulder'' after the state exists that is \SI{2}{dB} above the noise floor. While minimal, this could be used by Eve to gain knowledge of the phase encoding in the state and remain undetected by Alice and Bob.
+In figure \ref{fig:npl_states}, we can see states generated from an \ac{InP} transmitter operated with a specialised FPGA board. By sending different states in the system, we can start to see how inter-symbol interference has an effect in the system. While this is a well known effect in classical communication, it may have more serious impacts in quantum communication where the security may be compromised. For example, when sending a certain state we notice that a ``shoulder'' after the state exists that is \SI{2}{dB} above the noise floor. While minimal, this could be used by Eve to gain knowledge of the phase encoding in the state and remain undetected by Alice and Bob.
 
 \section{Outlook}
 
@@ -592,7 +603,7 @@ It is becoming increasingly vital that the future of secure communication is add
 
 \subsection{Finite Key Effects}
 
-As this demonstration was focussed towards the technology, we have not included analysis of finite key effects. The optimal method of including finite key effects is given in Ref. \cite{zhou2016}.
+As this demonstration was focussed towards the technology, we have not included analysis of finite key effects. The optimal method of including finite key effects is given in ref. \cite{zhou2016}.
 
 Statistical fluctuations in the measurements mean that the values used to estimate the single photon cases are not infinitely accurate. 
 
@@ -607,6 +618,13 @@ With monolithic integrated of fast photodiodes in \ac{InP}, quantum random numbe
 While \ac{MDI} removes all possible attacks on the detectors, there is still the possibility of Mallory gaining information by targeting the transmitters. Therefore, the security of the transmitters will still need to be characterised to ensure the security of a key exchange. Many attacks have been demonstrated on different \ac{QKD} system \cite{makarov2019}. However, to date none have been demonstrated against an integrated device. Some work towards characterisation of the chip-based system has been attempted \cite{vaquero2018}.
 
 \subsection{Miniaturised Electronics}
+
+\begin{figure}[tp]
+	\centering
+	\includegraphics[width=0.7\textwidth]{fpga.png}
+	\caption[Picture of the specialised FPGA controller for integrated QKD]{Picture of the specialised FPGA controller for integrated QKD. Can provide RF and DC signals for driving the chips.}
+	\label{fig:fpga}
+\end{figure}
 
 In order to make a system that truly scalable, there also needs to be efforts towards miniaturisation of the control electronics. Unlike the electronics required for classical communication systems, the precision of the quantum control electronics needs to be many more times accurate to minimise errors.
 
