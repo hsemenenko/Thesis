@@ -53,13 +53,13 @@ plot!(date,
    lab = ["Total" "Text" "Captions"],
    linetype=:steppost,
    w=3,
-   yaxis = ("Text and captions", (0,25000)),
+   yaxis = ("Text and captions", (0,35000)),
    yformatter = :plain,
    legend = :topleft,
    color = [:green :blue :blue],
    linestyle = [:solid :dash :dot],
    left_margin = 10mm,
-   right_margin = 10mm,
+   right_margin = 15mm,
    ygridlinewidth = 0
    )
 
@@ -69,7 +69,7 @@ plot!(twinx(),
    lab = [ "Equations" "Figures"],
    w=3,
    legend = :topright,
-   yaxis = ("\nFigures and Equations", (0,400)),
+   yaxis = ("Figures and Equations", (0,1000)),
    xaxis = false,
    linestyle = [:solid :dot],
    color = :orange,
@@ -79,4 +79,4 @@ plot!(twinx(),
    xforeground_color_grid = :white
    )
 
-savefig("count.png")
+savefig("count.png")+
