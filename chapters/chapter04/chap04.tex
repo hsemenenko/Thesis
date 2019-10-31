@@ -435,7 +435,7 @@ Also, as we will be using an \ac{mzi} for phase modulation, we can more easily f
 	\label{fig:elec_signals}
 \end{figure}
 
-For each transmitter, we require four RF signals with different requirements. For example, the decoy state analysis requires multiple levels while the phase randomisation only requires two levels, but needs to be very stable.
+%For each transmitter, we require four RF signals with different requirements. For example, the decoy state analysis requires multiple levels while the phase randomisation only requires two levels, but needs to be very stable.
 
 To synchronise the equipment, one AWG provided a clock that could be shared. The FPGA received a \SI{250}{\MHz} clock and each \ac{ppg} received a \SI{2}{\GHz} from the AWG. 
 
@@ -677,5 +677,84 @@ While we can remove all of the assumptions about the detectors, negating all det
 Working with \ac{npl}, we have begun testing the operation of the transmitters whilst using specialised electronics. In an effort to reduce the cost of a final system, specialised electronics will be preferred over the general systems currently used. However, a reduction in cost can also impact the performance of the system and introduce side-channels.
 
 In figure \ref{fig:npl_states}, we can see states generated from an \ac{InP} transmitter operated with a specialised FPGA board. By sending different states in the system, we can start to see how inter-symbol interference has an effect in the system. While this is a well known effect in classical communication, it may have more serious impacts in quantum communication where the security may be compromised. For example, when sending a certain state we notice that a ``shoulder'' after the state exists that is \SI{2}{dB} above the noise floor. While minimal, this could be used by Eve to gain knowledge of the phase encoding in the state and remain undetected by Alice and Bob.
+
+\section{Integrated MDI-QKD Receiver}
+
+Ideally, to create a system that can be widely adopted, as much of the system as possible would be integrated to ease scalability and reduce power, size and weight. In this section, we will introduce the first demonstration of a fully optically integrated \ac{QKD} system. The system is a hybrid between \ac{InP} transmitters and silicon receivers.
+
+\subsection{QKD Metropolitan Network Requirements}
+
+A crucial part of a global, quantum-secured network will be the metropolitan networks that will connected commercial entities and homes to the network. This will require a scalable platform that allows many devices to be made easily. 
+
+\subsection{Practical Challenges}
+
+Unlike laboratory conditions, the real world can't be controlled as thoroughly. This means that active feedback is required to keep timing, wavelength and polarisation overlapped during a key exchange. 
+
+\subsection{Receiver Device}
+
+By using a \ac{soi} device, we can replace some of the fibre optic components used in chapter \ref{chap:mdiqkd}.
+
+Integrating the receiver for \ac{MDI} is appealing due to its simplicity. There have been integrated receiver devices in laser-written glass waveguides \cite{wang2019}. However, the detectors are still off-chip.
+
+\subsection{Silicon Receiver}
+
+The receiver device is an \ac{soi} device meaning we can take advantage of many well established photonic techniques.
+
+As the measurement for \ac{MDI} in a time-bin encoding scheme is simply a beam splitter and two detectors, is it much simpler to integrated in a cryostat than other receivers (e.g. BB84, COW or DPS).
+
+\begin{figure}[tbp]
+	\centering
+	\includegraphics[width=\textwidth]{./node/node_chip}
+	\caption[Silicon MDI-QKD receiver]{Microscope image of the MDI-QKD receiver silicon chip. Grating couplers are used to couple pulses into the waveguides which are then interfered in an MMI before detected by waveguide integrated detectors. The device includes two copies of a transmitter, demonstrating the scalability of the platform. There is also a cut back waveguide to ensure maximal coupling onto the device.}
+	\label{fig:node_chip}
+\end{figure}
+
+\subsection{Waveguide Integrated Detectors}
+
+We can deposit some superconducting material onto the silicon and create \acp{snspd}. 
+
+The high confinement in the waveguide means that coupling to the nanowire is strong giving an increased efficiency. 
+
+\subsection{Experimental Setup}
+
+\begin{sidewaysfigure}
+	\centering
+	\includegraphics[width=\textwidth]{./node/NODE.png}
+	\caption[Schematic of a fully optically integrated QKD system]{Experimental schematic for fully integrated quantum key distribution. Alice and Bob use independent InP devices which generate BB84 states on-chip. The receiver (Charlie) is an SOI device with grating couplers and waveguide-integrated detectors.}
+	\label{fig:node}
+\end{sidewaysfigure}
+
+The experimental setup is shown in figure \ref{fig:node} and represents the first fully integrated \ac{QKD} demonstration. The same transmitters from chapter \ref{mdiqkd} are used but the receiver has now been replaced by a silicon integrated circuit. 
+
+\subsection{Metropolitan Network}
+
+We should put this onto a real world network.
+
+More electronics required.
+
+Active feedback required (wavelength, polarisation, switching)
+
+Potentially multiplexing (Time or wavelength)
+
+\subsection{Resource Scaling}
+
+Once we have a process of making one receiver or transmitter device, it becomes much easier to create many more. Given a big enough demand, the cost of these devices quickly decreases. Access to the networks becomes cheap, as \ac{InP} devices become more ubiquitous, and capacity of the networks can be scaled by taking advantage of the mature silicon photonics industry.
+
+We can also introduce more detectors to overcome issues with deadtime in detectors. By multiplexing detectors we can increase the rates possible.
+
+\subsection{Integrated Multi-User Switching}
+
+A scalable multi-user network will always have to overcome routing quantum signals without introducing drastic loss into the system. Commercial optical routing systems exist with \SI{\sim 1}{dB} loss per switch. However, these systems will be large to meet the numbers required for city-wide networks. To overcome this, an integrated switch should fulfil the requirements. 
+
+Optical on-chip switching can be achieved through a few methods. The first, and most widely used, phase modulation is done using \acp{topm}. Obviously, if we want to integrated both the switching and detection on the same device, the cryogenics will need to be able to provide enough cooling whilst heaters are on.
+
+\acp{eopm}.
+
+Opto-mechanical switches.
+
+\subsection{CMOS Compatible Electronics}
+
+The electronics for the system could eventually be integrated into the receiver device inside the cryostat. Electronics at low-temperatures have been demonstrated \cite{bardin2019}
+
 
 %=========================================================
