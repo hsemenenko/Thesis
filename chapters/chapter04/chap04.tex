@@ -12,7 +12,7 @@
 
 \section*{Statement of Work}
 
-Again, this chapter made used of devices conceived and design by Mark Thompson and Mark Godfrey that were fabricated by Oclaro. The experimental setup was modified from the previous chapter with support from Philip Sibson. FPGA and RF electronic design was supported by Andy Hart. 
+Again, this chapter made used of devices conceived and designed by Mark Thompson and Mark Godfrey. Mark Godfrey made the chip mask that was then fabricated by Oclaro. The experimental setup was modified from the previous chapter with support from Philip Sibson. FPGA and RF electronic design was supported by Andy Hart. I performed the experiment and analysed the data to estimate key rates. The integrated receiver concept was designed by Mark Thompson, Philip Sibson and Jorge Barreto. Chips were fabricated in Glasgow in the group of Robert Hadfield. Initial tests were performed but are not included in this thesis.
 
 \section{Introduction}
 
@@ -68,7 +68,7 @@ Secondly, it removes the asymmetry between Alice and Bob which allows for simple
 	\label{fig:mdi_protocol}
 \end{figure}
 
-An outline of the protocol is shown in figure \ref{fig:mdi_protocol}. We will use a four decoy state protocol \cite{zhou2016} which treats the $Z$ and $X$ bases separately. The $Z$ basis is used entirely to generate keys, while the $X$ basis is used to bound knowledge gained by an eavesdropper. This is optimal for the symmetric case. The asymmetric case needs to be dealt with slightly differently \cite{wang2018}.
+An outline of the protocol is shown in figure \ref{fig:mdi_protocol}. We will use a four decoy state protocol \cite{zhou2016} which treats the $Z$ and $X$ bases separately. The $Z$ basis is used entirely to generate keys, while the $X$ basis is used to bound knowledge gained by an eavesdropper. This is optimal for the symmetric case. The asymmetric case needs to be dealt with slightly differently where the loss of the channels from Alice and Bob to Charlie may be different \cite{wang2018}.
 
 \begin{enumerate}
 	\item \brisred{Preparation} Alice and Bob, independently and randomly, choose \acp{wcs} from the four BB84 states: $\ket{0}, \ket{1}, \ket{+}, \ket{-}$. They will also choose an intensity, at random, to satisfy a decoy state protocol. The bases choices do not need to be equally weighted and the optimal choices will depend on the gains and errors in a finite key regime. Both the state and intensity choice should remain secret at this stage. These states are then sent to Charlie. 
@@ -164,7 +164,9 @@ So we find that by just using a beam splitter and threshold detectors, it isn't 
 
 \subsection{Security and Key Rate Estimation}
 
-The estimate key rate of \ac{MDI} per pulse in the asymptotic case is given as
+The security of \ac{QKD} protocols is founded in the no-cloning theorem of quantum mechanics. When Alice and Bob send their single photons, they can be sure that Eve cannot faithfully duplicate the states to copy the information. However, Alice and Bob will not be sending true single photons, but instead will send weak coherent states. As there is the possibility of multi-photon events, regardless of how small, Alice and Bob will need to bound the number of events that were true single photon events. It is common to use a decoy state protocol for this \cite{Hwang2003}. It is possible to perform secure \ac{QKD} without decoy state analysis, but the key rates are drastically reduced \cite{Lo2005}.
+
+For a decoy state protocol, the estimated key rate of \ac{MDI} per pulse in the asymptotic case is given as \cite{Lo2014}
 
 \begin{equation}
 	R = (p_z)^2 Y_{11}^Z \left(1 - H_2(E_{11}^X)\right) - Q_{s,s}^Z f_e H_2(E_{\mu_s\mu_s}^Z)
@@ -192,7 +194,7 @@ In essence, decoys states are measuring the loss of the channel during a key exc
 \begin{equation}
 	Q_{\mu_{a} \mu_{b}}^{X, Z} E^{X, Z}_{\mu_{a} \mu_{b}}=\sum_{n, m} e^{-\left(\mu_{\mathrm{a}}+\mu_{\mathrm{b}}\right)} \frac{\mu_{\mathrm{a}}^{n}}{n !} \frac{\mu_{\mathrm{b}}^{m}}{m !} Y^{X, Z}_{n, m} E^{X, Z}_{n, m}
 \end{equation}
-where $\mu_a$ ($\mu_b$) are the intensities of Alice's (Bob's) pulses. The gain, $Q_{\mu\sigma}^i$, defined to be the number of successful Bell state projections when Alice and Bob send states in the basis $i$ with intensities $\mu$ and $\sigma$ respectively. These measurable values provide a set of linear equations which can be used to bound the yield and errors for single photon events.
+where $\mu_a$ ($\mu_b$) are the intensities of Alice's (Bob's) pulses. The gain, $Q_{\mu\sigma}^i$, defined to be the number of successful Bell state projections when Alice and Bob send states in either the X or Z basis with intensities $\mu$ and $\sigma$ respectively. These measurable values provide a set of linear equations which can be used to bound the yield and errors for single photon events.
 
 In this experiment, we used a four intensity decoy state protocol \cite{zhou2016} where we consider four sources: $\nu, \sigma, \mu, s$. The $\nu$ source is vacuum, $\sigma$ and $\mu$ are decoy pulses in the $X$ basis with average photon numbers $\sigma$ and $\mu$, respectively. Finally, the $s$ source emits pulses with intensity $s$ in the $Z$ basis only. In an \ac{MDI} protocol, we use the $X$ basis to bound the knowledge of Eve or Mallory and the $Z$ basis to generate key. This is due to the minimum possible error of $25\%$ in the $X$ basis \cite{Rubenok2013} which in turn is due to the reduce \ac{HOM} visibility with coherent states \cite{Rarity2005}. This can be understood by separating the possible cases into those that interfere, and those that didn't. Of those that interfered, we would expect no errors. Of those that didn't interfere, there is a \SI{50}{\percent} chance of error. 
 
@@ -379,17 +381,16 @@ In a \ac{QKD} system, the states should be chosen randomly. However, for simplic
 
 \section{Control Electronics}
 
-In order to operate the transmitters, there is a selection of control devices needed. In this section we will describe them.
+In order to operate the transmitters, there is a selection of control devices needed. In this section we will describe them. An overview of the electronic control is shown in figure \ref{fig:exp_control} which shows how the transmitters are controlled, as well as the data links to the receiver. A centralised computer controls Alice, Bob and Charlie. 
 
-For each transmitter, we require four RF signals with different requirements. For example, the decoy state analysis requires multiple levels while the phase randomisation only requires two levels, but needs to be very stable.
-
-To synchronise the equipment, one AWG provided a clock that could be shared. The FPGA received a \SI{250}{\MHz} clock and each \ac{ppg} received a \SI{2}{\GHz} from the AWG. 
-
-\begin{figure}[tbp]
+\begin{figure}[t]
 	\centering
-	\includegraphics[width=\textwidth]{experiment_control}
-	\caption[Control electronic schematic of the MDI-QKD experiment]{The experiment required a number of pieces of equipment to control the transmitters and provide synchronisation signals for the detection. This figure shows the ``control plane'' of the experiment.}
-	\label{fig04:exp_control}
+	\large
+	\def\svgwidth{\textwidth} 
+	\import{chapters/chapter04/fig04/}{experiment_control.pdf_tex}
+%	\includegraphics[width=\textwidth]{experiment_control}
+	\caption[Control electronic schematic of the MDI-QKD experiment]{The experiment required a number of pieces of equipment to control the transmitters and provide synchronisation signals for the detection. This figure shows the ``control plane'' of the experiment and how Alice, Bob and Charlie were connected. The experiment used a single computer to control all three parties.}
+	\label{fig:exp_control}
 \end{figure}
 
 \subsubsection*{Temperature Control}
@@ -402,7 +403,7 @@ The same Arroyo 6301 boxes also provided stable current sources to drive the on-
 
 \subsubsection*{Phase Modulator Biasing}
 
-\begin{figure}[tbp]
+\begin{figure}[t]
 	\centering
 	\def\svgwidth{\textwidth} 
 	\import{chapters/chapter04/fig04/mzi_cal/}{mzi_voltage_sweep.pdf_tex}
@@ -433,6 +434,10 @@ Also, as we will be using an \ac{mzi} for phase modulation, we can more easily f
 	\caption[Electrical signals for BB84 state generation]{Oscilloscope data of the electrical signals required for the BB84 states. P. Mod is used to create the pulses, Ph. Rand for gain switching the laser, Ph. Enc. for phase encoding and Int. Mod for decoy state preparation.}
 	\label{fig:elec_signals}
 \end{figure}
+
+For each transmitter, we require four RF signals with different requirements. For example, the decoy state analysis requires multiple levels while the phase randomisation only requires two levels, but needs to be very stable.
+
+To synchronise the equipment, one AWG provided a clock that could be shared. The FPGA received a \SI{250}{\MHz} clock and each \ac{ppg} received a \SI{2}{\GHz} from the AWG. 
 
 Each transmitter requires four high-speed signals for phase randomisation, timing encoding, intensity modulation and phase encoding. Oscilloscope traces of the electrical pulses used are shown in figure \ref{fig:elec_signals}. Only the intensity modulation, which is used for the decoy state preparation, requires more than a two level signal. To create the signal and two decoy intensities, we will require a three level signal. We will also need a signal for the synchronisation to the timetagger for reconstruction of the events. 
 
@@ -659,17 +664,17 @@ A prototype FPGA driver for the \ac{InP} transmitters is shown in figure \ref{fi
 
 \subsection{Security of Transmitters}
 
+\begin{figure}[t]
+	\includegraphics[width = \linewidth]{./NPL/states.png}
+	\caption[Security analysis of transmitters driven by specialised electronics]{States sent from an integrated device using specialised electronics. By sending different sequences of states we can analyse \ac{isi} which might compromise security through side-channels.}
+	\label{fig:npl_states}
+\end{figure}
+
 While \ac{MDI} removes all possible attacks on the detectors, there is still the possibility of Mallory gaining information by targeting the transmitters. Therefore, the security of the transmitters will still need to be characterised to ensure the security of a key exchange. Many attacks have been demonstrated on different \ac{QKD} system \cite{makarov2019}. However, to date none have been demonstrated against an integrated device. Some work towards characterisation of the chip-based system has been attempted \cite{vaquero2018}.
 
 While we can remove all of the assumptions about the detectors, negating all detection side-channels, we still need to ensure that there is no information leakage from the transmitters. While device-independent schemes exist, these are not possible with current technology
 
 Working with \ac{npl}, we have begun testing the operation of the transmitters whilst using specialised electronics. In an effort to reduce the cost of a final system, specialised electronics will be preferred over the general systems currently used. However, a reduction in cost can also impact the performance of the system and introduce side-channels.
-
-\begin{figure}[t]
-	\includegraphics[width = \linewidth]{./NPL/states.png}
-	\caption[Security analysis of transmitters driven by specialised electronics]{States sent from an integrated device using specialised electronics. By sending different sequences of states we can analyse \ac{ISI} which might compromise security through side-channels.}
-	\label{fig:npl_states}
-\end{figure}
 
 In figure \ref{fig:npl_states}, we can see states generated from an \ac{InP} transmitter operated with a specialised FPGA board. By sending different states in the system, we can start to see how inter-symbol interference has an effect in the system. While this is a well known effect in classical communication, it may have more serious impacts in quantum communication where the security may be compromised. For example, when sending a certain state we notice that a ``shoulder'' after the state exists that is \SI{2}{dB} above the noise floor. While minimal, this could be used by Eve to gain knowledge of the phase encoding in the state and remain undetected by Alice and Bob.
 
