@@ -290,6 +290,7 @@
 
 %%% GLOSSARIES STUFF %%%
 	\usepackage[acronym,
+							toc=false,
 							symbols,
 							section,
 							nogroupskip,
@@ -497,7 +498,7 @@
 %
 \chapter*{List of Acronyms}
 \addcontentsline{toc}{chapter}{List of Acronyms}
-\printglossary[type=acronym, nonumberlist, style=mylong]
+\printglossary[type=acronym, nonumberlist, style=mylong, title = {}]
 \clearemptydoublepage
 %
 %
@@ -511,19 +512,19 @@
 \clearemptydoublepage
 \import{chapters/chapter03/}{chap03.tex}
 \clearemptydoublepage
-%\import{chapters/chapter04/}{chap04.tex}
-%\clearemptydoublepage
-%\import{chapters/chapter06/}{chap06.tex}
-%\clearemptydoublepage
-%\import{chapters/chapter07/}{chap07.tex}
-%\clearemptydoublepage
+\import{chapters/chapter04/}{chap04.tex}
+\clearemptydoublepage
+\import{chapters/chapter06/}{chap06.tex}
+\clearemptydoublepage
+\import{chapters/chapter07/}{chap07.tex}
+\clearemptydoublepage
 
 % And the appendix goes here
-%\appendix
-%\import{chapters/appendices/}{app0.tex}
-%\clearemptydoublepage
-%\import{chapters/appendices/}{app-tips.tex}
-%\clearemptydoublepage
+\appendix
+\import{chapters/appendices/}{app0.tex}
+\clearemptydoublepage
+\import{chapters/appendices/}{app-tips.tex}
+\clearemptydoublepage
 %
 % Apparently the guidelines don't say anything about citations or
 % bibliography styles so I guess we can use anything.
