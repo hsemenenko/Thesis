@@ -585,7 +585,7 @@ Alternative, we can create $\ket{\pm}$ states with one transmitter, and tune the
 	\label{fig:wavelength_cal}
 \end{figure}
 
-In figure \ref{fig:wavelength_cal}, we show the error dependence on wavelength. Alice and Bob send a known set of BB84 states to Charlie which allows an error rate to be calculated. We will assume that Alice's wavelength will remain fixed and will stand as the target state preparation for Bob. As Bob tunes the wavelength of his states, the relative phases between early and late time-bins will also change. This will mean that his $\ket{+}$ and $\ket{-}$ states will tune in and out of phase relative to Alice's fixed states. This fringe will have the Gaussian shape from the \ac{HOM} interference, as previously derived. However, the error will oscillate sinusoidally with the varying phases as the change in wavelength causes different phase dependency between early and late time-bins. Therefore, the fringe will look like
+In figure \ref{fig:wavelength_cal}, we show the error dependence on wavelength for both the X and Z bases. Alice and Bob send a known set of BB84 states to Charlie which allows an error rate to be calculated. We will assume that Alice's wavelength will remain fixed and will stand as the target state preparation for Bob. As Bob tunes the wavelength of his states, the relative phases between early and late time-bins will also change. This will mean that his $\ket{+}$ and $\ket{-}$ states will tune in and out of phase relative to Alice's fixed states. This fringe will have the Gaussian shape from the \ac{HOM} interference, as previously derived. However, the error will oscillate sinusoidally with the varying phases as the change in wavelength causes different phase dependency between early and late time-bins. Therefore, the fringe will look like
 
 \begin{equation}
 	E^X = \frac{1}{2} - \frac{1}{4} \exp\left(-\frac{t_p^2(\Delta\omega)^2}{16\ln(2)}\right) \cos(\beta\Delta\omega)
@@ -635,8 +635,6 @@ Integrated photonics offers benefits for future networks with reduced power, wei
 
 The topology of MDI-QKD means that citywide resource sharing can be achieved through commercially available optical switches at an untrusted centralised location. Furthermore, banks of detectors can be used to increase secret key rates. Advances in cryogenic cooling mean superconducting detectors are becoming more readily available and will likely be a vital part of future quantum-compatible networks. Such nodes will form the basis for more complex communication protocols that will require quantum repeaters and photonic information processing \cite{wehner2018}. 
 
-The simplicity of the receiver in MDI-QKD lends itself towards an integrated platform \cite{wang2019}. Waveguide integrated single-photon detectors \cite{sprengers2011}, on-chip wavelength demultiplexing \cite{sugita2000} and cryogenic optical switching \cite{eltes2019} mean that a completely integrated receiver device could further decrease the cost of QKD systems. Fully integrated measurement devices facilitate a drastic increase in the number of detectors to allow a higher count rate before saturation and relax the need for sub-nanosecond deadtimes. Key rates could be further increased through wavelength division multiplexing which can also allow coexistence with classical signals \cite{price2018}. Specialised electronics could be used to truly take advantage of the size, weight and power efficiency of an integrated system \cite{valivarthi2017}.
-
 It is becoming increasingly vital that the future of secure communication is addressed to counter advances in classical and quantum computing. While quantum key distribution has been demonstrated as a potential candidate in future networks it has yet to be widely adopted. Concerns of side-channel attacks on physical implementations undermines the security promises of QKD systems. Here, we have improved on previous demonstrations of integrated QKD systems by removing all detection side-channels which vastly increases confidence in the security of the system. Mass-manufacturability and robust operation mean that integrated systems are poised to create an accessible platform for widespread quantum-secured communication.
 
 \subsection{Finite Key Effects}
@@ -662,6 +660,8 @@ With monolithic integrated of fast photodiodes in \ac{InP}, quantum random numbe
 	\label{fig:fpga}
 \end{figure}
 
+Specialised electronics could be used to truly take advantage of the size, weight and power efficiency of an integrated system \cite{valivarthi2017}.
+
 In order to make a system that truly scalable, there also needs to be efforts towards miniaturisation of the control electronics. Unlike the electronics required for classical communication systems, the precision of the quantum control electronics needs to be many more times accurate to minimise errors.
 
 By reducing the cost of the control electronics can also potentially open up the system to attacks due to inaccuracies in control, such as those mentioned in the previous chapter. 
@@ -676,7 +676,9 @@ A prototype \ac{fpga} driver for the \ac{InP} transmitters is shown in figure \r
 	\label{fig:npl_states}
 \end{figure}
 
-While \ac{MDI} removes all possible attacks on the detectors, there is still the possibility of Mallory gaining information by targeting the transmitters. Therefore, the security of the transmitters will still need to be characterised to ensure the security of a key exchange. Many attacks have been demonstrated on different \ac{QKD} system \cite{makarov2019}. However, to date none have been demonstrated against an integrated device. Some work towards characterisation of the chip-based system has been attempted \cite{vaquero2018}.
+While \ac{MDI} removes all possible attacks on the detectors, there is still the possibility of Mallory gaining information by targeting the transmitters. Therefore, the security of the transmitters will still need to be characterised to ensure the security of a key exchange. Many attacks have been demonstrated on different \ac{QKD} system \cite{makarov2019}. However, to date there have been none demonstrated against integrated devices. Without the technology to relieve all attacks with \ac{diqkd}, we must attempt to characterise the transmitters to mitigate potential attacks or side-channels.
+
+In collaboration with \ac{NPL}, we have started characterising the performance of the transmitters. Particularly, the experiment aimed to  Some work towards characterisation of the chip-based system has been attempted \cite{vaquero2018}.
 
 While we can remove all of the assumptions about the detectors, negating all detection side-channels, we still need to ensure that there is no information leakage from the transmitters. While device-independent schemes exist, these are not possible with current technology
 
@@ -685,6 +687,8 @@ Working with \ac{npl}, we have begun testing the operation of the transmitters w
 In figure \ref{fig:npl_states}, we can see states generated from an \ac{InP} transmitter operated with a specialised \ac{fpga} board. By sending different states in the system, we can start to see how inter-symbol interference has an effect in the system. While this is a well known effect in classical communication, it may have more serious impacts in quantum communication where the security may be compromised. For example, when sending a certain state we notice that a ``shoulder'' after the state exists that is \SI{2}{dB} above the noise floor. While minimal, this could be used by Eve to gain knowledge of the phase encoding in the state and remain undetected by Alice and Bob.
 
 \section{Fully Integrated QKD}
+
+The simplicity of the receiver in MDI-QKD lends itself towards an integrated platform \cite{wang2019}. Waveguide integrated single-photon detectors \cite{sprengers2011}, on-chip wavelength demultiplexing \cite{sugita2000} and cryogenic optical switching \cite{eltes2019} mean that a completely integrated receiver device could further decrease the cost of QKD systems. Fully integrated measurement devices facilitate a drastic increase in the number of detectors to allow a higher count rate before saturation and relax the need for sub-nanosecond deadtimes. Key rates could be further increased through wavelength division multiplexing which can also allow coexistence with classical signals \cite{price2018}. 
 
 Ideally, to create a system that can be widely adopted, as much of the system as possible would be integrated to ease scalability and reduce power, size and weight. In this section, we will introduce the first demonstration of a fully optically integrated \ac{QKD} system. The system is a hybrid between \ac{InP} transmitters and silicon receivers.
 
