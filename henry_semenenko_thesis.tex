@@ -279,9 +279,17 @@
 
 %%% END %%%
 		  
+%%% hyperref must be loaded before Glossaries-extra or hyperlinks go to the wrong place %%%
+	
+\usepackage[colorlinks=true,
+			pdfpagelayout=TwoColumnRight,			%Makes pdf two page scrolling
+			pagebackref,
+			allcolors=black]{hyperref}              %Creates hyperlinks in cross references
+			
+\usepackage{caption}		%Load this after hyperref to make figure references link to the top of the figure
+
 %%% GLOSSARIES STUFF %%%
 	\usepackage[acronym,
-							toc,
 							symbols,
 							section,
 							nogroupskip,
@@ -293,11 +301,37 @@
 	% Something important
 	\makeglossaries
 	% disable hyperlinks
-	\GlsXtrEnableLinkCounting[section]{general,acronym}
-	\renewcommand*{\glslinkpresetkeys}{%
- 		\ifnum\GlsXtrLinkCounterValue{\glslabel}>0
-  		\setkeys{glslink}{hyper=false}%
- 		\fi
+	%	\GlsXtrEnableLinkCounting[section]{general,acronym}
+	%	\renewcommand*{\glslinkpresetkeys}{%
+	% 		\ifnum\GlsXtrLinkCounterValue{\glslabel}>0
+	%  		\setkeys{glslink}{hyper=false}%
+	% 		\fi
+	%	}
+	% This command makes sure the entry name is in bold
+	\renewcommand{\glsnamefont}[1]{\textbf{#1}}
+	% Make the second column a bit wider
+	%\setlength{\glsdescwidth}{0.7\textwidth}
+	% GLS style modified from that shown on https://tex.stackexchange.com/questions/161443/glossary-style-long-but-without-the-indentation-before-the-notations
+	\newglossarystyle{mylong}{%
+		\renewenvironment{theglossary}%
+			{\begin{longtable}[l]{lp{\glsdescwidth}p{\glspagelistwidth}}}%
+			{\end{longtable}}%
+		\renewcommand*{\glossaryheader}{}%
+		\renewcommand*{\glsgroupheading}[1]{}%
+		\renewcommand{\glossentry}[2]{%
+			\glsentryitem{##1}\glstarget{##1}{\glossentryname{##1}} &
+			%\glossentrysymbol{##1} &
+			\Glossentrydesc{##1} &
+			##2\tabularnewline
+		}%
+		\renewcommand{\subglossentry}[3]{%
+			&
+			\glssubentryitem{##2}%
+			%\glossentrysymbol{##2} &
+			\glstarget{##2}{\strut}\glossentrydesc{##2} & ##3\tabularnewline
+		}%
+		\renewcommand*{\glsgroupskip}{%
+			\ifglsnogroupskip\else & & \tabularnewline\fi}%
 	}
 	
 %TC:macroword \ac 1
@@ -315,13 +349,6 @@
 	
 %%% Bibliography Stuff %%%
 
-%%% Define hyperref as last package %%%
-	
-\usepackage[colorlinks=true,
-			pdfpagelayout=TwoColumnRight,			%Makes pdf two page scrolling
-			pagebackref,
-			allcolors=black]{hyperref}              %Creates hyperlinks in cross references
-	  
 \usepackage{memhfixc}				%Must be used on memoir document 
 									%class after hyperref
 %Define the pdf info
@@ -435,6 +462,7 @@
 % 
 \frontmatter
 \pagenumbering{gobble}
+%\pagenumbering{roman}
 %
 \input{frontmatter/title}
 %
@@ -454,6 +482,9 @@
 \addtocontents{toc}{\par\nobreak \mbox{}\hfill{\textbf{Page}}\par\nobreak}
 \clearemptydoublepage
 %
+\input{frontmatter/publications}
+\clearemptydoublepage
+%
 \phantomsection
 \addcontentsline{toc}{chapter}{List of Tables and Figures}
 \listoftables*
@@ -464,11 +495,9 @@
 \addtocontents{lof}{\par\nobreak\textbf{{\scshape Figure} \hfill Page}\par\nobreak}
 \clearemptydoublepage
 %
-\chapter*{List of Publications}
-\printglossary[type=\acronymtype]
-\clearemptydoublepage
-%
-\input{frontmatter/publications}
+\chapter*{List of Acronyms}
+\addcontentsline{toc}{chapter}{List of Acronyms}
+\printglossary[type=acronym, nonumberlist, style=mylong]
 \clearemptydoublepage
 %
 %
