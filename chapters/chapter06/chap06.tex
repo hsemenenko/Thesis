@@ -7,14 +7,18 @@
 \graphicspath{{./chapters/chapter06/fig06/}}
 
 \let\textcircled=\pgftextcircled
-\chapter{Future Generation Integrated Transmitters}
+\chapter{Next Generation Integrated Transmitters}
 \label{chap:future}
 
 \section*{Statement of Work}
 
-Philip Sibson and I design the photonic chips that were fabricated by Fraunhofer HHI. I design the PCB for RF operation and optical connection with packaging supported by Alasdair Price and Graham Marshall. I characterised the initial DC and RF performance of the devices.
+Philip Sibson and I designed the photonic chips and compiled the chip mask that was fabricated by Fraunhofer HHI. I design the PCB for electrical operation and optical connection. I packaged the chip with support from Alasdair Price and Graham Marshall. I performed charaterisation of the initial parts of the circuits which included laser driving under both DC and RF operation and a preliminary test of laser seeding capability.
 
 %=======
+\section{Introduction}
+
+The transmitters that were used to demonstrate \ac{MDI} could be improved. Here, we will outline the next generation devices that have been designed and fabricated. 
+
 \section{Improved Transmitters}
 
 There are many ways of improving the QKD transmitters. For example, encoding in time-bin using a delay line to separate the pulses or generating different states using independent lasers.
@@ -33,17 +37,11 @@ We introduce multiple laser sources into the circuit which can each be independe
 
 While the previous generation of devices included delay lines to encode timing information, they we too lossy to be used. We have included a delay line in the design of this chip which should have lower losses. This should reduce the complexity of the control electronics and make the system compatible with a gain-switch DFB laser.
 
-
-\section{QKD Transmitter Requirements}
-\label{sec:sec06}
-
-A \ac{QKD} transmitter will need to meet certain requirements as we have discussed before.
-
 \section{Laser Seeding}
 
 Laser seeding provides a method of generating \ac{QKD} states by overcoming some of the issues with gain switching lasers while also reducing certain electrical requirements.. This has been performed using fibre lasers \cite{}. In this chapter, we will demonstrate the first integrated laser seeding transmitter for time-bin encoding \ac{QKD}. 
 
-\section{Integrated Laser Seeded Transmitter}
+\subsection{Integrated Laser Seeded Transmitter}
 
 There are no circulators or isolators currently available on-chip, so other methods of laser seeding need to be considered.
 
@@ -56,9 +54,9 @@ Figure \ref{fig:hhi_laser_seeding} shows the GDS for the integrated device. The 
 	\label{fig:hhi_laser_seeding}
 \end{sidewaysfigure}
 
-\section{Optical and Electrical Packaging}
+\subsection{Optical and Electrical Packaging}
 
-\section{PCB Design}
+\subsubsection*{PCB Design}
 
 \begin{figure}[tbp]
 	\centering
@@ -81,11 +79,11 @@ A section of the PCB was cut out to allow for a \ac{vga} to be held during the g
 
 Pads for a thermistor were placed as close to the chip as possible with via routing to the bottom of the chip to provide good thermal conductivity.
 
-\section{Chip Mounting}
+\subsubsection*{Chip Mounting}
 
 There is no need to electrically connect the bottom of the chip to ground, as was with the case with devices fabricated from Oclaro. Silver epoxy was still used for its good thermal conductivity. The plated vias provided a good thermal connection to the bottom of the PCB so that a peltier could be used for thermal stabilisation using feedback from the thermistor.
 
-\section{Optical Connection}
+\subsubsection*{Optical Connection}
 
 The \ac{vga} was held using a vacuum chuck and moved using a 6-axis micro-positioner (NanoMax). The on-chip lasers provided a light source for alignment. 
 
@@ -102,7 +100,7 @@ A photograph of the packaged chip under the steriliser is shown in figure \ref{f
 	\label{fig:hhi_photo}
 \end{figure}
 
-\section{Laser Operation}
+\subsection{Laser Operation}
 
 A current sweep of the laser \ac{SOA} was performed to see threshold and power characteristics. Two different lasers were tested on chip with \num{300} and \SI{500}{\um} \ac{SOA} lengths to see the different in performance. The rear \ac{DBR} and phase modulator were \SI{300}{\um} and \SI{50}{\um}, respectively, for both lasers. However, the front \ac{DBR} was only \SI{50}{\um} for the \SI{500}{\um} laser, while the other was \SI{150}{\um}.
 
@@ -132,7 +130,7 @@ The wavelength can be tuned but around \SI{3}{nm} by current injection of the tu
 
 The transmitter (shown in figure \ref{fig:hhi_laser_seeding}) contains two methods possible to achieve laser seeding.
 
-\section{Gain Switching}
+\subsection{Gain Switching}
 
 We can characterise the on-chip laser ability to gain switch, which is important for phase randomisation in \ac{QKD}. 
 
@@ -154,7 +152,7 @@ We can characterise the on-chip laser ability to gain switch, which is important
 	\label{fig:gain_switch_spectrum}
 \end{figure}
 
-\section{Laser Seeding}
+\subsection{Laser Seeding}
 
 
 \begin{figure}[tp]
@@ -174,14 +172,14 @@ We can characterise the on-chip laser ability to gain switch, which is important
 	\label{fig:las_seed_test}
 \end{figure}
 
-\section{Outlook}
-
-This chapter has extended the use of integrated devices for \acl{QKD}.
-
 \subsection{Quantum Random Number Generation}
 
 Random numbers are required for many parts of \ac{QKD}. One way of generating this randomness is with \acp{qrng} which has been demonstrated on \ac{InP} \cite{FrancescoThesis,Abellan2016}. However, there has not yet been a single device which fulfils both the requirements for quantum random number generation \textit{and} quantum key generation.
 
 The chip shown in figure \ref{fig:hhi_laser_seeding} contains both a \ac{qrng} and a laser seeded \ac{QKD} transmitter. Together with electronics to directly read the randomness and generate \ac{QKD} states this could been a fully packaged system.
+
+\section{Outlook}
+
+This chapter has extended the use of integrated devices for \acl{QKD}.
 
 %=========================================================
