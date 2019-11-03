@@ -32,7 +32,7 @@
 % double-sided.
 %
 % Memoir class loads useful packages by default (see manual).
-\documentclass[a4paper,11pt,reqno,oldfontcommands,hypcap]{memoir} %add 'draft' to turn draft option on (see below)
+\documentclass[a4paper,11pt,reqno,oldfontcommands]{memoir} %add 'draft' to turn draft option on (see below)
 %
 
 %Defining custom colours
@@ -217,7 +217,7 @@
 \usepackage{latexsym}					%Extra symbols
 \usepackage{cite}
 \usepackage[hyphens]{url}				%Supports url commands
-\usepackage[english]{babel}				%For languages characters and hyphenation
+\usepackage[UKenglish]{babel}				%For languages characters and hyphenation
 \usepackage{enumerate}					%For enumeration counter
 \usepackage{footnote}					%For footnotes
 \usepackage{microtype}					%Makes pdf look better.
@@ -430,6 +430,9 @@
 \hyphenation{quan-tum}
 \hyphenation{cryp-to-gra-phy}
 \hyphenation{in-for-ma-tion}
+\hyphenation{mea-sure-ment}
+\hyphenation{in-de-pen-dent}
+\hyphenation{metro-pol-it-an}
 %
 %
 %% Change the space between paragraphs
@@ -519,7 +522,7 @@
 \import{chapters/appendices/}{app-tips.tex}
 \clearemptydoublepage
 %
-% Apparently the guidelines don't say anything about citations or
+% The guidelines don't say anything about citations or
 % bibliography styles so I guess we can use anything.
 \backmatter
 \bibliographystyle{ieeetr}

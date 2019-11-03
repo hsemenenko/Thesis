@@ -605,7 +605,7 @@ The Z basis measurements are not dependent on \ac{HOM} interference so the error
 	\small
 	\def\svgwidth{0.9\textwidth} 
 	\import{chapters/chapter04/fig04/}{rates.pdf_tex}
-	\caption[Asymptotic key rates of chip-based MDI-QKD]{We demonstrate positive key rates up to \SI{200}{\km} over an emulated fibre link. At metropolitan distances (\SI{25}{\km}), we show \ key rate of \SI{12.7}{\km} is achievable while at \SI{100}{\km}, more than \SI{1}{kbps} can be exchanged. Using the errors and gains from the system, we model that positive key generation is possible at more than \SI{350}{\km}.}
+	\caption[Asymptotic key rates of chip-based MDI-QKD]{We demonstrate positive key rates up to \SI{200}{\km} over an emulated fibre link. At metropolitan distances (\SI{25}{\km}), we show \ key rate of \SI{12.7}{kbps} is achievable while at \SI{100}{\km}, more than \SI{1}{kbps} can be exchanged. Using the errors and gains from the system, we model that positive key generation is possible at more than \SI{350}{\km}.}
 	\label{fig:mdi_rates}
 \end{figure}
 
@@ -629,13 +629,13 @@ The mean photon number was 0.2 in the Z basis for the signal states. In the X ba
 
 \section{Outlook}
 
-In this demonstration, we have extended the functionality of integrated transmitters for \acl{MDI} making it a promising platform for a metropolitan scale quantum-secured network. Building on the \acl{HOM} interference shown in chapter \ref{chap:hom}, we are able to show good interference between independent transmitters whilst also encoding BB84, time-bin encoded states. The devices show state-of-the-art error rates allowing predicted positive key rates at distances beyond \SI{350}{\km}.
+In this proof-of-principle demonstration, we have extended the functionality of integrated transmitters for \acl{MDI} making it a promising platform for a metropolitan scale quantum-secured network. Building on the \acl{HOM} interference shown in chapter \ref{chap:hom}, we are able to show good interference between independent transmitters whilst also encoding BB84, time-bin encoded states. The devices show state-of-the-art error rates allowing predicted positive key rates at distances beyond \SI{350}{\km}.
 
-Integrated photonics offers benefits for future networks with reduced power, weight and size requirements while simultaneously facilitating increased complexity with inherent phase stability. Indium phosphide devices are shown as a feasible platform for QKD networks, allowing relatively cost-effective devices to be easily mass manufactured. Integrated laser sources and efficient phase modulation satisfy all the requirements of high-fidelity quantum state preparation in a single monolithically fabricated platform. 
+Integrated photonics offers benefits for future networks with reduced power, weight and size requirements while simultaneously facilitating increased complexity with inherent phase stability. Indium phosphide devices are shown as a feasible platform for \ac{QKD} networks, allowing relatively cost-effective devices to be easily mass manufactured. Integrated laser sources and efficient phase modulation satisfy all the requirements of high-fidelity quantum state preparation in a single monolithically fabricated platform. 
 
-The topology of MDI-QKD means that citywide resource sharing can be achieved through commercially available optical switches at an untrusted centralised location. Furthermore, banks of detectors can be used to increase secret key rates. Advances in cryogenic cooling mean superconducting detectors are becoming more readily available and will likely be a vital part of future quantum-compatible networks. Such nodes will form the basis for more complex communication protocols that will require quantum repeaters and photonic information processing \cite{wehner2018}. 
+The topology of \ac{MDI} means that citywide resource sharing can be achieved through commercially available optical switches at an untrusted centralised location. Furthermore, banks of detectors can be used to increase secret key rates. Advances in cryogenic cooling mean superconducting detectors are becoming more readily available and will likely be a vital part of future quantum-compatible networks. Such nodes will form the basis for more complex communication protocols that will require quantum repeaters and photonic information processing \cite{wehner2018}. 
 
-It is becoming increasingly vital that the future of secure communication is addressed to counter advances in classical and quantum computing. While quantum key distribution has been demonstrated as a potential candidate in future networks it has yet to be widely adopted. Concerns of side-channel attacks on physical implementations undermines the security promises of QKD systems. Here, we have improved on previous demonstrations of integrated QKD systems by removing all detection side-channels which vastly increases confidence in the security of the system. Mass-manufacturability and robust operation mean that integrated systems are poised to create an accessible platform for widespread quantum-secured communication.
+It is becoming increasingly vital that the future of secure communication is addressed to counter advances in classical and quantum computing. While quantum key distribution has been demonstrated as a potential candidate in future networks it has yet to be widely adopted. Concerns of side-channel attacks on physical implementations undermines the security promises of \ac{QKD} systems. Here, we have improved on previous demonstrations of integrated \ac{QKD} systems by removing all detection side-channels which vastly increases confidence in the security of the system. Mass-manufacturability and robust operation mean that integrated systems are poised to create an accessible platform for widespread quantum-secured communication.
 
 \subsection{Finite Key Effects}
 
@@ -645,7 +645,7 @@ Interestingly, when one considers finite-key effects the optimisation of intensi
 
 \subsection{State Randomisation}
 
-In this proof-of-principle demonstration, the states were not randomisation. In a secure demonstration, a \ac{qrng} should be used to generate on-the-fly randomness which would determine the states that Alice and Bob would send. 
+In this initial experiment, the states were not randomisation. In a secure demonstration, a \ac{qrng} should be used to generate on-the-fly randomness which would determine the states that Alice and Bob would send. 
 
 The \ac{InP} devices have shown that \ac{isi} is not a problem for point-to-point \ac{QKD} \cite{Sibson2017InP}. We should expect that this would not cause issues for \ac{MDI}.
 
@@ -656,7 +656,7 @@ With monolithic integrated of fast photodiodes in \ac{InP}, quantum random numbe
 \begin{figure}[t]
 	\centering
 	\includegraphics[width=0.7\textwidth]{fpga.png}
-	\caption[Picture of the specialised FPGA controller for integrated QKD]{Picture of the specialised \ac{fpga} controller for integrated QKD. Can provide RF and DC signals for driving the chips.}
+	\caption[Picture of the specialised FPGA controller for integrated QKD]{Picture of the specialised \ac{fpga} controller for integrated QKD. Can provide RF and DC signals for driving the chips. Only about \SI{20}{\cm} in length compared to rack mounted general equipment.}
 	\label{fig:fpga}
 \end{figure}
 
@@ -671,24 +671,47 @@ A prototype \ac{fpga} driver for the \ac{InP} transmitters is shown in figure \r
 \subsection{Security of Transmitters}
 
 \begin{figure}[t]
-	\includegraphics[width = \linewidth]{./NPL/states.png}
-	\caption[Security analysis of transmitters driven by specialised electronics]{States sent from an integrated device using specialised electronics. By sending different sequences of states we can analyse \ac{isi} which might compromise security through side-channels.}
-	\label{fig:npl_states}
+	\centering
+	\def\svgwidth{0.9\textwidth} 
+	\import{chapters/chapter04/fig04/NPL/}{states.pdf_tex}
+	\caption[States sent for ISI calibration]{By sending different combinations of states, we can characterise the \ac{isi} of the \ac{QKD} transmitters with \ac{fpga} driver.}
+	\label{fig:isi_states}
 \end{figure}
 
 While \ac{MDI} removes all possible attacks on the detectors, there is still the possibility of Mallory gaining information by targeting the transmitters. Therefore, the security of the transmitters will still need to be characterised to ensure the security of a key exchange. Many attacks have been demonstrated on different \ac{QKD} system \cite{makarov2019}. However, to date there have been none demonstrated against integrated devices. Without the technology to relieve all attacks with \ac{diqkd}, we must attempt to characterise the transmitters to mitigate potential attacks or side-channels.
 
-In collaboration with \ac{npl}, we have started characterising the performance of the transmitters. Particularly, the experiment aimed to  Some work towards characterisation of the chip-based system has been attempted \cite{vaquero2018}.
+In collaboration with \ac{npl}, we have performed preliminary characterisation of the integrated devices and their performances. In particular, the collaboration looked at how cost-effective driving electronics can introduce side-channels. This work discusses the necessary trade-off between the cost a system and its security. The work has been published in reference \cite{vaquero2018}.
 
-While we can remove all of the assumptions about the detectors, negating all detection side-channels, we still need to ensure that there is no information leakage from the transmitters. While device-independent schemes exist, these are not possible with current technology
+As mentioned, the quantum states are encoded in \acp{wcp} with relative phases between them. Early and late time-bins are used to create a binary basis and can be used in \ac{MDI}, BB84, \ac{cow} and \ac{dps} protocols. The \acp{wcp} have, on average, intensities that are less than one photon. The exactly intensity will depend on the protocol, distance and error rate. However, it is vital that the intensity of the states is well calibrated to faithfully estimate the number of single-photons events. 
 
-Working with \ac{npl}, we have begun testing the operation of the transmitters whilst using specialised electronics. In an effort to reduce the cost of a final system, specialised electronics will be preferred over the general systems currently used. However, a reduction in cost can also impact the performance of the system and introduce side-channels.
+\Ac{isi} is an interference effect where symbols sent by 
 
-In figure \ref{fig:npl_states}, we can see states generated from an \ac{InP} transmitter operated with a specialised \ac{fpga} board. By sending different states in the system, we can start to see how inter-symbol interference has an effect in the system. While this is a well known effect in classical communication, it may have more serious impacts in quantum communication where the security may be compromised. For example, when sending a certain state we notice that a ``shoulder'' after the state exists that is \SI{2}{dB} above the noise floor. While minimal, this could be used by Eve to gain knowledge of the phase encoding in the state and remain undetected by Alice and Bob.
+%have started characterising the performance of the transmitters. Particularly, the experiment aimed to 
+
+%Some work towards characterisation of the chip-based system has been attempted \cite{vaquero2018}.
+
+%While we can remove all of the assumptions about the detectors, negating all detection side-channels, we still need to ensure that there is no information leakage from the transmitters. While device-independent schemes exist, these are not possible with current technology
+
+%Working with \ac{npl}, we have begun testing the operation of the transmitters whilst using specialised electronics. In an effort to reduce the cost of a final system, specialised electronics will be preferred over the general systems currently used. However, a reduction in cost can also impact the performance of the system and introduce side-channels.
+
+Recent progress with measurement devices mean that \ac{npl} are able to characterise the system at the single-photon level so as to more accurately test a functioning \ac{QKD} system. A gated \ac{spad} was synchronised with the transmitter \ac{fpga}. However, as the gate was much wider than the state separation, the detector profile needed to be deconvolved to recover the true measured signal from the transmitter.
+
+In figure \ref{fig:npl_states}, we can see states generated from an \ac{InP} transmitter operated with a specialised \ac{fpga} board. By sending different states in the system, we can start to see how \ac{isi} has an effect in the system. While this is a well known effect in classical communication, it may have more serious impacts in quantum communication where the security may be compromised. For example, when sending a certain state we notice that a ``shoulder'' after the state exists that is \SI{2}{dB} above the noise floor. While minimal, this could be used by Eve to gain knowledge of the phase encoding in the state and remain undetected by Alice and Bob.
+
+\begin{figure}[t]
+	\centering
+	\tiny
+	\def\svgwidth{\textwidth} 
+	\import{chapters/chapter04/fig04/NPL/}{sequences.pdf_tex}
+	\caption[Security analysis of transmitters driven by specialised electronics]{States sent from an integrated device using specialised electronics. By sending different sequences of states we can analyse \ac{isi} which might compromise security through side-channels.}
+	\label{fig:npl_states}
+\end{figure}
+
+This initial characterisation demonstrates that measurements of \ac{QKD} systems at the single-photon level are possible. This work help inform standardisation by the Industry Specification Group on QKD of the European Telecommunication Standards Institute (ETSI-ISG-QKD) \cite{ETSI}.
 
 \section{Fully Integrated QKD}
 
-The simplicity of the receiver in MDI-QKD lends itself towards an integrated platform \cite{wang2019}. Waveguide integrated single-photon detectors \cite{sprengers2011}, on-chip wavelength demultiplexing \cite{sugita2000} and cryogenic optical switching \cite{eltes2019} mean that a completely integrated receiver device could further decrease the cost of QKD systems. Fully integrated measurement devices facilitate a drastic increase in the number of detectors to allow a higher count rate before saturation and relax the need for sub-nanosecond deadtimes. Key rates could be further increased through wavelength division multiplexing which can also allow coexistence with classical signals \cite{price2018}. 
+The simplicity of the receiver in \ac{MDI} lends itself towards an integrated platform \cite{wang2019}. Waveguide integrated single-photon detectors \cite{sprengers2011}, on-chip wavelength demultiplexing \cite{sugita2000} and cryogenic optical switching \cite{eltes2019} mean that a completely integrated receiver device could further decrease the cost of \ac{QKD} systems. Fully integrated measurement devices facilitate a drastic increase in the number of detectors to allow a higher count rate before saturation and relax the need for sub-nanosecond deadtimes. Key rates could be further increased through wavelength division multiplexing which can also allow coexistence with classical signals \cite{price2018}. 
 
 Ideally, to create a system that can be widely adopted, as much of the system as possible would be integrated to ease scalability and reduce power, size and weight. In this section, we will introduce the first demonstration of a fully optically integrated \ac{QKD} system. The system is a hybrid between \ac{InP} transmitters and silicon receivers.
 
