@@ -32,9 +32,9 @@
 % double-sided.
 %
 % Memoir class loads useful packages by default (see manual).
-\documentclass[a4paper,11pt,reqno,oldfontcommands]{memoir} %add 'draft' to turn draft option on (see below)
+\documentclass[a4paper,11pt,reqno,oldfontcommands,hypcap]{memoir} %add 'draft' to turn draft option on (see below)
 %
-	  
+
 %Defining custom colours
 \usepackage{xcolor}
 
@@ -301,13 +301,6 @@
 	\loadglsentries{glossaryEntries}
 	% Something important
 	\makeglossaries
-	% disable hyperlinks
-	%	\GlsXtrEnableLinkCounting[section]{general,acronym}
-	%	\renewcommand*{\glslinkpresetkeys}{%
-	% 		\ifnum\GlsXtrLinkCounterValue{\glslabel}>0
-	%  		\setkeys{glslink}{hyper=false}%
-	% 		\fi
-	%	}
 	% This command makes sure the entry name is in bold
 	\renewcommand{\glsnamefont}[1]{\textbf{#1}}
 	% Make the second column a bit wider
