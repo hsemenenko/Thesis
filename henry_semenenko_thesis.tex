@@ -158,8 +158,9 @@
 			\color{gray}\chaptitlefont\raggedleft ##1\par
 		\fi
 	}
-	\renewcommand{\mempostaddchaptertotochook}{\clearpage\nopagecolor\cleartooddpage[\emptypage]\glsresetall}
+	\renewcommand{\mempostaddchaptertotochook}{\clearpage\nopagecolor\cleartooddpage[\emptypage]}
 } 
+
 \makeatother 
 \chapterstyle{daleifmodif}
 %
@@ -288,6 +289,17 @@
 			
 \usepackage{caption}		%Load this after hyperref to make figure references link to the top of the figure
 
+%Define the pdf info
+\hypersetup{
+	pdfinfo={
+		Title={Advances in Chip-Based Quantum Key Distribution},
+		Author={Henry Semenenko},
+		Keywords={integrated optics; quantum key distribution; quantum optics},	
+		CreationDate={D:\DTMfetchyear{now}\DTMfetchmonth{now}\DTMfetchday{now}\DTMfetchhour{now}\DTMfetchminute{now}\DTMfetchsecond{now}},
+		Subject={A thesis submitted to the University of Bristol for the degree of Doctor of Philisophy in the Faculty of Science}
+	}
+}	  	  
+	
 %%% GLOSSARIES STUFF %%%
 \usepackage[acronym,
 						toc=false,
@@ -296,11 +308,17 @@
 						nogroupskip,
 						shortcuts=ac,
 						automake]{glossaries-extra}
+	%Set acronym style
 	\setabbreviationstyle{long-short}
 	\setabbreviationstyle[acronym]{long-short}
+	%Load entries
 	\loadglsentries{glossaryEntries}
+	%Introduce short version only if acronym has been used twice in a chapter
+	\GlsXtrEnableEntryUnitCounting{acronym}{2}{chapter}
 	% Something important
 	\makeglossaries
+	%Add all entries
+	\glsaddall
 	% This command makes sure the entry name is in bold
 	\renewcommand{\glsnamefont}[1]{\textbf{#1}}
 	% Make the second column a bit wider
@@ -342,20 +360,7 @@
 %%% END OF GLOSSARIES STUFF %%%       	
 	
 %%% Bibliography Stuff %%%
-
-\usepackage{memhfixc}				%Must be used on memoir document 
-									%class after hyperref
-%Define the pdf info
-\hypersetup{
-	pdfinfo={
-		Title={Advances in Chip-Based Quantum Key Distribution},
-		Author={Henry Semenenko},
-		Keywords={integrated optics; quantum key distribution; quantum optics},	
-		CreationDate={D:\DTMfetchyear{now}\DTMfetchmonth{now}\DTMfetchday{now}\DTMfetchhour{now}\DTMfetchminute{now}\DTMfetchsecond{now}},
-		Subject={A thesis submitted to the University of Bristol for the degree of Doctor of Philisophy in the Faculty of Science}
-	}
-}	  	  
-	  
+  
 %Changing the style of pagebackref in the bibliography
 \renewcommand*{\backref}[1]{
 		% default interface
@@ -505,10 +510,10 @@
 \clearemptydoublepage
 \import{chapters/chapter02/}{chap02.tex}
 \clearemptydoublepage
-\import{chapters/chapter03/}{chap03.tex}
-\clearemptydoublepage
-\import{chapters/chapter04/}{chap04.tex}
-\clearemptydoublepage
+%\import{chapters/chapter03/}{chap03.tex}
+%\clearemptydoublepage
+%\import{chapters/chapter04/}{chap04.tex}
+%\clearemptydoublepage
 \import{chapters/chapter06/}{chap06.tex}
 \clearemptydoublepage
 \import{chapters/chapter07/}{chap07.tex}
