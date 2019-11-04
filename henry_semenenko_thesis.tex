@@ -158,9 +158,8 @@
 			\color{gray}\chaptitlefont\raggedleft ##1\par
 		\fi
 	}
-	\renewcommand{\mempostaddchaptertotochook}{\clearpage\nopagecolor\cleartooddpage[\emptypage]}
+	\renewcommand{\mempostaddchaptertotochook}{\clearpage\nopagecolor\cleartooddpage[\emptypage]\glsresetall}
 } 
-
 \makeatother 
 \chapterstyle{daleifmodif}
 %
@@ -313,8 +312,6 @@
 	\setabbreviationstyle[acronym]{long-short}
 	%Load entries
 	\loadglsentries{glossaryEntries}
-	%Introduce short version only if acronym has been used twice in a chapter
-	\GlsXtrEnableEntryUnitCounting{acronym}{2}{chapter}
 	% Something important
 	\makeglossaries
 	%Add all entries
@@ -510,10 +507,10 @@
 \clearemptydoublepage
 \import{chapters/chapter02/}{chap02.tex}
 \clearemptydoublepage
-%\import{chapters/chapter03/}{chap03.tex}
-%\clearemptydoublepage
-%\import{chapters/chapter04/}{chap04.tex}
-%\clearemptydoublepage
+\import{chapters/chapter03/}{chap03.tex}
+\clearemptydoublepage
+\import{chapters/chapter04/}{chap04.tex}
+\clearemptydoublepage
 \import{chapters/chapter06/}{chap06.tex}
 \clearemptydoublepage
 \import{chapters/chapter07/}{chap07.tex}
