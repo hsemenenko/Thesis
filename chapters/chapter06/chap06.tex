@@ -12,12 +12,21 @@
 
 \section*{Statement of Work}
 
-Philip Sibson and I designed the photonic chips and compiled the chip mask that was fabricated by Fraunhofer HHI. I design the PCB for electrical operation and optical connection. I packaged the chip with support from Alasdair Price and Graham Marshall. I performed charaterisation of the initial parts of the circuits which included laser driving under both DC and RF operation and a preliminary test of laser seeding capability.
+Philip Sibson and I designed the photonic chips and compiled the chip mask that was fabricated by Fraunhofer HHI. I design the PCB for electrical operation and optical connection. I packaged the chip with support from Alasdair Price and Graham Marshall. I performed characterisation of the initial components of the circuits which included laser driving under both DC and RF operation and a preliminary test of laser seeding capability.
 
 %=======
 \section{Introduction}
 
+Integrated photonics has been used to demonstrate a range of quantum protocols and experiments \cite{wang2019integrated} but remains under heavy development. 
+
 The transmitters that were used to demonstrate \ac{MDI} could be improved. Here, we will outline the next generation devices that have been designed and fabricated. 
+
+\begin{figure}
+	\centering
+	\includegraphics[width=0.9\textwidth]{./schematics/components.pdf}
+	\caption[Components used for chip schematics]{List of components used for the chip schematics.}
+	\label{fig:components}
+\end{figure}
 
 \section{Improved Transmitters}
 
@@ -27,15 +36,31 @@ There are many ways of improving the \ac{QKD} transmitters. For example, encodin
 	\centering
 	\includegraphics[width=0.8\textwidth]{QKD_transmitter}
 	\caption[Latest generation InP QKD Transmitter]{Latest generation HHI indium phosphide transmitter. The \SI[product-units=power]{6x4}{mm} chip contains a few ways to create BB84 states for QKD. Firstly, we have designs to compare \ac{dfb} and \ac{DBR} lasers. Secondly, we can use a delay line to separate the time bins. Finally, we have multiplexed lasers to pulse independently lasers for each state.}
+	\label{fig:hhi_gds}
 \end{sidewaysfigure}
 
 \subsubsection*{Multiple Laser Sources}
+
+\begin{figure}
+	\centering
+	\def\svgwidth{\textwidth}
+	\import{chapters/chapter06/fig06/schematics/}{gain_switch_transmitter.pdf_tex}
+		\caption[Schematic of the multiple laser source transmitter]{Schematic of the multiple laser source transmitter.}
+	\label{fig:multiple_lasers_tx}
+\end{figure}
 
 We introduce multiple laser sources into the circuit which can each be independently gain-switched to generate the four BB84 states. 
 
 \subsubsection*{Delay Line Time-Bin Encoding}
 
-While the previous generation of devices included delay lines to encode timing information, they we too lossy to be used. We have included a delay line in the design of this chip which should have lower losses. This should reduce the complexity of the control electronics and make the system compatible with a gain-switch DFB laser.
+\begin{sidewaysfigure}
+	\centering
+	\includegraphics[width=\textwidth]{./schematics/hhi_transmitter.pdf}
+	\caption[Schematic of the HHI full transmitter]{Schematic of the HHI transmitter}
+	\label{fig:hhi_transmitter}
+\end{sidewaysfigure}
+
+While the previous generation of devices included delay lines to encode timing information, they we too lossy to be used. We have included a delay line in the design of this chip which should have lower losses. This should reduce the complexity of the control electronics and make the system compatible with a gain-switched DFB laser.
 
 \section{Laser Seeding}
 
@@ -156,9 +181,8 @@ We can characterise the on-chip laser ability to gain switch, which is important
 
 
 \begin{figure}[tp]
-	\centering	
-	\def\svgwidth{0.9\textwidth} 
-	\import{chapters/chapter06/fig06/schematics/}{laser_seeding.pdf_tex}
+	\centering
+	\includegraphics[width=0.9\textwidth]{./schematics/laser_seeding.pdf}
 	\caption[Schematic of on-chip laser seeding]{Schematic of on-chip laser seeding. As there is no non-linearity to exploit for a circulator, the usual method of laser seeding cannot be achieved in integrated photonics. These are the simplest conceivable circuits to attempted it in an integrated platform}
 	\label{fig:las_seed_schem}
 \end{figure}
