@@ -17,13 +17,13 @@ The photonic chips were initially conceived by Mark Thompson and Mark Godfrey. T
 
 Secure communication protocols have been the focus of much academic research since the promise of quantum computing attacks against modern cryptography \cite{shor1994}. \Ac{QKD} aims to provide long-term security without assuming the computational power of an adversary \cite{BB84, E91}. However, inconsistencies between theory and experiment have raised questions in terms of real-world security, while large and power-hungry commercial systems have slowed wide-scale adoption.
 
-\Ac{QKD} has been under scrutiny from the emerging `quantum hacking' community who have demonstrated that real-world implementations do not always meet the assumptions of the theoretical models \cite{mdi-qkd}. This can lead to malicious attacks that allow Mallory to gain information about the secret key. These include side-channels \cite{Lamas-Linares2007}, where vulnerable information is leaked through uncharacterised channels, or responses to external manipulation of devices through classical means \cite{Gisin2006}. In particular, many attacks have been directed at the detectors due to their complexity and inconsistencies between theory and experiment \cite{Lydersen2010b,Zhao2008, Makarov2006}.
+\Ac{QKD} has been under scrutiny from the emerging `quantum hacking' community who have demonstrated that real-world implementations do not always meet the assumptions of the theoretical models \cite{mdi-qkd}. This can lead to malicious attacks that allow Mallory to gain information about the secret key. These include side-channels \cite{Lamas-Linares2007}, where vulnerable information is leaked through uncharacterised channels, or responses to external manipulation of devices through classical means \cite{Gisin2006}. In particular, many attacks have been directed at the \acp{spd} due to their complexity and inconsistencies between theory and experiment \cite{Lydersen2010b,Zhao2008, Makarov2006}.
 
 \Ac{MDI} is a recent protocol that tackles some of the more prevalent attacks on systems by removing all detector side-channels \cite{mdi-qkd}. It does so by introducing a third party (Charlie) who acts as a relay to mediate detection events by announcing quantum correlations between states sent by Alice and Bob. The detection events alone do not contain any information about the secret key, so an eavesdropper cannot gain information by targeting the detectors. 
 
-At the heart of the \Ac{MDI} protocol is \ac{HOM} interference \cite{HOM}, a quantum phenomenon where indistinguishable single photons incident on a beam splitter interfere and bunch. \ac{HOM} interference is a fundamental phenomenon in quantum optics which describes an important interaction between photons. However, interference between independent sources remains challenging due to the requirement of the photons being indistinguishable in all degrees of freedom \cite{Xu2013}. It is possible to perform \ac{HOM}-like interference using weak coherent states, albeit with a reduced visibility in coincidences. 
+At the heart of the \Ac{MDI} protocol is \ac{HOM} interference \cite{HOM}, a quantum phenomenon where indistinguishable single-photons incident on a beam splitter interfere and bunch. \ac{HOM} interference is a fundamental phenomenon in quantum optics which describes an important interaction between photons. However, interference between independent sources remains challenging due to the requirement of the photons being indistinguishable in all degrees of freedom \cite{Xu2013}. It is possible to perform \ac{HOM}-like interference using weak coherent states, albeit with a reduced visibility in coincidences. 
 
-One of the more challenge degrees of freedom to ensure indistinguishability is the wavelength of the sources. Heterodyne detection is typically used to measure the frequency difference between two independent lasers where interference of optical fields on a beam splitter will produce a beat note when measured by a photodiode. However, photodiodes will require optical powers much greater than those used for \ac{QKD} protocols. Without drastically increasing the complexity of a system, we can instead use \ac{HOM} interference to characterise the wavelength overlap between independent sources.
+One of the more challenge degrees of freedom to ensure indistinguishability is the wavelength of the sources. Heterodyne detection is typically used to measure the frequency difference between two independent lasers where interference of optical fields on a beam splitter will produce a beat note when measured by a photodiode. However, photodiodes require much higher optical powers than those typically use for QKD protocols in order to register measurements. Without drastically increasing the complexity of a system, we can instead use \ac{HOM} interference to characterise the wavelength overlap between independent sources.
 
 %While the phenomenon itself is well understood, generating states for quantum interference at the high speeds required for modern telecommunication is practically challenging.
 
@@ -33,15 +33,15 @@ One of the more challenge degrees of freedom to ensure indistinguishability is t
 
 Integrated quantum photonics has facilitated a drastic increase in complexity of experiments simply not possible with alternatives. The inherent phase stability is a vital resource for quantum experiments meaning integrated devices are poised to create an accessible platform. \Ac{QKD} systems have historically been bulky and expensive which has limited their practicality and has slowed their commercial adoption. Recent developments on \ac{InP} photonic integrated devices have established them as a promising platform for telecommunications \cite{smit2014}. The platform fulfils all of the requirements to perform \ac{QKD} at state-of-the-art rates \cite{Sibson2017InP}. The monolithic inclusion of laser sources provides a method of producing weak coherent states that can be used in a decoy-state QKD protocol \cite{Lo2005}. Efficient and fast phase modulation can be performed through a \ac{qcse} with a bandwidth up to \SI{40}{GHz} \cite{smit2014}. The possibility of mass production means that \ac{InP} devices are an excellent candidate to reduce the access cost of a \ac{QKD} network and allow wide adoption \cite{JeppixRoadmap}.
 
-In this chapter, we experimentally demonstrate that \ac{InP} devices fulfil all the requirements of state-of-the-art \ac{HOM} interference while also being a practical platform for future quantum networks. Using on-chip lasers and pulse modulation, we generated \acp{wcp} and measured a visibility of \SI{46.5(8)}{\percent} between independent devices clocked at \SI{431}{MHz}. Through gain switching, we show that the same interference is possible at \SI{250}{MHz} without a reduction in state fidelity. This visibility is comparable to other demonstrations \cite{Yuan2014, Rubenok2013, Comandar2016} with the benefit of being performed with integrated devices. Crucially, this level of interference demonstrates \ac{InP} fulfil the required control for future \ac{QKD} networks.
+In this chapter, we experimentally demonstrate that \ac{InP} devices fulfil all the requirements of state-of-the-art \ac{HOM} interference while also being a practical platform for future quantum networks. Using on-chip lasers and pulse modulation, we generated \acp{wcp} and measured a visibility of \SI{46.5(8)}{\percent} between independent devices clocked at \SI{431}{MHz}. Using gain switching as an alternative means to accomplish phase randomisation between pulses, we show that the same interference is possible at \SI{250}{MHz} without a reduction in state fidelity. This visibility is comparable to other demonstrations \cite{Yuan2014, Rubenok2013, Comandar2016} with the benefit of being performed with integrated devices. Crucially, this level of interference demonstrates \ac{InP} fulfills the required control for future \ac{QKD} networks.
 
 %In this letter, we extend the application of InP devices as a QKD platform by demonstrating the required control to interfere two independent InP transmitters producing weak coherent states.  This experiment paves the way for a more practical, accessible and affordable metropolitan QKD networks.
 
 \section{Hong-Ou-Mandel Interference}
 
-\Ac{HOM} interference is a quantum phenomena where two indistinguishable single photons incident on a balanced beam splitter will interfere and bunch. It was first seen by Hong, Ou and Mandel in 1987 \cite{HOM} and is fundamental to many quantum information technologies from computation to communication and sensing. 
+\Ac{HOM} interference is a quantum phenomena where two indistinguishable single-photons incident on a balanced beam splitter will interfere and bunch. It was first seen by Hong, Ou and Mandel in 1987 \cite{HOM} and is fundamental to many quantum information technologies from computation to communication and sensing. 
 
-Conceptually, the experiment is simple. We first consider two single photons that are indistinguishable only in their spatial modes. Mathematically, this can be represented as 
+Conceptually, the experiment is simple. We first consider two single-photons that are indistinguishable only in their spatial modes. Mathematically, this can be represented as 
 
 \begin{equation}
 	\hat{a}^\dagger \hat{b}^\dagger \ket{0,0}_{a,b} = \ket{1,1}_{a,b}
@@ -62,7 +62,7 @@ In general, we can consider a beam splitter to have some reflection component, $
 	\quad\text{and}\quad
 	r^\ast t + r t^\ast = 0
 \end{equation}
-where $|r|^2$ and $|t|^2$ are the probabilities of reflection and transmission, respectively. The restrictions on $r$ and $t$ come from the unitary of quantum transformations. For a balance beam splitter, the transformation matrix becomes
+where $|r|^2$ and $|t|^2$ are the probabilities of reflection and transmission, respectively. The restrictions on $r$ and $t$ come from the unitarity of quantum transformations. For a balance beam splitter, the transformation matrix becomes
 
 \begin{equation}
 	\text{BS}_{50:50} = \frac{1}{\sqrt{2}}
@@ -84,17 +84,24 @@ where $\hat{a}$ and $\hat{b}$ are the two input modes and $\hat{c}$ and $\hat{d}
 	\hat{a}^\dagger \hat{b}^\dagger \ket{0,0}_{a,b} \rightarrow \left( \frac{\hat{c}^\dagger + \hat{d}^\dagger}{\sqrt{2}} \right)  \left( \frac{\hat{c}^\dagger - \hat{d}^\dagger}{\sqrt{2}} \right)  \ket{0,0}_{c,d} = \frac{1}{2}((\hat{c}^\dagger)^2 - (\hat{d}^\dagger)^2 \ket{0,0}_{c,d}
 \end{equation}
 
-We find that after the photons have interfered there is no probability that a photon ends up in each of the output modes of the beam splitter. This is referred to as the photons bunching, creating the superposition state
+We find that after the photons have interfered there is no probability that exactly one photon ends up in both of the output modes of the beam splitter. This is referred to as the photons bunching, creating the superposition state
 
 \begin{equation}
 	\frac{1}{2}\left(\ket{2,0}_{c,d} - \ket{0,2}_{c,d}\right)
 \end{equation}
 
-If we were to look at the detection events after the beam splitter, we would not see any coincidences in the output modes. This is a useful measure of how indistinguishable the input photons are. By deliberately introducing some distinguishability between the two photons (for example a time delay), a measure of visibility can be introduced as the ratio of coincidences with and without \ac{HOM} interference.
+If we were to look at the detection events after the beam splitter, we would not see any coincidences in the output modes. This is a useful measure of how indistinguishable the input photons are. By deliberately introducing some distinguishability between the two photons (for example a time delay), a measure of visibility can be introduced as the ratio of coincidences with and without \ac{HOM} interference.  Explicitly, this is
+
+\begin{equation}
+	\text{Visibility} = 1 - \frac{\text{P}_\text{HOM}}{\text{P}_\text{ind}}
+\end{equation}
+where $\text{P}_\text{HOM}$ is the probability of coincidence with maximal interference and $\text{P}_\text{ind}$ is the probability of coincidence without interference.
 
 \subsection{Coherent States on a Beam Splitter}
 
-While \ac{HOM} interference is typically considered when single photons interfere on a beam splitter, the same phenomenon can be seen with coherent states.  However, unlike interference with classical electric fields, we will assume that the incoming states are not phase coherent. We will see that the same reduction in coincidences can be demonstration, but with a visibility limited 50\% due to multi-photon events \cite{Rarity2005}. 
+While \ac{HOM} interference is typically considered when single-photons interfere on a beam splitter, the same phenomenon can be seen with coherent states.  However, the extent of the interference will be reduced due to multi-photon terms. Here, we will consider how the effect presents itself with \acp{wcs} and how the intensity of the light is important. We will distinguish this interference from classical wave interference by introducing phase randomisation between the states which will be discussed further in section \ref{sec:quant_class}.
+
+%However, unlike interference with classical electric fields, we will assume that the incoming states are not phase coherent. We will see that the same reduction in coincidences can be demonstration, but with a visibility limited 50\% due to multi-photon events \cite{Rarity2005}. 
 
 Consider two coherent states, $\ket{\alpha}$ and $\ket{\beta}$, incident on a beam splitter. Before the beam splitter, the states can be written as
 
@@ -143,7 +150,7 @@ For a 50:50 beam splitter, the output would become
 	\text{D}_c(\frac{1}{\sqrt{2}}\big(i\alpha + \beta\big))\text{D}_d(\frac{1}{\sqrt{2}}\big(\alpha - i\beta\big))\ket{0,0}_{c,d}
 \end{equation}
 
-We will model the \acp{spd} as threshold detectors meaning that single photon events are not distinguishable from multi-photon events. Therefore, we will need to consider how the efficiency of detection changes with multi-photon events. Consider an \ac{spd} with efficiency of detection $\eta$, then the probability that the detector clicks, given $n$ photons were present, is
+We will model the \acp{spd} as threshold detectors meaning that single-photon events are not distinguishable from multi-photon events. Therefore, we will need to consider how the efficiency of detection changes with multi-photon events. Consider an \ac{spd} with efficiency of detection $\eta$, then the probability that the detector clicks, given $n$ photons were present, is
 
 \begin{equation}
 	1 - (1 - \eta)^n
@@ -206,7 +213,7 @@ Therefore, the probability of a coincidence click, with both coherent states ove
 	\small
 	\def\svgwidth{0.8\textwidth} 
 	\import{chapters/chapter03/fig03/HOM_Coherent/}{HOM_BS_Vis.pdf_tex}
-	\caption[Coherent state photon number visibility]{Graph plotting the effect of an unbalanced beam splitter on the visibility of a HOM dip. Maximal visibility is found when the beam splitter is 50:50. Photon number also has an effect on visibility due to the increased probability of multi-photon terms. Here, we plot average photon numbers ranging from 1 to 5. Both states are assumed to have equal average photon number.}
+	\caption[Coherent state photon number visibility]{Graph plotting the effect of an unbalanced beam splitter on the visibility of a HOM dip. Maximal visibility is found when the beam splitter is 50:50. Photon number also has an effect on visibility due to the increased probability of multi-photon terms. Here, we plot average photon numbers ranging from 1 to 5. Both incoming states are assumed to have equal average photon number.}
 	\label{fig:HOM_BS_Vis}
 \end{figure}
 
@@ -224,11 +231,7 @@ We want to consider pulses that are phase randomised relative to each other. For
 	&\text{P}_\text{HOM}\text{(coincidence)} = \frac{1}{2\pi}\int_0^{2\pi}\left(1 - e^{-|e^{i\theta}\alpha r + \beta t|^2 \eta_c}\right)\left(1 - e^{-|e^{i\theta}\alpha t - \beta r|^2 \eta_d}\right)\text{d}\theta\\
 	&\text{P}_\text{ind}(\text{coincidence}) = \left(1 - e^{-\eta_c(|r\alpha|^2 + |t\beta|^2)}\right)\left(1 - e^{-\eta_d(|t\alpha|^2 + |r\beta|^2)}\right)
 \end{align}
-where the visibility of the HOM dip can be calculated from the ratio of the interfering and non-interfering cases. Explicitly, this is
-
-\begin{equation}
-	\text{Visibility} = 1 - \frac{\text{P}_\text{HOM}}{\text{P}_\text{ind}}
-\end{equation}
+where the visibility of the HOM dip can be calculated from the ratio of the interfering and non-interfering cases, as introduced previously.
 
 Using this equation, we can estimate the visibility of a \ac{HOM} dip given a variable reflectivity beam splitter and average photon number, as shown in figure \ref{fig:HOM_BS_Vis}. The average photon number is assumed to be the same for both incoming states. As the beam splitter becomes more reflective (or transmissive), the visibility reduces to zero as the incoming states will no longer be interfering. However, we do see that small deviations from a {50:50} beam splitter do not cause the visibility to drastically decrease. We also see that an increase in the average photon number of the states will reduce the visibility. This is due to an increase in the multi-photon terms in the coherent states.
 
@@ -239,9 +242,9 @@ Using this equation, we can estimate the visibility of a \ac{HOM} dip given a va
 As previously mentioned, we will be using the \ac{HOM} interference as a measure of wavelength overlap of independent sources. Therefore, it will be useful to understand what this interaction will look like. The experiment will see a \ac{CW} laser intensity modulated into pulses with a Gaussian shape in time. We will assume that the linewidth is much smaller than the frequency broadening due to pulse modulation so that the electric field can be modelled as a single frequency. This is to say that the pulses will be Fourier limited. We will also assume that effects from chirp are negligible. Therefore, we can model the normalised electric field of each pulse as
 
 \begin{equation}
-	\mathcal{E}_j(t, t_p, \omega_j, \phi_j) = \sqrt{\frac{2 \sqrt{2\ln(2)}}{t_p\sqrt{\pi}}} \exp{\left(-\frac{4 \ln(2) t^2}{t_p^2}\right)} \exp{\left(i(\omega_j t + \varphi_j)\right)}
+	\mathcal{E}_j(t, t_p, \omega_j, \phi_j) = \sqrt{\frac{2 \sqrt{2\ln(2)}}{t_p\sqrt{\pi}}} \exp{\left(-\frac{4 \ln(2) t^2}{t_p^2}\right)} \exp{\left(i(\omega_j t + \phi_j)\right)}
 \end{equation}
-where $j = a,b$ are the beam splitter inputs, $t_p$ is the \ac{FWHM} of the pulse in time (assumed the same for both inputs), $\ln(x)$ is the natural logarithm, $\omega_j$ are the frequencies and $\phi_j$ are the phases. To calculate the interaction, we can used the beam splitter relations for electric fields,
+where $j = a,b$ are the beam splitter inputs, $t_p$ is the \ac{FWHM} of the pulse in time (assumed the same for both inputs), $\ln(x)$ is the natural logarithm, $\omega_j$ are the frequencies and $\phi_j$ are the phases. To calculate the interaction, we can use the beam splitter relations for electric fields,
 
 \begin{align}
 	\mathcal{E}_c &= \frac{1}{\sqrt{2}}\left(\mathcal{E}_a + \mathcal{E}_b \right)\\
@@ -298,16 +301,17 @@ where we introduce $0 \le V \le 1$ to account for any distinguishability between
 %
 
 \subsection{Quantum Over Classical}
+\label{sec:quant_class}
 
-A natural question to ask when considering a quantum effect with electric fields is how the interference is different from classical wave interference. If we considered two coherent electric fields on a beam splitter we would see an interference in the fields and a change in the number of coincidences at the output, regardless of the intensity of the input. It could be argued that the limitation of \SI{50}{\percent} visibility is due to a misconfiguration of the experimental set up allowing a distinguishability in an unconsidered degree of freedom.
+A natural question to ask when considering a quantum effect with electric fields is how the interference is different from classical wave interference. If we considered two coherent electric fields on a beam splitter we would see an interference in the fields and a change in the number of coincidences at the output. It could be argued that the limitation of \SI{50}{\percent} visibility is due to a misconfiguration of the experimental set up allowing a distinguishability in an unconsidered degree of freedom.
 
-We can distinguish the quantum interference from a classical fringe by considering the intensities of the individual outputs of the beam splitter. In a classical fringe, we would expect the intensity of a single output to vary as the electric fields interfere. Therefore, to verify that the interference is due to \ac{HOM} effects, we need to show that the individual intensities are not changing with the change in coincidences. When we average over the relative phases and look at the intensity of each beam splitter output we find
+We can distinguish the quantum interference from a classical fringe by considering the intensities of the individual outputs of the beam splitter. In a classical fringe, we would expect the intensity of the individual beam splitter outputs to vary as the electric fields interfere. Therefore, to verify that the interference is due to \ac{HOM} effects, we need to show that the individual intensities are not changing with the change in coincidences. When we average over the relative phases and look at the intensity of each beam splitter output we find
 
 \begin{equation}
 	\langle \mathcal{I}_c \rangle_{\Delta\phi} = \langle \mathcal{I}_d \rangle_{\Delta\phi} = 1
 \end{equation}
 
-So changing the relative wavelengths of the input pulses does not change the output intensities. This difference is due to the phase randomised nature of the incoming light and distinguishes the interference from classic interference where the light fields would have a fixed relative phase.
+So changing the relative wavelengths of the input pulses does not change the intensities of the individual outputs from the beam splitter. However, as calculated before, the change in wavelength will cause a decrease in coincidence probability. This difference is due to the phase randomised nature of the incoming light and distinguishes the interference from classic interference where the light fields would have a fixed relative phase.
 
 %As we are using coherent states, we will need to verify that the interference we see cannot be explained using a classical interference. If we considered two electric fields that were phase coherent incident on a beam splitter we would see interference. The characteristics of the outputs would differ in two ways from the quantum, \ac{HOM} interference.
 %
@@ -316,13 +320,13 @@ So changing the relative wavelengths of the input pulses does not change the out
 \section{Sources and Requirements}
 \label{sec:sources}
 
-In this section, we will discuss the main experimental challenges in performing \ac{HOM} interference and describe some of the photons sources that can be used to fulfil the stringent requirements of high-visibility interference. To show good interference between light fields, they need to be indistinguishable. Put more explicitly, for maximal interference, the two pulses need to have the same wavelength; arrive at the same time; have equal intensities; be in the same polarisation; and have the same pulse shape.
+In this section, we will discuss the main experimental challenges in performing \ac{HOM} interference and describe some of the photon sources that can be used to fulfil the stringent requirements of high-visibility interference. To show good interference between light fields, they need to be indistinguishable. Put more explicitly, for maximal interference, the two pulses need to have the same wavelength; arrive at the same time; have equal intensities; be in the same polarisation; and have the same pulse shape.
 
 %It is well understood that for two light pulses to interfere, they need to be indistinguishable \cite{}. 
 
-\subsection{Single Photons}
+\subsection{Single-Photons}
 
-Historically, \acl{HOM} interference experiments have been performed with a single photons. The first demonstrations used \ac{spdc} to generate pairs of single photons that were distinguishable only in path \cite{HOM, Rarity1989}. By delaying one of the photons before interfering on a beam splitter, \ac{HOM} interference could be demonstrated. Subsequent experiments have demonstrated interference between single photons sources from \ac{sfwm} \cite{jiang2015}, atomic systems \cite{Leong2015}, quantum dots \cite{somaschi2016} and NV centres \cite{Bernien2012}.
+Historically, \acl{HOM} interference experiments have been performed with single-photons. The first demonstrations used \ac{spdc} to generate pairs of single-photons that were distinguishable only in path \cite{HOM, Rarity1989}. By delaying one of the photons before interfering on a beam splitter, \ac{HOM} interference could be demonstrated. Subsequent experiments have demonstrated interference between different single-photon sources including \ac{sfwm} \cite{jiang2015}, atomic systems \cite{Leong2015}, quantum dots \cite{somaschi2016} and NV centres \cite{Bernien2012}.
 
 % \footnote{A recent review can be found at \url{http://www.rri.res.in/quic/resources/opn2019}}.
 
@@ -334,9 +338,9 @@ It is worth noting that as quantum networks evolve from simple key exchange netw
 
 \subsection{Weak Coherent States}
 
-In the absence of true single photon sources, another source of light needs to be considered for scalable quantum encryption protocols. Coherent states represent a close approximation to single photons when strongly attenuated. They are also readily available and easily manipulated. In the regime of low average photon number, we will introduce the term \acp{wcs}. 
+In the absence of true single-photon sources, another source of light needs to be considered for scalable quantum encryption protocols. Coherent states represent a close approximation to single-photons when strongly attenuated. They are also readily available and easily manipulated. In the regime of low average photon number, we will introduce the term \ac{wcs}. 
 
-As previously mentioned, the requirements for high-fidelity \ac{HOM}, and therefore \ac{QKD}, are stringent. Here we discuss some of the requirements for a \ac{wcs} sources to be useful in a \ac{QKD} system. 
+As previously mentioned, the requirements for high-fidelity \ac{HOM}, and therefore \ac{QKD}, are stringent. Here we discuss some of the requirements for \ac{wcs} sources to be useful in a \ac{QKD} system. 
 
 \subsubsection*{Extinction Ratio}
 
@@ -356,17 +360,17 @@ In a time-bin encoding scheme, we will need to make sure that the laser pulses i
 
 \subsubsection*{Phase Randomisation}
 
-A vital part of the \ac{HOM} interference is for the \acp{wcs} to be phase randomised. This means that each quantum state should have a phase reference that is uncorrelated to the previous state. This phase randomisation is also, crucially, what distinguishes between the classical wave interference and the quantum \ac{HOM} interference.
+A vital part of the \ac{HOM} interference is for the \acp{wcs} to be phase randomised. This means that each quantum state should have a phase reference that is uncorrelated to the previous state. This phase randomisation is also, crucially, what distinguishes between the classical wave interference and the quantum \ac{HOM} interference which will be described more explicitly in section \ref{sec:quant_class}.
 
 %While it may seem counter-intuitive to require phase randomisation after also requiring long coherence lengths of the laser. However, phase randomisation between subsequent states is a vital part of \ac{HOM} interference with coherent states. Crucially, it is what 
 
 \subsubsection*{Linearly Polarised}
 
-As mentioned before, the states will need to be overlapped in each degree of freedom. The polarisation needs to be linear for interference. While a \ac{pbs} can be used to ensure polarisation overlap for interference, this adds complexity and losses to the system. Orthogonal polarisations can also introduce side-channels into a \ac{QKD} system to allow Eve to gain knowledge of the key exchange.
+As mentioned before, the states will need to be overlapped in each degree of freedom. The polarisation needs to be linear for maximal interference. While a \ac{pbs} can be used to ensure polarisation overlap for interference, this adds complexity and losses to the system. Orthogonal polarisations can also introduce side-channels into a \ac{QKD} system to allow Eve to gain knowledge of the key exchange.
 
 \subsubsection*{Wavelength Tunable}
 
-Modern telecommunications networks heavily rely on \acp{wdm} to maintain the data rates required. To ensure quantum compatibility with the same networks, it is likely that the wavelength of a \ac{QKD} system will need to be tunable in order to switch between the standardised frequency bands. This may also restrict the use of wavelength filters, unless they are easily tunable. Moreover, unfiltered wavelengths can introduce side-channels which could be exploited by Eve or Mallory.
+Modern telecommunications networks heavily rely on \ac{wdm} to maintain the data rates required. To ensure quantum compatibility with the same networks, it is likely that the wavelength of a \ac{QKD} system will need to be tunable in order to switch between the standardised frequency bands. This may also restrict the use of wavelength filters, unless they are easily tunable. Moreover, unfiltered wavelengths can introduce side-channels which could be exploited by Eve or Mallory.
 
 \subsection{Previous Methods}
 
@@ -380,24 +384,24 @@ While gain switched lasers offer simplicity and easily satisfy the phase randomi
 
 \subsubsection*{Laser seeding}
 
-Laser seeding using two separately controlled laser, a master and a slave \cite{Comandar2016PLS}. The control is through multi-level RF electronics which can increase the cost of a system and, again, wavelength filtering is required.
+Laser seeding using two separately controlled lasers, a master and a slave \cite{Comandar2016PLS}. The control is through multi-level RF electronics which can increase the cost of a system and, again, wavelength filtering is required.
 
 %(Multi-level and expensive control required, filtering required)
 
 \subsubsection*{Intensity modulation}
 
-Starting from a \ac{CW} laser, the light can be intensity modulated into distinct time bins. There is no inherent phase randomisation involve, however, this doesn't broaden the spectrum beyond the Fourier limit meaning wavelength filtering is not required \cite{Sibson2017InP}.
+Starting from a \ac{CW} laser, the light can be intensity modulated into distinct time bins. There is no inherent phase randomisation involved, however, this doesn't broaden the spectrum beyond the Fourier limit meaning wavelength filtering is not required \cite{Sibson2017InP}.
 
 \section{Integrated Weak Coherent Source}
 
 \begin{figure}[tp]
 	\centering
 	\includegraphics[width = 0.8\textwidth]{Oclaro_00_HOM.png}
-	\caption[Schematic of the integrated transmitters for weak coherent state generation]{Schematic for the \ac{InP} transmitters for weak coherent state generation. The \ac{CW} is intensity modulated using the \ac{mzi} and coupled into fibre.}
+	\caption[Schematic of the integrated transmitters for weak coherent state generation]{Schematic for the \ac{InP} transmitters for weak coherent state generation. The \ac{CW} Fabry-P\'{e}rot laser is intensity modulated using the \ac{mzi} into \acp{wcp} which are coupled into fibre through spot-size converters.}
 	\label{fig:hom_chip}
 \end{figure}
 
-In this section, we will describe the integrated transmitters that we will use for generating weak coherent states. Each transmitter is \ac{InP} device, measuring \SI{6x2}{mm}, that was fabricated by Oclaro. A schematic is shown in figure \ref{fig:hom_chip} showing the on-chip laser source and \ac{mzi}.
+In this section, we will describe the integrated transmitters that we will use for generating weak coherent states. Each transmitter is an \ac{InP} device, measuring \SI{6x2}{mm}, that was fabricated by Oclaro. A schematic is shown in figure \ref{fig:hom_chip} showing the on-chip laser source and \ac{mzi}.
 
 \subsection{Laser Source}
 
@@ -429,7 +433,7 @@ From this, we find that changes in the refractive index will linearly change the
 	\label{fig:las_curr_volt}
 \end{figure}
 
-From the picture, we can see that the \acp{DBR} are both the same length. Typically, the rear \ac{DBR} would be longer to increase the reflectivity back into the cavity which increases the laser power. While the applications here only require weak coherent states, \ac{cvqkd} requires a bright local oscillator which needs to be considered during chip design. Subsequent chip designs should considering this design change.
+From the picture, we can see that the \acp{DBR} are both the same length. Typically, the rear \ac{DBR} would be longer to increase the reflectivity back into the cavity which increases the laser power. While the applications here only require weak coherent states, \ac{cvqkd} requires a bright local oscillator which needs to be considered during chip design. Subsequent chip designs should consider this design change to include a longer rear \ac{DBR} to increase the laser power for \ac{cvqkd} applications.
 
 The \ac{SOA} is a single-mode, ridge waveguide structure that is optimised for TE polarisation. An electrical current is used to pump the carriers for a population inversion. Figure \ref{fig:las_curr_volt} shows the characteristics of the laser showing a threshold current of \SI{14}{\mA} and a diode voltage around \SI{0.7}{V}. The optical power is shown to be linear with applied laser current after the threshold and the diodes were tested up to \SI{80}{\mA}. Operating the laser at higher currents (more than around \SI{60}{\mA}) can have detrimental effects on the lasing stability as heating within the cavity can cause the laser to mode-hop. Operating the laser at lower currents resolves this issue.
 
@@ -444,21 +448,21 @@ The \ac{SOA} is a single-mode, ridge waveguide structure that is optimised for T
 	\label{fig:spectra}
 \end{figure}
 
-A typical spectra of the two transmitter lasers is shown in figure \ref{fig:spectra} which demonstrates a \SI{<30}{pm} \ac{FWHM} and a \SI{>50}{dB} sideband suppression. The linewidth here is stated as \SI{<30}{pm} \ac{FWHM} as this is limited to the precision of the \ac{OSA} used (Anritsu MS9740A). The two lasers were deliberately offset in wavelength and the spectra show the reproducibility offered by integrated optics. Typically, we would expect the linewidth of a Fabry-P\'{e}rot laser to be Lorentzian \cite{Ismail16}. 
+A typical spectra of the two transmitter lasers is shown in figure \ref{fig:spectra} which demonstrates a \SI{<30}{pm} \ac{FWHM} and a \SI{>50}{dB} sideband suppression. The linewidth here is stated as \SI{<30}{pm} \ac{FWHM} as this is limited to the precision of the \ac{OSA} used (Anritsu MS9740A). The two lasers were deliberately offset in wavelength to show each spectra. The spectra demonstrates the reproducibility offered by integrated optics. Typically, we would expect the linewidth of a Fabry-P\'{e}rot laser to be Lorentzian \cite{Ismail16}. 
 
 While the spectrum is limited by the precision of the \ac{OSA}, we can put bounds on the linewidth from coherent measurements. The coherence length of the laser can be calculated from the linewidth by
 
 \begin{equation}
 	L_\text{coh} = \frac{c}{\pi\Delta v}
 \end{equation}
-where $\Delta v$ is the \ac{FWHM} of the laser in frequency. The integrated lasers from Oclaro have previously demonstrated a coherence time of \SI{1.5}{ns} which corresponds to a \ac{FWHM} of \SI{1.7}{pm} \cite{Sibson2017InP}. We will see later that partial coherence can be seen at \SI{4}{ns} which provides a lower bound on the \ac{FWHM} of around \SI{0.7}{pm}. In order to measure the the linewidth more accurately, a self-heterodyne measurement technique can be used \cite{self-heterodyne}. 
+where $\Delta v$ is the \ac{FWHM} of the laser in frequency. The integrated lasers from Oclaro have previously demonstrated a coherence time of \SI{1.5}{ns} which corresponds to a \ac{FWHM} of \SI{1.7}{pm} \cite{Sibson2017InP}. We will see later that partial coherence can be seen at \SI{4}{ns} which provides a lower bound on the \ac{FWHM} of around \SI{0.7}{pm}. In order to measure the linewidth more accurately, a self-heterodyne measurement technique can be used \cite{self-heterodyne}. 
 
 In figure \ref{fig:DBR_sweep}, we show laser tuning through current injection of the \acp{DBR} which will change the reflection peak through heating effects. By varying the voltage from \SI{0}{\V} to \SI{1}{\V}, the wavelength can be tuned by about \SI{10}{\nm} within the telecommunications C-band. Both the front and rear \acp{DBR} need to have similar voltages applied to maintain a good cavity mode for lasing. The wavelength can also be tuned by changing the temperature of the device, which causes the cavity to expand or contract. 
 
 \begin{figure}[tp]
 	\centering
 	\small
-	\def\svgwidth{0.8\textwidth} 
+	\def\svgwidth{0.9\textwidth} 
 	\import{chapters/chapter03/fig03/}{DBR_sweep.pdf_tex}
 	\caption[Laser wavelength scan with DBR current injection]{Through current injection of the \acp{DBR} we can change the wavelength of the laser due to heating effects. By sweeping the front and back \acp{DBR}, we can tune the laser \SI{10}{\nm} within the telecomms C-band.}
 	\label{fig:DBR_sweep}
@@ -475,7 +479,7 @@ In figure \ref{fig:DBR_sweep}, we show laser tuning through current injection of
 
 The wavelength of the lasers can also be finely tuned through current injection of the \ac{SOA} itself. This is shown in figure \ref{fig:curr_sweep} where changing the driving current from \SIrange{20}{28}{mA} sees an increase in wavelength of around \SI{100}{pm} due to heating effects in the cavity. Also with with a wavelength change, this will also change the intensity of the laser. As we saw above, the photon number is an important aspect to control during a \ac{HOM} interference. Therefore, when using \ac{SOA} current injection to sweep the wavelength some attenuation will also be required. 
 
-We note here that the narrow linewidth of the laser means that during no experiment with the \ac{InP} chips do we need to use a wavelength filter to clean up the light or optical pulses. This is important as it removed a component that would add cost to any system but also restrict the wavelength operation of the devices. Without the need for a filter, the lasers are free to operate in a wavelength that spans more than \SI{10}{nm}. This will be crucial as it is likely that \ac{QKD} systems will needed to be \ac{wdm} to meet the demands of high-speed networks for increased rates or quantum-classical multiplexing.
+We note here that the narrow linewidth of the laser means that during no experiment with the \ac{InP} chips do we need to use a wavelength filter to clean up the light or optical pulses. This is important as it removed a component that would add cost to any system but also restrict the wavelength operation of the devices. Without the need for a filter, the lasers are free to operate in a wavelength that spans more than \SI{10}{nm}. This will be crucial as it is likely that \ac{QKD} systems will needed to be \ac{wdm} compatible to meet the demands of high-speed networks for increased rates or quantum-classical multiplexing.
 
 \subsection{Phase Modulation}
 
@@ -500,19 +504,19 @@ As we are only interested here in the refractive index change due to the \ac{qcs
 	\Delta n(\omega) \approx \frac{c}{\pi}\mathcal{P}\int_{\omega_1}^{\omega_2} \frac{\alpha(\omega')}{(\omega')^2 - \omega^2} d\omega'
 \end{equation}
 
-By comparing the absorption of the material with and without the electric field $\alpha(\omega)$ can be estimated. Numerical integration can then be used to calculate the refractive index change due to an applied electric field. For small refractive index changes
+By comparing the absorption of the material with and without the electric field, $\alpha(\omega)$, can be estimated. Numerical integration can then be used to calculate the refractive index change due to an applied electric field. For small refractive index changes
 
 \begin{equation}
 	\Delta n \propto E^2
 \end{equation}
 where $E$ is the applied electric field \cite{qcse}. As the electric field increases, the effect saturates meaning that quadratic nature is only valid for small changes in the refractive index. Exactly how the electric field and the refractive index are proportional is related to the exciton peak which is dependent on the specific material. 
 
-The modulators are oriented parallel to the major flat axis of the substrate so that linear electro-optic effects add to the \ac{qcse}, where they would substrate if placed orthogonally. While the effect from the \ac{qcse} can reach speeds in excess of \SI{40}{GHz}, design of the modulator and device packaging are important to maximise performance. For speeds above \SI{10}{GHz}, the modulator should be less than \SI{1}{mm}. To ensure faithly transfer of RF signals to the chip, wirebond length should be minimised and effective termination employed to stop reflections.
+The modulators are oriented parallel to the major flat axis of the subtract so that linear electro-optic effects add to the \ac{qcse}, where they would substrate if placed orthogonally. While the effect from the \ac{qcse} can reach speeds in excess of \SI{40}{GHz}, design of the modulator and device packaging are important to maximise performance. For speeds above \SI{10}{GHz}, the modulator should be less than \SI{1}{mm}. To ensure the faithful transfer of RF signals to the chip, wirebond length should be minimised and effective termination employed to stop reflections.
 
 \begin{figure}[tp]
 	\centering
 	\includegraphics[width = 0.8\linewidth]{./Chip/Oclaro_00_MZI_1.png}
-	\caption[Microscope image of an integrated Mach-Zehnder interferometer]{Integrated \acl{mzi} made from two \acsp{mmi} and two \acsp{eopm} which can be used for intensity modulation of light into \acp{wcp}. The \ac{mzi} measures only around \SI{1}{\mm} in length and around \SI{350}{\micro\metre} in width. The \acp{eopm} can be connected electrical with the bond pads.}
+	\caption[Microscope image of an integrated Mach-Zehnder interferometer]{Integrated \acl{mzi} made from two \acsp{mmi} and two \acsp{eopm} which can be used for intensity modulation of light into \acp{wcp}. The \ac{mzi} measures only around \SI{1}{\mm} in length and around \SI{350}{\micro\metre} in width. Electrical connections to the \acp{eopm} can be made via the bond pads.}
 	\label{fig:InP_MZI}
 \end{figure}
 
@@ -529,11 +533,11 @@ The structure is only \SI{1}{mm} in length, while the modulators themselves are 
 	\small
 	\def\svgwidth{0.8\textwidth} 
 	\import{chapters/chapter03/fig03/Chip_heating_minimisation/}{MZI_heating_on_off_bias_sweep_phi2=2V.pdf_tex}
-	\caption[MZI optimisation through thermo-optic modulation]{Due to fabrication tolerances, the phase differences between the two arms of an \ac{mzi} will be different. By using a small resistance in the modulator, we can pass a current over the modulator to tune the arms to have the same phase and increase the possible extinction ratio.}
+	\caption[MZI optimisation through thermo-optic phase modulation]{Effect of applying thermo-optic phase modulation within an \ac{mzi}. Without heating, we can only get an extinction of around \SI{14}{dB} by using the \ac{qcse}. By correcting for phase differences through thermo-optic effects, we can increase the extinction to more than \SI{35}{dB}.} %Due to fabrication tolerances, the phase differences between the two arms of an \ac{mzi} will be different. By using a small resistance in the modulator, we can pass a current over the modulator to tune the arms to have the same phase and increase the possible extinction ratio.}
 	\label{fig:mzi_heating}
 \end{figure}
 
-Imperfections in the \acp{mzi} due to the fabrication of the devices mean that the phases accumulated on top and bottom path are not the same. While not designed for thermo-optic modulation, the \acp{eopm} have a resistance of around \SI{10}{\ohm} which can be used to vary the phase. By passing a small current over one arm of the \ac{mzi}, we can correct for the phase mismatch to recover the desired performance.
+Imperfections in the \acp{mzi} due to the fabrication of the devices mean that the phases accumulated on the top and bottom path are not the same. While not designed for thermo-optic modulation, the \acp{eopm} have a resistance of around \SI{10}{\ohm} which can be used to vary the phase. By passing a small current over one arm of the \ac{mzi}, we can correct for the phase mismatch to recover the desired performance.
 
 Figure \ref{fig:mzi_heating} demonstrates how heating effects can change the characteristics of an \ac{mzi}. By changing the voltage bias for the \ac{qcse} over one arm of the modulator ($\Phi_1$) whilst the other arm is kept constant ($\Phi_2$) we can characterise the performance. $\Phi_1$ is swept over the range \SIrange{0}{-10}{V} and the power at one output of the \ac{mzi} is measured. We can then compare the difference in DC modulation with and without heating. 
 
@@ -552,24 +556,24 @@ Using this heating technique, we can apply RF modulation to the \ac{mzi} to crea
 
 \subsection{Fibre Coupling}
 
-To efficiently couple the light from the waveguide mode (\SI{1.5}{\um}) to a fibre model (\SI{10}{\micro\metre}), a spot-size converter on the chip is used to expand the light mode to \SI{3}{\micro\meter}. The spot-size converter also changes the mode to be more circular from the elliptical waveguide mode. A lensed fibre was then used to convert this mode to \SI{10}{\micro\meter}. The fibre was held in a Elliot Gold fibre launch stage with piezo actuators that gave a precision of \SI{10}{\nm} in X, Y and Z axes over a range of \SI{25}{\micro\meter}.
+To efficiently couple the light from the waveguide mode (\SI{1.5}{\um}) to a fibre mode (\SI{10}{\micro\metre}), a spot-size converter on the chip is used to expand the light mode to \SI{3}{\micro\meter}. The spot-size converter also changes the mode to be more circular from the elliptical waveguide mode. A lensed fibre was then used to convert this mode to \SI{10}{\micro\meter}. The fibre was held in a Elliot Gold fibre launch stage with piezo actuators that gave a precision of \SI{10}{\nm} in the X, Y and Z axes over a range of \SI{25}{\micro\meter}.
 
-To reduce reflections back into the waveguide, the facet of the spot-size converter is at an angle relative to the edge of the chip. On these devices, the waveguides are at \SI{7}{\degree} to the edge which minimises back scattering. From Snell's law, given that the waveguide refractive index is 3.26, we can calculate that the fibre should be at \SI{23}{\degree} to the edge of the chip.
+To reduce reflections back into the waveguide, the facet of the spot-size converter is at an angle relative to the edge of the chip. On these devices, the waveguides are at \SI{7}{\degree} to the edge which minimises back scattering from the high refractive index contrast. When coupling from the chip through air into a fibre, we need to consider refraction to minimise loss. From Snell's law, we can calculate that the fibre should be at \SI{23}{\degree} to the edge of the chip, given that the waveguide refractive index is 3.26.
 
 It was not possible to directly measure the coupling losses on these devices as there were no test structures to isolate the waveguides and spot-size converters. From foundry tests, the coupling loss from a spot-size converter to a standard single-mode fibre was estimated to be \SI{1.5}{dB}. It is expect that these devices will have similar losses.
 
 \subsection{Packaging}
 
-\begin{figure}[tp]
+\begin{figure}[t]
 	\centering
 	\includegraphics[width=0.8\textwidth]{Chip_PCB}
-	\caption[Transmitter PCB package]{Chip packaging to breakout the electrical connection on the chip. SMA connectors were used for the high-speed connections to offer a response of more than \SI{10}{\GHz}. Capacitors and resistors were also used for termination of RF modulation signals. DC pins were used for low-speed connections for thermo-optic modulation and \ac{DBR} tuning. The bottom of the PCB cut out to allow optical access to the side of the chip.}
+	\caption[Transmitter PCB package]{Chip packaging to breakout the electrical connection on the chip. SMA connectors were used for the high-speed connections to offer a response of more than \SI{10}{\GHz}. Capacitors and resistors were also used for termination of RF modulation signals. DC pins were used for low-speed connections for thermo-optic modulation and \ac{DBR} tuning. The bottom of the PCB is cut out to allow optical access to the side of the chip.}
 	\label{fig:chip_pcb}
 \end{figure}
 
 To be able to access the electrical components of the integrated devices, we need to create a package to transfer the signals from the driving electronics to the chip . A PCB was designed to electrically connect the modulators and laser to SMA connectors for high-speed operation and DC pins for biasing. A render is shown in figure \ref{fig:chip_pcb}. The bottom of the chip is ground which connects to a copper block that is also connected to the ground of the PCB. Silver epoxy was used to glue the chip to the mount to ensure a good electrical connection. It also provided a good thermal connection for temperature stabilisation. The PCB is designed with a cut-out for optical access to the chip from one side.
 
-\begin{figure}[tp]
+\begin{figure}[t]
 	\centering
 	\Large
 	\def\svgwidth{0.6\textwidth} 
@@ -578,7 +582,7 @@ To be able to access the electrical components of the integrated devices, we nee
 	\label{fig:GSG_waveguide}
 \end{figure}
 
-In order to maintain a good signal integrity the impedance of the tracks needs to match the electronics. As the devices require a number of RF connections to a small area, using standard FR-4 material would not be sufficient. Instead, Rogers 6006ns material was chosen for its high dielectric constant of \num{6.15} meaning that narrow grounded coplanar waveguides with could still maintain \SI{50}{\ohm} impedance. A schematic of the waveguides is shown in figure \ref{fig:GSG_waveguide}. The characteristic impedance of a grounded coplanar waveguide can be approximated by \cite{wadell1991}
+In order to maintain a good signal integrity the impedance of the tracks needs to match the electronics. As the devices require a number of RF connections to a small area, using standard FR-4 material would not be sufficient. Instead, Rogers 6006ns material was chosen for its high dielectric constant of \num{6.15} meaning that narrow grounded coplanar waveguides could maintain a \SI{50}{\ohm} impedance. A schematic of the waveguides is shown in figure \ref{fig:GSG_waveguide}. The characteristic impedance of a grounded coplanar waveguide can be approximated by \cite{wadell1991}
 
 \begin{equation}
 	Z_0 = \frac{60\pi}{\sqrt{E_\text{eff}}}\frac{1}{\frac{K(k)}{K(k')} + \frac{K(k_l)}{K(k_l')}}
@@ -601,15 +605,15 @@ The tracks were designed and then laser etched into the copper on the substrate.
 
 The pads on the chip were wirebonded to the PCB with a \SI{25}{\micro\meter} ball bond and then a wedgebond onto the PCB. Silver epoxy was then applied over the wedgebond to ensure a good electrical contact with the PCB and to increase durability. The PCB was designed such that the length of the RF wirebonds was minimised so that capacitance and resistance of the gold wire were reduced. Such effects can be detrimental for high-speed operation.
 
-An RF signal could be applied to one side of a \ac{eopm} while the other side provided termination to minimise electrical reflections. A capacitor blocked the DC component of the signal while a \SI{50}{\ohm} resistor terminates the AC signal. 
+An RF signal could be applied to one side of an \ac{eopm} while the other side provided termination to minimise electrical reflections. A capacitor blocked the DC component of the signal while a \SI{50}{\ohm} resistor terminates the AC signal. 
 
 \section{Fibre Optic Transmitter}
 
-For initial demonstrations of the on-chip laser and pulses generation, it will be useful to have a well characterised source of \acp{wcp}. Here, we describe the commercial fibre components that can be used to replicate the chip components.
+For initial demonstrations of the on-chip laser and pulse generation, it will be useful to have a well characterised source of \acp{wcp}. Here, we describe the commercial fibre components that can be used to replicate the chip components.
 
 \subsection{State Preparation}
 
-A \ac{CW} fibre laser (Yenista T100s-hp) with a wide tuning around the C-band in steps of \SI{1}{\pm} was used as the source. This meant that the laser could be sweep very precisely compared with the integrated laser, which would remain fixed. 
+A \ac{CW} fibre laser (Yenista T100s-hp) with a wide tuning around the C-band in steps of \SI{1}{\pm} was used as the source. This meant that the laser could be swept very precisely compared with the integrated laser, which would remain fixed. 
 
 The lithium niobate fibre modulator from ThorLabs was used to intensity modulate the light. It required a \SI{5}{\Vpp} pulse meaning that amplification of the signal from the \ac{ppg} was needed. The amplifier used was an SHF 810 with \SI{29}{dB} gain and up to \SI{40}{\GHz} operation.
 
@@ -625,7 +629,7 @@ where $\tau_p$ is the \ac{FWHM} of the pulse in time and $\Delta \omega$ is the 
 
 %In order to vary the pulse intensity, each transmitter has a digital \acp{voa}. These can be used to ensure a good match in powers between the two transmitters.
 
-As the pulses were coupled it fibre, we could make use of commercial fibre components for control, interference and measurement. This section will describe the required control off chip, as well as the detection 
+As the pulses were coupled into fibre, we could make use of commercial fibre components for control, interference and measurement. This section will describe the required control off chip, as well as the detection and correlation of photons.
 
 \subsection{Polarisation and Projection}
 
@@ -637,13 +641,13 @@ As we will be using the current of the on-chip laser to vary the wavelength this
 
 \subsection{Detection}
 
-The detectors used in the experiment were \acp{snspd} from Photonspot which were chosen over other single-photon detectors for their high efficiency (\SI{>80}{\percent}), small timing jitter (\SI{30}{\ps}) and short recovery time (\SI{100}{\ns}). The detectors were housed in a closed cycle helium refrigerator that was kept at \SI{0.7}{K}. A successful event was indicated by an RF signal of around \SI{10}{\mV} which was amplified with low-noise amplifier to around \SI{200}{\mV} which could then be time-tagged.
+The detectors used in the experiment were \acp{snspd} from Photonspot which were chosen over other single-photon detectors for their high efficiency (\SI{>80}{\percent}), small timing jitter (\SI{30}{\ps}) and short recovery time (\SI{100}{\ns}). The detectors were housed in a closed cycle helium refrigerator that was kept at \SI{0.7}{K}. A successful event was indicated by an RF signal of around \SI{10}{\mV} which was amplified with a low-noise amplifier to around \SI{200}{\mV} which could then be time-tagged.
 
 \subsection{Time-tagging}
 
-Detection events were time-tagged using a PicoQuant Hydraharp 400 and saved to a computer for later analysis. An optical link was used to provide a synchronisation signal from the transmitters to the time-tagger. The precision of timing events could be set by the user and could be as low as \SI{1}{\ps} and the electronic jitter is \SI{<12}{\ps}. The dead time of the tagging electronics is \SI{<80}{\ns}, which is comparable to the detector dead time so should not impact the experiment. In this experiment, \SI{16}{\ps} bins were used. As the exact series of events could be reconstructed form the time-tags, the number of coincidences could be calculated from the saved tags provided the timing information between transmitters had been calibrated.
+Detection events were time-tagged using a PicoQuant Hydraharp 400 and saved to a computer for later analysis. An optical link was used to provide a synchronisation signal from the transmitters to the time-tagger. The precision of timing events could be set by the user and could be as low as \SI{1}{\ps} with an electronic jitter of \SI{<12}{\ps}. The dead time of the tagging electronics is \SI{<80}{\ns}, which is comparable to the detector dead time so should not impact the experiment. In this experiment, \SI{16}{\ps} bins were used. As the exact series of events could be reconstructed from the time-tags, the number of coincidences could be calculated from the saved tags provided the timing information between transmitters had been calibrated.
 
-The coincidence window could be varied to in the analysis after to ensure that the coincidences come from when the pulse is a Gaussian shape. As we see from figure \ref{fig:pulses}, there is a `tail' on the later edge of the pulses would cause a chirp in the pulse. This would have two effects on the \ac{HOM} interference. Firstly, if the two pulse shapes are different, this would cause a reduced interference as the photons would have different wavelengths. Secondly, this would change the shape of the \ac{HOM} dip from the Gaussian shape that will be derived later.
+The coincidence window could be varied in the analysis after to ensure that the coincidences come from when the pulse is a Gaussian shape. As we see from figure \ref{fig:pulses}, there is a `tail' on the later edge of the pulses that could cause hirp in the pulse. This would have two effects on the \ac{HOM} interference. Firstly, if the two pulse shapes are different, this would cause a reduced interference as the photons would have different wavelengths. Secondly, this would change the shape of the \ac{HOM} dip from the Gaussian shape that will be derived later.
 
 \subsection{Synchronisation}
 
@@ -669,7 +673,7 @@ A 10K thermistor place in the copper mount was used to give feedback to a PID lo
 
 \section{Fibre Optic Hong-Ou-Mandel Demonstration}
 
-\begin{figure}[tp]
+\begin{figure}[t]
 	\centering
 	\def\svgwidth{\textwidth} 
 	\import{chapters/chapter03/fig03/HOM_Yenista_Chip/}{experiment.pdf_tex}
@@ -689,12 +693,12 @@ To simplify the first tests of the integrated devices, a transmitter was setup u
 
 \subsection{Fibre Laser Wavelength Sweep}
 
-\begin{figure}[tp]
+\begin{figure}[p]
 	\centering
 	\small
-	\def\svgwidth{0.7\textwidth} 
+	\def\svgwidth{0.9\textwidth} 
 	\import{chapters/chapter03/fig03/HOM_Yenista_Chip/}{HOM_total.pdf_tex}
-	\caption[HOM interference between fibre components and chip]{The fibre laser wavelength was tuned over a \SI{150}{pm} range relative to the fixed on-chip laser. The pulses were interfered on a beam splitter to show good interference close to the maximum visibility of \SI{50}{\percent}. The total counts remain constant through the sweep showing that the coincidence dip is not explain through classical interference.}
+	\caption[HOM interference between fibre components and chip]{The fibre laser wavelength was tuned over a \SI{150}{pm} range relative to the fixed on-chip laser. The pulses were interfered on a beam splitter to show good interference close to the maximum visibility of \SI{50}{\percent}. The total counts remain constant through the sweep showing that the coincidence dip is not explained through classical interference.}
 	\label{fig:fibre_wavelength_sweep}
 \end{figure}
 
@@ -710,7 +714,7 @@ Wavelengths of the individual lasers was coarsely overlapped on an \ac{OSA} arou
 
 In figure \ref{fig:fibre_wavelength_sweep}, we show the single and coincidences events as the fibre laser is swept in \SI{1}{pm} steps over a \SI{150}{pm} range. As the two transmitters become more indistinguishable in wavelength, the number of coincidences reduces close to the theoretical maximum visibility of \SI{50}{\percent}. From the current injection of the on-chip laser, we can see that this level of precision is well within the capability of the chip.
 
-By looking at the total number of counts in each detectors, we can they do not vary with the change in coincidences. This demonstrates that the reduction in coincidences cannot be attributed to classical interference. The difference between the detector counts is due to a slight difference in efficiency between detectors.
+By looking at the total number of counts in each detectors, we can see that they do not vary with the change in coincidences. This demonstrates that the reduction in coincidences cannot be attributed to classical interference. The difference between the detector counts is due to a slight difference in efficiency between detectors.
 
 \subsection{On-Chip Laser Current Sweep}
 
@@ -719,7 +723,7 @@ By looking at the total number of counts in each detectors, we can they do not v
 	\small
 	\def\svgwidth{0.8\textwidth} 
 	\import{chapters/chapter03/fig03/HOM_Yenista_Chip/}{HOM_curr_sweep.pdf_tex}
-	\caption[HOM between fibre components and chip by varying laser current]{To show that the laser control precise enough to vary the wavelength. The total number of counts on each detector was used to vary the attenuation to account for the increasing laser power.}
+	\caption[HOM between fibre components and chip by varying laser current]{By increasing the current of one laser, whilst keeping the fibre laser was kept fixed, we can change the relative wavelength through heating effects. We find \ac{HOM} interference as the lasers become indistinguishable in wavelength. The total number of counts on each detector was used to vary the attenuation to account for the increasing laser power. This demonstrates that wavelength control of the on-chip laser is sufficient to precisely overlap the two independent lasers.}
 	\label{fig:fibre_curr_sweep}
 \end{figure}
 
@@ -753,7 +757,7 @@ The experiment uses two \ac{InP} devices which we will call Alice and Bob and a 
 %	\includegraphics[width=0.8\textwidth]{HOM}
 	\def\svgwidth{0.8\textwidth} 
 	\import{chapters/chapter03/fig03/}{HOM.pdf_tex}
-	\caption[Hong-Ou-Mandel interference between integrated devices]{\ac{HOM} interference between two integrated devices demonstrating \SI{46.5(8)}{\%} visibility. By changing the relative wavelength between the two lasers the lasers become indistinguishable and the number of coincidences reduced to a visibility limited to \SI{50}{\percent}.}
+	\caption[Hong-Ou-Mandel interference between integrated devices]{\ac{HOM} dip between independently generated \acp{wcp} by two integrated devices. By changing the relative wavelength between the two devices, we demonstrate a reduction in coincidences due to \ac{HOM} interference. We find a visibility of \SI{46.5(8)}{\%} which is limited to \SI{50}{\percent} for coherent states due to multi-photon terms.}
 	\label{fig:HOM}
 \end{figure}
 
@@ -779,7 +783,7 @@ In figure \ref{fig:HOM}, we demonstrate \acl{HOM} interference between the two d
 	\label{fig:gain_switch}
 \end{figure}
 
-We have previously discussed that, to demonstrate quantum interference over the classical interference, the laser pulses should be phase randomised relative to one another. In the previous experiment, as the lasers were not phase locked, we could average over the phases by taking data for long enough for the phases between the two lasers to drift. However, for \ac{QKD} purposes this would not meet criteria for security. This means that we need to be able to actively create pulses with randomised phases. This section will describe how we can utilise gain-switching to create phase randomised windows and intensity modulation to create well-defined pulses. Using coincidence counts between neighbouring pulses, we can verify that the  \acp{wcp} are phase randomised.
+We have previously discussed that, to demonstrate quantum interference over the classical interference, the laser pulses should be phase randomised relative to one another. In the previous experiment, as the lasers were not phase locked, we could average over the phases by taking data for long enough for the phases between the two lasers to drift. However, for \ac{QKD} purposes this would not meet criteria for security. This means that we need to be able to actively create pulses with randomised phases. This section will describe how we can utilise gain-switching to create phase randomised windows and intensity modulation to create well-defined pulses. Using coincidence counts between neighbouring pulses, we can verify that the  \acp{wcp} are phase randomised. By looking at coincidences between neighbouring pulses we can check correlations between \acp{wcp} that haven't interfered. If the laser is phase randomised, we would not expect to see any relation between subsequent pulses. 
 
 %As we will see in chapter \ref{chap:mdiqkd}, it will be important for the pulses to be phase randomised relative to subsequent pulses to maintain the security of a \ac{QKD} protocol. 
 
@@ -791,7 +795,7 @@ In figure \ref{fig:gain_switch}, we demonstrate gain switching the on-chip laser
 
 After the negative signals, the lasing oscillates before returning to a continuous (and useful) lasing mode. These oscillations can be attributed to mode competition in the laser cavity and also ringing in the RF signal. Therefore, we can still generate states at \SI{250}{MHz} and demonstrate good state preparation through intensity modulation.
 
-To test that the pulses are phase randomised, we can look at coincidences between neighbouring pulses. If the laser is phase randomised, we would not expect to see any relation between subsequent pulses. In figure \ref{fig:HOM_coherence}, we demonstrate two \ac{HOM} fringes with and without phase randomisation. Both experiments see a visibility of \SI{47}{\percent}. When the pulses are coherent, we see a partial relationship between the pulses as the relative wavelength between the lasers changes. If there was complete coherence, this would be a sinusoidal fringe as subsequent pulses tune in and out of phase. After phase randomisation, we find no relationship between coincidences of subsequent pulses.
+In figure \ref{fig:HOM_coherence}, we demonstrate two \ac{HOM} fringes with and without phase randomisation. Both experiments see a visibility of \SI{47}{\percent}. When the pulses are coherent, we see a partial relationship between the pulses as the relative wavelength between the lasers changes. If there was complete coherence, this would be a sinusoidal fringe as subsequent pulses tune in and out of phase (similar to the error fringe from Bell state projections seen in the next chapter). After phase randomisation, we find no relationship between coincidences of subsequent pulses.
 
 \begin{figure}[tp]
 	\centering
@@ -806,21 +810,27 @@ We have demonstrated that by combing gain-switching and intensity modulation of 
 
 \section{Outlook}
 
-In this experiment, we have demonstrated state-of-the-art \acl{HOM} interference between GHz clocked integrated photonic devices exploiting monolithically fabricated lasers and \acp{eopm} with a visibility of \SI{46.5(8)}{\%}. Further, we have demonstrated that gain switching the laser between pulses doesn't reduce the visibility. However, this does limit the speed of operation which will be a consideration for \ac{QKD} systems. As we will see in chapter \ref{chap:mdiqkd}, this result will play a crucial role in \ac{MDI} and high fidelity interference will be required to bound the knowledge that could be gained by Mallory.
+In this experiment, we have demonstrated state-of-the-art \acl{HOM} interference between independent, integrated photonic devices. By utilising monolithically fabricated lasers and \acp{eopm}, we generated \acp{wcp} with precise control over all degrees of freedom. By changing the relative wavelength of the devices, we demonstrated a \ac{HOM} dip with a visibility of \SI{46.5(8)}{\%}. Further, we demonstrate gain-switching of the on-chip laser to provide actively phase randomised pulses. We show that the introduction of phase randomisation doesn't reduce the visibility of the interference and also doesn't require the pulses to be wavelength filtered.
+
+%\ac{HOM} effects are crucial for quantum information protocols and this demonstration expands the functionality of integrated devices. \ac{MDI} isis the first step towards chip-based \ac{MDI}. The experiment shows that control and precision to accurately  Further, we have demonstrated that gain switching the laser between pulses doesn't reduce the visibility. 
+
+%However, this does limit the speed of operation which will be a consideration for \ac{QKD} systems. As we will see in chapter \ref{chap:mdiqkd}, this result will play a crucial role in \ac{MDI} and high fidelity interference will be required to bound the knowledge that could be gained by Mallory.
+
+The stability and scalability of this integrated platform make it a good contender for accessible metropolitan \ac{QKD}. This demonstration is the first step towards chip-based \ac{MDI} which facilitates resource sharing without sacrificing security by introducing trusted nodes. Access can be provided through the cheap and scalable \ac{InP} platform, while expensive resources, such as \acp{spd}, optical switches and time taggers can be shared between all users. The flexibility of the integrated photonic platform allows increased rates through wavelength division multiplexing \cite{price2018} and enables fully integrated systems through on-chip detection \cite{akhlaghi2015} further reducing a major barrier towards widespread quantum secure communications.
 
 \subsection{Active Stabilisation}
 
-Performing this experiment in a controlled laboratory environment is obviously favourable for prolonged operation over several hours. However, as the aim will be to create devices that can deployed on real-world networks, the systems will need to compensate for drifts in the fibres and electronic control.
+Performing this experiment in a controlled laboratory environment is obviously favourable for prolonged operation over several hours. However, as the aim will be to create devices that can be deployed on real-world networks, the systems will need to compensate for drifts in the fibres and electronic control.
 
 %To maintain a high fidelity interference between the two devices over a prolonged period will require feedback as the devices will drift. 
 
-Polarisation can be stabilised by utilising the unused arm of the \ac{pbs} to monitor counts and using an electrically controlled polarisation controller to keep the polarisation stable.
+Polarisation can be stabilised by utilising the unused arm of the \ac{pbs} to monitor counts and using an electrically controlled polarisation controller to keep the polarisation stable. At the single-photon level, \acp{spd} can be used feedback from the number of counts can be used to maximise the extinction. It has been demonstrated in field trials that polarisation in deployed fibre is more favourable with polarisation drift than spooled lab fibre \cite{wengerowsky2019}.
 
 Wavelength can be stabilised using the visibility of \ac{HOM} interference by minimising coincidences. By changing the current of one of the transmitters, the wavelength can be very finely tuned. While this will change the power of the laser, if only small changes in current are required then this power change will be negligible.
 
 Timing stabilisation can be achieved by looking at the time of arrival of the pulses. In particular, the \ac{FWHM} can be used to ensure that the pulses are overlapped i.e. minimising the \ac{FWHM} in the histogram of detection events means that the pulses will be maximally overlapped.
 
-Given a good current source to dive the laser, the average photon number is unlikely to change dramatically. On-chip fast photodiodes can be used to locally monitor the power to provide any required feedback. Having fibres fixed to the chips with UV cured glue will remove any change of loss from fibre coupling.
+Given a good current source to drive the laser, the average photon number is unlikely to change dramatically. On-chip fast photodiodes can be used to locally monitor the power to provide any required feedback. Having fibres fixed to the chips with UV cured glue will remove any change in loss from fibre coupling.
 
 %However, using on-chip photodiodes allows local feedback. 
 %
@@ -828,7 +838,7 @@ Given a good current source to dive the laser, the average photon number is unli
 
 \subsection{Wavelength Division Multiplexing}
 
-As mentioned previously, there is no need to filter the pulses to see interference. This is important as it allows the transmitters to be easily wavelength tuned making it compatible with \ac{wdm} and possible classical-quantum multiplexing. An interesting demonstration of this would be to multiplex the quantum signals with classical data to verify that quantum interference can still be seen. This could be an important consideration for future networks.
+As mentioned previously, there is no need to filter the pulses to see interference. This is important as it allows the transmitters to be easily wavelength tuned making it compatible with \ac{wdm} and possible classical-quantum multiplexing. An interesting demonstration of this would be to multiplex the quantum signals with classical data to verify that quantum interference can still be seen. This could be an important consideration for compatibility with future networks. One would need to consider cross-talk from neighbouring channels to ensure maximal interference.
 
 \subsection{DFB Laser}
 
