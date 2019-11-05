@@ -1,14 +1,23 @@
 %\newacronym{laser}{laser}{light amplification by stimulated emission of radiation}
 
+%Use this for nested acronyms
+\newcommand*\myglsentry[1]{%
+  \protect\ifglsused{#1}{%
+    \glsentryshort{#1}%
+  }{%
+    \glsentrylong{#1}%
+  }%
+}
+
 \newacronym{HOM}{HOM}{Hong-Ou-Mandel}
 
 \newacronym{QKD}{QKD}{quantum key distribution}
 
 \newacronym{InP}{InP}{indium phosphide}
 
-\newacronym{MDI}{MDI-QKD}{measurement-device-independent quantum key distribution}
+\newacronym{MDI}{MDI-QKD}{measurement-device-independent \myglsentry{QKD}}
 
-\newacronym{diqkd}{DI-QKD}{device-independent quantum key distribution}
+\newacronym{diqkd}{DI-QKD}{device-independent \myglsentry{QKD}}
 
 \newacronym[longplural={full width at half maxima}, shortplural={FWHM}]{FWHM}{FWHM}{full width at half maximum}
 
@@ -42,9 +51,9 @@
 
 \newacronym{qrng}{QRNG}{quantum random number generator}
 
-\newacronym{cvqkd}{CV-QKD}{continuous-variable quantum key distribution}
+\newacronym{cvqkd}{CV-QKD}{continuous-variable \myglsentry{QKD}}
 
-\newacronym{dvqkd}{DV-QKD}{discrete-variable quantum key distribution}
+\newacronym{dvqkd}{DV-QKD}{discrete-variable QKD}
 
 \newacronym{wcs}{WCS}{weak coherent state}
 
