@@ -1,4 +1,3 @@
-%
 % File: chap06.tex
 % Author: Henry Semenenko
 % Description: Laser Seeding
@@ -27,40 +26,6 @@ The transmitters that were used to demonstrate \ac{MDI} could be improved. Here,
 	\caption[Components used for chip schematics]{List of components used for the chip schematics.}
 	\label{fig:components}
 \end{figure}
-
-\section{Improved Transmitters}
-
-There are many ways of improving the \ac{QKD} transmitters. For example, encoding in time-bin using a delay line to separate the pulses or generating different states using independent lasers.
-
-\begin{sidewaysfigure}
-	\centering
-	\includegraphics[width=0.8\textwidth]{QKD_transmitter}
-	\caption[Latest generation InP QKD Transmitter]{Latest generation HHI indium phosphide transmitter. The \SI[product-units=power]{6x4}{mm} chip contains a few ways to create BB84 states for QKD. Firstly, we have designs to compare \ac{dfb} and \ac{DBR} lasers. Secondly, we can use a delay line to separate the time bins. Finally, we have multiplexed lasers to pulse independently lasers for each state.}
-	\label{fig:hhi_gds}
-\end{sidewaysfigure}
-
-\subsubsection*{Multiple Laser Sources}
-
-\begin{figure}
-	\centering
-	\def\svgwidth{\textwidth}
-	\import{chapters/chapter06/fig06/schematics/}{gain_switch_transmitter.pdf_tex}
-		\caption[Schematic of the multiple laser source transmitter]{Schematic of the multiple laser source transmitter.}
-	\label{fig:multiple_lasers_tx}
-\end{figure}
-
-We introduce multiple laser sources into the circuit which can each be independently gain-switched to generate the four BB84 states. 
-
-\subsubsection*{Delay Line Time-Bin Encoding}
-
-\begin{sidewaysfigure}
-	\centering
-	\includegraphics[width=\textwidth]{./schematics/hhi_transmitter.pdf}
-	\caption[Schematic of the HHI full transmitter]{Schematic of the HHI transmitter}
-	\label{fig:hhi_transmitter}
-\end{sidewaysfigure}
-
-While the previous generation of devices included delay lines to encode timing information, they we too lossy to be used. We have included a delay line in the design of this chip which should have lower losses. This should reduce the complexity of the control electronics and make the system compatible with a gain-switched DFB laser.
 
 \section{Laser Seeding}
 
@@ -109,6 +74,13 @@ Pads for a thermistor were placed as close to the chip as possible with via rout
 There is no need to electrically connect the bottom of the chip to ground, as was with the case with devices fabricated from Oclaro. Silver epoxy was still used for its good thermal conductivity. The plated vias provided a good thermal connection to the bottom of the PCB so that a peltier could be used for thermal stabilisation using feedback from the thermistor.
 
 \subsubsection*{Optical Connection}
+
+\begin{figure}[t]
+	\centering
+	\includegraphics[width=\textwidth]{geometry_lesson.pdf}
+	\caption[A quick lesson in geometry for edge coupling]{The chip facets are designed as \SI{500}{\um} spaced so as to be compatible with standard \acp{vga}. As previously mentioned, the facets are at a \SI{7}{\degree} angle to the edge of the chip to reduce back reflections into the chip. To maximise coupling, the \ac{vga} chosen was polished to match this angle. However, once rotated, the vertical spacing of the fibres in the \ac{vga} are no longer \SI{500}{\um} spaced. this meant only one fibre could be connected to the device.}
+	\label{fig:geometry_lesson}
+\end{figure}
 
 The \ac{vga} was held using a vacuum chuck and moved using a 6-axis micro-positioner (NanoMax). The on-chip lasers provided a light source for alignment. 
 
@@ -190,7 +162,7 @@ We can characterise the on-chip laser ability to gain switch, which is important
 
 \begin{figure}[tp]
 	\centering	
-	\def\svgwidth{0.8\textwidth} 
+	\def\svgwidth{0.9\textwidth} 
 	\import{chapters/chapter06/fig06/}{laser_seeding_test.pdf_tex}
 	\caption[Integrated laser seeding test]{By applying \SI{1}{GHz} square waves to both lasers, we can get pulses that should be phase randomised. However,  this will need testing. Pulses show \SI{120}{ps} \ac{FWHM}.}
 	\label{fig:las_seed_test}
@@ -201,6 +173,60 @@ We can characterise the on-chip laser ability to gain switch, which is important
 Random numbers are required for many parts of \ac{QKD}. One way of generating this randomness is with \acp{qrng} which has been demonstrated on \ac{InP} \cite{FrancescoThesis,Abellan2016}. However, there has not yet been a single device which fulfils both the requirements for quantum random number generation \textit{and} quantum key generation.
 
 The chip shown in figure \ref{fig:hhi_laser_seeding} contains both a \ac{qrng} and a laser seeded \ac{QKD} transmitter. Together with electronics to directly read the randomness and generate \ac{QKD} states this could been a fully packaged system.
+
+\section{Improved Transmitters}
+
+There are many ways of improving the \ac{QKD} transmitters. For example, encoding in time-bin using a delay line to separate the pulses or generating different states using independent lasers.
+
+\begin{sidewaysfigure}
+	\centering
+	\includegraphics[width=0.8\textwidth]{QKD_transmitter}
+	\caption[Latest generation InP QKD Transmitter]{Latest generation HHI indium phosphide transmitter. The \SI[product-units=power]{6x4}{mm} chip contains a few ways to create BB84 states for QKD. Firstly, we have designs to compare \ac{dfb} and \ac{DBR} lasers. Secondly, we can use a delay line to separate the time bins. Finally, we have multiplexed lasers to pulse independently lasers for each state.}
+	\label{fig:hhi_gds}
+\end{sidewaysfigure}
+
+\subsubsection*{Multiple Laser Sources}
+
+\begin{figure}[t]
+	\centering
+	\def\svgwidth{\textwidth}
+	\import{chapters/chapter06/fig06/schematics/}{gain_switch_transmitter.pdf_tex}
+		\caption[Schematic of the multiple laser source transmitter]{Schematic of the multiple laser source transmitter. By using independent lasers to generate each of the different states, we can gain switch each to ensure phase incoherence between them. A relatively simple optical circuit can then be used to encode the four BB84 states in time-bins. The loss compensation \ac{mzi} can match the losses between the two paths in the \ac{amzi}. The phase compensation allows fine tuning of the relative phases in the X basis states.}
+	\label{fig:multiple_lasers_tx}
+\end{figure}
+
+We introduce multiple laser sources into the circuit which can each be independently gain-switched to generate the four BB84 states. 
+
+From chapter \ref{chap:hom}, we can see that laser wavelengths can be overlapped very precisely. Therefore, introducing multiple laser sources shouldn't introduce any side-channels for Eve or Mallory to exploit.
+
+The top laser is pulsed to give a $\ket{0}$ state as it will go through the delay line and end up as a late pulses. The bottom laser will go through the short arm of the \ac{amzi} and will make a $\ket{1}$ state.
+
+For the X basis states, the different paths will cause a relative phase to be introduced.
+
+$\ket{+}$:
+
+\begin{equation}
+	a^\dagger_e \xrightarrow{BS} \frac{1}{\sqrt{2}} (a^\dagger_e + b^\dagger_e) \xrightarrow{aMZI} \frac{1}{\sqrt{2}} (a^\dagger_l + b^\dagger_e) \xrightarrow{BS} \frac{1}{2}(a^\dagger_e + a^\dagger_l - b^\dagger_e + b^\dagger_l)
+\end{equation}
+
+$\ket{-}$:
+
+\begin{equation}
+	b^\dagger_e \xrightarrow{BS} \frac{1}{\sqrt{2}} (a^\dagger_e - b^\dagger_e) \xrightarrow{aMZI} \frac{1}{\sqrt{2}} (a^\dagger_l - b^\dagger_e) \xrightarrow{BS} \frac{1}{2}(- a^\dagger_e + a^\dagger_l + b^\dagger_e + b^\dagger_l)
+\end{equation}
+
+So when looking at the output port, we get a relative phase between the two different pulsed lasers.
+
+\subsubsection*{Delay Line Time-Bin Encoding}
+
+\begin{sidewaysfigure}
+	\centering
+	\includegraphics[width=\textwidth]{./schematics/hhi_transmitter.pdf}
+	\caption[Schematic of the HHI full transmitter]{Schematic of the HHI transmitter}
+	\label{fig:hhi_transmitter}
+\end{sidewaysfigure}
+
+While the previous generation of devices included delay lines to encode timing information, they we too lossy to be used. We have included a delay line in the design of this chip which should have lower losses. This should reduce the complexity of the control electronics and make the system compatible with a gain-switched DFB laser.
 
 \section{Outlook}
 
