@@ -213,7 +213,7 @@ Therefore, the probability of a coincidence click, with both coherent states ove
 	\small
 	\def\svgwidth{0.8\textwidth} 
 	\import{chapters/chapter03/fig03/HOM_Coherent/}{HOM_BS_Vis.pdf_tex}
-	\caption[Coherent state photon number visibility]{Graph plotting the effect of an unbalanced beam splitter on the visibility of a HOM dip. Maximal visibility is found when the beam splitter is 50:50. Photon number also has an effect on visibility due to the increased probability of multi-photon terms. Here, we plot average photon numbers ranging from 1 to 5. Both incoming states are assumed to have equal average photon number.}
+	\caption[Coherent state photon number visibility against beam splitter ratio]{Graph plotting the effect of an unbalanced beam splitter on the visibility of a HOM dip. Maximal visibility is found when the beam splitter is 50:50. Photon number also has an effect on visibility due to the increased probability of multi-photon terms. Here, we plot average photon numbers ranging from 1 to 5. Both incoming states are assumed to have equal average photon number. As the photon number tends to zero, the visibility on a 50:50 beam splitter will tend towards \SI{50}{\percent}.}
 	\label{fig:HOM_BS_Vis}
 \end{figure}
 
@@ -405,7 +405,7 @@ In this section, we will describe the integrated transmitters that we will use f
 
 \subsection{Laser Source}
 
-\begin{figure}[tp]
+\begin{figure}[t]
 	\centering
 	\includegraphics[width=0.6\textwidth]{/Chip/Oclaro_00_LASER.png}
 	\caption[Microscope image of the waveguide integrated Fabry-P\'{e}rot laser]{Waveguide integrated Fabry-P\'{e}rot laser formed of two tunable \acp{DBR}, which forms the optical cavity, and an \ac{SOA} for optical gain. Gold pads allow wirebonding for electrical control through current injection. Each \ac{DBR} is \SI{200}{\um} long while the \ac{SOA} is \SI{500}{\um} for a total length of \SI{1}{\mm} including isolation sections.}
@@ -424,7 +424,7 @@ Each device contains a Fabry-P\'{e}rot \ac{CW} laser which is shown in figure \r
 
 From this, we find that changes in the refractive index will linearly change the reflection peak. The grating pitch is chosen to be \SI{237.7}{nm} giving a peak reflected wavelength of \SI{1550}{nm}, where $n_\text{eff} = 3.26$.
 
-\begin{figure}[tp]
+\begin{figure}[t]
 	\centering
 	\tiny
 	\def\svgwidth{\textwidth} 
@@ -439,7 +439,11 @@ The \ac{SOA} is a single-mode, ridge waveguide structure that is optimised for T
 
 %The laser was tested with up to \SI{80}{\mA} which was limited by the current source. 
 
-\begin{figure}[tp]
+A typical spectra of the two transmitter lasers is shown in figure \ref{fig:spectra} which demonstrates a \SI{<30}{pm} \ac{FWHM} and a \SI{>50}{dB} sideband suppression. The linewidth here is stated as \SI{<30}{pm} \ac{FWHM} as this is limited to the precision of the \ac{OSA} used (Anritsu MS9740A). The two lasers were deliberately offset in wavelength to show each spectra. The spectra demonstrates the reproducibility offered by integrated optics. Typically, we would expect the linewidth of a Fabry-P\'{e}rot laser to be Lorentzian \cite{Ismail16}. 
+
+While the spectrum is limited by the precision of the \ac{OSA}, we can put bounds on the linewidth from coherent measurements. The coherence length of the laser can be calculated from the linewidth by
+
+\begin{figure}[t]
 	\centering
 	\small
 	\def\svgwidth{0.8\textwidth} 
@@ -447,10 +451,6 @@ The \ac{SOA} is a single-mode, ridge waveguide structure that is optimised for T
 	\caption[On-chip laser spectra]{Typical spectra of the two independent on-chip lasers. Each demonstrates a \ac{FWHM} of \SI{30}{pm} (limited to the precision of the \ac{OSA}) and a sideband suppression of \SI{50}{dB}. The two lasers were deliberately detuned in wavelength so both spectra could be seen.}
 	\label{fig:spectra}
 \end{figure}
-
-A typical spectra of the two transmitter lasers is shown in figure \ref{fig:spectra} which demonstrates a \SI{<30}{pm} \ac{FWHM} and a \SI{>50}{dB} sideband suppression. The linewidth here is stated as \SI{<30}{pm} \ac{FWHM} as this is limited to the precision of the \ac{OSA} used (Anritsu MS9740A). The two lasers were deliberately offset in wavelength to show each spectra. The spectra demonstrates the reproducibility offered by integrated optics. Typically, we would expect the linewidth of a Fabry-P\'{e}rot laser to be Lorentzian \cite{Ismail16}. 
-
-While the spectrum is limited by the precision of the \ac{OSA}, we can put bounds on the linewidth from coherent measurements. The coherence length of the laser can be calculated from the linewidth by
 
 \begin{equation}
 	L_\text{coh} = \frac{c}{\pi\Delta v}
@@ -464,7 +464,7 @@ In figure \ref{fig:DBR_sweep}, we show laser tuning through current injection of
 	\small
 	\def\svgwidth{0.9\textwidth} 
 	\import{chapters/chapter03/fig03/}{DBR_sweep.pdf_tex}
-	\caption[Laser wavelength scan with DBR current injection]{Through current injection of the \acp{DBR} we can change the wavelength of the laser due to heating effects. By sweeping the front and back \acp{DBR}, we can tune the laser \SI{10}{\nm} within the telecomms C-band.}
+	\caption[Laser wavelength scan with DBR current injection]{Through current injection of the \acp{DBR} we can change the wavelength of the laser due to heating effects. By sweeping the front and back \acp{DBR}, we can tune the laser around \SI{10}{\nm} within the telecomms C-band.}
 	\label{fig:DBR_sweep}
 \end{figure}
 
@@ -573,6 +573,13 @@ It was not possible to directly measure the coupling losses on these devices as 
 
 To be able to access the electrical components of the integrated devices, we need to create a package to transfer the signals from the driving electronics to the chip . A PCB was designed to electrically connect the modulators and laser to SMA connectors for high-speed operation and DC pins for biasing. A render is shown in figure \ref{fig:chip_pcb}. The bottom of the chip is ground which connects to a copper block that is also connected to the ground of the PCB. Silver epoxy was used to glue the chip to the mount to ensure a good electrical connection. It also provided a good thermal connection for temperature stabilisation. The PCB is designed with a cut-out for optical access to the chip from one side.
 
+In order to maintain a good signal integrity the impedance of the tracks needs to match the electronics. As the devices require a number of RF connections to a small area, using standard FR-4 material would not be sufficient. Instead, Rogers 6006ns material was chosen for its high dielectric constant of \num{6.15} meaning that narrow grounded coplanar waveguides could maintain a \SI{50}{\ohm} impedance. A schematic of the waveguides is shown in figure \ref{fig:GSG_waveguide}. The characteristic impedance of a grounded coplanar waveguide can be approximated by \cite{wadell1991}
+
+\begin{equation}
+	Z_0 = \frac{60\pi}{\sqrt{E_\text{eff}}}\frac{1}{\frac{K(k)}{K(k')} + \frac{K(k_l)}{K(k_l')}}
+\end{equation}
+where, for a track of width $a$, waveguide of width $b$ and substrate of height $h$ we have
+
 \begin{figure}[t]
 	\centering
 	\Large
@@ -581,13 +588,6 @@ To be able to access the electrical components of the integrated devices, we nee
 	\caption[Grounded coplanar waveguide structure]{Grounded coplanar waveguide for RF signal transmission. $a$ is the width of the waveguide while $b$ is the width of the waveguide plus the space between ground. $h$ is the thickness of the substrate and $E_r$ is the dielectric constant.}
 	\label{fig:GSG_waveguide}
 \end{figure}
-
-In order to maintain a good signal integrity the impedance of the tracks needs to match the electronics. As the devices require a number of RF connections to a small area, using standard FR-4 material would not be sufficient. Instead, Rogers 6006ns material was chosen for its high dielectric constant of \num{6.15} meaning that narrow grounded coplanar waveguides could maintain a \SI{50}{\ohm} impedance. A schematic of the waveguides is shown in figure \ref{fig:GSG_waveguide}. The characteristic impedance of a grounded coplanar waveguide can be approximated by \cite{wadell1991}
-
-\begin{equation}
-	Z_0 = \frac{60\pi}{\sqrt{E_\text{eff}}}\frac{1}{\frac{K(k)}{K(k')} + \frac{K(k_l)}{K(k_l')}}
-\end{equation}
-where, for a track of width $a$, waveguide of width $b$ and substrate of height $h$ we have
 
 \begin{align}
 	k &= \frac{a}{b} &&k' = \sqrt{1 - k^2}\\
@@ -775,6 +775,12 @@ In figure \ref{fig:HOM}, we demonstrate \acl{HOM} interference between the two d
 
 \section{HOM Interference with Actively Phase Randomised Pulses}
 
+We have previously discussed that, to demonstrate quantum interference over the classical interference, the laser pulses should be phase randomised relative to one another. In the previous experiment, as the lasers were not phase locked, we could average over the phases by taking data for long enough for the phases between the two lasers to drift. However, for \ac{QKD} purposes this would not meet criteria for security. This means that we need to be able to actively create pulses with randomised phases. This section will describe how we can utilise gain-switching to create phase randomised windows and intensity modulation to create well-defined pulses. Using coincidence counts between neighbouring pulses, we can verify that the  \acp{wcp} are phase randomised. By looking at coincidences between neighbouring pulses we can check correlations between \acp{wcp} that haven't interfered. If the laser is phase randomised, we would not expect to see any relation between subsequent pulses. 
+
+%As we will see in chapter \ref{chap:mdiqkd}, it will be important for the pulses to be phase randomised relative to subsequent pulses to maintain the security of a \ac{QKD} protocol. 
+
+Laser gain-switching is a technique used to cause phase randomisation by keeping the laser below threshold and only applying current when a \ac{wcp} is desired. As the pulses are limited to the timing of a spontaneous emission, the timing jitter of the pulses is usually large. There is also a wavelength broadening meaning that filtering is required for \ac{HOM} interference \cite{Agnesi2019}. 
+
 \begin{figure}[tp]
 	\centering
 	\def\svgwidth{0.8\textwidth} 
@@ -782,12 +788,6 @@ In figure \ref{fig:HOM}, we demonstrate \acl{HOM} interference between the two d
 	\caption[Gain switching of the on-chip lasers at \SI{250}{MHz}]{By applying a negative electrical signal to the on-chip laser, we can drain the optical cavity. Lasing will then resume from spontaneous emission meaning that the phase will not be coherent with the previous lasing conditions. It takes around \SI{1}{\ns} for the laser to relax into a continuous operation from which states can be encoded.}
 	\label{fig:gain_switch}
 \end{figure}
-
-We have previously discussed that, to demonstrate quantum interference over the classical interference, the laser pulses should be phase randomised relative to one another. In the previous experiment, as the lasers were not phase locked, we could average over the phases by taking data for long enough for the phases between the two lasers to drift. However, for \ac{QKD} purposes this would not meet criteria for security. This means that we need to be able to actively create pulses with randomised phases. This section will describe how we can utilise gain-switching to create phase randomised windows and intensity modulation to create well-defined pulses. Using coincidence counts between neighbouring pulses, we can verify that the  \acp{wcp} are phase randomised. By looking at coincidences between neighbouring pulses we can check correlations between \acp{wcp} that haven't interfered. If the laser is phase randomised, we would not expect to see any relation between subsequent pulses. 
-
-%As we will see in chapter \ref{chap:mdiqkd}, it will be important for the pulses to be phase randomised relative to subsequent pulses to maintain the security of a \ac{QKD} protocol. 
-
-Laser gain-switching is a technique used to cause phase randomisation by keeping the laser below threshold and only applying current when a \ac{wcp} is desired. As the pulses are limited to the timing of a spontaneous emission, the timing jitter of the pulses is usually large. There is also a wavelength broadening meaning that filtering is required for \ac{HOM} interference \cite{Agnesi2019}. 
 
 Instead of gain switching to generate pulses, we can reverse the high speed pulse to provide a negative voltage between pulse carving. This pulses removes the carriers in the diode and allows the optical cavity to empty to make phase randomised windows. The upper-state lifetime of semiconductors is very short, as is the cavity lifetime, meaning this can still be done relatively quickly. 
 
