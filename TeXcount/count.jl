@@ -17,7 +17,7 @@ i_reg = r"Number of math inlines: (.*\d)"
 d_reg = r"Number of math displayed: (.*\d)"
 w_reg = r"All words: (.*\d)"
 
-milestones = [Date("2019-10-11")]
+milestones = [Date("2019-10-11"), Date("2019-11-06")]
 
 for file in filter(x -> endswith(x, "txt"), readdir("./History"))
     push!(date, Date(file[1:10],"yyyy_mm_dd"))
@@ -35,19 +35,19 @@ for file in filter(x -> endswith(x, "txt"), readdir("./History"))
     w = parse(Int, collect(eachmatch(w_reg, data))[end][1])
     push!(words, w)
 end
-
-plot([date[66],date[66]],
-        [0, words[66]],
-        st = :path,
-        label = ["Chapter 3 Draft"],
-        yformatter = :plain,
-        w=4,
-        color = :purple,
-        yforeground_color_grid = :white,
-        xforeground_color_grid = :white
-        )
-
-plot!(date,
+#
+# plot([date[66],date[66]],
+#         [0, words[66]],
+#         st = :path,
+#         label = ["Chapter 3 Draft"],
+#         yformatter = :plain,
+#         w=4,
+#         color = :purple,
+#         yforeground_color_grid = :white,
+#         xforeground_color_grid = :white
+#         )
+#
+plot(date,
    [words,texts,caption],
    xrotation = 45,
    lab = ["Total" "Text" "Captions"],
