@@ -674,15 +674,13 @@ To truly utilise integrated photonics, dedicated and specialised electronics wil
 	\label{fig:fpga}
 \end{figure}
 
-A prototype \ac{fpga} driver for the \ac{InP} transmitters is shown in figure \ref{fig:fpga}. The board can provide RF signals for high-speed operation. It also has the capability to provide DC signals for thermo-optic phase modulation and laser driving. Together with a PID controller for temperature stability, an entire \ac{QKD} transmitter could be drastically reduced in size.
-
-Benefits of specialised driving electronics could also reduce the driving voltages for modulation as the chip could be closer to the driver. This would reduce the losses associated with PCB waveguides and connections, especially for the high bandwidth requirements of communication devices. 
+The integrated transmitters only require a limited number of signals to operate, as shown in figure \ref{fig:elec_signals}. Therefore, the generalised \ac{awg} are overkill and lots of functionality is wasted. By considering what the requirements are, the driving electronics can be reduced to a single \ac{fpga} which is shown in figure \ref{fig:fpga}. The board can provide RF signals for high-speed operation. It also has the capability to provide DC signals for thermo-optic phase modulation and laser driving. Together with a PID controller for temperature stability, an entire \ac{QKD} transmitter could be drastically reduced in size. Benefits of specialised driving electronics could also reduce the driving voltages for modulation as the chip could be closer to the driver. This would reduce the losses associated with PCB waveguides and connections, especially for the high bandwidth requirements of communication devices. 
 
 %Specialised electronics could be used to truly take advantage of the size, weight and power efficiency of an integrated system \cite{valivarthi2017}.
 
 %In order to make a system that truly scalable, there also needs to be efforts towards miniaturisation of the control electronics. Unlike the electronics required for classical communication systems, the precision of the quantum control electronics needs to be many more times accurate to minimise errors.
 
-One needs to be careful with the design of RF electronics for \ac{QKD} systems. Detrimental effects with RF electronics can introduce side-channels that can be exploited by Eve or Mallory. By reducing the cost of the control electronics can also potentially open up the system to attacks due to inaccuracies in control. 
+However, while the stringent requirements for state generation means that one needs to be careful with the design of RF electronics for \ac{QKD} systems. Detrimental effects with RF electronics can introduce side-channels that can be exploited by Eve or Mallory. By reducing the cost of the control electronics can also potentially open up the system to attacks due to inaccuracies in control.
 
 \subsection{Security Tradeoff}
 
@@ -734,32 +732,51 @@ While \ac{isi} is a well known effect in classical communication, it may have mo
 
 The simplicity of the receiver in \ac{MDI} lends itself towards an integrated platform \cite{wang2019}. Waveguide integrated single-photon detectors \cite{sprengers2011}, on-chip wavelength demultiplexing \cite{sugita2000} and cryogenic optical switching \cite{eltes2019} mean that a completely integrated receiver device could further decrease the cost of \ac{QKD} systems. Fully integrated measurement devices facilitate a drastic increase in the number of detectors to allow a higher count rate before saturation and relax the need for sub-nanosecond deadtimes. Key rates could be further increased through wavelength division multiplexing which can also allow coexistence with classical signals \cite{price2018}. 
 
-Ideally, to create a system that can be widely adopted, as much of the system as possible would be integrated to ease scalability and reduce power, size and weight. In this section, we discuss the first steps towards a fully optically integrated \ac{QKD} system. The system is a hybrid between \ac{InP} transmitters and silicon receivers to utilise the best of both platforms.
+%Ideally, to create a system that can be widely adopted, as much of the system as possible would be integrated to ease scalability and reduce power, size and weight.
+
+Integrated transmitters will facilitate the wide adoption of \ac{QKD} transmitters where a centralised resource can be shared between many users. In this section, we will discuss the first steps towards a fully optically integrated \ac{QKD} system where \ac{InP} and \ac{soi} can be complementary in a single system.
 
 \subsection{Receiver Device}
 
-The receiver device is an \ac{soi} device meaning we can take advantage of many well established photonic techniques.
+With integrated transmitters demonstrated, is seems reasonable to consider how a receiver for \ac{MDI} could utilise integrated photonics. The \ac{soi} photonic platform has been well developed in the last decade meaning that such a circuit can be created with minimal losses \cite{wang2019integrated}. Such advances will likely play a crucial role in widespread quantum communication deployment.
 
-As the measurement for \ac{MDI} in a time-bin encoding scheme is simply a beam splitter and two detectors, is it much simpler to integrated in a cryostat than other receivers (e.g. BB84, COW or DPS).
+As we have seen, projecting time-bin encoded states in the Bell basis requires a very simple optical circuit. The interference of the states requires a 50:50 beam splitter where \acp{spd} record the time of arrival. Coincidences between time-bins indicate successful projections. In comparison, this measurement device is much simpler than protocols such as BB84, \ac{cow} or \ac{dps} which would require delay lines and stable phase shifters. It is possible to make a \ac{pic} to decode these signals \cite{Sibson2017InP} without the \ac{spd}. However, waveguide integrated of detectors likely requires cryogenic temperatures which limits the use of typical phase shifters due to carrier freeze out.
+
+Here, we will discuss how each part of an \ac{MDI} receiver can be replaced with an integrated component in \ac{soi} \ac{pic}. A microscope image of the first test receiver is shown in figure \ref{fig:node_chip}.
 
 \begin{figure}[tbp]
 	\centering
 	\includegraphics[width=0.8\textwidth]{./node/node_chip}
-	\caption[Silicon MDI-QKD receiver with waveguide integrated detectors]{Microscope image of the MDI-QKD receiver silicon chip. Grating couplers are used to couple pulses into the waveguides which are then interfered in an MMI before detected by waveguide integrated detectors. The device includes two copies of a transmitter, demonstrating the scalability of the platform. There is also a cut back waveguide to ensure maximal coupling onto the device. This image was provided by R. Heath of devices fabricated by J. Paul.}
+	\caption[Silicon MDI-QKD receiver with waveguide integrated detectors]{Microscope image of the \ac{MDI} receiver silicon chip. Grating couplers are used to couple pulses into the waveguides which are then interfered in an \ac{mmi} before detected by waveguide integrated detectors. The device includes two copies of a transmitter, demonstrating the scalability of the platform. There is also a cut back waveguide to ensure maximal coupling onto the device. This image was provided by R. Heath of devices fabricated by J. Paul.}
 	\label{fig:node_chip}
 \end{figure}
 
 \subsubsection*{Grating Couplers}
 
+By exploiting the high index contrast of \ac{soi}, grating couplers can be used to efficiently convert a fibre optic mode into a waveguide mode. Coupling losses tend to be higher than edge coupler. However, designs have been reported with losses as low as \SI{0.36}{dB} \cite{Notaros2016}. The grating period determines the peak wavelength which can be quite narrow. The gratings were designed for \SI{1550}{nm} for compatibility with the transmitters.
+
+To ensure maximal coupling, two grating couplers at the top and bottom were connected to a waveguide allowing a cut back measurements and feedback. 
+
+\subsubsection*{Multi-Mode Interferometer}
+
+The states can be interfered on an \ac{mmi} where the splitting ratio of the component is design for a particular wavelength. The exact ratio is a function of the wavelength and size of the component. If the input wavelength changes, so will the splitting ratio. Due to fabrication tolerances, Glasgow were unsure whether the splitting ratio of 50:50 could be easily achieved. This uncertainty is what motivated figure \ref{fig:HOM_BS_Vis} where visibility was calculated as the splitting ratio changed. We could see that high visibility could be maintained even if the splitting ratio was off by a few \%.
+
 \subsubsection*{Waveguide Integrated Detectors}
 
-We can deposit some niobium-titanium-nitride (NbTiN) material onto the silicon and create \acp{snspd}. 
+\begin{figure}[t]
+	\centering
+	\includegraphics[width=\textwidth]{./node/NODE.png}
+	\caption[Schematic of a fully optically integrated QKD system]{Experimental schematic for fully integrated quantum key distribution. Alice and Bob use independent InP devices which generate BB84 states on-chip. The receiver (Charlie) is an SOI device with grating couplers and waveguide-integrated detectors.}
+	\label{fig:node}
+\end{figure}
 
-The high confinement in the waveguide means that coupling to the nanowire is strong giving an increased efficiency. 
+A \ac{NbTiN} thin film on \ac{soi} was used to make the device which allowed the waveguide integrated \acp{snspd} to be etched directly on the substrate. The optical circuit could then be created around the \acp{snspd}. The confinement in the waveguide should mean that there is a strong coupling to the nanowire meaning a high efficiency. To increase coupling, the nanowire is made in a meander on top of the waveguide which should increase the interaction between the nanowire and photons.
 
-By using a \ac{soi} device, we can replace some of the fibre optic components used in chapter \ref{chap:mdiqkd}.
+%The high confinement in the waveguide means that coupling to the nanowire is strong giving an increased efficiency. 
 
-Integrating the receiver for \ac{MDI} is appealing due to its simplicity. There have been integrated receiver devices in laser-written glass waveguides \cite{wang2019}. However, the detectors are still off-chip.
+%By using a \ac{soi} device, we can replace some of the fibre optic components used in chapter \ref{chap:mdiqkd}.
+
+%Integrating the receiver for \ac{MDI} is appealing due to its simplicity. There have been integrated receiver devices in laser-written glass waveguides \cite{wang2019}. However, the detectors are still off-chip.
 
 %A crucial part of a global, quantum-secured network will be the metropolitan networks that will connected commercial entities and homes to the network. This will require a scalable platform that allows many devices to be made easily. 
 %
@@ -769,40 +786,52 @@ Integrating the receiver for \ac{MDI} is appealing due to its simplicity. There 
 
 \begin{figure}[t]
 	\centering
-	\includegraphics[width=\textwidth]{./node/NODE.png}
-	\caption[Schematic of a fully optically integrated QKD system]{Experimental schematic for fully integrated quantum key distribution. Alice and Bob use independent InP devices which generate BB84 states on-chip. The receiver (Charlie) is an SOI device with grating couplers and waveguide-integrated detectors.}
-	\label{fig:node}
+	\small
+	\def\svgwidth{0.8\textwidth} 
+	\import{chapters/chapter04/fig04/node/}{rates_node.pdf_tex}
+	\caption[Estimate rates for integrated receiver]{The estimated efficiency of the integrated detectors is low. This is due to chip losses. here we compare how this will effect the key rate given the same number of dark counts.}
+	\label{fig:rates_node}
 \end{figure}
 
-The experimental setup is shown in figure \ref{fig:node} and represents the first fully integrated \ac{QKD} demonstration. The same transmitters from chapter \ref{mdiqkd} are used but the receiver has now been replaced by a silicon integrated circuit. 
+Combining the \ac{InP} transmitters and the \ac{soi} receiver would allow a \ac{QKD} system where all of the optical components are on integrated devices. The states can be generated with the \ac{InP} \acp{pic} while the states can be interfered on measured on a simple \ac{soi} circuit. Figure \ref{fig:node} shows the schematic of the experimental demonstration.
 
-Once we have a process of making one receiver or transmitter device, it becomes much easier to create many more. Given a big enough demand, the cost of these devices quickly decreases. Access to the networks becomes cheap, as \ac{InP} devices become more ubiquitous, and capacity of the networks can be scaled by taking advantage of the mature silicon photonics industry.
+From the model that was developed before, we can estimate what we would expect the performance of the system to be. We saw previously that \ac{HOM} interference is not severely impacted by a splitting ratio that is a few percent either side of 50:50. Therefore, we can assume that the error rate would be equivalent to what was found with the fibre-optic receiver. However, the losses within the chip will potentially be high which would reduce the expected gain. While grating couplers can be designed with low loss, it is quite likely that the first devices will exhibit higher loss. The efficiency of the waveguide detectors is also unknown. We will assume that the efficiency will be around \SI{10}{\percent} to be pessimistic and that the detectors will have the same dark count rate. 
 
-We can also introduce more detectors to overcome issues with deadtime in detectors. By multiplexing detectors we can increase the rates possible.
+Figure \ref{fig:rates_node} compares the previous demonstration with the revised efficiency. The reduced efficiency gives a key rate approximately \SI{20}{dB} below the previous experiment until around \SI{300}{km}. After this point, the dark count rate of the detectors becomes dominant and so positive key generation is no longer possible. 
 
-\subsection{Metropolitan Network}
+Unfortunately, due to fabrication difficulties, the experiment as described was never able to come to fruition. Challenges when etching the \ac{NbTiN} to create the \acp{snspd} meant that the step over etched a reduced the thickness of the silicon. This changed the peak coupling wavelength for the grating couplers by around \SI{100}{nm}. This wavelength is not compatible with the \ac{InP} transmitters and would also have serious implications for rest of the circuit. 
 
-We should put this onto a real world network.
+%The experimental setup is shown in figure \ref{fig:node} and represents the first fully integrated \ac{QKD} demonstration. The same transmitters from chapter \ref{mdiqkd} are used but the receiver has now been replaced by a silicon integrated circuit. 
 
-More electronics required.
+%Integrated devices are certainly the future of any realistic attempt at ubiquitous quantum communication. Such devices will allow wider adoption of \ac{QKD} and also provide vital infrastructure for future quantum communication protocols. Beyond \ac{QKD}, \acp{snspd} will inevitably be required for their unbeaten efficiency which is only amplified through waveguide integration. The mass-manufacturability of ingrated devices will ease their wider adoption while the inherent complexity will facilitate future protocols. 
 
-Active feedback required (wavelength, polarisation, switching)
+%Once we have a process of making one receiver or transmitter device, it becomes much easier to create many more. Given a big enough demand, the cost of these devices quickly decreases. Access to the networks becomes cheap, as \ac{InP} devices become more ubiquitous, and capacity of the networks can be scaled by taking advantage of the mature silicon photonics industry.
 
-Potentially multiplexing (Time or wavelength)
+%We can also introduce more detectors to overcome issues with deadtime in detectors. By multiplexing detectors we can increase the rates possible.
 
-\subsection{Further Integration}
+%\subsection{Performance}
 
-A scalable multi-user network will always have to overcome routing quantum signals without introducing drastic loss into the system. Commercial optical routing systems exist with \SI{\sim 1}{dB} loss per switch. However, these systems will be large to meet the numbers required for city-wide networks. To overcome this, an integrated switch should fulfil the requirements. 
-
-Optical on-chip switching can be achieved through a few methods. The first, and most widely used, phase modulation is done using \acp{topm}. Obviously, if we want to integrated both the switching and detection on the same device, the cryogenics will need to be able to provide enough cooling whilst heaters are on.
-
-\acp{eopm}.
-
-Opto-mechanical switches.
-
-\subsubsection*{CMOS Compatible Electronics}
-
-The electronics for the system could eventually be integrated into the receiver device inside the cryostat. Electronics at low-temperatures have been demonstrated \cite{bardin2019}
+%We should put this onto a real world network.
+%
+%More electronics required.
+%
+%Active feedback required (wavelength, polarisation, switching)
+%
+%Potentially multiplexing (Time or wavelength)
+%
+%\subsection{Further Integration}
+%
+%A scalable multi-user network will always have to overcome routing quantum signals without introducing drastic loss into the system. Commercial optical routing systems exist with \SI{\sim 1}{dB} loss per switch. However, these systems will be large to meet the numbers required for city-wide networks. To overcome this, an integrated switch should fulfil the requirements. 
+%
+%Optical on-chip switching can be achieved through a few methods. The first, and most widely used, phase modulation is done using \acp{topm}. Obviously, if we want to integrated both the switching and detection on the same device, the cryogenics will need to be able to provide enough cooling whilst heaters are on.
+%
+%\acp{eopm}.
+%
+%Opto-mechanical switches.
+%
+%\subsubsection*{CMOS Compatible Electronics}
+%
+%The electronics for the system could eventually be integrated into the receiver device inside the cryostat. Electronics at low-temperatures have been demonstrated \cite{bardin2019}
 
 
 %=========================================================
