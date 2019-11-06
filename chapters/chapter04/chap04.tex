@@ -12,7 +12,7 @@
 
 \section*{Statement of Work}
 
-The work in this chapter made used of devices conceived and designed by Mark Thompson and Mark Godfrey. Mark Godfrey compiled the chip mask that was then fabricated by Oclaro. The experimental setup was modified from the previous chapter with support from Philip Sibson. \ac{fpga} and RF electronic design was supported by Andy Hart. I performed the experiment and analysed the data to estimate key rates. Security analysis of the transmitters was performed in collaboration with \acl{npl} using an \acs{fpga} programmed by Andy Hart. I developed the experiment and operated the integrated transmitters. The integrated receiver concept was designed by Mark Thompson, Nicola Tyler, Philip Sibson and Jorge Barreto. Chips were fabricated in Glasgow in the group of Robert Hadfield. I performed analysis and simulation of an \ac{MDI} system with estimated parameters to inform fabrication decisions. Initial tests of components was performed but are not included in this thesis.
+The work in this chapter made used of devices conceived and designed by Mark Thompson and Mark Godfrey. Mark Godfrey compiled the chip mask that was then fabricated by Oclaro. The experimental setup was modified from the previous chapter with support from Philip Sibson. \ac{fpga} and RF electronic design was supported by Andy Hart. I performed the experiment and analysed the data to estimate key rates. Security analysis of the transmitters was performed in collaboration with \acl{npl} using an \acs{fpga} programmed by Andy Hart. I developed the experiment and operated the integrated transmitters. The integrated receiver concept was designed by Nicola Tyler, Philip Sibson, Jorge Barreto and Mark Thompson. Chips were fabricated in Glasgow in the group of Robert Hadfield. I performed analysis and simulation of an \ac{MDI} system with estimated parameters to inform fabrication decisions. Initial tests of components was performed but are not included in this thesis. Parts of this chapter have been published and are available in refs. \cite{semenenko2019mdi} and \cite{vaquero2018}.
 
 \section{Introduction}
 
@@ -287,7 +287,7 @@ While superconducting detectors are currently considered research equipment, the
 
 \Ac{InP} transmitters provide all the required optical components to create high fidelity BB84 states as required for \ac{MDI}. By using chip-based transmitters the power, size and weight of the required optical components can be dramatically reduced compared to fibre (and free-space) alternatives. Monolithic fabrication also facilitates mass manufacture without requiring manual assembly which would further decrease cost and increase availability.
 
-It is worth noting that the technology is still maturing and optimisation of designs is still required before devices can be confidently reproduced to a required standard for secure communication. The transmitters used for this experiment (figure \ref{fig:oclaro_00}) were originally designed to operate as transceiver modules which would allow two-way operation. The delay line in the centre of the device could be used for encoding and decoding time-bin encoded states. However, the waveguides were found to be too lossy to be useful, showing how further optimisation of designs is required.
+It is worth noting that the technology is still maturing and optimisation of designs is still required before devices can be confidently reproduced to a required standard for secure communication. The transmitters used for this experiment (figure \ref{fig:oclaro_00}) were originally designed to operate as transceiver modules which would allow two-way operation. The delay line in the centre of the device could be used for encoding and decoding time-bin encoded states. However, the waveguides were found to be too lossy to be useful, showing how further optimisation of designs is required. The design of such a delay line is challenging as the loss in a waveguide can be as high as \SI{2}{dB\per\cm} \cite{JeppixRoadmap}. For a \SI{500}{ps} delay in a material with a refractive index of 3, the loss could be as high as \SI{100}{dB}. This is mostly linked to two-photon and free carrier absorption \cite{Kumar2019}.
 
 A schematic of the chip is shown in figure \ref{chip_mdi_schematic}. Cascaded \acp{mzi} are used to encode time, phase and intensity onto \acp{wcp}.  We will encode our quantum states in a time-bin encoding scheme and the four BB84 states are shown in figure \ref{fig:BB84_time_bin}. The early and late time-bins of the states will be our $\ket{0}$ and $\ket{1}$ states where a superposition of these creates more complicated states. A relative phase can be applied between the time-bins for a full encoding. We will define the $\ket{+}$ state to be when the two time-bins are in phase. To encode a $\ket{-}$ state, we need to apply a $\pi$ phase shift between time-bins. 
 
@@ -643,46 +643,48 @@ The topology of \ac{MDI} means that citywide resource sharing can be achieved th
 
 It is becoming increasingly vital that the future of secure communication is addressed to counter advances in classical and quantum computing. While quantum key distribution has been demonstrated as a potential candidate in future networks it has yet to be widely adopted. Concerns of side-channel attacks on physical implementations undermines the security promises of \ac{QKD} systems. Here, we have improved on previous demonstrations of integrated \ac{QKD} systems by removing all detection side-channels which vastly increases confidence in the security of the system. Mass-manufacturability and robust operation mean that integrated systems are poised to create an accessible platform for widespread quantum-secured communication.
 
-\subsection{Finite Key Effects}
+\subsection{Full System Demonstration}
 
-This experiment focused on the technology and, thus, it is a proof-of-principle experiment dealing with the key rate estimations in the asymptotic limit. To ensure that the single-photon events are accurate Alice and Bob would need to have an infinite number of events. In a realistic key exchange, it is necessary that the number of events will be finite. Therefore, the bounds must be modified to consider statistical fluctuations in the data set. A method of calculating these statistical variations for \ac{MDI} is given in ref. \cite{zhou2016}.
+This experiment focused on the technology and, thus, it is a proof-of-principle experiment that dealt with the demonstration of the technology. There are many aspects of a full protocol that will still need to be added before a key can be exchange. No least of which is the distribution of Alice, Bob and Charlie to separate locations. Such a separation will require extensive feedback and synchronisation between Alice, Bob and Charlie to minimise error rates. The \ac{MDI} protocol as present previously would need to be expanded to allow for initialisation between Alice and Bob. 
+
+When estimating the key rate from the experiment, we assumed that the we could accurately estimate the asymptotic limit. To ensure that the single-photon events are accurate Alice and Bob would need to have an infinite number of events. In a realistic key exchange, it is necessary that the number of events will be finite. Therefore, the bounds must be modified to consider statistical fluctuations in the data set. A method of calculating these statistical variations for \ac{MDI} is given in ref. \cite{zhou2016}.
 
 Interestingly, when one considers finite-key effects the optimisation of intensities for decoy states becomes practically challenging. This is, in part, due to a trade of security against size of data set. By increasing the photon number, Alice and Bob can generate a larger data set more quickly. However, this also gives Eve more opportunity to exploit multi-photon terms. Such effects have been studied and fast algorithms developed for optimisation \cite{Wang2019asymmetric}.
 
-\subsection{State Randomisation}
+To demonstrate the key exchange, we chose a pre-determined set of states that Alice and Bob would send to Charlie so as to estimate the errors and gains efficiently. However, the security of \ac{QKD} requires that the states being sent are independently and randomly chosen. \Ac{qrng} devices have been demonstrated to produce randomness at \si{Gb\per\second} \cite{Raffaelli2018, Abellan2016, herrero2017quantum} which also utilise the \ac{InP} platform. One could imagine a \ac{qrng} and the transmitters in a single design so that all of the optical components could be on a single \ac{pic}.
 
-In this initial experiment, the states were not randomisation. In a secure demonstration, a \ac{qrng} should be used to generate on-the-fly randomness which would determine the states that Alice and Bob would send. 
+One might argue that demonstrating the transmitters without state randomisation would be invalid as the destructive effects such as \ac{isi} could have a detrimental effect on the system. However, such effects will be present in the driving electronics but should not be inherent in a modulator provided that the termination and bandwidth are sufficient. \Ac{InP} devices have previously been demonstrated for \ac{QKD} with \ac{qrng} derived randomness which demonstrates that \ac{isi} effects are not inherent in the devices. The effect of \ac{isi} within the driving electronics will be discussed further in the next section.
 
-The \ac{InP} devices have shown that \ac{isi} is not a problem for point-to-point \ac{QKD} \cite{Sibson2017InP}. We should expect that this would not cause issues for \ac{MDI}.
+%The separation of Alice, Bob and Charlie requires feedback mechanisms for the transmitters to minimise error rates. The optical clock syst
 
-With monolithic integrated of fast photodiodes in \ac{InP}, quantum random number generations can be performed on the same optical chip. Then all the optical components for a \ac{QKD} transmitter could be contained in a single device.
+%The \ac{InP} devices have shown that \ac{isi} is not a problem for point-to-point \ac{QKD} \cite{Sibson2017InP}. We should expect that this would not cause issues for \ac{MDI}.
+
+%With monolithic integrated of fast photodiodes in \ac{InP}, quantum random number generations can be performed on the same optical chip. Then all the optical components for a \ac{QKD} transmitter could be contained in a single device.
 
 \subsection{Miniaturised Electronics}
+
+To truly utilise integrated photonics, dedicated and specialised electronics will need to be developed which would reduce the power, weight and cost of a system. Here we will discuss one such attempt to provide specialised driving electronics and consider how choices of driving electronics will need to be informed by security analysis.
+
+\subsubsection{Purpose-built FPGA}
 
 \begin{figure}[t]
 	\centering
 	\includegraphics[width=0.7\textwidth]{fpga.png}
-	\caption[Picture of the specialised FPGA controller for integrated QKD]{Picture of the specialised \ac{fpga} controller for integrated QKD. Can provide RF and DC signals for driving the chips. Only about \SI{20}{\cm} in length compared to rack mounted general equipment.}
+	\caption[Picture of the specialised FPGA controller for integrated QKD]{Picture of the specialised \ac{fpga} controller (HTG-K800 Xilinx Kintex UltraScale 060 FPGA in A1517 package) for integrated QKD. The driver can provide RF and DC signals for high-speed operation as well as stabilisation and laser driving. The board measures only \SI{20}{\cm} in length which is much more compact that general rack mounted equipment.}
 	\label{fig:fpga}
 \end{figure}
 
-Specialised electronics could be used to truly take advantage of the size, weight and power efficiency of an integrated system \cite{valivarthi2017}.
-
-In order to make a system that truly scalable, there also needs to be efforts towards miniaturisation of the control electronics. Unlike the electronics required for classical communication systems, the precision of the quantum control electronics needs to be many more times accurate to minimise errors.
-
-By reducing the cost of the control electronics can also potentially open up the system to attacks due to inaccuracies in control, such as those mentioned in the previous chapter. 
-
 A prototype \ac{fpga} driver for the \ac{InP} transmitters is shown in figure \ref{fig:fpga}. The board can provide RF signals for high-speed operation. It also has the capability to provide DC signals for thermo-optic phase modulation and laser driving. Together with a PID controller for temperature stability, an entire \ac{QKD} transmitter could be drastically reduced in size.
 
-\subsection{Security of Transmitters}
+Benefits of specialised driving electronics could also reduce the driving voltages for modulation as the chip could be closer to the driver. This would reduce the losses associated with PCB waveguides and connections, especially for the high bandwidth requirements of communication devices. 
 
-\begin{figure}[t]
-	\centering
-	\def\svgwidth{0.9\textwidth} 
-	\import{chapters/chapter04/fig04/NPL/}{states.pdf_tex}
-	\caption[States sent for ISI calibration]{States sent to characterise the performance of the chip and \ac{fpga} and check for \ac{isi}. The early and late time-bins are as before. We are only testing the timing encoding and the early and late time-bins are as before.}
-	\label{fig:isi_states}
-\end{figure}
+%Specialised electronics could be used to truly take advantage of the size, weight and power efficiency of an integrated system \cite{valivarthi2017}.
+
+%In order to make a system that truly scalable, there also needs to be efforts towards miniaturisation of the control electronics. Unlike the electronics required for classical communication systems, the precision of the quantum control electronics needs to be many more times accurate to minimise errors.
+
+One needs to be careful with the design of RF electronics for \ac{QKD} systems. Detrimental effects with RF electronics can introduce side-channels that can be exploited by Eve or Mallory. By reducing the cost of the control electronics can also potentially open up the system to attacks due to inaccuracies in control. 
+
+\subsection{Security Tradeoff}
 
 While \ac{MDI} removes all possible attacks on the detectors, there is still the possibility of Mallory gaining information by targeting the transmitters. Therefore, the security of the transmitters will still need to be characterised to ensure the security of a key exchange. Many attacks have been demonstrated on different \ac{QKD} system \cite{makarov2019}. However, to date there have been none demonstrated against integrated devices. Without the technology to relieve all attacks with \ac{diqkd}, we must attempt to characterise the transmitters to mitigate potential attacks or side-channels.
 
@@ -693,6 +695,14 @@ In collaboration with \ac{npl}, we have performed preliminary characterisation o
 %in the electrical signal used to drive the modulation where one symbol interferes with subsequent ones. For example, in the time-bin encoding, Alice or Bob will decide whether to pulse in the early or late time-bins, or both. These states are shown in figure \ref{fig:isi_states}. 
 
 The quantum states are encoded in \acp{wcp} with relative phases between them. Early and late time-bins are used to create a binary basis and can be used in \ac{MDI}, BB84, \ac{cow} and \ac{dps} protocols. The intensity preparation of the states is shown in figure \ref{fig:isi_states}. The \acp{wcp} have, on average, intensities that are less than one photon. The exactly intensity will depend on the protocol, distance and error rate. However, it is vital that the intensity of the states is well calibrated to faithfully estimate the number of single-photons events. a system's ability to maintain precise levels will be paramount for its security. By sending and measuring all nine combinations of states we can see where \ac{isi} might impact performance and security of a system.
+
+\begin{figure}[t]
+	\centering
+	\def\svgwidth{0.9\textwidth} 
+	\import{chapters/chapter04/fig04/NPL/}{states.pdf_tex}
+	\caption[States sent for ISI calibration]{States sent to characterise the performance of the chip and \ac{fpga} and check for \ac{isi}. The early and late time-bins are as before. We are only testing the timing encoding and the early and late time-bins are as before.}
+	\label{fig:isi_states}
+\end{figure}
 
 Recent progress with single-photon measurement devices mean that \ac{npl} are able to characterise the system at the single-photon level so as to more accurately test a functioning \ac{QKD} system. A gated \ac{spad} (IDQuantique 210, \SI{300}{ps} \ac{FWHM}) was synchronised with the transmitter \ac{fpga} with a tunable delay. The efficiency was \SI{0.02}{\percent} for this short gate time. By scanning with the tunable delay, the detector could measure a sequence of pulses. However, as the gate has some finite width, the detector profile needed to be deconvolved to recover the true measured signal from the transmitter. The transmitter was operated at \SI{1.031}{GHz}. 
 
