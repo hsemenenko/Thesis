@@ -175,13 +175,25 @@
 \makeoddhead{myvf}{}{}{\small\textsc{\rightmark}}
 \pagestyle{myvf}
 %
+
+%Command to check if in the appendix
+\makeatletter
+\newcommand{\inappendix}{TT\fi\expandafter\ifx\@chapapp\appendixname}
+\makeatother
+
+
 % Define command to create clear pages between chapters
 % This will clear to next odd page
 \def\clearemptydoublepage{%
+	\if\inappendix
+        \clearpage
+        \cleartooddpage[\emptypage]
+	\else
         \clearpage%
         \cleartoevenpage[\emptypage]
         \clearpage
         \cleartooddpage[\emptypage]
+    \fi
     }%
 %
 %
