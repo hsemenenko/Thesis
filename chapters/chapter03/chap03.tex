@@ -573,7 +573,7 @@ It was not possible to directly measure the coupling losses on these devices as 
 
 To be able to access the electrical components of the integrated devices, we need to create a package to transfer the signals from the driving electronics to the chip . A PCB was designed to electrically connect the modulators and laser to SMA connectors for high-speed operation and DC pins for biasing. A render is shown in figure \ref{fig:chip_pcb}. The bottom of the chip is ground which connects to a copper block that is also connected to the ground of the PCB. Silver epoxy was used to glue the chip to the mount to ensure a good electrical connection. It also provided a good thermal connection for temperature stabilisation. The PCB is designed with a cut-out for optical access to the chip from one side.
 
-In order to maintain a good signal integrity the impedance of the tracks needs to match the electronics. As the devices require a number of RF connections to a small area, using standard FR-4 material would not be sufficient. Instead, Rogers 6006ns material was chosen for its high dielectric constant of \num{6.15} meaning that narrow grounded coplanar waveguides could maintain a \SI{50}{\ohm} impedance. A schematic of the waveguides is shown in figure \ref{fig:GSG_waveguide}. The characteristic impedance of a grounded coplanar waveguide can be approximated by \cite{wadell1991}
+In order to maintain a good signal integrity the impedance of the tracks needs to match the electronics. As the devices require a number of RF connections to a small area, using standard FR-4 material would not be sufficient. Instead, Rogers 6006ns material was chosen for its high dielectric constant of \num{6.15} meaning that narrow \acp{cbcpw} could maintain a \SI{50}{\ohm} impedance. A schematic of the waveguides is shown in figure \ref{fig:GSG_waveguide}. The characteristic impedance of a \ac{cbcpw} can be approximated by \cite{wadell1991}
 
 \begin{equation}
 	Z_0 = \frac{60\pi}{\sqrt{E_\text{eff}}}\frac{1}{\frac{K(k)}{K(k')} + \frac{K(k_l)}{K(k_l')}}
@@ -585,7 +585,7 @@ where, for a track of width $a$, waveguide of width $b$ and substrate of height 
 	\Large
 	\def\svgwidth{0.6\textwidth} 
 	\import{chapters/chapter03/fig03/}{GSG_Waveguide.pdf_tex}
-	\caption[Grounded coplanar waveguide structure]{Grounded coplanar waveguide for RF signal transmission. $a$ is the width of the waveguide while $b$ is the width of the waveguide plus the space between ground. $h$ is the thickness of the substrate and $E_r$ is the dielectric constant.}
+	\caption[Conductor-backed coplanar waveguide structure]{\ac{cbcpw} schematic for RF signal transmission. $a$ is the width of the waveguide while $b$ is the width of the waveguide plus the space between ground. $h$ is the thickness of the substrate and $E_r$ is the dielectric constant.}
 	\label{fig:GSG_waveguide}
 \end{figure}
 
