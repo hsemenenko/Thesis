@@ -31,7 +31,9 @@ In this chapter, we will introduce the next generation designs for \ac{InP} \ac{
 	\label{fig:components}
 \end{figure}
 
-\section{Laser Seeding}
+\section{Pulsed Laser Seeding}
+
+\Ac{pls} is an optical technique that is based on optical-injection locking of lasers which can be used to create narrow pulses with low timing jitter \cite{Seo1996, Gunning1996}. An initial (master) laser runs in a \ac{CW} mode which is injected into a second (slave) laser. The slave is electrically pulsed which creates a narrow pulse from the injected photons and inherits the phase of the master. However, this would still require phase randomisation for \ac{QKD} as the phase from the initial laser would only slow drift. 
 
 Laser seeding provides a method of generating \ac{QKD} states by overcoming some of the issues with gain switching lasers while also reducing certain electrical requirements.. This has been performed using fibre lasers \cite{Comandar2016PLS, Comandar2016}. In this section, we will present two designs for integrated laser seeding transmitter for time-bin encoding \ac{QKD}. Initial characterisation of the devices was performed but further work is required to 
 
@@ -71,7 +73,7 @@ The complexity of the device required careful consideration to ensure optical an
 
 The electrical connections for integrated devices is challenging, especially in test devices where on-chip real estate is valuable. In figure \ref{fig:hhi_pcb} we show the PCB designed to connect most (but not all) components of the chip shown in figure \ref{fig:hhi_laser_seeding}. For this initial test, the \ac{qrng} section of the chip was not connected. In total, 33 electrical lines were included in the design for the initial testing.
 
-The PCB was again made from Rogers 6006 for its high dielectric constant and contained four layers. The first two layers were dedicated to the RF tracks. The top layer provided signal lines through \ac{cpw} while the second layer provided isolation from the DC tracks below. The \ac{cpw} dimensions can be calculated using equations presented in chapter \ref{chap:hom}. The high dielectric constant allowed narrow \acp{cpw} while maintaining a \SI{50}{\ohm} impedance. 
+The PCB was again made from Rogers 6006 for its high dielectric constant and contained four layers. The top layer of the PCB is electroless nickel immersion gold plated for the wirebond connections. The first two layers were dedicated to the RF tracks. The top layer provided signal lines through \ac{cpw} while the second layer provided isolation from the DC tracks below. The \ac{cpw} dimensions can be calculated using equations presented in chapter \ref{chap:hom}. The high dielectric constant allowed narrow \acp{cpw} while maintaining a \SI{50}{\ohm} impedance. 
 
 To improve the performance over previous designs, a via fence was included along the RF tracks to create a \ac{gcpw} which should increase the bandwidth \cite{haydl2002use}. This via fence reflects the signal and stops a surface wave being created along the track. The spacing between the vias is important to maximise bandwidth, as is the spacing between the track and via. Generally speaking, a microwaves will reflect off of gaps which are less than \nicefrac{1}{4} of their wavelength \cite{Sain2016}. Therefore, the spacing between each via can be calculated as 
 
@@ -114,88 +116,112 @@ Solder pads were placed as close to the chip as possible for a thermistor to be 
 
 \subsubsection*{Chip Mounting}
 
-Unlike the device from Oclaro, where the bottom of the device was the ground plane, there is no need to electrically connect the bottom of the devices from HHI. However, silver epoxy was still used for its good thermal conductivity to aid with temperature stabilising the devices. A section of the PCB was partially milled out meaning that placing the chip was more challenging as the sides of the chip would be below the top of the PCB.
+Unlike the device from Oclaro, where the bottom of the device was the ground plane, there is no need to electrically connect the bottom of the devices from HHI. However, silver epoxy was still used for its strong adhesive properties and good thermal conductivity to aid with temperature stabilising the devices. A section of the PCB was partially milled out meaning that placing the chip was more challenging as the sides of the chip would be below the top of the PCB.
 
-To accurately place the chip onto the PCB, vacuum tweezers were used. A silicone cup was used to pick up the chip from the top. Silver epoxy was spread onto the milled out section where the chip was then placed. The PCB was then heated to around \SI{100}{\celsius} for \SI{30}{\minute}.
+To accurately place the chip onto the PCB, vacuum tweezers were used. A silicone cup was used to pick up the chip from the top which could be released when the chip was in position. Silver epoxy was spread onto the milled out section where the chip was then placed. The chip was allowed to overhang the PCB by \SI{0.5}{\mm} to ease \ac{vga} connection. The PCB was then heated to \SI{100}{\celsius} for \SI{30}{\minute} to allow the silver epoxy to cure.
 
 %A section for the chip was milled out so that the top of the device would sit flush with the top of the PCB. The was to ease wirebonding and minimise the distance between chip and PCB bond bads. This milled out section was plated and contained four plated vias to the bottom layer of the PCB. This was to bypass the thermal isolation of the substrate and provide a good thermal contact between the chip and the peltier that will be used for thermal management.
 
 \subsubsection*{Wirebonding}
 
-
-
-\subsubsection*{Optical Connection}
-
-The \ac{vga} was held using a vacuum chuck and moved using a 6-axis micro-positioner (NanoMax). The on-chip lasers provided a light source for alignment. 
-
-UV cured index matched glue was used to attach the \ac{vga} to the chip. The make and model was Dymax OP-4-20632.
-
-The \ac{vga} was aligned using the on-chip laser. Then a small amount of glue could be applied along the connection. The \ac{vga} was then pressed against the chip. A UV LED lamp illuminated the area to allow for drying. This was left for 12 hours to cure. Silicon was applied to the fibres 
-
-A photograph of the packaged chip under the steriliser is shown in figure \ref{fig:hhi_photo}. The fibre strain relief is shown in the left with silicone to secure the fibre to the PCB. 
-
-\begin{figure}
+\begin{figure}[t]
 	\centering
 	\includegraphics[width = 0.8\textwidth]{hhi_packaged}
 	\caption[Photograph of packaged HHI transmitter]{Photograph of the packaged HHI device. The \ac{InP} chip is glued to the centre of the PCB with the \ac{vga} glued to the edge couplers. Fibre strain relief is shown to the left were the bare fibres from the \ac{vga} are attached to the PCB. The electrical pads on the chip have been wirebonded to the PCB for electrical control.}
 	\label{fig:hhi_photo}
 \end{figure}
 
+\SI{25}{\um} gold wire is used to connect the chip bond pads to the PCB which heated to \SI{100}{\celsius}. A high-voltage electrode provides a spark to the end of the wire creating a \SI{50}{\um} ball at the end of a capillary. The capillary is positioned above the chip bond pad connected to the chip bond pad through thermosonic bonding, which using a combination of heat, pressure and ultrasonic energy to form a bond. The wire is then fed through the capillary to form a loop so the wire can be connected to the PCB pad with a wedge bond, again using thermosonic bonding. This method can be used to create connections to devices with bandwidths above \SI{60}{GHz} \cite{chen2015bandwidth}, while coax wirebonds have been developed to support bandwidths above \SI{100}{GHz} \cite{cahill2006development}.
+
+\subsubsection*{Optical Connection}
+
+The device contains eight \acp{ssc} on the side of the chip which are designed to convert from the the \SI{2.5}{\um} waveguide mode to a \SI{10}{\um} mode that is more circular. This means that we don't need to use lensed fibres and can connect the \acp{ssc} directly to SMF fibre. The \acp{ssc} are \SI{500}{\um} spaced so as to be compatible with the standard \acs{vga} which was provided by Oz Optics for this device. 
+
+A brass vacuum chuck was designed from the dimensions of the \ac{vga} so that it could be securely held during alignment and gluing. The chuck was placed on a 6-axis micro-positioner (NanoMax) so that it could be well aligned with the orientation of the chip. 
+
+The integrated lasers were used to align the \ac{vga} to the chip. A stable current source provided each laser with \SI{75}{\mA}.The device had been designed with lasers at both the top and bottom of the chip to allow the roll of the \ac{vga} to match that of the chip. As mentioned before, and show in figure \ref{fig:geometry_lesson}, it was not possible to align all of the fibres in the \ac{vga} with the \acp{ssc}. Therefore, the \ac{ssc} with the most test structures was chosen to be the only fibre aligned. 
+
+%was held using a vacuum chuck and moved using a . The on-chip lasers provided a light source for alignment. 
+
+Once the fibre was sufficiently aligned, the \ac{vga} was moved back from the chip to allow glue to be applied between the \ac{vga} and the chip. Index matched, UV cured glue (Dymax OP-4-20632) was used to attach the fibres and the chip. Only a small gap between the \ac{vga} and chip was required due to the low viscosity of the glue allowing it to permeate between them. 
+
+Once the glue had been applied, the \ac{vga} moved back to be in contact with the chip. A UV LED lamp illuminated the area to cure the glue which was left for 12 hours. Silicone glue was then applied to the bar fibres at the edge of the PCB for strain relief and left to dry. Once the silicone had dried, the vacuum was turned off and the brass chuck could be lowered away from the device. To ensure that the UV cured glue was completely cured, the entire device was placed into a UV steriliser and left for a further 12 hours. 
+
+A photograph of the packaged chip under the steriliser is shown in figure \ref{fig:hhi_photo}. The HHI chip sits in the middle of the device and is glued and wirebonded to the PCB. The \ac{vga} is attached with UV cured glue and the bare fibres are attached to the PCB with silicone glue to provide strain relief. Electrical connections can be made through the SMA and FFC connections on the edge of the PCB.
+
+The packaged device was screwed to a heat sink with nylon screws to avoid thermal loops. A peltier placed directly under the chip. An Arroyo 6305 was connected to both the thermistor and peliter and a PID loop was calibrated to stabilise the temperature. A case was placed over the PCB to reduce air flow over the device which can cause thermal instability. The temperature was set to \SI{25}{\celsius} and the PID loop maintained a temperature instability of less than \SI{0.01}{\celsius}. The device could then be electrically and optically tested to characterise the performance.
+
 \subsection{Laser Operation}
 
-A current sweep of the laser \ac{SOA} was performed to see threshold and power characteristics. Two different lasers were tested on chip with \num{300} and \SI{500}{\um} \ac{SOA} lengths to see the different in performance. The rear \ac{DBR} and phase modulator were \SI{300}{\um} and \SI{50}{\um}, respectively, for both lasers. However, the front \ac{DBR} was only \SI{50}{\um} for the \SI{500}{\um} laser, while the other was \SI{150}{\um}.
-
-The sweeps are show in figure \ref{fig:hhi_soa_sweep}. Both lasers show a lasing threshold of around \SI{30}{\mA}. Fluctuations in power at higher driving current is likely attributed to mode competition. At very high currents, the \SI{300}{\um} \ac{SOA} laser starts to decrease in power. This will be due to the efficiency of the laser diode at higher temperatures.
-
-\begin{figure}[tp]
+\begin{figure}[t]
 	\centering
 	\small	
-	\def\svgwidth{0.9\textwidth} 
+	\def\svgwidth{\textwidth} 
 	\import{chapters/chapter06/fig06/I_sweep/}{current_sweep.pdf_tex}
-	\caption[Current sweep of HHI laser SOA]{Sweeping laser current. Threshold of \SI{30}{\mA} for both. Fluctuations in power likely due to the mode competition in the cavity. Reduction in power for \SI{300}{mA} attributed to heating of the diode reducing efficiency.}
+	\caption[Current sweep of the HHI Fabry-P\'{e}rot test lasers]{Current sweep of the on-chip, Fabry-P\'{e}rot test lasers. The two designs have different \ac{SOA} and front \ac{DBR} lengths. Both show a lasing threshold of around \SI{30}{\mA}. We find that the longer \ac{SOA} provides considerably more power despite the shorter front \ac{DBR}. Fluctuations in power likely due to the mode competition in the cavity. Reduction in power for \SI{300}{\um} \ac{SOA} are likely attributed to heating of the diode reducing efficiency. The effective is elastic so reducing the current recovers the original efficiency.}
 	\label{fig:hhi_soa_sweep}
 \end{figure}
 
-Laser spectrum shows multi-modal operation. This is likely due to broad reflection peaks in wavelength allowing simultaneous modes in the cavity. Sidebands can be suppressed through current injection of the tunable \acp{DBR}. However, they are still only around \SIrange{30}{40}{dB} below the peak. 
+This device contains two Fabry-P\'{e}rot laser test structures to assess their characteristics. A cavity is formed from two current-injection tunable \acp{DBR} which are of different lengths. The rear \ac{DBR} is \SI{300}{\um} in length which should provide \SI{95}{\percent} reflectivity. Two different front \ac{DBR} lengths were chosen, as well as different lengths for the \ac{SOA}. The first laser had a front \ac{DBR} length of \SI{150}{\um} with an \ac{SOA} length of \SI{300}{\um}. The second laser had a front \ac{DBR} length of \SI{50}{\um} and \ac{SOA} length of \SI{500}{\um}. The reduction in \ac{DBR} length from \SI{150}{\um} to \SI{50}{\um} is estimated by the foundry to reduce the reflectivity from \SI{75}{\percent} to \SI{25}{\percent}. Both cavities also contain a \ac{cipm} which can be used to precisely tune the wavelength of the laser. This method is preferred over current injection of the \ac{SOA} as it won't not affect the output power of the laser.
+
+Two different lasers designs were tested on chip with \num{300} and \SI{500}{\um} \ac{SOA} lengths to see the difference in performance. The rear \ac{DBR} and phase modulator were \SI{300}{\um} and \SI{50}{\um}, respectively, for both lasers. However, the front \ac{DBR} was only \SI{50}{\um} for the \SI{500}{\um} laser, while the other was \SI{150}{\um}.
+
+A current sweep of the laser \ac{SOA} was performed to see threshold and power characteristics which are shown in figure \ref{fig:hhi_soa_sweep}, together with schematics of the two laser designs. Both lasers show a lasing threshold of around \SI{30}{\mA} and gain is initially linear. At high driving currents, both lasers exhibit fluctuations in power. This is likely attributed to mode competition within the laser cavity caused by cavity heating. The increased \ac{SOA} length allows the laser to reach around three times higher power for the same driving current. This will be partially due to the longer gain medium allowing a higher amplification and also the reduced reflectivity of the front \ac{DBR} allowing more light to escape the cavity. The power given in figure \ref{fig:hhi_soa_sweep} is not corrected for coupling or routing component loss and so the power on-chip is expected to be higher. 
+
+At currents above \SI{100}{\mA}, the \SI{300}{\um} \ac{SOA} begins to decrease in power and by \SI{150}{\mA} the optical power has drastically reduced. While more investigation is required, this is likely due an increase in temperature of the diode reducing the efficiency of the diode. The effect is elastic so reducing the driving current recovers the efficiency of the laser. This breakdown could possibly be remedied through better thermal management.
+
+% Fluctuations in power at higher driving current is likely attributed to mode competition. At very high currents, the \SI{300}{\um} \ac{SOA} laser starts to decrease in power. This will be due to the efficiency of the laser diode at higher temperatures.
+
+Figure \ref{fig:hhi_dbr_sweep} shows specta of the lasers while tuning the \acp{DBR} through current injection. The lasing is single-mode with a \ac{FWHM} of \SI{30}{pm} which is limited to the resolution of the \ac{OSA} used (Anritsu MS9740A). However, the laser only achieves \SI{30}{dB} of sideband suppression when \acp{DBR} are suitably tuned. Both the laser configurations exhibit similar spectra. This suppression is much less than the \SI{50}{dB} found in the Oclaro lasers of similar design. These sidebands are likely due to the reflected wavelength of the \acp{DBR} being quite broad allowing multiple modes to co-exist. 
+
+By tuning the front and rear \acp{DBR}, the lasing wavelength can be changed. Passing a current through the \acp{DBR} causes them to heat, expanding the grating period and reducing the peak reflected wavelength. With a current up to \SI{40}{\mA}, the wavelength of the laser can be tuned by around \SI{3}{nm}. Fine tuning of the wavelength can be achieved by adjusting the temperature of the device or current injection of the \ac{cipm} within the cavity. 
+
+%Laser spectrum shows multi-modal operation. This is likely due to broad reflection peaks in wavelength allowing simultaneous modes in the cavity. Sidebands can be suppressed through current injection of the tunable \acp{DBR}. However, they are still only around \SIrange{30}{40}{dB} below the peak. 
 
 \begin{figure}[tp]
 	\centering
 	\small	
 	\def\svgwidth{0.9\textwidth} 
 	\import{chapters/chapter06/fig06/Spectra/}{spectra.pdf_tex}
-	\caption[Wavelength sweep through current injection of tunable DBRs]{Current injection of the tunable \acp{DBR} causing a change of peak reflected wavelength. The lasers show multi-modal operation and a sideband suppression of only \SI{35}{dB}.}
+	\caption[Wavelength sweep through current injection of tunable DBRs]{Current injection of the tunable \acp{DBR} causing a change of peak reflected wavelength. The lasers show multi-modal operation and a sideband suppression of only \SI{30}{dB}.}
 	\label{fig:hhi_dbr_sweep}
 \end{figure}
 
-The wavelength can be tuned but around \SI{3}{nm} by current injection of the tunable \acp{DBR}. Typical values are less than \SI{2}{V}. High driving current can cause heating of the cavity causing the wavelength to increase. 
-
-The transmitter (shown in figure \ref{fig:hhi_laser_seeding}) contains two methods possible to achieve laser seeding.
+%The wavelength can be tuned but around \SI{3}{nm} by current injection of the tunable \acp{DBR}. Typical values are less than \SI{2}{V}. High driving current can cause heating of the cavity causing the wavelength to increase. 
 
 \subsection{Gain Switching}
 
 We can characterise the on-chip laser ability to gain switch, which is important for phase randomisation in \ac{QKD}. 
+
+The \ac{SOA} within the laser cavity is connected to a \ac{gcpw} line for high-speed operation. Using a bias tee, the DC offset can be changed whilst an RF signal is provided to demonstrate gain switching. This is shown in figure \ref{fig:gain_switch_test} with varied DC offsets.
+
+A \ac{ppg} provided a \SI{1}{GHz} signal, Arroyo 6305 provided the stable current source. The \ac{ppg} also provided a synchronisation signal to the detectors through an optical channel. \Ac{snspd} was used for detection and events correlated on a PicoQuant Hydraharp. A histogram could then be created. A \ac{voa} was used to stop the laser light from saturating the detectors.
 
 \begin{figure}[tp]
 	\centering
 	\small	
 	\def\svgwidth{\textwidth} 
 	\import{chapters/chapter06/fig06/laser_gain_switch/}{gain_switch_test.pdf_tex}
-	\caption[Gain switching test of the HHI on-chip lasers]{\SI{20}{mA} (left), \SI{30}{\mA} (middle), \SI{40}{\mA} (right). \SI{1}{GHz} \SI{2}{\Vpp} square wave from \ac{ppg}. Laser threshold around \SI{30}{mA}. Pulses are around \SI{120}{ps} \ac{FWHM}.}
+	\caption[Gain switching test of the HHI on-chip lasers]{Gain switching test of the on-chip lasers. A bias tee mixes a DC offset with an RF signal. A \SI{1}{GHz} \SI{2}{\Vpp} square wave was used and the DC offset was varied around the lasing threshold. the \SI{20}{mA} (left), \SI{30}{\mA} (middle), \SI{40}{\mA} (right). \SI{1}{GHz} \SI{2}{\Vpp} square wave from \ac{ppg}. Laser threshold around \SI{30}{mA}. Pulses are around \SI{120}{ps} \ac{FWHM}.}
 	\label{fig:gain_switch_test}
 \end{figure}
+
+A spectrum of the gain switched laser is shown in figure \ref{fig:gain_switch_spectrum}. The spectrum is broadened with is usual for gain switched lasers. The sideband suppression is reduced to only \SI{10}{dB}.
 
 \begin{figure}[tp]
 	\centering
 	\small	
 	\def\svgwidth{0.9\textwidth} 
 	\import{chapters/chapter06/fig06/Spectra/}{spectrum_gain_switch.pdf_tex}
-	\caption[Spectrum of the gain switched laser]{Spectral broadening due to the laser gain switching. \SI{30}{mA} current, \SI{2}{\Vpp} \SI{1}{\GHz} square wave.}
+	\caption[Spectrum of the gain switched laser]{A spectrum of the gain switched laser when the DC offset is just below threshold (\SI{30}{mA}) with a \SI{2}{\Vpp} \SI{1}{\GHz} square wave. The spectrum is broadened which is usual for a gain switched laser. The sideband suppression is also reduced to only around \SI{10}{dB}. Such a source would likely need filtering before being useful for quantum experiments.}
 	\label{fig:gain_switch_spectrum}
 \end{figure}
 
 \subsection{Laser Seeding}
 
+The transmitter (shown in figure \ref{fig:hhi_laser_seeding}) contains two methods possible to achieve laser seeding, which are shown in figure \ref{fig:las_seed_schem}. Due to the misalignment of the \ac{vga} and chip, only design \ref{fig:las_seed_test}a was accessible for testing. Figure \ref{fig:las_seed_test} shows the initial test of driving the two transmitters with \SI{1}{GHz} square waves. 
 
+The setup is as in the gain switching test except the \ac{ppg} provided two RF signals and a second Arroyo box was used to provide the two lasers with independent DC offsets. Pulses were attenuated an measured with an \ac{snspd}. 
 
 \begin{figure}[tp]
 	\centering	
@@ -234,7 +260,7 @@ There are many ways of improving the \ac{QKD} transmitters. For example, encodin
 	\centering
 	\def\svgwidth{\textwidth}
 	\import{chapters/chapter06/fig06/schematics/}{gain_switch_transmitter.pdf_tex}
-		\caption[Schematic of the multiple laser source transmitter]{Schematic of the multiple laser source transmitter. By using independent lasers to generate each of the different states, we can gain switch each to ensure phase incoherence between them. A relatively simple optical circuit can then be used to encode the four BB84 states in time-bins. The loss compensation \ac{mzi} can match the losses between the two paths in the \ac{amzi}. The phase compensation allows fine tuning of the relative phases in the X basis states.}
+		\caption[Schematic of the multiple laser source transmitter]{Schematic of the multiple laser source transmitter. By using independent lasers to generate each of the different states, we can gain switch each to ensure phase randomisation. A relatively simple optical circuit can then be used to encode the four BB84 states in time-bins. The loss compensation \ac{mzi} can match the losses between the two paths in the \ac{amzi}. The phase compensation allows fine tuning of the relative phases in the X basis states.}
 	\label{fig:multiple_lasers_tx}
 \end{figure}
 
@@ -249,13 +275,13 @@ For the X basis states, the different paths will cause a relative phase to be in
 $\ket{+}$:
 
 \begin{equation}
-	a^\dagger_e \xrightarrow{\text{BS}} \frac{1}{\sqrt{2}} (a^\dagger_e + b^\dagger_e) \xrightarrow{\text{aMZI}} \frac{1}{\sqrt{2}} (a^\dagger_l + b^\dagger_e) \xrightarrow{\text{BS}} \frac{1}{2}(a^\dagger_e + a^\dagger_l - b^\dagger_e + b^\dagger_l)
+	a^\dagger_e \xrightarrow{\text{\acs{bs}}} \frac{1}{\sqrt{2}} (a^\dagger_e + b^\dagger_e) \xrightarrow{\text{\acs{amzi}}} \frac{1}{\sqrt{2}} (a^\dagger_l + b^\dagger_e) \xrightarrow{\text{\acs{bs}}} \frac{1}{2}(a^\dagger_e + a^\dagger_l - b^\dagger_e + b^\dagger_l)
 \end{equation}
 
 $\ket{-}$:
 
 \begin{equation}
-	b^\dagger_e \xrightarrow{\text{BS}} \frac{1}{\sqrt{2}} (a^\dagger_e - b^\dagger_e) \xrightarrow{\text{aMZI}} \frac{1}{\sqrt{2}} (a^\dagger_l - b^\dagger_e) \xrightarrow{\text{BS}} \frac{1}{2}(- a^\dagger_e + a^\dagger_l + b^\dagger_e + b^\dagger_l)
+	b^\dagger_e \xrightarrow{\text{\acs{bs}}} \frac{1}{\sqrt{2}} (a^\dagger_e - b^\dagger_e) \xrightarrow{\text{\acs{amzi}}} \frac{1}{\sqrt{2}} (a^\dagger_l - b^\dagger_e) \xrightarrow{\text{\acs{bs}}} \frac{1}{2}(- a^\dagger_e + a^\dagger_l + b^\dagger_e + b^\dagger_l)
 \end{equation}
 
 So when looking at the output port, we get a relative phase between the two different pulsed lasers.
@@ -272,6 +298,8 @@ So when looking at the output port, we get a relative phase between the two diff
 While the previous generation of devices included delay lines to encode timing information, they we too lossy to be used. We have included a delay line in the design of this chip which should have lower losses. This should reduce the complexity of the control electronics and make the system compatible with a gain-switched DFB laser.
 
 \section{Outlook}
+
+While integrated devices have been used to demonstrate \ac{QKD} \cite{Sibson2017InP, Sibson2017Si, semenenko2019mdi, zhang2019integrated, ma2016silicon, paraiso2019}
 
 This chapter has extended the use of integrated devices for \acl{QKD}.
 
