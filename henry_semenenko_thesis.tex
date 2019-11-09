@@ -84,6 +84,11 @@
 \usepackage[sfdefault]{roboto}
 \usepackage{roboto-mono}
 \fontseries{m}
+\renewcommand{\cftchapterpagefont}{\robototlf}
+\renewcommand{\cftsectionpagefont}{\robototlf}
+\renewcommand{\cftsubsectionpagefont}{\robototlf}
+\renewcommand{\cftfigurepagefont}{\robototlf}
+\renewcommand{\cfttablepagefont}{\robototlf}
 %
 
 %Defining an empty page with key graphic
@@ -169,8 +174,8 @@
 % The pages should be numbered consecutively at the bottom centre of the
 % page.
 \makepagestyle{myvf} 
-\makeoddfoot{myvf}{}{\thepage}{} 
-\makeevenfoot{myvf}{}{\thepage}{} 
+\makeoddfoot{myvf}{}{\robotoTLF{\thepage}}{} 
+\makeevenfoot{myvf}{}{\robotoTLF{\thepage}}{} 
 \makeheadrule{myvf}{\textwidth}{\normalrulethickness} 
 \makeevenhead{myvf}{\small\textsc{\leftmark}}{}{} 
 \makeoddhead{myvf}{}{}{\small\textsc{\rightmark}}
