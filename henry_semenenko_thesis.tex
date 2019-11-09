@@ -78,12 +78,15 @@
 \setheaderspaces{*}{2\onelineskip}{*} 
 \checkandfixthelayout
 %
-% Change the font
+% Change the font to Roboto
 \frenchspacing
 \usepackage[T1]{fontenc}  
 \usepackage[sfdefault]{roboto}
+%Loads the roboto mono to use tabular lined fonts
 \usepackage{roboto-mono}
+%Choose the medium font
 \fontseries{m}
+%Changes the page number fonts to tabular lined
 \renewcommand{\cftchapterpagefont}{\robototlf}
 \renewcommand{\cftsectionpagefont}{\robototlf}
 \renewcommand{\cftsubsectionpagefont}{\robototlf}
@@ -223,23 +226,18 @@
 \usepackage{nicefrac}
 \usepackage{braket}
 \usepackage{amsfonts} 					%Calls Amer. Math. Soc. (AMS) fonts
-\usepackage[centertags]{mathtools}		%Writes maths centred down
-\usepackage{stmaryrd}					%New AMS symbols
+\usepackage{mathtools}			%Writes maths centred down
 \usepackage{amssymb}					%Calls AMS symbols
 \usepackage{amsthm}						%Calls AMS theorem environment
 \usepackage{graphicx}					%Calls figure environment 
-%\usepackage[utf8]{inputenc}				%Needed to encode non-english characters 
-%										%directly for mac
-%\usepackage{mathrsfs}					%Even more math symbols
 \usepackage{float}						%Helps to place figures, tables, etc. 
-\usepackage{latexsym}					%Extra symbols
 \usepackage{cite}
 \usepackage[hyphens]{url}				%Supports url commands
 \urlstyle{same}
 \usepackage[UKenglish]{babel}				%For languages characters and hyphenation
 \usepackage{enumerate}					%For enumeration counter
 \usepackage{enumitem}					%This is used to change the font for the enumeration numbers
-\setlist[enumerate]{font=\robotoTLF}	%This changes the font to a lining font making the numbers uniformly spaced
+\setlist[enumerate]{font=\robotoTLF}	%This changes the font to a tabular lined font making the numbers uniformly spaced
 \usepackage{footnote}					%For footnotes
 \usepackage{microtype}					%Makes pdf look better.
 \usepackage{rotfloat}					%For rotating and float environments as tables, 
@@ -273,33 +271,6 @@
 %\usepackage{tocloft}
 %\cftpagenumbersoff{chapter} 
 
-%%% PGFPLOTS STUFF %%%
-
-\usepackage{pgfplots}
-\pgfplotsset{compat=newest}
-\usepgfplotslibrary{colorbrewer}
-
-%input the colour definitions
-\input{graphics/colours.tex}
-
-\makeatletter \newcommand{\pgfplotsdrawaxis}{\pgfplots@draw@axis} \makeatother
-
-\pgfplotsset{axis line on top/.style={
-  axis line style=transparent,
-  ticklabel style=transparent,
-  tick style=transparent,
-  axis on top=false,
-  after end axis/.append code={
-    \pgfplotsset{axis line style=opaque,
-      ticklabel style=opaque,
-      tick style=opaque,
-      grid=none}
-    \pgfplotsdrawaxis}
-  }
-}
-
-%%% END %%%
-		  
 %%% hyperref must be loaded before Glossaries-extra or hyperlinks go to the wrong place %%%
 	
 \usepackage[colorlinks=true,
