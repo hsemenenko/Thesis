@@ -18,52 +18,70 @@ Philip Sibson and I designed the photonic chips and compiled the chip mask that 
 
 Integrated photonics has facilitated a drastic increase in the complexity possible for quantum information experiments \cite{wang2019integrated}. The inherent phase stability allows a level of control on a scale simply not possible with fibre or bulk alternatives. However, the technology is still under heavy development to improve the performances of devices at both component and circuit levels. As such, further optimisation is required before commercial deployment of integrated devices is viable. 
 
-While the demonstrations in previous chapters showed state-of-the-art performances from \ac{InP} devices, there were several parts which are in need of revision. For example, tuning of \acp{mzi} requires \ac{topm} and delay line losses were too high to be used. 
+While the demonstrations in previous chapters showed state-of-the-art performances from \ac{InP} devices, there were several parts which are in need of revision. For example, tuning of \acp{mzi} requires \ac{topm} and delay line losses were too high to be used. Waveguide losses have halved from \SI{2}{dB\per\cm} to \SI{1}{dB\per\cm}.
 
 In this chapter, we will introduce the next generation designs for \ac{InP} \ac{QKD} transmitters. By learning from the lessons from the first generation devices, we can introduce more components to the circuit for more fine tuning. Developments in processing have reduced the losses from components and waveguides meaning that optical delay lines become more achievable. Waveguides losses can be as low as \SI{1}{dB\per\cm}
 
 %The transmitters that were used to demonstrate \ac{MDI} could be improved. Here, we will outline the next generation devices that have been designed and fabricated. 
 
-\begin{figure}
+\begin{figure}[t]
 	\centering
-	\includegraphics[width=0.9\textwidth]{./schematics/components.pdf}
+	\huge	
+	\def\svgwidth{0.9\textwidth} 
+	\import{chapters/chapter06/fig06/schematics/}{components.pdf_tex}
 	\caption[Components used for chip schematics]{List of components used for the chip schematics: \acf{dfb} laser, \acf{mmi}, \acf{DBR}, \acf{cipm}, \acf{SOA}, \acf{pd}, \acf{topm}.}
 	\label{fig:components}
 \end{figure}
 
 \section{Pulsed Laser Seeding}
 
-\Ac{pls} is an optical technique that is based on optical-injection locking of lasers which can be used to create narrow pulses with low timing jitter \cite{Seo1996, Gunning1996}. An initial (master) laser runs in a \ac{CW} mode which is injected into a second (slave) laser. The slave is electrically pulsed which creates a narrow pulse from the injected photons and inherits the phase of the master. However, this would still require phase randomisation for \ac{QKD} as the phase from the initial laser would only slow drift. 
+\Ac{pls} is an optical technique that is based on optical-injection locking of lasers which can be used to create narrow pulses with low timing jitter \cite{Seo1996, Gunning1996}. An initial (master) laser operates in \ac{CW} mode which is injected into a second (slave) laser. The slave is electrically pulsed which creates an optical pulse from the injected photons and inherits the phase of the master. As the process is not reliant on a spontaneous emission, the pulse width can be very narrow \cite{}. However, as the master laser is running in \ac{CW} operation, the phase of the pulsed slave laser will only drift slowly with the changing phase of the master laser. This will not be sufficiency for \ac{QKD} pulses which require phase randomisation between states. 
 
-Laser seeding provides a method of generating \ac{QKD} states by overcoming some of the issues with gain switching lasers while also reducing certain electrical requirements.. This has been performed using fibre lasers \cite{Comandar2016PLS, Comandar2016}. In this section, we will present two designs for integrated laser seeding transmitter for time-bin encoding \ac{QKD}. Initial characterisation of the devices was performed but further work is required to 
+%However, this would still require phase randomisation for \ac{QKD} as the phase from the initial laser would only slow drift. 
 
-Since this chip had been designed, similar work was published demonstrating an integrated laser-seeding transmitter based on the \ac{InP} platform \cite{paraiso2019}. 
+Either, the pulses generated from optical-injection locking could be phase randomised using a further modulator. This increases the complexity of the optical system and driving electrics so is not ideal. Instead, we can consider phase randomising the phase of the master laser before the optical injection. This is the idea behind the \ac{pls} technique.
 
-Laser seeing using two pulsed lasers: a master and a slave. Both are driving with electrical square waves. The master laser is kept just below threshold and gain switching causing a laser pulse from a spontaneous emission. The DC offset is such that the timing jitter is minimised (although still large) while maintaining a randomised phase. This initial pulse is sent through a circulator to the slave laser The slave has a DC offset below lasing threshold such that without the master laser pulse, no lasing can occur even with the RF signal.
+Instead of operating the maser laser in a \ac{CW} mode, it is given a DC offset below the lasing threshold and an RF signal gain-switches to provide a long, phase randomised pulse. The pulse is variably attenuated and passed through a circulator to isolate it from the slave laser pulses. A DC offset below the lasing threshold is provided to the slave and an electrical pulse then gains-switches the slave laser when the master laser pulse is in the cavity. This causes the slave to produce a narrow pulse that inherits the optical properties of the master laser. As the master laser is being gain switched, the pulses produced by the slave laser will be phase randomised.
+
+This method of \ac{pls} provides the base pulses for a \ac{QKD} system but encoding is still required. Previous demonstrations have used a polarisation encoding to generate the BB84 states in adition to \ac{pls} \cite{Comandar2016}. However, for a time-bin encoding one can consider encoding the states directly with the master laser. To maintain phase coherence between time-bins, the master laser can be kept above threshold for two cycles. The pulses generated from the slave laser will then also have a phase coherence. By adjusting the driving voltage for the master laser between time-bins, a phase shift can be created between early and late time-bins. By fine tuning the parameters of a system, all of the BB84 states can be generated in a time-bin encoding scheme by just using \ac{pls}.
+
+\Ac{pls} provides a method of generating BB84 states by overcoming some of the issues with gain-switching or intensity modulation of lasers while also reducing the optical complexity of a circuit. The electrical requirement for the system remain stringent with RF pulses requiring high resolution to precisely control the phases of the master laser. \Ac{pls} has been demonstrated using fibre optic components to show high-fidelity \ac{HOM} interference and \ac{MDI} \cite{Comandar2016PLS, Comandar2016}. 
+
+%Laser seeing using two pulsed lasers: a master and a slave. Both are driving with electrical square waves. The master laser is kept just below threshold and gain switching causing a laser pulse from a spontaneous emission. The DC offset is such that the timing jitter is minimised (although still large) while maintaining a randomised phase. This initial pulse is sent through a circulator to the slave laser The slave has a DC offset below lasing threshold such that without the master laser pulse, no lasing can occur even with the RF signal.
 
 \subsection{Integrated Laser Seeded Transmitter}
-
-There are no circulators or isolators currently available on-chip, so other methods of laser seeding need to be considered.
-
-Figure \ref{fig:hhi_laser_seeding} shows the GDS for the integrated device. The complexity of integrated devices is obvious. Shared grounded needed to be implemented to reduce the number of electrical wires on the chip.
 
 \begin{sidewaysfigure}
 	\centering
 	\includegraphics[width=0.9\textwidth]{Laser_Seeding_gds.png}
-	\caption[InP laser seeding transmitter with QRNG]{This shows the layout of the laser seeded transmitter device fabricated by HHI. The chip measures \SI[product-units=power]{6x4}{mm} and contains two laser seeding prototype circuits, a homodyne \ac{qrng} and test structure to measure laser and waveguide performances. This demonstrates the complexity and compactness possible in the integrated platform.}
+	\caption[InP laser seeding transmitter with QRNG]{This shows the layout of the laser seeded transmitter device fabricated by HHI. The optical components are shown in blue while the electrical connections are in red. The chip measures \SI{6x4}{mm} and contains two laser seeding prototype circuits, a homodyne \ac{qrng} and test structure to measure laser and waveguide performances. Wires are routed to the side of the chip to allow wirebonding. Light is converted from the waveguide mode to a \SI{10}{\um} mode with \acp{ssc} at the side of the chip.}
 	\label{fig:hhi_laser_seeding}
 \end{sidewaysfigure}
 
-The schematic for the on-chip laser seeding test is shown in figure \ref{fig:las_seed_schem} where master and slave lasers can interact.
+In this section, we will present two designs for integrated laser seeding transmitter for time-bin encoding \ac{QKD}. The devices were fabricated by Fraunhofer HHI from \ac{InP} and measure only \SI{6x4}{mm}. Edge couplers on the side of the chip allow optical access while the electrical connections are routed to the remaining three sides. Test structures are included in the design to measure the laser characteristics, photodiode performance and cutbacks allow the waveguide and coupling losses to be estimated. This device also contains a \ac{qrng} which will be discussed in section \ref{sec:hhi_qrng}.
 
-Back reflections are a potential issue for this design which could introduce challenges achieving phase randomisation.
+Figure \ref{fig:hhi_laser_seeding} shows the GDS for the device and aptly demonstrates the complexity achievable with \acp{pic}. In total, the device contains eight Fabry-P\'{e}rot lasers. The fabrication process meant that all \acp{ssc} had to be on the same side of the device. Therefore, each \ac{ssc} was separated with \acp{mmi} to the different parts of the chip. This will increase the losses in the circuit and should be considered for the characterisation of the device. 
 
-\begin{figure}[tp]
+Electrical connections were routed to the side of the chip in staggered rows to help with wirebonding. Waveguide crossings were added where appropriate as the stack does not have a separated electrical layer. Due to the number of electrical connections, shared grounds were implemented to reduce the number of bond pads required.
+
+%Initial characterisation of the devices was performed but further work is required to 
+
+Currently, there are no standard methods to integrate optical isolation or circulators. Therefore, the standard design for \ac{pls} cannot be replicated exactly in the circuit. In this \ac{pic} we include the two simplest methods to allow the master to inject light into the slave. These are shown in figure \ref{fig:las_seed_schem}. First, (fig. \ref{fig:las_seed_schem}a) we consider the two lasers connected by a \num{1x2} \ac{mmi}. The master can inject light into the front of the slave, which can then be pulsed. Half of the light will then leave the device through the output port. The second design (fig. \ref{fig:las_seed_schem}b) considers the lasers in series along a waveguide. The master injects light through the rear \ac{DBR} from which the slave can then create a pulse. 
+
+Without isolation between the master and slave laser, back reflections are a potential issue. Such reflections could make it more difficult for the phase randomisation as remnants of previous pulses may impart their phase on subsequent ones. This may be less apparent in design \ref{fig:las_seed_schem}b as the rear \ac{DBR} will suppress reflections from the edge facet of the device. 
+
+%There are no circulators or isolators currently available on-chip, so other methods of laser seeding need to be considered.
+
+%The schematic for the on-chip laser seeding test is shown in figure \ref{fig:las_seed_schem} where master and slave lasers can interact.
+
+\begin{figure}[t]
 	\centering
 	\includegraphics[width=0.9\textwidth]{./schematics/laser_seeding.pdf}
-	\caption[Schematic of on-chip laser seeding]{Schematic of on-chip laser seeding. As there is no non-linearity to exploit for a circulator, the usual method of laser seeding cannot be achieved in integrated photonics. These are the simplest conceivable circuits to attempted it in an integrated platform}
+	\caption[Schematic of on-chip laser seeding]{Schematic of on-chip laser seeding. As there is no non-linearity to exploit for a circulator, the usual method of laser seeding cannot be achieved in integrated photonics. These are the simplest conceivable circuits to attempt \ac{pls} in a \ac{pic}. \textbf{a} The master can inject light through a \num{1x2} \ac{mmi} which also allows half of the slave light to the output. \textbf{b} The master and slave are in series. Light is injected into the rear \ac{DBR} of the slave which is also connected directly to the output.}
 	\label{fig:las_seed_schem}
 \end{figure}
+
+Since this chip had been designed, similar work was published demonstrating an integrated laser-seeding transmitter based on the \ac{InP} platform \cite{paraiso2019}. The designs are similar to those present here but use \ac{dfb} lasers in series with an \ac{mzi} in between to attenuate the master laser as required. 
 
 \subsection{Optical and Electrical Packaging}
 
@@ -82,7 +100,7 @@ To improve the performance over previous designs, a via fence was included along
 \end{equation}
 where $f$ is the maximum frequency of operation and $E_r$ is the dielectric constant of the substrate. For this PCB design, the vias were placed \SI{500}{\um} from the track and spaced \SI{1}{\mm} apart meaning the \ac{gcpw} should have a bandwidth up to \SI{25}{GHz}. SMA edge-launch connectors rated to \SI{26.5}{GHz} were soldered to the tracks and grounds for high speed signals.
 
-\begin{figure}[tbp]
+\begin{figure}[t]
 	\centering
 	\includegraphics[width=\textwidth]{HHI_PCB/HHI_PCB_render_2.png}
 	\caption[PCB breakout for an InP integrated circuit]{PCB designed to connect the HHI device to control and measurement equipment. The chip sits in the middle of the PCB so that RF track length can be minimised. RF lines are shielded to increase bandwith and are connected to edge-launch SMA connectors. DC lines are routed through a lower layer of the PCB and connected to an FFC receptacle. A section of the PCB is milled out to allow a \ac{vga} to be mounted for optical connection. Screw holes allow the package to be mounted to a heat sink for thermal management.}
@@ -101,18 +119,18 @@ As in the previous chips, the \acp{ssc} were angled at \SI{7}{\degree} from the 
 
 %The chip was angled at \SI{7}{\degree} so that the \acp{ssc} were perpendicular to the side of the PCB. Unfortunately, as shown in figure \ref{fig:geometry_lesson}, this meant that the \ac{vga} no longer lined up with the output ports of the chip. 
 
-One should also note that \SI{7}{\degree} is not the optimal angle for coupling from the chip to the \ac{vga}. The refractive index of the \ac{InP} waveguides is 3.26 whereas standard optical fibre has a refractive index of around 1.44. Therefore, through Snell's law, the optimal angle for coupling from an \ac{ssc} to fibre would be \SI{16}{\degree}. 
-
-A section at the edge of the chip was milled out to provide a space for the \ac{vga} to be held and glued onto the chip. The cutout was designed to allow the chip to hang over the side by about \SI{1}{\mm} to ease gluing. A section at the edge of the PCB was also partially milled out to a depth of around \SI{0.5}{\mm}. This was to allow the bare fibres to remain horizontal and not change the pitch of the \ac{vga} when aligned to the chip. It also provides a place for the fibres to be fixed to the PCB for strain relief.
-
-Solder pads were placed as close to the chip as possible for a thermistor to be used for thermal stabilisation. Tracks were routed to the bottom of the PCB to provide good thermal connectivity to the chip and peltier. Screw holes were provided to allow the device to be connected to a heat sink and were surrounded by vias to shield the PCB from RF radiation.
-
 \begin{figure}[t]
 	\centering
 	\includegraphics[width=\textwidth]{geometry_lesson.pdf}
 	\caption[A quick lesson in geometry for edge coupling]{The chip facets are designed as \SI{500}{\um} spaced so as to be compatible with standard \acp{vga}. As previously mentioned, the facets are at a \SI{7}{\degree} angle to the edge of the chip to reduce back reflections into the chip. To maximise coupling, the \ac{vga} chosen was polished to match this angle. However, once rotated, the vertical spacing of the fibres in the \ac{vga} are no longer \SI{500}{\um} spaced. this meant only one fibre could be connected to the device.}
 	\label{fig:geometry_lesson}
 \end{figure}
+
+One should also note that \SI{7}{\degree} is not the optimal angle for coupling from the chip to the \ac{vga}. The refractive index of the \ac{InP} waveguides is 3.26 whereas standard optical fibre has a refractive index of around 1.44. Therefore, through Snell's law, the optimal angle for coupling from an \ac{ssc} to fibre would be \SI{16}{\degree}. 
+
+A section at the edge of the chip was milled out to provide a space for the \ac{vga} to be held and glued onto the chip. The cutout was designed to allow the chip to hang over the side by about \SI{1}{\mm} to ease gluing. A section at the edge of the PCB was also partially milled out to a depth of around \SI{0.5}{\mm}. This was to allow the bare fibres to remain horizontal and not change the pitch of the \ac{vga} when aligned to the chip. It also provides a place for the fibres to be fixed to the PCB for strain relief.
+
+Solder pads were placed as close to the chip as possible for a thermistor to be used for thermal stabilisation. Tracks were routed to the bottom of the PCB to provide good thermal connectivity to the chip and peltier. Screw holes were provided to allow the device to be connected to a heat sink and were surrounded by vias to shield the PCB from RF radiation.
 
 \subsubsection*{Chip Mounting}
 
@@ -232,6 +250,7 @@ The setup is as in the gain switching test except the \ac{ppg} provided two RF s
 \end{figure}
 
 \subsection{Quantum Random Number Generation}
+\label{sec:hhi_qrng}
 
 \begin{figure}[t]
 	\centering
