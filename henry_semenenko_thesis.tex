@@ -6,7 +6,6 @@
 \RequirePackage[l2tabu]{nag}		% Warns for incorrect (obsolete) LaTeX usage
 %
 
-
 % File: henry_semenenko_thesis.tex
 % Author: Henry Semenenko
 % Description: Contains the thesis template using memoir class,
@@ -39,6 +38,7 @@
 \usepackage{xcolor}
 
 %Bright colours
+%https://gka.github.io/palettes/#/3|d|ab1f2d,ffc12e|ffc12e,411f78|1|1
 \definecolor{bristol-red}{HTML}{AB1F2D}
 \definecolor{aqua}{HTML}{06827D}  
 \definecolor{blue}{HTML}{1C7698}
@@ -208,10 +208,6 @@
 %
 % Creates indexes for Table of Contents, List of Figures, List of Tables and Index
 \makeindex
-% \printglossaries below creates a list of abbreviations. \gls and related
-% commands are then used throughout the text, so that latex can automatically
-% keep track of which abbreviations have already been defined in the text.
-%
 % The import command enables each chapter tex file to use relative paths when
 % accessing supplementary files. For example, to include
 % chapters/brewing/images/figure1.png from chapters/brewing/brewing.tex we can
@@ -253,23 +249,15 @@
 	range-units = single,
 	product-units=power
 }
-%TC:macroword \SI 1
-%TC:macroword \SIrange 1
 
-%	detect-all,
-%	detect-weight,
-%	detect-inline-family = text,
-%	detect-inline-weight = math
-%}
 \DeclareSIUnit[]{\Vpp}{\ensuremath{\si{\V}_\text{pp}}}
 
 \usetikzlibrary{arrows,shapes,decorations,
 		       automata,backgrounds,			
 		       petri,topaths}				%To use diverse features from tikz	
 
-% Uncomment this to hide page numbers for chapters in toc
-%\usepackage{tocloft}
-%\cftpagenumbersoff{chapter} 
+%TC:macrocount \SI 2
+%TC:macrocount \SIrange 4
 
 %%% hyperref must be loaded before Glossaries-extra or hyperlinks go to the wrong place %%%
 	
@@ -287,7 +275,7 @@
 		Author={Henry Semenenko},
 		Keywords={integrated optics; quantum key distribution; quantum optics},	
 		CreationDate={D:\DTMfetchyear{now}\DTMfetchmonth{now}\DTMfetchday{now}\DTMfetchhour{now}\DTMfetchminute{now}\DTMfetchsecond{now}},
-		Subject={A thesis submitted to the University of Bristol for the degree of Doctor of Philisophy in the Faculty of Science}
+		Subject={A thesis submitted to the University of Bristol for the degree of Doctor of Philisophy in the Faculty of Science.}
 	}
 }	  	  
 	
@@ -334,17 +322,17 @@
 		\renewcommand*{\glsgroupskip}{%
 			\ifglsnogroupskip\else & & \tabularnewline\fi}%
 	}
-	
-%TC:macroword \ac 1
-%TC:macroword \acl 1
-%TC:macroword \acp 1
-%TC:macroword \acs 1
-%TC:macroword \aclp 1
-%TC:macroword \Ac 1
-%TC:macroword \Acl 1
-%TC:macroword \Acp 1
-%TC:macroword \Acs 1
-%TC:macroword \Aclp 1
+
+%TC:macrocount \ac 1
+%TC:macrocount \acp 1
+%TC:macrocount \acl 1
+%TC:macrocount \acs 1
+%TC:macrocount \acf 1
+%TC:macrocount \Ac 1
+%TC:macrocount \Acp 1
+%TC:macrocount \Acl 1
+%TC:macrocount \Acs 1
+%TC:macrocount \Acf 1
 
 %%% END OF GLOSSARIES STUFF %%%       	
 	
