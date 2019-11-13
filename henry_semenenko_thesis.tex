@@ -221,6 +221,7 @@
 \usepackage{lipsum}
 \usepackage{nicefrac}
 \usepackage{braket}
+\usepackage{mdframed} 			%Used to format theorem styles
 \usepackage{subdepth}				%Makes the subscript vertical the same regardless of whether a superscript is present
 \usepackage{amsfonts} 					%Calls Amer. Math. Soc. (AMS) fonts
 \usepackage{mathtools}			%Writes maths centred down
@@ -387,16 +388,20 @@
 
 % Theorem styles
 %
-\theoremstyle{plain}
-\newtheorem{theorem}{Theorem}[chapter]
+\mdfdefinestyle{mytheorem}{linewidth=0pt,
+						innermargin= 0cm,
+						outermargin=0cm,
+                        skipabove=1cm,
+                        skipbelow=1cm,
+                        frametitlefont=\color{bristol-red}\bfseries
+}
+\mdtheorem[style=mytheorem]{theorem}{Theorem}[chapter]
+\mdtheorem[style=mytheorem]{algorithm}{Algorithm}[chapter]
 
-\BeforeBeginEnvironment{theo}{\begin{adjustwidth}{1cm}{1cm}}
-\AfterEndEnvironment{theo}{\end{adjustwidth}}
 
 %
 % Expand tables
 %
-
 \setlength{\tabcolsep}{6pt}
 \renewcommand{\arraystretch}{1.2}
 
@@ -476,9 +481,9 @@
 \addtocontents{lof}{\par\nobreak\textbf{{\scshape Figure} \hfill Page}\par\nobreak}
 \clearemptydoublepage
 %
-\chapter*{List of Acronyms}
-\vspace*{-2cm}
-\addcontentsline{toc}{chapter}{List of Acronyms}
+\chapter*{List of Abbreviations and Acronyms}
+\vspace*{-1.5cm}
+\addcontentsline{toc}{chapter}{List of Abbreviations and Acronyms}
 \printglossary[type=acronym, nonumberlist, style=mylong, title = {}]
 \clearemptydoublepage
 %

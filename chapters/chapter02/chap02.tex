@@ -23,7 +23,7 @@ Before we begin, we will need to introduce the cast of characters that will each
 
 \brisred{Eve} is a very nosey individual who listens to all public communication between Alice and Bob. She is intent on reading the message sent by Alice and while very persistent, she is not very inventive so will not put very much effort into deciphering the message. Eve is often mistaken as Mallory, as they have similar intents.
 
-\brisred{Mallory} would also like to know what Alice has sent to Bob, but will go to more extreme measures to discover their secrets. She has unlimited resources available (confined only by the laws of physics) and will use all possible methods within her power to crack the hidden message. 
+\brisred{Mallory} would also like to know what Alice has sent to Bob, but will go to more extreme measures to discover their secrets. She is particularly fortunate in having unlimited resources available (confined only by the laws of physics) and will use all possible methods within her power to expose the hidden message. 
 
 The reader is encouraged to picture their own cast of characters in their mind's eye to bring this story to life. Any likeness of characters to any persons, real or imaginary, is purely coincidental.
 
@@ -36,16 +36,20 @@ The idea of obscuring messages from third-party onlookers dates back (as far as 
 
 The convenience of being able to share thoughts through written methods came with an immediate compromise to security.
 
-A cryptographic algorithm should obey Kerckhoffs's principle:
+A cryptographic algorithm should obey Kerckhoffs's principle \cite{KerckhoffsPrincple}. The principle was summarised succinctly as \cite{shannon1949communication}:
 
-Put simply: 
-
-\begin{quotation}
+\begin{quote}
 \centering
 \textit{``The enemy knows the system''} - Claude Shannon 
-\end{quotation}
+\end{quote}
+
+What we mean to say is that Alice and Bob will have to assume that both Eve and Mallory are aware of the encryption system they are using. 
+
+Cryptography has evolved since  
 
 \subsection{Symmetric Key Cryptography}
+
+The first algorithms used for cryptography were so called \brisred{symmetric key} algorithms. Alice and Bob initially decide on the key 
 
 Two parties, typically Alice and Bob, share a secret key that can be used to encrypt messages. The method of encryption is, generally, publicly known. However, it will be hard to decrypt messages without the secret key.
 
@@ -53,7 +57,7 @@ These ciphers have been widely used through history. However, with modern techno
 
 \subsection{Monoalphabetic Ciphers}
 
-The simplest ciphers are those that permute the alphabet and are known as {\color{bristol-red} monoalphabetic ciphers}. The symmetric key in these 	ciphers is the permutation used. There are two well known cases of monoalphabetic ciphers which we will present here. 
+The simplest ciphers are those that permute the alphabet and are known as \brisred{monoalphabetic ciphers}. The symmetric key in these 	ciphers is the permutation used. There are two well known cases of monoalphabetic ciphers which we will present here. 
 
 \subsubsection*{Caesar Cipher}
 
@@ -110,6 +114,7 @@ Generally, public key ciphers are computationally intensive. Therefore, they are
 
 The RSA algorithm is named after it's inventors Ron Rivest, Adi Shamir, and Leonard Adleman\footnote{It was later discovered that the RSA method had been known by Clifford Cocks during his time at GCHQ \cite{}.} and was released in 1977 \cite{}. Suppose Alice would like to send a message to Bob. The algorithm goes something like:
 
+\begin{algorithm}[RSA]
 \begin{enumerate}
 	\item Bob needs to first choose a secret key. He selects to large (typically 2048 bit) prime numbers, $p$ and $q$, and calculates $n = p \times q$.
 	\item He then chooses some $d < (p-1)(q-1)$ which is coprime\footnote{Two numbers are coprime if they share no common factors greater than 1.} to $(p-1)(q-1)$.
@@ -117,6 +122,7 @@ The RSA algorithm is named after it's inventors Ron Rivest, Adi Shamir, and Leon
 	\item Alice breaks her message into integers $m < N$ and encrypts as $c = m^d \mathrm{ mod } N$. The ciphertext $c$ can now be sent to Bob.
 	\item To decrypt Alice's message, Bob computes $m = c^d$ and the communication is complete. 
 \end{enumerate}   
+\end{algorithm}
 
 The proof that $m \equiv c^d \equiv m^{d\times e}$ requires a few theorems from number theory. 
 
@@ -127,6 +133,7 @@ Although this algorithm outlines the general understanding of RSA encryption, it
 
 The Diffe-Hellman cipher isn't used to share messages, but instead distributes keys between Alice and Bob in a secure way that can then be used in a symmetric key cipher. It is attributed to Whit Diffe and Martin E. Hellman\footnote{Malcolm J. Williamson had already discovered the Diffe-Hellman key exchange whilst working at GCHQ but it remained classified.} after they discovered it in 1976 \cite{}.
 
+\begin{algorithm}[Diffe-Hellman]
 \begin{enumerate}
 	\item Alice and Bob agree on a large prime number, $p$, and a primitive root, $a$. These numbers can actually be publicly available.
 	\item They both also secretly choose integers $d_A$ and $d_B$.
@@ -134,6 +141,7 @@ The Diffe-Hellman cipher isn't used to share messages, but instead distributes k
 	\item On receiving a public key, Alice and Bob compute $k = q_B^{d_A} = a^{d_A\times d_B}$ and $k = q_A^{d_B} = a^{d_A\times d_B}$, respectively.
 	\item Alice and Bob now share the secret key $k$.
 \end{enumerate}
+\end{algorithm}
 
 The information that is available to Eve are the numbers $p, a, q_{A}$ and $q_{B}$. Without being able to solve the discrete logarithm she is unable to break the code. 
 
@@ -181,13 +189,60 @@ Quantum mechanics can be seen as a generalised probability theory and was born o
 
 A fundamental theorem in quantum mechanics is the {\color{bristol-red} no-cloning theorem} which will also underpin the security of \ac{QKD}. The general principle of the theorem states that there is no physical process that copies, or clones, an arbitrary quantum state. We can state this more formally:
 
-\begin{theorem}
+\begin{theorem}[No-Cloning Theorem]
 	 The no-cloning theorem states that there is no quantum channel, $\mathcal{E}$, from $M(\mathbb{C}^d)$ to $M(\mathbb{C}^d) \otimes M(\mathbb{C}^d)$ such that
 	 \begin{equation*}
 	 	\mathcal{E}(\ket{\psi}\bra{\psi}) = \ket{\psi}\bra{\psi} \otimes \ket{\psi}\bra{\psi}
 	 \end{equation*}
 	 for all states $\ket{\psi} \in \mathbb{C}^d$.
 \end{theorem}
+
+\subsection{Quantum Information}
+
+\begin{figure}
+	\centering
+	\def\svgwidth{0.4\textwidth}
+   	\import{chapters/chapter02/fig02/}{Bloch_Sphere.pdf_tex}
+   	\caption[Bloch sphere representation of a qubit]{Bloch Ball representation of the state $\ket{\psi}$. We introduce the real variables $0\le\theta\le\pi$ and $0\le\varphi<2\pi$.}
+   	\label{fig:bloch}
+\end{figure}
+
+Exploiting quantum mechanical processes gives rise to a new information theory called {\textcolor{bristol-red} quantum information}. Using quantum phenomena, we introduce quantum bits (qubits) as a generalisation of the bits that are typically used in classical computing.
+
+In general, a quantum bit is of the form 
+
+\begin{equation}
+	\ket{\psi} = \alpha\ket{0} + \beta\ket{1}
+\end{equation}
+where $|\alpha|^2 + |\beta|^2 = 1$. Equivalently, we can write
+
+\begin{equation}
+	\ket{\psi} = \cos\left(\nicefrac{\theta}{2}\right)\ket{0} + e^{i\varphi}\sin\left(\nicefrac{\theta}{2}\right)\ket{0}
+\end{equation}
+where $\theta$ and $\varphi$ as shown in figure \ref{fig:bloch}.
+
+We introduce the observables 
+
+\begin{equation}
+	\hat{x} = \left(\begin{matrix}
+		0 & 1 \\
+		1 & 0
+	\end{matrix}\right),
+	\quad
+	\hat{y} = \left(\begin{matrix}
+		0 & -i \\
+		i & 0
+	\end{matrix}\right),
+	\quad
+	\hat{z} = \left(\begin{matrix}
+		1 & 0 \\
+		0 & -1
+	\end{matrix}\right)
+\end{equation}
+
+\subsubsection{Time-bin Encoding}
+
+For communication protocols, we will find it useful to encode information using time and phase of quantum states as it is generally less susceptible to fluctuations in real-world fibres.
 
 \subsection{Quantum Photonics}
 
@@ -199,23 +254,22 @@ Coherent states are very useful and are given by
 	\ket{\alpha} = \mathrm{e}^{-\frac{|\alpha|^2}{2}} \sum_{n=0}^\infty \frac{\alpha^n}{\sqrt{n}} \ket{n} 
 \end{equation}
 
-\subsection{Quantum Information}
-
-Exploiting quantum mechanical processes gives rise to a new information theory called {\textcolor{bristol-red} quantum information}. Using quantum phenomena, we introduce quantum bits (qubits) as a generalisation of the bits that are typically used in classical computing.
-
-\subsubsection{Time-bin Encoding}
-
-For communication protocols, we will find it useful to encode information using time and phase of quantum states as it is generally less susceptible to fluctuations in real-world fibres.
-
 \subsection{Quantum Computing}
 
 To motivate the introduction of quantum-secure communication, we will introduce some concepts and protocols in quantum computing. While quantum computing has been a big motivator for moving to new encryption, we still have no assurances that the trap-door functions we rely on for security are secure even against classical computers.
 
 Shor's algorithm efficiently factors composite numbers into their prime factors \cite{shor1994}. Both RSA and Diffie-Hellman are vulnerable to attacks from a quantum computer using Shor's algorithm. The estimated number of physical qubits needed to factor RSA-2048 has reduced drastically in recent years from 1 billion \cite{mosca2018, fowler2012} to 20 million \cite{gidney2019}. While the task is still daunting, it is more reasonable.
 
-Grover's algorithm could also be used to search through keys in a block cipher protocol. However, the speed-up is only $\sqrt{n}$ which has been proven as optimal on a quantum computer \cite{Bennent1997} . Therefore, the same security in a post-quantum world can be achieved by doubling the key length i.e. moving from 128 bit to 256 bit AES.
+Grover's algorithm could also be used to search through keys in a block cipher protocol. However, the speed-up is only $\sqrt{n}$ which has been proven as optimal on a quantum computer \cite{Bennent1997} . Therefore, the same security in a post-quantum world can be achieved by doubling the key length i.e. moving from 128 bit to 256 bit \ac{aes}.
 
 \section{Quantum Key Distribution}
+
+\begin{figure}
+	\centering
+	\def\svgwidth{0.9\textwidth}
+   	\import{chapters/chapter02/fig02/}{qkd_encoding.pdf_tex}
+   	\caption[\acs{dvqkd} and \acs{cvqkd} encoding]{\acs{dvqkd} and \acs{cvqkd} encoding.}
+\end{figure}
 
 \Acl{QKD} is a fundamentally new method of key exchange by exploiting quantum mechanics to ensure security that is guaranteed by the laws of physics. It comes under the umbrella of \brisred{quantum safe} cryptography and, together with \brisred{post-quantum} cryptography, will form a crucial part of future global networks.
 
@@ -251,9 +305,22 @@ There are still some questions about the security of \ac{cvqkd} and the practica
 
 \subsection{Hacking}
 
+\begin{table}[t]
+\centering
+\begin{tabular}{lll}
+	\textbf{Attack} & \textbf{Target} & \textbf{References}\\ 
+	\Acl{pns} & photon source &
+\end{tabular}
+\caption[Attacks demonstrated against \acs{QKD} systems]{Attacks demonstrated against \acs{QKD} systems.}
+\end{table}
+
 While \ac{QKD} is often claimed to be ``perfectly secure'' or ``unhackable'', this is only true under certain assumptions.  Mallory, however, is quite determined to gain any knowledge of the secret key. As the systems exist in the real world, the security of a key exchange is only as good as the security model. However, it is challenging to completely model every part of a system. This leaves side-channels, where sensitive information is leaked through uncharacterised channels such as sound or temperature.
 
 The first demonstration of \ac{QKD} by Bennett and Brassard was flawed due to polarisation dependent sounds from the power supplies. Brassard noted that their key exchange was ``perfectly secure against any eavesdropper who happened to be deaf'' \cite{Brassard2005}. 
+
+\begin{quote}
+\textit{``…power supplies make noise, and not the same noise for the different voltages needed for different polarizations... Thus, our prototype was unconditionally secure against any eavesdropper who happened to be deaf!''} - Gilles Brassard \cite{Brassard2005}
+\end{quote}
 
 Since then, there have been numerous demonstrations that \ac{QKD} system are insecure under real world condition. These have demonstrated vulnerabilities in all parts of both the transmitters and receivers: transmitter modulation \cite{Gisin2006}. 
 
