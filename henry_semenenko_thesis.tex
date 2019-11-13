@@ -221,6 +221,7 @@
 \usepackage{lipsum}
 \usepackage{nicefrac}
 \usepackage{braket}
+\usepackage{subdepth}				%Makes the subscript vertical the same regardless of whether a superscript is present
 \usepackage{amsfonts} 					%Calls Amer. Math. Soc. (AMS) fonts
 \usepackage{mathtools}			%Writes maths centred down
 \usepackage{amssymb}					%Calls AMS symbols
@@ -266,7 +267,7 @@
 			pagebackref,
 			allcolors=black]{hyperref}              %Creates hyperlinks in cross references
 			
-\usepackage{caption}		%Load this after hyperref to make figure references link to the top of the figure
+\usepackage[labelfont=bf]{caption}		%Load this after hyperref to make figure references link to the top of the figure
 
 %Define the pdf info
 \hypersetup{
@@ -327,11 +328,13 @@
 %TC:macrocount \acp 1
 %TC:macrocount \acl 1
 %TC:macrocount \acs 1
+%TC:macrocount \acps 1
 %TC:macrocount \acf 1
 %TC:macrocount \Ac 1
 %TC:macrocount \Acp 1
 %TC:macrocount \Acl 1
 %TC:macrocount \Acs 1
+%TC:macrocount \Acps 1
 %TC:macrocount \Acf 1
 
 %%% END OF GLOSSARIES STUFF %%%       	
@@ -474,6 +477,7 @@
 \clearemptydoublepage
 %
 \chapter*{List of Acronyms}
+\vspace*{-2cm}
 \addcontentsline{toc}{chapter}{List of Acronyms}
 \printglossary[type=acronym, nonumberlist, style=mylong, title = {}]
 \clearemptydoublepage

@@ -51,18 +51,22 @@ where $a,b$ are the two spatial modes.
 In general, we can consider a beam splitter to have some reflection component, $r$, and some transmission component, $t$. The transformation matrix is given as 
 
 \begin{equation}
-	\left(
+	\hat{U}_{bs} = \left(
 	\begin{matrix}
-		t & r \\
-		r & t
+		t_{ac} & r_{bc} \\
+		r_{bd} & t_{bd}
 	\end{matrix}
 	\right)
-	\quad\text{such that}\quad
-	|r|^2 + |t|^2 = 1 
-	\quad\text{and}\quad
-	r^\ast t + r t^\ast = 0
 \end{equation}
-where $|r|^2$ and $|t|^2$ are the probabilities of reflection and transmission, respectively. The restrictions on $r$ and $t$ come from the unitarity of quantum transformations. For a balance beam splitter, the transformation matrix becomes
+such that
+\begin{equation}
+	|t_{ac}|^2 + |r_{bc}|^2 = |r_{bd}|^2 + |t_{bd}|^2 = 1 
+	\quad\text{and}\quad
+	t_{ac}^\ast r_{bd} + t_{bd} r_{bc}^\ast = t_{ac} r_{bd}^\ast + t_{bd}^\ast  r_{bc} = 0
+\end{equation}
+where $t_{ij}$ and $r_{ij}$ are the transmission and reflection, respectively, along the input and output paths, $i$ and $j$. The restrictions on $r_{ij}$ and $t_{ij}$ come from the unitarity of quantum transformations. 
+
+For a balance beam splitter, the transformation matrix becomes
 
 \begin{equation}
 	\text{BS}_{50:50} = \frac{1}{\sqrt{2}}
@@ -73,7 +77,7 @@ where $|r|^2$ and $|t|^2$ are the probabilities of reflection and transmission, 
 	\end{matrix}
 	\right)	
 \end{equation}
-where the {-1} is physically represented as a relative $\pi$ phase being applied between the two reflected paths. In an operator formalism, the creation operators will transform as
+where the \num{-1} is physically represented as a relative $\pi$ phase being applied between the two reflected paths. In an operator formalism, the creation operators will transform as
 
 \begin{equation}
 	\hat{a}^\dagger \rightarrow \frac{\hat{c}^\dagger + \hat{d}^\dagger}{\sqrt{2}} \quad \text{and} \quad \hat{b}^\dagger \rightarrow \frac{\hat{c}^\dagger - \hat{d}^\dagger}{\sqrt{2}}
