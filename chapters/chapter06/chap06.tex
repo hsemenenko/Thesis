@@ -47,7 +47,7 @@ In this chapter, we will introduce the next generation designs of \ac{InP} \ac{Q
 
 \section{Pulsed Laser Seeding}
 
-\Ac{pls} is an optical technique that is based on optical-injection locking of lasers which can be used to create narrow pulses with low timing jitter when compared with gain-switching or intensity modulation \cite{Seo1996, Gunning1996}. An initial (master) laser operates in \ac{CW} mode which is injected into a second (slave) laser. The slave is electrically pulsed which creates an optical pulse from the injected photons and inherits the phase of the master. As the process is not reliant on a spontaneous emission, the pulse width can be very narrow \cite{Comandar2016PLS}. However, as the master laser is running in \ac{CW} operation, the phase of the pulsed slave laser will only drift slowly with the changing phase of the master laser. This will not be sufficiency for \ac{QKD} pulses which require phase randomisation between states. 
+\Ac{pls} is an optical technique that is based on optical-injection locking of lasers which can be used to create narrow pulses with low timing jitter when compared with gain-switching or intensity modulation \cite{Seo1996, Gunning1996}. As schematic is shown in figure \ref{fig:las_seed_schem}. An initial (master) laser operates in \ac{CW} mode which is injected into a second (slave) laser. The slave is electrically pulsed which creates an optical pulse from the injected photons and inherits the phase of the master. As the process is not reliant on a spontaneous emission, the pulse width can be very narrow \cite{Comandar2016PLS}. However, as the master laser is running in \ac{CW} operation, the phase of the pulsed slave laser will only drift slowly with the changing phase of the master laser. This will not be sufficiency for \ac{QKD} pulses which require phase randomisation between states. 
 
 %However, this would still require phase randomisation for \ac{QKD} as the phase from the initial laser would only slow drift. 
 
@@ -78,9 +78,9 @@ Electrical connections were routed to the side of the chip in staggered rows to 
 
 %Initial characterisation of the devices was performed but further work is required to 
 
-Currently, there are no standard methods to integrate optical isolation or circulators. Therefore, the standard design for \ac{pls} cannot be replicated exactly in the circuit. In this \ac{pic}, we include the two simplest methods to allow the master to inject light into the slave. These are shown in figure \ref{fig:las_seed_schem}. First, (fig. \ref{fig:las_seed_schem}a) we consider the two lasers connected by a \num{1x2} \ac{mmi}. The master can inject light into the front of the slave, which can then be pulsed. Half of the light will then leave the device through the output port. The second design (fig. \ref{fig:las_seed_schem}b) considers the lasers in series along a waveguide. The master injects light through the rear \ac{DBR} from which the slave can then create a pulse. 
+Currently, there are no standard methods to integrate optical isolation or circulators. Therefore, the standard design for \ac{pls} cannot be replicated exactly in the circuit. In this \ac{pic}, we include the two simplest methods to allow the master to inject light into the slave. These are shown in figure \ref{fig:las_seed_schem}. First, (fig. \ref{fig:las_seed_schem}b) we consider the two lasers connected by a \num{1x2} \ac{mmi}. The master can inject light into the front of the slave, which can then be pulsed. Half of the light will then leave the device through the output port. The second design (fig. \ref{fig:las_seed_schem}c) considers the lasers in series along a waveguide. The master injects light through the rear \ac{DBR} from which the slave can then create a pulse. 
 
-Without isolation between the master and slave laser, back reflections are a potential issue. Such reflections could make it more difficult for the phase randomisation as remnants of previous pulses may impart their phase on subsequent ones. This may be less problematic in design \ref{fig:las_seed_schem}b as the rear \ac{DBR} will suppress reflections from the edge facet of the device. 
+Without isolation between the master and slave laser, back reflections are a potential issue. Such reflections could make it more difficult for the phase randomisation as remnants of previous pulses may impart their phase on subsequent ones. This may be less problematic in design \ref{fig:las_seed_schem}c as the rear \ac{DBR} will suppress reflections from the edge facet of the device. 
 
 %There are no circulators or isolators currently available on-chip, so other methods of laser seeding need to be considered.
 
@@ -88,8 +88,8 @@ Without isolation between the master and slave laser, back reflections are a pot
 
 \begin{figure}[t]
 	\centering
-	\includegraphics[width=0.9\textwidth]{./schematics/laser_seeding.pdf}
-	\caption[Schematic of on-chip laser seeding]{Schematic of on-chip laser seeding. As there is no non-linearity to exploit for a circulator, the usual method of laser seeding cannot be achieved in integrated photonics. These are the simplest conceivable circuits to attempt \acs{pls} in a \acs{pic}. \textbf{a} The master can inject light through a \num{1x2} \acs{mmi} which also allows half of the slave light to the output. \textbf{b} The master and slave are in series. Light is injected into the rear \acs{DBR} of the slave which is also connected directly to the output.}
+	\includegraphics[width=\textwidth]{./schematics/laser_seeding.pdf}
+	\caption[Schematic of fibre-based and on-chip \acs{pls}]{\textbf{a} Fibre schematic for \acs{pls}. A master laser provides a pulse which is attenuated and sent to the slave through a circulator. The slave then generates a pulse from this seed which is sent to the output. As there is no non-linearity to exploit for a circulator, the usual method of laser seeding cannot be achieved in integrated photonics. These are the simplest conceivable circuits to attempt \acs{pls} in a \acs{pic}. \textbf{b} The master can inject light through a \num{1x2} \acs{mmi} which also allows half of the slave light to the output. \textbf{c} The master and slave are in series. Light is injected into the rear \acs{DBR} of the slave which is also connected directly to the output.}
 	\label{fig:las_seed_schem}
 \end{figure}
 
@@ -101,11 +101,19 @@ The complexity of the device required careful consideration to ensure optical an
 
 \subsubsection*{PCB Design}
 
+\begin{figure}[t]
+	\centering	
+	\def\svgwidth{\textwidth} 
+	\import{chapters/chapter06/fig06/}{GCPW.pdf_tex}
+	\caption[Grounded coplanar waveguide schematic]{Schematic of the \acs{gcpw} structure from the side and top. The track width, $a$, total width $b$, substrate height, $h$, and dielectric constant $E_r$ determine the characteristic impedance of the track. Vias provide a shield to suppress surface wave modes. Vias are spaced $S_\text{via}$ which determines their performance.}
+	\label{fig:gcpw}
+\end{figure}
+
 The electrical connections for integrated devices is challenging, especially in test devices where on-chip real estate is valuable and therefore fully utilised. In figure \ref{fig:hhi_pcb} we show the PCB designed to connect most (but not all) components of the chip shown in figure \ref{fig:hhi_laser_seeding}. For this initial test, the \ac{qrng} section of the chip was not connected to reduce the number of electrical connections. In total, 33 electrical lines were included in the design for the initial testing the integrated lasers, modulators and \acp{pd}.
 
 The PCB was again made from Rogers 6006 for its high dielectric constant and contained four layers. The top layer of the PCB is \ac{enig} plated for the wirebond connections. The first two layers were dedicated to the RF tracks. The top layer provided signal lines through \ac{cpw} while the second layer provided isolation from the DC tracks below. The \ac{cpw} dimensions can be calculated using equations presented in chapter \ref{chap:hom}. The high dielectric constant allowed narrow \acp{cpw} while maintaining a \SI{50}{\ohm} impedance. 
 
-To improve the performance over previous designs, a via fence was included along the RF tracks to create a \ac{gcpw} which should increase the bandwidth \cite{haydl2002use}. This via fence reflects the signal and stops a surface wave being created along the track. The spacing between the vias is important to maximise bandwidth, as is the spacing between the track and via. Generally speaking, a microwaves will reflect off of gaps which are less than \nicefrac{1}{4} of their wavelength \cite{Sain2016}. Therefore, the spacing between each via can be calculated as 
+To improve the performance over previous designs, a via fence was included along the RF tracks to create a \ac{gcpw} which should increase the bandwidth \cite{haydl2002use}. A schematic is shown in figure \ref{fig:gcpw}. This via fence reflects the signal and stops a surface wave being created along the track. The spacing between the vias is important to maximise bandwidth, as is the spacing between the track and via. Generally speaking, a microwaves will reflect off of gaps which are less than \nicefrac{1}{4} of their wavelength \cite{Sain2016}. Therefore, the spacing between each via can be calculated as 
 
 \begin{equation}
 	S_\text{via} = \frac{\lambda}{4} = \frac{c}{4 f \sqrt{E_r}}
@@ -262,7 +270,7 @@ A spectrum of the gain switched laser is shown in figure \ref{fig:gain_switch_sp
 	\label{fig:las_seed_test}
 \end{figure}
 
-As described above, the device contains two methods of performing \ac{pls} as shown in figure \ref{fig:las_seed_schem}. In the absence of a circulator or isolator on chip, these two methods are the simplest conceivable designs. Unfortunately, due to the misalignment of the \ac{vga} and the chip, only design \ref{fig:las_seed_test}a was accessible for testing. 
+As described above, the device contains two methods of performing \ac{pls} as shown in figure \ref{fig:las_seed_schem}b and c. In the absence of a circulator or isolator on chip, these two methods are the simplest conceivable designs. Unfortunately, due to the misalignment of the \ac{vga} and the chip, only design \ref{fig:las_seed_test}a was accessible for testing. 
 
 In this design, the master and slave lasers are connected with a \num{1x2} \ac{mmi} which allows the master pulses to reach the slave, but also for half of the slave light to be emitted from the device. Both the \ac{SOA} are connected with \ac{gcpw} to allow for high-speed operation. The setup is as with the gain-switching tests above, with a second stable current source and RF signal provided to the device to control the master and slave lasers independently. Electronic delays were used to overlap the master and slave gain-switching in time. Single-photon events can again be measured with an \ac{snspd} and time-tagger to correlate events with the \ac{ppg}.
 
