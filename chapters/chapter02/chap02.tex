@@ -30,6 +30,8 @@ The reader is encouraged to picture their own cast of characters in their mind's
 \section{Cryptography}
 \label{sec1:crypto}
 
+The history of cryptography is long with elements dating back as long ago as Egyptian and Ancient Greek times \cite{Deipnosophistae, singh1999code}.
+
 Cryptography is the process of taking a message (\brisred{plaintext}) and translating it into a something that is indecipherable (\brisred{ciphertext}). Importantly, it also encompasses the reverse process of taking a ciphertext and returning the original message. 
 
 The idea of obscuring messages from third-party onlookers dates back (as far as we can tell) to ancient Egypt and has played an important role in the world for the last 2 millennia. 
@@ -67,8 +69,8 @@ By assigning values to each letter of the alphabet (`a' = 0, `b' = 1, etc.), the
 
 \begin{center}
 \begin{tabular}{l l}%{@{}l@{\ }l}
-	Plain:  &\quad\texttt{ a b c \ldots x y z} \\ 
-	Cipher: &\quad\texttt{ F G H \ldots C D E} \\
+	Plain:  &\quad\texttt{a b c d e f g h i j k l m n o p q r s t u v w x y z} \\ 
+	Cipher: &\quad\texttt{F G H I J K L M N O P Q R S T U V W X Y Z A B C D E} \\
 \end{tabular}
 \end{center}
 
@@ -78,15 +80,33 @@ As there are only 25 possibly keys, a brute force attack on this kind of cipher 
 
 \subsubsection*{Affine Cipher}
 
-A slightly more complex cipher is the affine cipher. This is still a mapping from the alphabet to itself (i.e. monoalphabetic) but the key now contains two numbers. Firstly
+A slightly more complex cipher is the affine cipher. This is still a mapping from the alphabet to itself (i.e. monoalphabetic) but the key now contains two numbers. Alice and Bob agree on two integers $k,\lambda\in \mathbb{Z}_{26}$ such that $\lambda$ is coprime to $k$ i.e. they have no common factors greater than $1$. For each letter $x$, we can encrypt using the mapping
+
+\begin{equation}
+	x \rightarrow \lambda \cdot x + k 
+\end{equation}
+
+For example, using $k = 3$ and $\lambda = 7$, we get the mapping
+
+\begin{center}
+\begin{tabular}{l l}
+	Plain:  &\quad\texttt{a b c d e f g h i j k l m n o p q r s t u v w x y z} \\ 
+	Cipher: &\quad\texttt{D K R  Y F M T A H O V C J Q X E L S Z G N U B I P W} \\
+\end{tabular}
+\end{center}
+which seems more `random' than the Caesar cipher. However, one need only successfully guess two mappings to uniquely break this code.
 
 \subsection{Polyalphabetic Ciphers}
 
-
+Since the use of the Caesar cipher in Roman times, there were not many advances in cryptography until the 16\textsuperscript{th} century. A \brisred{polyalphabetic cipher} is a sequence of monoalphabetic used sequentially.
 
 \subsubsection*{Vigen\`{e}re Cipher}
 
 This cipher was developed by Giovan Battista Bellaso in 1553 \cite{} but is attributed to Blaise de Vigen\`{e}re \cite{}. The key is a word or phrase which can be `added' to the plaintext to get the cipher text.
+
+\subsubsection*{The Enigma Machine}
+
+Perhaps the most famous polyalphabetic cipher is the enigma machine that was widely used by the Axis powers during WWII.
 
 \subsubsection*{One-Time Pad}
 
@@ -114,10 +134,10 @@ Generally, public key ciphers are computationally intensive. Therefore, they are
 
 The RSA algorithm is named after it's inventors Ron Rivest, Adi Shamir, and Leonard Adleman\footnote{It was later discovered that the RSA method had been known by Clifford Cocks during his time at GCHQ \cite{}.} and was released in 1977 \cite{}. Suppose Alice would like to send a message to Bob. The algorithm goes something like:
 
-\begin{algorithm}[RSA]
+\begin{algorithm}[\Acl{rsa} Key Exchange]
 \begin{enumerate}
 	\item Bob needs to first choose a secret key. He selects to large (typically 2048 bit) prime numbers, $p$ and $q$, and calculates $n = p \times q$.
-	\item He then chooses some $d < (p-1)(q-1)$ which is coprime\footnote{Two numbers are coprime if they share no common factors greater than 1.} to $(p-1)(q-1)$.
+	\item He then chooses some $d < (p-1)(q-1)$ which is coprime to $(p-1)(q-1)$.
 	\item Finally, Bob calculates the inverse, $e$, of $d$ modulo $(p-1)(q-1)$ and publishes the public key $N$ and $e$ whilst keeping $p,q$ and $d$ private.
 	\item Alice breaks her message into integers $m < N$ and encrypts as $c = m^d \mathrm{ mod } N$. The ciphertext $c$ can now be sent to Bob.
 	\item To decrypt Alice's message, Bob computes $m = c^d$ and the communication is complete. 
@@ -126,6 +146,8 @@ The RSA algorithm is named after it's inventors Ron Rivest, Adi Shamir, and Leon
 
 The proof that $m \equiv c^d \equiv m^{d\times e}$ requires a few theorems from number theory. 
 
+
+
 Although this algorithm outlines the general understanding of RSA encryption, it is not actually secure as it stands. The problem is that it is essentially a monoalphabetic cipher i.e. each $m$ modulo $N$ will always encode to the same ciphertext $c$. Implementations used introduce some randomness to make it secure.
 
 
@@ -133,7 +155,7 @@ Although this algorithm outlines the general understanding of RSA encryption, it
 
 The Diffe-Hellman cipher isn't used to share messages, but instead distributes keys between Alice and Bob in a secure way that can then be used in a symmetric key cipher. It is attributed to Whit Diffe and Martin E. Hellman\footnote{Malcolm J. Williamson had already discovered the Diffe-Hellman key exchange whilst working at GCHQ but it remained classified.} after they discovered it in 1976 \cite{}.
 
-\begin{algorithm}[Diffe-Hellman]
+\begin{algorithm}[Diffe-Hellman Key Exchange]
 \begin{enumerate}
 	\item Alice and Bob agree on a large prime number, $p$, and a primitive root, $a$. These numbers can actually be publicly available.
 	\item They both also secretly choose integers $d_A$ and $d_B$.
@@ -155,16 +177,26 @@ As we will see later, authentication will play a crucial role in a \ac{QKD} syst
 
 \subsection{Post-Quantum Cryptography}
 
-Post-quantum cryptography falls under the umbrella term of \brisred{quantum-safe} cryptography which encompasses key exchange protocols which are though (or proven) to be secure against attacks that use a quantum computer. Instead of relying on problems such as discrete logarithm or factoring, which are known to be efficiently solved with Shor's algorithm, the protocols utilise problems that are thought to be hard even on a quantum processor. However, much like a proof of RSA's security in classical computing has eluded mathematicians, proof of security for post-quantum algorithms in both quantum and classical regimes has not yet been established.
+Post-quantum cryptography falls under the umbrella term of \brisred{quantum-safe} cryptography which encompasses key exchange protocols which are thought (or proven) to be secure against attacks that use a quantum computer. Instead of relying on problems such as discrete logarithm or factoring, which are known to be efficiently solved with Shor's algorithm, the protocols utilise problems that are thought to be hard even on a quantum processor. However, much like a proof of RSA's security in classical computing has eluded mathematicians, proof of security for post-quantum algorithms in both quantum and classical regimes has not yet been established.
 
-There are a number of examples in which quantum algorithms that were thought to be hard against quantum computers turned out to be broken using classical computers \checkthis{Can't remember the algorithm}. The National Institute of Standards and Technology (NIST) in the US has been developing standards for public-key algorithms for security against quantum computers and processors.
+There are a number of examples in which quantum algorithms that were thought to be hard against quantum computers turned out to be broken using classical computers \checkthis{Can't remember the algorithm}. \Ac{nist} in the US has been developing standards for public-key algorithms for security against quantum computers and processors.
 
 Some interest proposals were made with RSA that would be easy for a classical computer but hard for a quantum computer. The protocol aimed to exploit the difficulty in loading data into a quantum machine which would bottleneck the operation. However, the scheme used many small RSA number making it easy to break on a classical computer \checkthis{Find this protocol and analysis}.
 
 \subsection{Cryptanalysis}
 \label{sec1:cryptanalysis}
 
+\begin{figure}[t]
+	\centering
+	\def\svgwidth{0.5\textwidth}
+   	\import{chapters/chapter02/fig02/}{letter_freq.pdf_tex}
+   	\caption[Relative letter frequency in the English language]{A histogram of the relative letter frequency in the English language.}
+   	\label{fig:letter_freq}
+\end{figure}
+
 This is the research into how encryption can be broken. Simple ciphers can easily be broken by comparing the ciphertext to the percentage of each letter used. As \texttt{`e'} is the most common letter in the English language, it follows that if a monoalphabetic cipher is used, then the most common letter in a passage is likely to be decoded to \texttt{`e'}.
+
+Parts of the enigma code were broken in WWII when the German's would send the same message ever morning \cite{hodges2012alan}. The British would even deliberately fly planes to force messages that they could decipher.
 
 \section{Quantum Theory}
 
@@ -354,6 +386,32 @@ In the search for a platform for \ac{QKD} protocols, we will need to define cert
 
 In this section, we will introduce two platforms for photonic integration: \Ac{InP} and Silicon.
 
+\subsection{Waveguide}
+
+\subsection{Multi-Mode Interferometer}
+
+\begin{figure}[t]
+	\centering
+	\includegraphics[width = 0.4\textwidth]{mmi.pdf}
+	\caption[Multi-mode interferometer schematic]{Illustration of \acs{mmi} operation.}
+	\label{fig:mmi}
+\end{figure}
+
+\subsection{Phase modulation}
+
+\subsubsection*{Mach-Zehnder Interferometer}
+
+\begin{figure}[t]
+	\centering
+	\includegraphics[width = 0.4\textwidth]{mzi.pdf}
+	\caption[Mach-Zehnder Interferometer schematic]{Illustration of \acs{mzi}.}
+	\label{fig:mzi}
+\end{figure}
+
+Combining \acp{eopm}, acp{topm} and \acp{mmi} we can create on-chip \acp{mzi} which can be used for very fast routing, intensity modulation and phase encoding. 
+
+The layout is shown in figure \ref{fig:mzi}.
+
 \subsection{Indium Phosphide}
 
 One of the more recent advances in integrated photonics is from III-V materials which offer certain benefits for \acp{pic}, especially for communication purposes. In this section, we will introduce the \acl{InP} platform and describe some of the components that we will find useful for the remainder of the thesis.
@@ -381,12 +439,6 @@ Thermal management can become an issue if too many \acp{topm} are used on a chip
 A \ac{qcse} gives rise to high speed electro-optic modulation of up to \SI{40}{GHz} \cite{jeppix}.
 
 High-speed modulation can also be achieved through current injection into the material to change the refractive index. 
-
-\subsubsection*{Mach-Zehnder Interferometers}
-
-Combining \acp{eopm}, acp{topm} and \acp{mmi} we can create on-chip \acp{mzi} which can be used for very fast routing, intensity modulation and phase encoding. 
-
-The layout is shown in figure \ref{fig:mzi}
 
 \subsection{Silicon}
 
