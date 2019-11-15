@@ -15,78 +15,92 @@
 
 Before we begin, we will need to introduce the cast of characters that will each have parts to play throughout this thesis. While the exact reasons behind each persons' role is unclear, we can be sure that they will follow their roles without question. 
 
-\brisred{Alice}, for reasons that we will not discuss here, would like to send a message to Bob. The particular message is unknown publicly and she would like it to remain as such. While she has never met Bob, she wants to make sure that the message is actually being sent to Bob.
+\brisred{Alice}, for reasons that we will not discuss here, would like to send a message to Bob. The particular message is unknown publicly and she would like it to remain as such. While she has never met Bob, she wants to make sure that the message is actually being sent to Bob. Often she will require to know that the message has reached Bob but will rarely seek any further response.
 
-\brisred{Bob} wants to receive and also read the message from Alice, whom he has never met, whilst also being sure that the message is, in fact, from Alice. He also wants to ensure that the message he received is a faithful representation of the one Alice sent and has not been modified along the way.
+\brisred{Bob} wants to receive and also read the message from Alice, whom he has never met, whilst also being sure that the message is, in fact, from Alice. He also wants to ensure that the message he received is a faithful representation of the one Alice sent and has not been modified along the way. Bob is not very talkative and doesn't often respond to messages from Alice.
 
 \brisred{Charlie} is a mutual acquaintance of Alice and Bob (despite having never met either of them) who volunteers to act as a mediator for their communication. His specific role will depend on exactly how Alice and Bob are communicating and he is often not required beyond moral support. While he is not actively trying to sabotage Alice and Bob's communication, neither is he actively protecting them.
 
 \brisred{Eve} is a very nosey individual who listens to all public communication between Alice and Bob. She is intent on reading the message sent by Alice and while very persistent, she is not very inventive so will not put very much effort into deciphering the message. Eve is often mistaken as Mallory, as they have similar intents.
 
-\brisred{Mallory} would also like to know what Alice has sent to Bob, but will go to more extreme measures to discover their secrets. She is particularly fortunate in having unlimited resources available (confined only by the laws of physics) and will use all possible methods within her power to expose the hidden message. 
+\brisred{Mallory} would also like to know what Alice has sent to Bob, but will go to more extreme measures to discover their secrets. She is particularly fortunate in having unlimited resources available (confined only by the laws of physics) and will use all possible methods within her power to expose the hidden message. Her motivations are remain unknown.
 
-The reader is encouraged to picture their own cast of characters in their mind's eye to bring this story to life. Any likeness of characters to any persons, real or imaginary, is purely coincidental.
+The reader is encouraged to picture their own cast of characters in their mind's eye to bring this thesis to life. Any likeness of characters to any persons, real or imaginary, is purely coincidental.
 
 \section{Cryptography}
 \label{sec1:crypto}
 
-The history of cryptography is long with elements dating back as long ago as Egyptian and Ancient Greek times \cite{Deipnosophistae, singh1999code}.
+Elements of cryptography date back almost 4000 years to Ancient Egyptian times where unusual hieroglyphs were found to have been added to potential shroud mystery over the meaning\cite{singh1999code}. While generally not considered a serious attempt at hiding any secret message (and therefore considered steganography) such concepts of concealment are fundamental in modern cryptography.
 
-Cryptography is the process of taking a message (\brisred{plaintext}) and translating it into a something that is indecipherable (\brisred{ciphertext}). Importantly, it also encompasses the reverse process of taking a ciphertext and returning the original message. 
+It has been argued that cryptography was known to the Ancient Greeks. To incite a revolt against the Persians around 440 BC, Histi{\ae}us was said to shave the head of his most trusted slave so that a tattooed message would be hidden by his regrown hair \cite{Herodotus}. References were also made centuries later to a long stick called a scytale around the 3rd century BC \cite{Deipnosophistae}. Parchment was wound around the scytale and in effect created a transposition of the message which was then used in the Spartan military. While these were revolutionary for their time, they are not considered cryptographic as the message is merely hidden rather than encrypted.
 
-The idea of obscuring messages from third-party onlookers dates back (as far as we can tell) to ancient Egypt and has played an important role in the world for the last 2 millennia. 
+%The history of cryptography is long with elements dating back as long ago as Egyptian and Ancient Greek times \cite{Deipnosophistae, singh1999code}.
 
-The convenience of being able to share thoughts through written methods came with an immediate compromise to security.
+%Cryptography is the process of taking a message (\brisred{plaintext}) and translating it into a something that is indecipherable (\brisred{ciphertext}). Importantly, it also encompasses the reverse process of taking a ciphertext and returning the original message. 
 
-A cryptographic algorithm should obey Kerckhoffs's principle \cite{KerckhoffsPrincple}. The principle was summarised succinctly as \cite{shannon1949communication}:
+%The idea of obscuring messages from third-party onlookers dates back (as far as we can tell) to ancient Egypt and has played an important role in the world for the last 2 millennia. 
+
+%The convenience of being able to share thoughts through written methods came with an immediate compromise to security.
+
+To better define whether a system can be classified a cryptography, and truly distinguishable from steganography, we must fast-forward to the 19th century. Systems designed at hiding messages, but not necessarily encrypting them, were commonplace. Auguste Kerckhoffs presented a set of six principles that any cryptographic system should satisfy \cite{KerckhoffsPrincple}. While technological advances have superseded some of the principles, Kerckhoffs' principle remains which can be succinctly summarised as
 
 \begin{quote}
 \centering
-\textit{``The enemy knows the system''} - Claude Shannon 
+\textit{``The enemy knows the system''} - Claude Shannon \cite{shannon1949communication}
 \end{quote}
 
-What we mean to say is that Alice and Bob will have to assume that both Eve and Mallory are aware of the encryption system they are using. 
+Any cryptographic system should remain secure without requiring secrecy of the underlying protocol. Alice and Bob should assume that Eve and Mallory have a copy of their system when considering its security. Only the \textit{key} will remain secret to Alice and Bob. Of course, we will see that the definition of ``secure'' will change depending on the context to mean \textit{practically} or \textit{mathematically} indecipherable. 
 
-Cryptography has evolved since  
+This section will introduce some of the important advances in cryptographic history. We will discuss how the modest origins of classical cryptography will become a crucial part of society and how cryptography may have even altered the course of history.
 
 \subsection{Symmetric Key Cryptography}
 
-The first algorithms used for cryptography were so called \brisred{symmetric key} algorithms. Alice and Bob initially decide on the key 
+The first algorithms used for cryptography were so called \brisred{symmetric key} algorithms. Alice and Bob initially decide on a shared key. Historically, these keys would have been shared in person, although technological advances have allowed these keys to be shared from a distance. The shared key can be used by Alice and Bob to both encrypt and decrypt the message, although transformations for encryption and decryption may differ.
 
-Two parties, typically Alice and Bob, share a secret key that can be used to encrypt messages. The method of encryption is, generally, publicly known. However, it will be hard to decrypt messages without the secret key.
+%Symmetric key algorithms are, broadly speaking, separated into three categories.
 
-These ciphers have been widely used through history. However, with modern technology, they are not deemed to be secure. We will see in section \ref{sec1:cryptanalysis}
+%through some other means which they can then used to encrypt and decrypt messages. 
+
+%Two parties, typically Alice and Bob, share a secret key that can be used to encrypt messages. The method of encryption is, generally, publicly known. However, it will be hard to decrypt messages without the secret key.
+
+%These ciphers have been widely used through history. However, with modern technology, they are not deemed to be secure. We will see in section \ref{sec1:cryptanalysis}
 
 \subsection{Monoalphabetic Ciphers}
 
-The simplest ciphers are those that permute the alphabet and are known as \brisred{monoalphabetic ciphers}. The symmetric key in these 	ciphers is the permutation used. There are two well known cases of monoalphabetic ciphers which we will present here. 
+The most basic ciphers are those that simple permute the alphabet. These are known as \brisred{monoalphabetic ciphers}. The symmetric key in these ciphers is the permutation used, that can be as simple as a single number. Here we will introduce a couple of well known examples of monoalphabetic ciphers. 
 
 \subsubsection*{Caesar Cipher}
 
-The Caesar cipher one of the oldest that was well documented being used. Seutonius wrote that Julius Caesar used the cipher to send important information to the military. 
+One well-known example of cryptography in history was used by the Romans and is now referred to as the \brisred{Caesar cipher}. According to Seutonius, Julius Caesar used this simple cipher to communicate important messages to his generals \cite{Suetonius}. 
 
-By assigning values to each letter of the alphabet (`a' = 0, `b' = 1, etc.), the encryption is done by `adding' the secret key, $k$ to each letter modulo 26. For example, when $k = 5$ we get the encoding
+Each letter of the alphabet is assigned a numeric value i.e. `a' = 0, `b' = 1, etc. and Alice and Bob agree a key $k\in\mathbb{Z}_{26}$ which they keep secret. When Alice wants to send a message, she converts her message into a number and systematically `adds' the secret key, $k$, to each of the letters, modulo 26. Caesar was reported to use $k=3$, which would give the encoding 
+
+%The algorithm assigns numeric values to each letter of the alphabet () and a key  is agreed between Alice and Bob.  the encryption is done by `adding' the secret key, $k$ to each letter modulo 26. For example, when $k = 5$ we get the encoding
+
+%The Caesar cipher one of the oldest that was well documented being used. Seutonius wrote that Julius Caesar used the cipher to send important information to the military. 
+
+%By assigning values to each letter of the alphabet (`a' = 0, `b' = 1, etc.), the encryption is done by `adding' the secret key, $k$ to each letter modulo 26. For example, when $k = 5$ we get the encoding
 
 \begin{center}
 \begin{tabular}{l l}%{@{}l@{\ }l}
 	Plain:  &\quad\texttt{a b c d e f g h i j k l m n o p q r s t u v w x y z} \\ 
-	Cipher: &\quad\texttt{F G H I J K L M N O P Q R S T U V W X Y Z A B C D E} \\
+	Cipher: &\quad\texttt{D E F G H I J K L M N O P Q R S T U V W X Y Z A B C} \\
 \end{tabular}
 \end{center}
+where the Alice finds the letter of her plain text in the top row and substitutes it with the cipher text in the bottom row. Eve and Mallory would not be able to make out the works without the secret key. 
 
-Deciphering the ciphertext is as simple as `subtracting' $k$ from each letter and reading out the plaintext message.
+Once Bob receives the message from Alice, he can decipher the message by `subtracting' $k$ from the message i.e. moving from the bottom row of the table above to the top row. This allows him to read the message.
 
-As there are only 25 possibly keys, a brute force attack on this kind of cipher is fairly trivial. It is easy to loop over each choice, especially with modern computers, until the plaintext is revealed.
+In an era where most people would have been illiterate, the cipher was likely to be secure. However, with only 25 possible combinations to try, guess each one is rather trivial. Once a single word has been uncovered the entire message would be forfeit. 
 
 \subsubsection*{Affine Cipher}
 
-A slightly more complex cipher is the affine cipher. This is still a mapping from the alphabet to itself (i.e. monoalphabetic) but the key now contains two numbers. Alice and Bob agree on two integers $k,\lambda\in \mathbb{Z}_{26}$ such that $\lambda$ is coprime to $k$ i.e. they have no common factors greater than $1$. For each letter $x$, we can encrypt using the mapping
+A slightly more complex cipher is the affine cipher, although it seems to be confined more for academic interest than real world use. The cipher is still a simple permutation of the alphabet but Alice and Bob now share two numbers. They agree on two integers $k,\lambda\in \mathbb{Z}_{26}$ such that $\lambda$ is coprime to $k$ i.e. they have no common factors greater than $1$. For each letter $x$, we can encrypt using the mapping
 
 \begin{equation}
-	x \rightarrow \lambda \cdot x + k 
+	x \rightarrow \lambda \cdot x + k \text{ (mod 26)}
 \end{equation}
-
-For example, using $k = 3$ and $\lambda = 7$, we get the mapping
+where the decryption requires the inverse of $\lambda$. For example, using $k = 3$ and $\lambda = 7$, we get the mapping
 
 \begin{center}
 \begin{tabular}{l l}
@@ -94,15 +108,62 @@ For example, using $k = 3$ and $\lambda = 7$, we get the mapping
 	Cipher: &\quad\texttt{D K R  Y F M T A H O V C J Q X E L S Z G N U B I P W} \\
 \end{tabular}
 \end{center}
-which seems more `random' than the Caesar cipher. However, one need only successfully guess two mappings to uniquely break this code.
+which seems more `random' than the Caesar cipher. However, the cipher still only relies on two numbers to encrypt and decrypt. Eve or Mallory may just guess two of the mappings which allows them to decipher the entire message. Alternatively, as the cipher contains only $12 \cdot 26$ possible combinations, Mallory could easily perform a brute force attack.
+
+\subsubsection*{Frequency Analysis}
+
+\begin{figure}[t]
+	\centering
+	\def\svgwidth{0.5\textwidth}
+   	\import{chapters/chapter02/fig02/}{letter_freq.pdf_tex}
+   	\caption[Relative letter frequency in the English language]{A histogram of the relative letter frequency in the English language.}
+   	\label{fig:letter_freq}
+\end{figure}
+
+With ciphers being commonly used, interest turned to analysing cipher text. In the case of a monoalphabetic cipher, Eve or Mallory can consider the relative frequency of the letters. Figure \ref{fig:letter_freq} shows a histogram of the letters used in the English language. One finds that the letter `e`  is the most common, while letter such as `j', `q', `x' and `z` are rarely used.
+
+If Eve or Mallory know that the cipher being used is a monoalphabetic one (which we would assume from Kerckhoffs' principle) then they can calculate the letter frequency of the message. By matching the most used letters in the cipher text to the letter frequency, they may be able to decode the message. 
+
+In more complex analysis, one can even consider the frequency of letters at the beginning or ends of words, and also the frequency of two or three letter fragments. Once parts of the cipher text have been decrypted, it will usually be sufficient to recover the rest.
 
 \subsection{Polyalphabetic Ciphers}
 
-Since the use of the Caesar cipher in Roman times, there were not many advances in cryptography until the 16\textsuperscript{th} century. A \brisred{polyalphabetic cipher} is a sequence of monoalphabetic used sequentially.
+Since the invention of the Caesar cipher in Roman times, there were not many advances in encryption until the 15th century. Up until this point, encryption methods generally used simple substitutions or permutations. The next evolution was to develop polyalphabetic ciphers where each letter was encrypted (and decrypted) using a different permutation of the alphabet. Essentially, they were a collection of monoalphabetic ciphers used in a particular order.
 
 \subsubsection*{Vigen\`{e}re Cipher}
 
-This cipher was developed by Giovan Battista Bellaso in 1553 \cite{} but is attributed to Blaise de Vigen\`{e}re \cite{}. The key is a word or phrase which can be `added' to the plaintext to get the cipher text.
+This cipher was originally developed by Giovan Battista Bellaso in 1553 \cite{belaso1553cifra} but is attributed to Blaise de Vigen\`{e}re \cite{vigenere1586traite}. The cipher was believed for a long time to be unbreakable as it was not initially clear how frequency analysis techniques could be adjusted for the multiple permutations. 
+
+The cipher introduces a word or phrase shared by Alice and Bob which is used as the key. The keyword is repeated to match the length of the message and each letter represents its own Caesar cipher. For example, Alice and Bob may choose to share the keyword `\texttt{photon}' in which case they would encrypt as
+
+\begin{center}
+\begin{tabular}{l l}
+	Plain:  &\texttt{wewillbuildaquantumcomputerbytheendofthisdecade} \\ 
+	Keyword: &\texttt{photonphotonphotonphotonphotonphotonphotonphoto}\\
+	Cipher: &\texttt{LLKBZYQBWERNFBOGHHBJCFDHILFUMGWLSGRBUAVBGQTJOWS} \\
+\end{tabular}
+\end{center}
+where decryption is the reverse and each letter is `subtracted' from the message.
+
+If the message is long enough, then the problem can be reduced to analysing $k$ individual Caesar ciphers, where $k$ is the length of the keyword. However, this requires Eve or Mallory to know the length of the keyword. Therefore, they need a method of calculating $k$.
+
+A method introduced by William F. Friedman considered the comparing the cipher text with a shifted version of itself. For example
+\begin{center}
+\begin{tabular}{l}
+	\brisred{\texttt{{ }{ }{ }{ }{ }{ }{ }{ }{ }l{ }{ }{ }{ }{ }{ }{ }u{ }{ }{ }{ }{ }{ }{ }{ }{ }{ }{ }{ }{ }{ }{ }{ }{ }{ }{ }{ }{ }{ }{ }{ }{ }{ }{ }de{ }{ }{ }{ }{ }{ }{ }{ }{ }{ }{ }{ }}} \\
+	\texttt{wewillbuildaquantumcomputerbytheendofthisdecadeusingtodaystools} \\
+	\texttt{{ }{ }{ }{ }wewillbuildaquantumcomputerbytheendofthisdecadeusingtodaystools} \\
+\end{tabular}
+\end{center}
+where we have highlighted the letters that happened to be the same in the shifted text. In this example, we found 4 out of 63 letters match (\SI{6.3}{\percent}). How often would we expect this to happen?
+
+Considering the frequencies of each letters, as shown in figure \ref{fig:letter_freq}, we can calculate the probability as
+
+\begin{equation}
+	P(\text{match}) = p_\text{`a'}^2 + p_\text{`b'}^2 + \dots +p_\text{`z'}^2 \approx 0.0655
+\end{equation}
+
+Suppose we were comparing text of two different permutations of the alphabet such as one used in the Caesar cipher. On average, we would expect a match probability of around \SI{3.85}{\percent}.
 
 \subsubsection*{The Enigma Machine}
 
@@ -134,7 +195,7 @@ Generally, public key ciphers are computationally intensive. Therefore, they are
 
 The RSA algorithm is named after it's inventors Ron Rivest, Adi Shamir, and Leonard Adleman\footnote{It was later discovered that the RSA method had been known by Clifford Cocks during his time at GCHQ \cite{}.} and was released in 1977 \cite{}. Suppose Alice would like to send a message to Bob. The algorithm goes something like:
 
-\begin{algorithm}[\Acl{rsa} Key Exchange]
+\begin{algorithm}[Rivest-Shamir-Adleman Key Exchange]
 \begin{enumerate}
 	\item Bob needs to first choose a secret key. He selects to large (typically 2048 bit) prime numbers, $p$ and $q$, and calculates $n = p \times q$.
 	\item He then chooses some $d < (p-1)(q-1)$ which is coprime to $(p-1)(q-1)$.
@@ -186,13 +247,7 @@ Some interest proposals were made with RSA that would be easy for a classical co
 \subsection{Cryptanalysis}
 \label{sec1:cryptanalysis}
 
-\begin{figure}[t]
-	\centering
-	\def\svgwidth{0.5\textwidth}
-   	\import{chapters/chapter02/fig02/}{letter_freq.pdf_tex}
-   	\caption[Relative letter frequency in the English language]{A histogram of the relative letter frequency in the English language.}
-   	\label{fig:letter_freq}
-\end{figure}
+Cryptography has been crucial to society and at some points critical to historical development. Had the Zimmermann telegram not been decipher, the United States may have never joined WWI.
 
 This is the research into how encryption can be broken. Simple ciphers can easily be broken by comparing the ciphertext to the percentage of each letter used. As \texttt{`e'} is the most common letter in the English language, it follows that if a monoalphabetic cipher is used, then the most common letter in a passage is likely to be decoded to \texttt{`e'}.
 
