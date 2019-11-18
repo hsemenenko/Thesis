@@ -207,9 +207,9 @@ The RSA algorithm is named after it's inventors Ron Rivest, Adi Shamir, and Leon
 
 The proof that $m \equiv c^d \equiv m^{d\times e}$ requires a few theorems from number theory. 
 
+Interestingly, while this outlines the underlying concepts, the algorithm as it stands is not secure. As the algorithm is deterministic, Eve or Mallory can produce the cipher text of any plain text message. They can compare these to the cipher text to the message being sent from Alice to Bob. To protect against this attack, Alice introduces some random bits into the message , $m$, through a method called padding \cite{goldwasser1982probabilistic}. 
 
-
-Although this algorithm outlines the general understanding of RSA encryption, it is not actually secure as it stands. The problem is that it is essentially a monoalphabetic cipher i.e. each $m$ modulo $N$ will always encode to the same ciphertext $c$. Implementations used introduce some randomness to make it secure.
+%Although this algorithm outlines the general understanding of RSA encryption, it is not actually secure as it stands. The problem is that it is essentially a monoalphabetic cipher i.e. each $m$ modulo $N$ will always encode to the same ciphertext $c$. Implementations used introduce some randomness to make it secure.
 
 
 \subsubsection*{Diffe-Hellman}
@@ -434,36 +434,124 @@ On the route to a scalable technology, we will need to find a platform which all
 In the search for a platform for \ac{QKD} protocols, we will need to define certain criteria which will need to be met.
 
 \begin{itemize}
-	\item High speed modulation
 	\item Creation of quantum light
-	\item Detectors
+	\item High-speed modulation
+	\item Detection of single-photons
 \end{itemize}
 
-In this section, we will introduce two platforms for photonic integration: \Ac{InP} and Silicon.
+In this section, we will introduce two platforms for photonic integration: \ac{InP} and \ac{soi}.
 
-\subsection{Waveguide}
+\subsection{Waveguides}
+
+\begin{figure}[t]
+	\centering
+	\includegraphics[width=0.8\textwidth]{./Integrated_optics/waveguides.pdf}
+	\caption[Main types of waveguide structures]{There are three main types of waveguides. The core is shown in purple while the cladding is shown in red. \textbf{a} Slab; \textbf{b} Rib; \textbf{c} Strip waveguides}
+	\label{fig:waveguides}
+\end{figure}
+
+To manipulate the path of lights, waveguide structures are created in the \ac{pic}. Such structures rely on total internal reflection 
+
+The theory of linear optics is governed by Maxwell's equations which provide a set of relationships between the electric field, $\mathcal{E}$, and the magnetic field, $\mathcal{H}$.
+
+\begin{align}
+	\nabla\cdot\mathcal{E} &= 0\\
+	\nabla\cdot\mathcal{H} &= 0\\
+	\nabla\times\mathcal{E} &= -\mu_0\frac{\partial\mathcal{H}}{\partial t}\\
+	\nabla\times\mathcal{H} &= \mu_0\epsilon_0\frac{\partial\mathcal{E}}{\partial t}
+\end{align}
+
+where the charge density, $\rho$, is zero. This is valid in a semiconductor where the photon energy is below the band gap \cite{SilverstoneThesis}.
+
+$\mu_0$ is the magnetic permeability and $\epsilon_0$ is the dielectric permittivity.
+
+We assume that there is no current in the medium typically written as $\sigma = 0$ where sigma is the conductivity.
+
+The relationship between the magnetic field and flux is $\mathcal{B} = \mu_o \mathcal{H}$ if the material is not magnetic.
+
+From these four equations, we can derive
+
+\begin{align}
+	\nabla^2\mathcal{E} &= \mu_0\epsilon_0\frac{\partial^2\mathcal{E}}{\partial t^2}\\ 
+	\nabla^2\mathcal{H} &= \mu_0\epsilon_0\frac{\partial^2\mathcal{H}}{\partial t^2}
+\end{align}
+given that there is no conductivity ($\sigma=0$).
+
+For a waveguide, we find the equations \cite{lifante2003integrated}.
+
+\begin{align}
+	\nabla^2\mathcal{E} + \nabla\left(\frac{1}{n^2}\nabla n^2\mathcal{E}\right) - \epsilon_o\mu_0 n^2 \frac{\partial^2\mathcal{E}}{\partial t^2} &= 0\\
+	\nabla^2\mathcal{H} + \frac{1}{n^2}\nabla n^2\times\left(\nabla\times\mathcal{H}\right) - \epsilon_o\mu_0 n^2 \frac{\partial^2\mathcal{H}}{\partial t^2} &= 0
+\end{align}
 
 \subsection{Multi-Mode Interferometer}
 
 \begin{figure}[t]
 	\centering
 	\includegraphics[width = 0.4\textwidth]{mmi.pdf}
-	\caption[Multi-mode interferometer schematic]{Illustration of \acs{mmi} operation.}
+	\caption[Multi-mode interferometer operating principle]{Illustration of \acs{mmi} operation. The input light excites a superposition of modes with different propagation velocities. Depending on the length, the modes will either constructively or destructively interfere. This figure shows the simplest case for a \si{2x2} \acs{mmi} but in principle can be designed to be \si{n x m}.}
 	\label{fig:mmi}
 \end{figure}
 
+\Acp{mmi} can be used to mix or separate spatially separated waveguide modes \cite{soldano1995optical}.
+
+\begin{equation}
+	\frac{1}{\sqrt{2}}\left(
+	\begin{matrix}
+	r & t\\
+	t & r
+	\end{matrix}
+	\right)
+\end{equation}
+
 \subsection{Phase modulation}
 
-\subsubsection*{Mach-Zehnder Interferometer}
+\begin{equation}
+	\left(
+	\begin{matrix}
+	1 & 0\\
+	0 & e^{i\theta}
+	\end{matrix}
+	\right)
+\end{equation}
+
+\subsection{Mach-Zehnder Interferometer}
 
 \begin{figure}[t]
 	\centering
 	\includegraphics[width = 0.4\textwidth]{mzi.pdf}
-	\caption[Mach-Zehnder Interferometer schematic]{Illustration of \acs{mzi}.}
+	\caption[Mach-Zehnder interferometer schematic]{Illustration of \acs{mzi} made from two 50:50 beam splitters and a phase modulator.}
 	\label{fig:mzi}
 \end{figure}
 
 Combining \acp{eopm}, acp{topm} and \acp{mmi} we can create on-chip \acp{mzi} which can be used for very fast routing, intensity modulation and phase encoding. 
+
+\begin{equation}
+	\frac{1}{\sqrt{2}}\left(
+	\begin{matrix}
+	1 & 1\\
+	1 & -1
+	\end{matrix}
+	\right)
+	\left(
+	\begin{matrix}
+	1 & 0\\
+	0 & e^{i\theta}
+	\end{matrix}
+	\right)
+	\frac{1}{\sqrt{2}}\left(
+	\begin{matrix}
+	1 & 1\\
+	1 & -1
+	\end{matrix}
+	\right)=
+	\frac{1}{2}\left(
+	\begin{matrix}
+	1 + e^{i\theta} & 1 -  e^{i\theta}\\
+	1 -  e^{i\theta} & 1 +  e^{i\theta}
+	\end{matrix}
+	\right)
+\end{equation}
 
 The layout is shown in figure \ref{fig:mzi}.
 
@@ -479,7 +567,7 @@ As \ac{InP} has a direct band gap it is possible to monolithically integrate las
 
 Multi quantum well structures in \ac{InP} mean that we can create lasers on chip.
 
-We can make either \ac{DBR} or \ac{dfb} lasers in \ac{InP} with very competitive linewidths and mW power into fibre \cite{jeppix}. An example spectrum is show in 
+We can make either \ac{DBR} or \ac{dfb} lasers in \ac{InP} with very competitive linewidths and mW power into fibre \cite{smit2014, jeppix}. An example spectrum is show in 
 
 \subsubsection*{Thermo-optic Modulation}
 
@@ -491,11 +579,11 @@ Thermal management can become an issue if too many \acp{topm} are used on a chip
 
 \subsubsection*{Electro-optic Modulation}
 
-A \ac{qcse} gives rise to high speed electro-optic modulation of up to \SI{40}{GHz} \cite{jeppix}.
+A \ac{qcse} gives rise to high speed electro-optic modulation of up to \SI{40}{GHz} \cite{smit2014, jeppix}.
 
 High-speed modulation can also be achieved through current injection into the material to change the refractive index. 
 
-\subsection{Silicon}
+\subsection{Silicon-on-Insulator}
 
 Silicon is ubiquitous in the world today and powers everything from watches to supercomputers. The advances that have been made in the trillion dollar semiconductor industry have made silicon a hugely successful platform for quantum photonics. With a band gap of \SI{\sim 1100}{nm}, we can also leverage the telecommunications industry to create low-loss \acl{pic}. However, as it has an indirect band gap, it has been challenging to develop efficient light sources on-chip \cite{}. While efforts have been made to create integrated lasers and amplifiers, their performances don't match those of other integrated approaches, such as III-V materials.
 
