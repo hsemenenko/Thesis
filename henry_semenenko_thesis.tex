@@ -34,6 +34,8 @@
 \documentclass[a4paper,11pt,reqno,oldfontcommands]{memoir} %add 'draft' to turn draft option on (see below)
 %
 
+\def\mytitle{Advances in Chip-Based Quantum Key Distribution}
+
 %Defining custom colours
 \usepackage{xcolor}
 
@@ -158,16 +160,23 @@
 			\else
 				\color{white}
 			\fi
-			\chaptitlefont\raggedleft ##1\par
-			\begin{figure*}
-				\centering
-				\includegraphics[scale=0.25]{./graphics/skytale}
-			\end{figure*}				
+			\chaptitlefont\raggedleft ##1			
 		\else
 			\color{gray}\chaptitlefont\raggedleft ##1\par
 		\fi
 	}
-	\renewcommand{\mempostaddchaptertotochook}{\clearpage\nopagecolor\cleartooddpage[\emptypage]\glsresetall\suppressfloats}
+	\renewcommand{\mempostaddchaptertotochook}{
+									\par
+									\begin{figure*}
+										\centering
+									\includegraphics[scale=0.25]{./graphics/skytale}
+									\end{figure*}	
+									\clearpage
+									\nopagecolor
+									\cleartooddpage[\emptypage]
+									\glsresetall
+									\suppressfloats
+									}
 } 
 \makeatother 
 \chapterstyle{daleifmodif}
@@ -266,7 +275,9 @@
 \usepackage[colorlinks=true,
 			pdfpagelayout=TwoColumnRight,			%Makes pdf two page scrolling
 			pagebackref,
-			allcolors=black]{hyperref}              %Creates hyperlinks in cross references
+			allcolors=black,
+			bookmarksopen=true,
+			bookmarksopenlevel=0]{hyperref}              %Creates hyperlinks in cross references
 			
 \usepackage[labelfont=bf]{caption}		%Load this after hyperref to make figure references link to the top of the figure
 
@@ -356,11 +367,11 @@
 	% #2: backref list with distinct entries
 	% #3: number of back references including duplicates
 	% #4: backref list including duplicates
-	\par
+%	\par
 	\ifnum#3=1 %
-		Page %
+		Cited on page %
 	\else
-		Pages %
+		Cited on pages %
 	\fi
 	#2.\par
 }
@@ -428,6 +439,12 @@
 %% Change the space between paragraphs
 \abnormalparskip{3pt}
 
+%% Change the spacing after an equation
+\setDisplayskipStretch{1.5}
+\renewcommand*{\memdskips}{%
+	\advance\belowdisplayskip \memdskipstretch\belowdisplayskip%
+	\advance\belowdisplayshortskip \memdskipstretch\belowdisplayshortskip}
+
 \begin{document}
 
 % UoB guidlines:
@@ -461,6 +478,7 @@
 \input{frontmatter/dedication}
 \clearemptydoublepage
 %
+\pdfbookmark[0]{Table of Contents}{contents}
 \pagenumbering{roman} 
 \renewcommand{\contentsname}{Table of Contents}
 \maxtocdepth{subsection}

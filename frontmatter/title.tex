@@ -14,6 +14,10 @@
 % the dissertation (text only) should be entered at the bottom right-hand side of the page.
 %
 %
+
+%Add bookmark for title page.
+\pdfbookmark[-1]{\mytitle}{title}
+
 \begin{titlingpage}
 \pagecolor{bristol-red}
 \begin{SingleSpace}
@@ -22,12 +26,9 @@
 \vspace*{5mm}
 \begin{center}
 \vspace{20mm}
-%\rule[0.5ex]{\linewidth}{2pt}\vspace*{-\baselineskip}\vspace*{3.2pt}
-%\rule[0.5ex]{\linewidth}{1pt}\\[\baselineskip]
-{\HUGE \color{white} \textbf{Advances in Chip-Based\\Quantum Key Distribution} }\\[4mm]
-%{\Large \textit{Subtitle}}\\
-%\rule[0.5ex]{\linewidth}{1pt}\vspace*{-\baselineskip}\vspace{3.2pt}
-%\rule[0.5ex]{\linewidth}{2pt}\\
+\begin{minipage}{10cm}
+\HUGE \color{white} \textbf{\mytitle}
+\end{minipage}\\
 \vspace{30mm}
 {\huge\color{white}Henry Semenenko\textsc{}}\\
 \vspace*{\fill}
@@ -35,11 +36,15 @@
 \end{center}
 \end{adjustwidth*}
 \end{SingleSpace}
-\clearpage%
-\cleartoevenpage[\thispagestyle{plain}]
 \clearpage
-\cleartooddpage[\thispagestyle{plain}]
+\pagecolor{white}
+\clearemptydoublepage
+%\clearpage%
+%\cleartoevenpage[\thispagestyle{plain}]
+%\clearpage
+%\cleartooddpage[\thispagestyle{plain}]
 \begin{SingleSpace}
+\pagecolor{bristol-red}
 \thispagestyle{plain}
 \calccentering{\unitlength} 
 \begin{adjustwidth*}{\unitlength}{-\unitlength}

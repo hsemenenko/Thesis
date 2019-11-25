@@ -23,7 +23,7 @@ Before we begin, we will need to introduce the cast of characters that will each
 
 \brisred{Eve} is a very nosey individual who listens to all public communication between Alice and Bob. She is intent on reading the message sent by Alice and while very persistent, she is not very inventive so will not put very much effort into deciphering the message. Eve is often mistaken as Mallory, as they have similar intents.
 
-\brisred{Mallory} would also like to know what Alice has sent to Bob, but will go to more extreme measures to discover their secrets. She is particularly fortunate in having unlimited resources available (confined only by the laws of physics) and will use all possible methods within her power to expose the hidden message. Her motivations are remain unknown.
+\brisred{Mallory} would also like to know what Alice has sent to Bob, but will go to more extreme measures to discover their secrets. She is particularly fortunate in having unlimited resources available (confined only by the laws of physics) and will use all possible methods within her power to expose the hidden message. Her motivations are unknown.
 
 The reader is encouraged to picture their own cast of characters in their mind's eye to bring this thesis to life. Any likeness of characters to any persons, real or imaginary, is purely coincidental.
 
@@ -53,9 +53,9 @@ Any cryptographic system should remain secure without requiring secrecy of the u
 
 This section will introduce some of the important advances in cryptographic history. We will discuss how the modest origins of classical cryptography will become a crucial part of society and how cryptography may have even altered the course of history.
 
-\subsection{Symmetric Key Cryptography}
+\subsection{Symmetric-Key Cryptography}
 
-The first algorithms used for cryptography were so called \brisred{symmetric key} algorithms. Alice and Bob initially decide on a shared key. Historically, these keys would have been shared in person, although technological advances have allowed these keys to be shared from a distance. The shared key can be used by Alice and Bob to both encrypt and decrypt the message, although transformations for encryption and decryption may differ.
+The first algorithms used for cryptography were so called \brisred{symmetric-key} algorithms. Alice and Bob initially decide on a shared key. Historically, these keys would have been shared in person, although technological advances have allowed these keys to be shared from a distance. The shared key can be used by Alice and Bob to both encrypt and decrypt the message, although transformations for encryption and decryption may differ.
 
 %Symmetric key algorithms are, broadly speaking, separated into three categories.
 
@@ -65,7 +65,7 @@ The first algorithms used for cryptography were so called \brisred{symmetric key
 
 %These ciphers have been widely used through history. However, with modern technology, they are not deemed to be secure. We will see in section \ref{sec1:cryptanalysis}
 
-\subsection{Monoalphabetic Ciphers}
+\subsubsection{Monoalphabetic Ciphers}
 
 The most basic ciphers are those that simple permute the alphabet. These are known as \brisred{monoalphabetic ciphers}. The symmetric key in these ciphers is the permutation used, that can be as simple as a single number. Here we will introduce a couple of well known examples of monoalphabetic ciphers. 
 
@@ -98,7 +98,7 @@ In an era where most people would have been illiterate, the cipher was likely to
 A slightly more complex cipher is the affine cipher, although it seems to be confined more for academic interest than real world use. The cipher is still a simple permutation of the alphabet but Alice and Bob now share two numbers. They agree on two integers $k,\lambda\in \mathbb{Z}_{26}$ such that $\lambda$ is coprime to $k$ i.e. they have no common factors greater than $1$. For each letter $x$, we can encrypt using the mapping
 
 \begin{equation}
-	x \rightarrow \lambda \cdot x + k \text{ (mod 26)}
+	x \rightarrow \lambda \cdot x + k\quad\text{(mod 26)}
 \end{equation}
 where the decryption requires the inverse of $\lambda$. For example, using $k = 3$ and $\lambda = 7$, we get the mapping
 
@@ -114,9 +114,9 @@ which seems more `random' than the Caesar cipher. However, the cipher still only
 
 \begin{figure}[t]
 	\centering
-	\def\svgwidth{0.5\textwidth}
+	\def\svgwidth{0.6\textwidth}
    	\import{chapters/chapter02/fig02/}{letter_freq.pdf_tex}
-   	\caption[Relative letter frequency in the English language]{A histogram of the relative letter frequency in the English language.}
+   	\caption[Relative letter frequency in the English language]{A histogram of the relative letter frequency in the English language which can be used to break monoalphabetic ciphers.}
    	\label{fig:letter_freq}
 \end{figure}
 
@@ -126,7 +126,7 @@ If Eve or Mallory know that the cipher being used is a monoalphabetic one (which
 
 In more complex analysis, one can even consider the frequency of letters at the beginning or ends of words, and also the frequency of two or three letter fragments. Once parts of the cipher text have been decrypted, it will usually be sufficient to recover the rest.
 
-\subsection{Polyalphabetic Ciphers}
+\subsubsection{Polyalphabetic Ciphers}
 
 Since the invention of the Caesar cipher in Roman times, there were not many advances in encryption until the 15th century. Up until this point, encryption methods generally used simple substitutions or permutations. The next evolution was to develop polyalphabetic ciphers where each letter was encrypted (and decrypted) using a different permutation of the alphabet. Essentially, they were a collection of monoalphabetic ciphers used in a particular order.
 
@@ -147,76 +147,141 @@ where decryption is the reverse and each letter is `subtracted' from the message
 
 If the message is long enough, then the problem can be reduced to analysing $k$ individual Caesar ciphers, where $k$ is the length of the keyword. However, this requires Eve or Mallory to know the length of the keyword. Therefore, they need a method of calculating $k$.
 
-A method introduced by William F. Friedman considered the comparing the cipher text with a shifted version of itself. For example
+A method introduced by William F. Friedman considered the comparing the cipher text with a shifted version of itself. To understand how this might work, consider compare two passages of text with one shifted relative to the other. How often would we expect the letters between the two to match? For example, 
 \begin{center}
 \begin{tabular}{l}
-	\brisred{\texttt{{ }{ }{ }{ }{ }{ }{ }{ }{ }l{ }{ }{ }{ }{ }{ }{ }u{ }{ }{ }{ }{ }{ }{ }{ }{ }{ }{ }{ }{ }{ }{ }{ }{ }{ }{ }{ }{ }{ }{ }{ }{ }{ }{ }de{ }{ }{ }{ }{ }{ }{ }{ }{ }{ }{ }{ }}} \\
+	\brisred{\texttt{{ }{ }{ }{ }{ }{ }{ }{ }{ }l{ }{ }{ }{ }{ }{ }{ }u{ }{ }{ }{ }{ }{ }{ }{ }{ }{ }{ }{ }{ }{ }{ }{ }{ }{ }{ }{ }{ }{ }{ }{ }{ }{ }{ }de{ }{ }{ }{ }{ }}} \\
 	\texttt{wewillbuildaquantumcomputerbytheendofthisdecadeusingtodaystools} \\
-	\texttt{{ }{ }{ }{ }wewillbuildaquantumcomputerbytheendofthisdecadeusingtodaystools} \\
+	\texttt{{ }{ }{ }{ }wewillbuildaquantumcomputerbytheendofthisdecadeusingtodaystools}
 \end{tabular}
 \end{center}
-where we have highlighted the letters that happened to be the same in the shifted text. In this example, we found 4 out of 63 letters match (\SI{6.3}{\percent}). How often would we expect this to happen?
+where the second message has been shifted by four letters. The letters that match between the two texts are highlighted above in red. In this example, we found 4 out of 63 letters match (\SI{6.3}{\percent}). How often should we expect this to happen?
 
 Considering the frequencies of each letters, as shown in figure \ref{fig:letter_freq}, we can calculate the probability as
 
 \begin{equation}
-	P(\text{match}) = p_\text{`a'}^2 + p_\text{`b'}^2 + \dots +p_\text{`z'}^2 \approx 0.0655
+	P(\text{id}) = p_\text{`a'}^2 + p_\text{`b'}^2 + \dots +p_\text{`z'}^2 \approx 0.0655
+\end{equation}
+where the `id' refers to the fact that the messages were both written with the same alphabet.
+
+Suppose we were to instead compare two messages which had a different encoding, for example the plain text message with a monoalphabetic cipher text. Let us denote a monoalphabetic encoding of the alphabet as $\pi(i)$ which is acts on the $i$th letter. We then like to calculate
+
+\begin{equation}
+	P(\pi) = \sum_\text{`a'}^\text{`z'} p_i \cdot p_{\pi(i)}
 \end{equation}
 
-Suppose we were comparing text of two different permutations of the alphabet such as one used in the Caesar cipher. On average, we would expect a match probability of around \SI{3.85}{\percent}.
+In general, the probability of coincidence will \emph{always} be less when comparing two different encodings. For any non-trivial permutation $\pi$,
 
-\subsubsection*{The Enigma Machine}
+\begin{align}
+	P(\text{id}) - P(\pi) &= \sum p_i^2 - \sum p_i \cdot p_{\pi(i)}\\
+	&= \frac{1}{2}\left(\sum p_i^2 + \sum p_{\pi(i)}^2\right) - \sum p_i \cdot p_{\pi(i)}\\
+	&= \frac{1}{2} \sum (p_i - p_{\pi(i)})^2 > 0
+\end{align}
 
-Perhaps the most famous polyalphabetic cipher is the enigma machine that was widely used by the Axis powers during WWII.
+On average, we would expect a match probability of around \nicefrac{1}{26} \SI{\approx 3.85}{\percent}. To apply this to the Vigen\`{e}re cipher, one simply needs to compare the cipher text with a shift version of itself. The probability of coincidence will be maximised when the text is shifted by a multiple of the keyword length. Once the length of the keyword has been discovered, the problem reduces to analysing multiple Caesar ciphers. Frequency analysis can be applied to break each individually and recover the plain text from the cipher text. 
+
+%\subsubsection*{The Enigma Machine}
+%
+%Perhaps the most famous polyalphabetic cipher is the enigma machine that was widely used by the Axis powers during WWII.
 
 \subsubsection*{One-Time Pad}
 
-A polyalphabetic cipher where the key is as long as the message. If the key is truly random, each message is equally likely given a cipher text. Therefore, it is unbreakable provided that the key is completely secure.
+%A polyalphabetic cipher where the key is as long as the message. If the key is truly random, each message is equally likely given a cipher text. Therefore, it is unbreakable provided that the key is completely secure.
 
-The problem then becomes how to distribute the keys.
+The \ac{otp} is a polyalphabetic cipher where the key is made as long as the message and every message is encrypted with a unique and random key. It was initial described in 1882 by Frank Miller \cite{miller1882telegraphic} but it wasn't widely recognised until 1919 when a Gilbert Vernam patented a method to combine the message and key on punched-tape \cite{vernam1919}. In the patent, the tape that stored the key was reused after a full cycle. It was later realised that if the key was completely random and not reused then ``the messages are rendered entirely secret'' \cite{vernam1926cipher}. 
 
-\subsection{Block Ciphers}
+Typically, the \ac{otp} is concerned with bit level operations where encrypting and decrypting are both performed with addition modulo 2. Consider that the message, $m$, can be represented as a bit string $m_1m_2\ldots m_k$, and similarly for the key and cipher text, Then encrypting the message is simply
 
-The first block encryption was the \ac{des} cipher which was developed in the early 70's \cite{}. Upon its introduction, there was criticism that the NSA deliberately weakened the security of the cipher \cite{Diffie1977}. It remained a standard in cryptography until the late 1990's when it was demonstrated that it was insecure against modern computers \cite{}.
+\begin{equation}
+	c_i = m_i + k_i\quad\text{(mod 2)} 
+\end{equation}
+where $k_i$ are the bits that represent the key which is of the same length as the message and $c_i$ is the cipher text bit. Equivalently, decryption is
 
-The \ac{aes} cipher is by far the most used encryption method used today which superseded \ac{des} in the early 2000's \cite{}. It is generally thought that \ac{aes} is secure against attacks by a quantum computer. However, much like security using classical computers, there is no proof.
+\begin{equation}
+	m_i = c_i + k_i\quad\text{(mod 2)}
+\end{equation}
 
-Typically, 256 bit keys are exchanged using public key cryptography which are then used in a block cipher. 
+Since each letter is encrypted with a random monoalphabetic cipher, there is no way to perform frequency analysis. Likewise, the general cryptanalysis used for the Vigen\`{e}re cipher will provide no information as there is no repetition in the key.
 
-\subsection{Public Key Cryptography}
+Providing that the key is chosen randomly and not reused, the \ac{otp} can be proven to be \brisred{information-theoretic} secure \cite{shannon1949communication}. That is to say that even Mallory, with her unlimited power, would not be able to comprise the message without the secret key. Intuitively, as the key is completely random, each decryption is equally so there is no way to reveal the true message.
 
-A more practical method of encrypting data is to employ an asymmetric scheme which allows many people to send encrypted messages to a single person. For example, customers of a bank may want an easy way to send encrypted messages about their finances.
+%We can consider the cipher to be polyalphabetic where they length of the key is as long as the message itself. 
 
-These ciphers include what is know as a {\color{bristol-red} trapdoor function}. These functions are such that they are easy to perform one way, but are difficult to inverse without a private key. 
+While the protocol itself provides a `perfect' method of encryption, this doesn't exclude physical vulnerabilities in the system. Information may be leaked through side-channels in specific system implementations. Alice and Bob also have to overcome the problem of securely distributing the keys. 
 
-Generally, public key ciphers are computationally intensive. Therefore, they are generally used to exchange keys which can then be used in a block cipher, such as \ac{aes}.
+\subsubsection{Block Ciphers}
 
-\subsubsection*{RSA}
+Despite the inherent security provided by the \ac{otp}, it is rarely used in practice. Challenges with key exchange render it impractical as Alice and Bob must have keys that are as long as the message itself. Methods to exchange these keys remain slow meaning that, typically, the theoretical security of a system is forfeit in favour of practicality. 
 
-The RSA algorithm is named after it's inventors Ron Rivest, Adi Shamir, and Leonard Adleman\footnote{It was later discovered that the RSA method had been known by Clifford Cocks during his time at GCHQ \cite{}.} and was released in 1977 \cite{}. Suppose Alice would like to send a message to Bob. The algorithm goes something like:
+The most used encryption methods in modern communication are \brisred{block ciphers} that were introduced by Horst Feistel \cite{feistel1970cryptographic}. Instead of considering the message as individual letters (or binary bits), a block cipher will consider the message in blocks of a certain length. As the data is considered as vectors and the encryption done through matrix multiplication, the algorithms can be computed efficiently. The exact length of the block will depend on the cipher being used. The block is split into two equal parts $v$ and $w$ which are encoded in the first round using 
 
-\begin{algorithm}[Rivest-Shamir-Adleman Key Exchange]
+\begin{equation}
+	v' = w \quad \text{and} \quad w' = v + F(w, k)
+\end{equation}
+where $F$ is a vector-valued function and $k$ is the key. The key is then modified to generate a subkey in which the process above is repeated with $v$, $w$ and $k$ replaced by $v'$, $w'$ and $k'$. The function $F$ and the method of generating the subkeys is depending on the block cipher being used. This process is easily reverse by
+
+\begin{equation}
+	w = v' \quad \text{and} \quad v = w' + F(v', k)
+\end{equation}
+
+The first widely used block cipher was \ac{des} introduced in 1977 \cite{DES1977} and was based mostly on Feistel's idea. The algorithm uses a key length of 56 bits and separates the data into 64 bit blocks which are divided into two vectors, $v$ and $w$, each of length 32 bits. The vector-valued function for \ac{des} is described in algorithm \ref{alg:des} which is repeated for 16 rounds.
+
+\begin{algorithm}[Data Encryption Standard]
+\label{alg:des}
 \begin{enumerate}
-	\item Bob needs to first choose a secret key. He selects to large (typically 2048 bit) prime numbers, $p$ and $q$, and calculates $n = p \times q$.
-	\item He then chooses some $d < (p-1)(q-1)$ which is coprime to $(p-1)(q-1)$.
-	\item Finally, Bob calculates the inverse, $e$, of $d$ modulo $(p-1)(q-1)$ and publishes the public key $N$ and $e$ whilst keeping $p,q$ and $d$ private.
-	\item Alice breaks her message into integers $m < N$ and encrypts as $c = m^d \mathrm{ mod } N$. The ciphertext $c$ can now be sent to Bob.
-	\item To decrypt Alice's message, Bob computes $m = c^d$ and the communication is complete. 
-\end{enumerate}   
+	\item $w$ is expanded from 32 bits to 48 bits by repeating certain bits.
+	\item The key, $k$, is divided into two separate 28-bit keys. 
+	\item In each successive round, the two keys are shifted by one or two bits depending on the round.
+	\item 24 bits from each key are selected to create a 48-bit subkey which is added to the expanded vector, $w$. 
+	\item Each block is separated into eight six-bit sections which each substituted with four-bit outputs from a lookup table. This transformation is non-linear.
+	\item Finally, the 32 outputs are permuted by a fixed mapping.
+\end{enumerate}
 \end{algorithm}
 
-The proof that $m \equiv c^d \equiv m^{d\times e}$ requires a few theorems from number theory. 
+Immediately following the release of \ac{des}, there was scrutiny concerning the involvement of the \ac{nsa} and the short length of the key. I was suggested that a machine could be built at the cost of only \$20 million which could break \ac{des} in a day \cite{Diffie1977}. Despite these concerns, \ac{des} remained a standard until 2001. At which point, a number of brute-force attacks had been demonstrated, notably by the Electronic Frontier Foundation. 
 
-Interestingly, while this outlines the underlying concepts, the algorithm as it stands is not secure. As the algorithm is deterministic, Eve or Mallory can produce the cipher text of any plain text message. They can compare these to the cipher text to the message being sent from Alice to Bob. To protect against this attack, Alice introduces some random bits into the message , $m$, through a method called padding \cite{goldwasser1982probabilistic}. 
+\Ac{des} was replaced by \ac{aes} in 2001 \cite{aes2001} which was based on the same block cipher structure. The message is now split into 128 bit messages and secret keys of length 128, 192, or 256 bits are available to prevent brute-force attacks. Block ciphers are not information-theoretic secure, as each bit of key is expanded and used to encrypted more than one bit of the message. It is believed that \ac{aes} remains \brisred{computationally secure}. That is to say that it is not feasible to build a computer that can break an \ac{aes} cipher in a reasonable amount of time. 
 
-%Although this algorithm outlines the general understanding of RSA encryption, it is not actually secure as it stands. The problem is that it is essentially a monoalphabetic cipher i.e. each $m$ modulo $N$ will always encode to the same ciphertext $c$. Implementations used introduce some randomness to make it secure.
+%The new standard increased the possible key size to a minimum of 128 bits with keys up to 256 bits also possible. 
 
+%The first block encryption was the \ac{des} cipher which was developed in the early 70's \cite{}. Upon its introduction, there was criticism that the NSA deliberately weakened the security of the cipher \cite{}. It remained a standard in cryptography until the late 1990's when it was demonstrated that it was insecure against modern computers \cite{}.
 
-\subsubsection*{Diffe-Hellman}
+%The \ac{aes} cipher is by far the most used encryption method used today which superseded \ac{des} in the early 2000's \cite{}. It is generally thought that \ac{aes} is secure against attacks by a quantum computer. However, much like security using classical computers, there is no proof.
 
-The Diffe-Hellman cipher isn't used to share messages, but instead distributes keys between Alice and Bob in a secure way that can then be used in a symmetric key cipher. It is attributed to Whit Diffe and Martin E. Hellman\footnote{Malcolm J. Williamson had already discovered the Diffe-Hellman key exchange whilst working at GCHQ but it remained classified.} after they discovered it in 1976 \cite{}.
+%Typically, 256 bit keys are exchanged using public key cryptography which are then used in a block cipher. 
 
-\begin{algorithm}[Diffe-Hellman Key Exchange]
+\subsection{Public-Key Cryptography}
+
+We have alluded to the challenges of distributing keys between Alice and Bob for use in a symmetric key algorithm. The obvious solution is for Alice and Bob to meet in person prior to their secret communication. However, it might not always be possible for them to meet and it certainly is not practical. 
+
+In order to exchange secret messages over insecure communication channels, \brisred{public-key} cryptography algorithms were developed. Alice and Bob act asymmetrically basing security from number theory problems are assumed hard. There has yet to be an algorithm that can claim with certainty to be even computationally secure.
+
+Such problems employ \brisred{trapdoors}: functions that are easy to compute one way, but challenging to invert without secret information. Alice will use the function to encrypt, but only Bob has the secret information to decrypt the message. As the name suggests, Bob will publicly announce certain information which Alice (or anyone else for that matter) can use to encrypt a message. However, he keeps a private key which will allow him to decrypt the messages.
+
+This section will introduce two public-key algorithms that are widely used. While the algorithms can be used as a method to send messages, the computational intensity of encryption and decryption means that they are typically used to distribute keys. These keys are then used in a symmetric key algorithm such as \ac{aes}.
+
+%A more practical method of encrypting data is to employ an asymmetric scheme which allows many people to send encrypted messages to a single person. For example, customers of a bank may want an easy way to send encrypted messages about their finances.
+
+%These ciphers include what is know as a . These functions are such that they are easy to perform one way, but are difficult to inverse without a private key. 
+
+%Generally, public key ciphers are computationally intensive. Therefore, they are generally used to exchange keys which can then be used in a block cipher, such as \ac{aes}.
+
+\subsubsection*{Diffie-Hellman Algorithm}
+
+The first public-key cryptography algorithm was proposed by Whitfield Diffie and Martin Hellman in 1976 \cite{diffie1976new}. It was later revealed that researchers at \ac{gchq} had previously demonstrated that such a protocol was possible \cite{Ellis1970, williamson1974}.
+
+The security of the protocol is based on the hardness of the discrete logarithm problem. The problem is to find $k = \log_a(b)$ given a prime number, $p$, and integers $1<a<p$ and $b$, such that
+
+\begin{equation}
+	a^k = b\quad\text{(mod } p\text{)}
+\end{equation}
+
+There is no publicly known classical algorithm that can efficiently compute the discrete logarithm. However, an algorithm was presented by Peter Shor in 1994 that uses a quantum algorithm to solve the discrete logarithm in polynomial time \cite{shor1994}.
+
+The Diffie-Hellman algorithm is not used to send a message between Alice and Bob, but instead is used to establish a key between them. This key can then be used in a symmetric key algorithm. The protocol is presented in algorithm \ref{alg:dh}.
+
+\begin{algorithm}[Diffie-Hellman Key Exchange]
+\label{alg:dh}
 \begin{enumerate}
 	\item Alice and Bob agree on a large prime number, $p$, and a primitive root, $a$. These numbers can actually be publicly available.
 	\item They both also secretly choose integers $d_A$ and $d_B$.
@@ -226,77 +291,224 @@ The Diffe-Hellman cipher isn't used to share messages, but instead distributes k
 \end{enumerate}
 \end{algorithm}
 
-The information that is available to Eve are the numbers $p, a, q_{A}$ and $q_{B}$. Without being able to solve the discrete logarithm she is unable to break the code. 
+The information that is available to Eve or Mallory are the numbers $p, a, q_{A}$ and $q_{B}$. However, without being able to solve the discrete logarithm, they are unable to compute $d_A$ or $d_B$. Hence, they cannot efficiently compute the secret key $k$.  
+
+%Typically, the Diffie-Hellman algorithm is used as a key exchange method to 
+
+%The Diffie-Hellman cipher isn't used to share messages, but instead distributes keys between Alice and Bob in a secure way that can then be used in a symmetric key cipher. It is attributed to Whitfield Diffie and Martin Hellman\footnote{Malcolm J. Williamson had already discovered the Diffie-Hellman key exchange whilst working at GCHQ but it remained classified.} after they discovered it in 1976 \cite{}.
+
+\subsubsection*{RSA Algorithm}
+
+Two years later, the \ac{rsa} algorithm would be released publicly, named after its inventors Ron Rivest, Adi Shamir, and Leonard Adleman \cite{rivest1978method}. As with the Diffie-Hellman algorithm, it was later discovered that the \ac{rsa} method had been known by Clifford Cocks during his time at \ac{gchq} \cite{Cocks1973}. 
+
+Unlike the Diffie-Hellman algorithm, the \ac{rsa} algorithm allows Alice to send a predetermined message to Bob. Its security relies on the hardness of factoring semi-primes: a number that is the product of two prime numbers. The \ac{rsa} algorithm is given below.
+
+%Suppose Alice would like to send a message to Bob. The algorithm goes something like:
+
+\begin{algorithm}[Rivest-Shamir-Adleman Key Exchange]
+\begin{enumerate}
+	\item Bob needs to first choose a secret key. He selects two large prime numbers, $p$ and $q$, and calculates $n = p \times q$.
+	\item He then chooses some $d < (p-1)(q-1)$ which is coprime to $(p-1)(q-1)$.
+	\item Finally, Bob calculates the inverse, $e$, of $d$ modulo $(p-1)(q-1)$ and publishes the public key $N$ and $e$ whilst keeping $p,q$ and $d$ private.
+	\item Alice breaks her message into integers $m < N$ and encrypts as $c = m^d\text{ }(\text{mod }N)$. The ciphertext $c$ can now be sent to Bob.
+	\item To decrypt Alice's message, Bob computes $c^d$ and the communication is complete. 
+\end{enumerate}   
+\end{algorithm}
+
+To prove that the decoded message is equivalent to the original message, we note that
+
+\begin{equation}
+	b \equiv c^d \equiv m ^{d\cdot e}\quad(\text{mod } N)
+\end{equation} 
+and as $e$ is the inverse of $d$ modulo $(p - 1)(q - 1)$, we have
+
+\begin{equation}
+	d \cdot e = t \cdot (p - 1)(q - 1) + 1
+\end{equation}
+for $t\in\mathbb{Z}$. If $m$ and $p$ are coprime, then Fermat's little theorem states that 
+
+\begin{equation}
+	m^{p-1} \equiv 1\quad(\text{mod }p)
+\end{equation}
+from which, we find
+\begin{equation}
+	b \equiv m^{t \cdot (p - 1)(q - 1) + 1} \equiv m \cdot (m^{p-1})^{t\cdot(q-1)} \equiv m \quad(\text{mod } p)
+\end{equation}
+
+If $p$ is not coprime to $m$, then $p$ divides $m$ and also $b$. Therefore, $b\equiv m \text{ (mod } p$) which can be equivalently reasoned for $q$. Since $b$ and $m$ were taken modulo $N$, we must have that $b\equiv m \text{ (mod } N$).
+
+Generating keys for the \ac{rsa} algorithm uses computationally efficient algorithm to check for primality and fast modular exponentiation. However, there is no method at the present to break the cipher without factoring $N$. 
+
+Interestingly, while this outlines the underlying concepts, the algorithm as it stands is not secure. As the algorithm is deterministic, Eve or Mallory can produce the cipher text of any plain text message. They can compare these to the cipher text to the message being sent from Alice to Bob. To protect against this attack, Alice introduces some random bits into the message, $m$, through a method called padding \cite{goldwasser1982probabilistic}. 
+
+%Although this algorithm outlines the general understanding of RSA encryption, it is not actually secure as it stands. The problem is that it is essentially a monoalphabetic cipher i.e. each $m$ modulo $N$ will always encode to the same ciphertext $c$. Implementations used introduce some randomness to make it secure.
+
 
 \subsection{Authentication}
 
-Until this point, we have discussed how Alice and Bob and create ciphertext that would deceive Eve. However, we also need to be aware that Mallory is more cunning than Eve. 
+We have described how Alice can send a message to Bob without having ever met to share a secret key by using public-key cryptography. How can she be sure that the public key that she is using to encrypt her message was actually \emph{Bob's} public key? Without being sure, they can fall foul to a \ac{mitm} attack.
 
-As we have mentioned before, Alice and Bob have never met. However, they would like to be sure that they are talking to each other. If they don't ensure they are talking to each other, Mallory can perform a \ac{mitm} attack. Mallory is able to intercept messages sent from Alice to Bob. To Alice, she will imitate Bob, and to Bob, she will imitate Alice. By exchanging keys with both, she can fool Alice and Bob into sending their secret messages to her without ever knowing.
+As Mallory is aware of the protocol that Alice and Bob are using (again referring to Kerckhoffs' principle) she can appear to Bob to Alice and, likewise, appear as Alice to Bob. By providing a public key to Alice and using Bob's public key to establish a secure communication, Mallory can take full control of the protocol. 
 
-As we will see later, authentication will play a crucial role in a \ac{QKD} system.
+Alice will send a message to Mallory, thinking it was Bob, is able to decrypt the message into plain text. Mallory can then forward the message to Bob, using his public key, without either of them knowing that their message was compromised. 
+
+Specific authentication protocols are beyond the scope of this thesis. However, we will note that their importance in modern communication is paramount and remains a prevalent discussion for the future of cryptography. 
+
+%The reader is encouraged to learn more that a variant of \ac{aes} is often used for authentication and the digital signature algorithm is used for public-key cryptography. 
+
+%In modern day cryptography, protocols rely on trusted third parties who verify the authenticity of users. However, this system is far from infallible. Nevertheless, it is hugely important.
+
+%Until this point, we have discussed how Alice and Bob and create ciphertext that would deceive Eve. However, we also need to be aware that Mallory is more cunning than Eve. 
+
+%As we have mentioned before, Alice and Bob have never met. However, they would like to be sure that they are talking to each other. If they don't ensure they are talking to each other, Mallory can perform a \ac{mitm} attack. Mallory is able to intercept messages sent from Alice to Bob. To Alice, she will imitate Bob, and to Bob, she will imitate Alice. By exchanging keys with both, she can fool Alice and Bob into sending their secret messages to her without ever knowing.
+
+%As we will see later, authentication will play a crucial role in a \ac{QKD} system.
 
 \subsection{Post-Quantum Cryptography}
 
-Post-quantum cryptography falls under the umbrella term of \brisred{quantum-safe} cryptography which encompasses key exchange protocols which are thought (or proven) to be secure against attacks that use a quantum computer. Instead of relying on problems such as discrete logarithm or factoring, which are known to be efficiently solved with Shor's algorithm, the protocols utilise problems that are thought to be hard even on a quantum processor. However, much like a proof of RSA's security in classical computing has eluded mathematicians, proof of security for post-quantum algorithms in both quantum and classical regimes has not yet been established.
+In light of recent advances in quantum computing architectures \cite{arute2019quantum}, it is become more realistic that current public-key cryptography will become vulnerable to Shor's algorithm \cite{shor1994} in the near future. To counter these advances, \brisred{post-quantum} algorithms have been suggested as alternatives that will remain secure even against quantum computers. These algorithms used the same classical computers and networks, but are based on different problems. These algorithms are part of \brisred{quantum-safe} cryptography.
 
-There are a number of examples in which quantum algorithms that were thought to be hard against quantum computers turned out to be broken using classical computers \checkthis{Can't remember the algorithm}. \Ac{nist} in the US has been developing standards for public-key algorithms for security against quantum computers and processors.
+Since November 2017, \ac{nist} has been developing a new public standard for post-quantum algorithms. The process invited protocols to be submitted for assessment. In total 82 candidates were submitted, of which 69 were accepted as the first round candidates \cite{alagic2019status}. Finalists are expected to be selected in 2020.
 
-Some interest proposals were made with RSA that would be easy for a classical computer but hard for a quantum computer. The protocol aimed to exploit the difficulty in loading data into a quantum machine which would bottleneck the operation. However, the scheme used many small RSA number making it easy to break on a classical computer \checkthis{Find this protocol and analysis}.
+Proving the security of an algorithm remains challenging, particularly against quantum computers. A recent algorithm, \textit{Soliloquy}, that was a lattice-based algorithm created by researchers at \ac{gchq}. After a brief development between 2010 and 2013, a quantum algorithm was discovered that would efficiently break the cipher. The story was published as a cautionary tale for future algorithms. A paper from Peter Shor that claimed to efficiently break lattice-based cryptography was quickly withdrawn following a mistake\cite{eldar2016efficient}. Such developments demonstrate the rapidly changing landscape of modern cryptography.
+
+% for security against quantum computers and processors. A status report has recently been 
+
+%Post-quantum cryptography falls under the umbrella term of \brisred{quantum-safe} cryptography which encompasses key exchange protocols which are thought (or proven) to be secure against attacks that use a quantum computer. Instead of relying on problems such as discrete logarithm or factoring, which are known to be efficiently solved with Shor's algorithm, the protocols utilise problems that are thought to be hard even on a quantum processor. However, much like a proof of \ac{rsa}'s security in classical computing has eluded mathematicians, proof of security for post-quantum algorithms in both quantum and classical regimes has not yet been established.
+
+%There are a number of examples in which quantum algorithms that were thought to be hard against quantum computers turned out to be broken using classical computers \checkthis{Can't remember the algorithm}. 
+
+%Some interest proposals were made with RSA that would be easy for a classical computer but hard for a quantum computer. The protocol aimed to exploit the difficulty in loading data into a quantum machine which would bottleneck the operation. However, the scheme used many small RSA number making it easy to break on a classical computer \checkthis{Find this protocol and analysis}.
 
 \subsection{Cryptanalysis}
-\label{sec1:cryptanalysis}
 
-Cryptography has been crucial to society and at some points critical to historical development. Had the Zimmermann telegram not been decipher, the United States may have never joined WWI.
+\brisred{Cryptanalysis} aims to test the integrity of a cryptographic system and find weaknesses. This may be to analyse the mathematical problems which form the basis of the security of an algorithm or it may be testing the physical implementation. Successful cryptanalysis has been performed throughout history, mainly motivated through war, and may have even changed the course of history.
 
-This is the research into how encryption can be broken. Simple ciphers can easily be broken by comparing the ciphertext to the percentage of each letter used. As \texttt{`e'} is the most common letter in the English language, it follows that if a monoalphabetic cipher is used, then the most common letter in a passage is likely to be decoded to \texttt{`e'}.
+A notable example of cryptanalysis was during WWI in the form of the Zimmermann telegram \cite{zimmermann1917}. The message, intended to form an alliance between Germany and Mexico, was intercepted and deciphered by British intelligence. The United States, who were neutral at the time, joined the war three months later.
 
-Parts of the enigma code were broken in WWII when the German's would send the same message ever morning \cite{hodges2012alan}. The British would even deliberately fly planes to force messages that they could decipher.
+The most well known example of cryptanalysis was in Bletchley Park during the second world war. Hut 8 was specifically designated to analysis the enigma machine that was being used by the Axis powers \cite{hodges2012alan}. The team used \emph{cribs}, plain text that was suspected to be in a cipher text, with great success to break enigma codes. Such messages included ``nothing to report'' and physical intervention was even used to force the German Navy to send cribs \cite{hodges2012alan}. This work eventually led to Turning developing the first computer from the Polish Bombes.
 
-\section{Quantum Theory}
+%\label{sec1:cryptanalysis}
+%
+%For some of the system above, we have discuss their security. \brisred{Cryptanalysis} is the process of assessing the security of a system. 
+%
+%Cryptography has been crucial to society and at some points critical to historical development. Had the Zimmermann telegram not been decipher, the United States may have never joined WWI.
+%
+%This is the research into how encryption can be broken. Simple ciphers can easily be broken by comparing the ciphertext to the percentage of each letter used. As \texttt{`e'} is the most common letter in the English language, it follows that if a monoalphabetic cipher is used, then the most common letter in a passage is likely to be decoded to \texttt{`e'}.
+%
+%Parts of the enigma code were broken in WWII when the German's would send the same message ever morning \cite{hodges2012alan}. The British would even deliberately fly planes to force messages that they could decipher.
 
-At the turn of the 20\textsuperscript{th}, physics was built upon Newtonian mechanics, Maxwell's equations and statistical mechanics. 
+%\section{Quantum Theory}
+%
+%At the turn of the 20th, physics was built upon Newtonian mechanics, Maxwell's equations and statistical mechanics. 
+%
+%\subsection{Linear Algebra}
+%
+%To be able to introduce quantum theory, we first need to introduce some linear algebra which provides much of the language of quantum mechanics.
 
-\subsection{Linear Algebra}
+\section{Quantum Information}
 
-To be able to introduce quantum theory, we first need to introduce some linear algebra which provides much of the language of quantum mechanics.
+Exploiting quantum mechanical processes gives rise to a new information theory called \brisred{quantum information}. Using quantum phenomena, we introduce quantum bits (qubits) as a generalisation of the bits that are typically used in classical computing.
+
+The success of quantum mechanics to describe the physical world has yet to be beaten. 
+
+The quantum computer concept had been suggested in the 1980s by Yuri Manin \cite{manin1980computable} and Richard Feynman \cite{feynman1982simulating}.
+
+Divincenzo's criteria \cite{divincenzo2000physical}.
+
+Despite the success of describe the physical world, quantum mechanics remains a mathematical framework from which physical laws can be derived. 
+
+Quantum mechanics can be seen as a generalised probability theory and was born out of mathematics. While quantum mechanics 
+
+The ideas create a framework to describe physical systems which rests on four postulates:
 
 \subsection{Quantum Mechanics}
 
-Quantum mechanics can be seen as a generalised probability theory and was born out of mathematics. The ideas create a framework to describe physical systems which rests on four postulates:
+The postulates of quantum mechanics are not quite axiomatic, but rather guidelines for developing a more comprehensive framework for a particular system. The postulate are what connects the mathematical framework of quantum mechanics to physical systems.
 
-\begin{itemize}
-	\item[] \textbf{Postulate 1:} The state defined the quantum system
-	\item[] \textbf{Postulate 2:} The state evolves in time
-	\item[] \textbf{Postulate 3:} Measurements of quantum systems
-	\item[] \textbf{Postulate 4:} System can be combined into composite systems
-\end{itemize}
+\subsubsection*{Postulate 1: The State Space}
 
-\subsubsection{No-Cloning Theorem}
+The first postulate concerns the state of the system. Any closed quantum system exists in a Hilbert space, $\mathcal{H}$, which is known as the state space of the system. The system is described by a vector of unit length within $\mathcal{H}$. Any vectors that differ by a global factor represent the same state.
 
-A fundamental theorem in quantum mechanics is the {\color{bristol-red} no-cloning theorem} which will also underpin the security of \ac{QKD}. The general principle of the theorem states that there is no physical process that copies, or clones, an arbitrary quantum state. We can state this more formally:
+Of course, the postulate doesn't tell us which Hilbert space to choose for our particular quantum system. Nor does it give the vector associated with our quantum state. To answer such questions, one must consult theories such as quantum electrodynamics. The simplest spaces and states are those found in quantum information which is restricted to two-level systems. The states are called \brisred{qubits} and take the general form
 
-\begin{theorem}[No-Cloning Theorem]
-	 The no-cloning theorem states that there is no quantum channel, $\mathcal{E}$, from $M(\mathbb{C}^d)$ to $M(\mathbb{C}^d) \otimes M(\mathbb{C}^d)$ such that
-	 \begin{equation*}
-	 	\mathcal{E}(\ket{\psi}\bra{\psi}) = \ket{\psi}\bra{\psi} \otimes \ket{\psi}\bra{\psi}
-	 \end{equation*}
-	 for all states $\ket{\psi} \in \mathbb{C}^d$.
-\end{theorem}
+\begin{equation}
+	\ket{\psi} = \alpha\ket{0} + \beta\ket{1}
+\end{equation} 
+where $\ket{0}$ and $\ket{1}$ form an orthonormal basis with the Hilbert space and are called the computational basis. $\alpha$ and $\beta$ are complex numbers which satisfy $|\alpha|^2 + |\beta|^2 = 1$ so that the state has unit length.
 
-\subsection{Quantum Information}
+\subsubsection*{Postulate 2: Quantum State Evolution}
+
+Closed quantum systems evolution is described by the second postulate. It states that quantum states evolve through unitary transformations. The state at some time $t_2$ is related to the state at an earlier time $t_1$ by a unitary operator i.e.
+
+\begin{equation}
+	\ket{\psi_{t_2}} = \hat{U}\ket{\psi_{t_1}}
+\end{equation}
+
+When one is concerned with the time evolution of a quantum system, it is described by the Shr\"{o}dinger equation,
+
+\begin{equation}
+	i \hbar \frac{\mathrm{d}\ket{\psi}}{\mathrm{d}t} = \hat{H}\ket{\psi}
+\end{equation}
+where $\hbar$ is Plank's reduced constant and $\hat{H}$ is the Hamiltonian of the system. If the Hamiltonian of a system is known, then we can completely describe its dynamics. The Hamiltonian is a hermitian operator meaning that the unitary transformation is given by
+
+\begin{equation}
+	\hat{U} = \mathrm{e}^{-\nicefrac{i(t_2 - t_1)\hat{H}}{\hbar}}
+\end{equation}
+
+\subsubsection*{Postulate 3: Measurement of the State}
+
+Contrary to classical system, where the state can, in principle, be measured with arbitrary accuracy, quantum mechanics is inherently random. Before describing the measurement process, we will introduce \brisred{observables}. Physical quantities in a quantum system are given by the observables which are a self-adjoint operators on $\mathcal{H}$. The spectral theorem gives a decomposition of a $d$-dimensional observable $\hat{A}$ as 
+
+\begin{equation}
+	\hat{A} = \sum_{i=1}^d \lambda_i \ket{e_i}\bra{e_i} = \sum_{i=1}^d \lambda_i \hat{P}_{\lambda_i}
+\end{equation}
+where the \brisred{eigenvectors} are the set $\{\ket{e_1},\ldots ,\ket{e_d}\}$ associated with the \brisred{eigenvalues} $\{\lambda_1,\ldots ,\lambda_d\}$. $\hat{P}_{\lambda_i}$ is the \brisred{eigenprojector} associated to the eigenvalue $\lambda_i$.
+
+To describe measurements of a quantum state, we will introduce a \ac{pvm} over a set $\{\lambda_1, \ldots, \lambda_n\}$. The \ac{pvm} is given by a collection of projections $\{\hat{P}_{\lambda_1},\ldots,\hat{P}_{\lambda_n}\}$ over the subsets of the Hilbert space $\mathcal{H}$ such that
+
+\begin{enumerate}
+	\item The projections are orthogonal i.e. $\hat{P}_{\lambda_i}\hat{P}_{\lambda_j} = \delta_{ij}\hat{P}_{\lambda_i}$
+	\item The projections are complete i.e. $\sum_{i=1}^n \hat{P}_{\lambda_i} = \hat{\mathbb{I}}$
+\end{enumerate}
+
+Measurements on a quantum system, $\ket{\psi}$ have outcomes $\{\lambda_1, \ldots, \lambda_N\}$ which are described by a \ac{pvm} on the Hilbert space $\mathcal{H}$. The outcome of the projection is random with a probability distribution
+
+\begin{equation}
+	P(\lambda_k) = |\hat{P}_{\lambda_k}\ket{\psi}|^2 = \bra{\psi}\hat{P}_{\lambda_k}\ket{\psi}
+\end{equation}
+
+Given that the outcome of the measurement was $\lambda_k$, the resulting state after normalisation will be
+
+\begin{equation}
+	\ket{\psi'} = \frac{\hat{P}_{\lambda_k}\ket{\psi}}{|\hat{P}_{\lambda_k}\ket{\psi}|}
+\end{equation}
+
+This postulate describes the inherent randomness in quantum mechanics. The amount of information that we can gain by measuring a quantum state or system is limited regardless of the precision of the measurement device. It also raises the question of how the state is disturbed during measurement. The measurement process gives rise to different interpretations of quantum mechanics which are beyond the scope of this thesis.
+
+%This postulate is generally known as the Born rule \cite{Born1926}.
+
+\subsubsection*{Postulate 4: Composite Systems}
+
+The final postulate allows us to describe systems that are made from more than one state. Any composite quantum states exist in a Hilbert space that is the tensor product of the Hilbert spaces of the individual states. If each of $N$ states is prepared individually, the combined state is simply
+
+\begin{equation}
+	\ket{\psi} = \ket{\psi_1}\otimes\cdots\otimes\ket{\psi_N}
+\end{equation}
+
+This postulate also applies to states that are not simply the product of individual states i.e. not \emph{product} states. Such states are called \brisred{entangled} states. This will be discussed further below.
+
+\subsection{Quantum Bits and Entanglement}
 
 \begin{figure}
 	\centering
 	\def\svgwidth{0.4\textwidth}
    	\import{chapters/chapter02/fig02/}{Bloch_Sphere.pdf_tex}
-   	\caption[Bloch sphere representation of a qubit]{Bloch Ball representation of the state $\ket{\psi}$. We introduce the real variables $0\le\theta\le\pi$ and $0\le\varphi<2\pi$.}
+   	\caption[Bloch sphere representation of a qubit]{Bloch Ball representation of the qubit state $\ket{\psi}$. We introduce the real variables $0\le\theta\le\pi$ and $0\le\varphi<2\pi$ where an unphysical global phase has been omitted.}
    	\label{fig:bloch}
 \end{figure}
 
-Exploiting quantum mechanical processes gives rise to a new information theory called {\textcolor{bristol-red} quantum information}. Using quantum phenomena, we introduce quantum bits (qubits) as a generalisation of the bits that are typically used in classical computing.
-
-In general, a quantum bit is of the form 
+Similar to how information is represented as bits in classical computers, we can introduce the concept of a \brisred{quantum bit}, which we will call \brisred{qubits}. As mentioned above, qubits are two-level systems that exist in $\mathcal{H}_2$ where we introduce the orthonormal basis $\ket{0}$ and $\ket{1}$, called the computational basis. In general, a qubit is of the form 
 
 \begin{equation}
 	\ket{\psi} = \alpha\ket{0} + \beta\ket{1}
@@ -306,9 +518,9 @@ where $|\alpha|^2 + |\beta|^2 = 1$. Equivalently, we can write
 \begin{equation}
 	\ket{\psi} = \cos\left(\nicefrac{\theta}{2}\right)\ket{0} + e^{i\varphi}\sin\left(\nicefrac{\theta}{2}\right)\ket{0}
 \end{equation}
-where $\theta$ and $\varphi$ as shown in figure \ref{fig:bloch}.
+where $0\le\theta\le\pi$ and $0\le\varphi<2\pi$ as shown in figure \ref{fig:bloch}. To account for mixed states, this representation is a ball, rather than a sphere. Pure states exist on the surface on the ball, while mixed states exist within.
 
-We introduce the observables 
+We introduce the Pauli matrixes which form the observables of qubits: 
 
 \begin{equation}
 	\hat{x} = \left(\begin{matrix}
@@ -326,47 +538,143 @@ We introduce the observables
 		0 & -1
 	\end{matrix}\right)
 \end{equation}
+which are given in the computational basis. 
 
-\subsubsection{Time-bin Encoding}
-
-For communication protocols, we will find it useful to encode information using time and phase of quantum states as it is generally less susceptible to fluctuations in real-world fibres.
-
-\subsection{Quantum Photonics}
-
-Fock states
-
-Coherent states are very useful and are given by
+As per postulate 4, we can form composite systems through the tensor product of individual qubits for form more complex systems. Given two qubits,
 
 \begin{equation}
-	\ket{\alpha} = \mathrm{e}^{-\frac{|\alpha|^2}{2}} \sum_{n=0}^\infty \frac{\alpha^n}{\sqrt{n}} \ket{n} 
+	\ket{\psi} = \alpha\ket{0} + \beta\ket{1} \quad \text{and} \quad \ket{\phi} = \delta\ket{0} + \gamma\ket{1}
+\end{equation} 
+that were prepared individually, the composite system is
+
+\begin{equation}
+	\ket{\psi}\ket{\phi} = \alpha\delta\ket{00} + \alpha\gamma\ket{01} + \beta\delta\ket{10} + \beta\gamma\ket{11}
 \end{equation}
+which exists in the Hilbert space $\mathcal{H}_4$. Equally, we could consider a state that was prepared in $\mathcal{H}_4$ that is not a product state. Then general form of such a state is
+
+\begin{equation}
+	\ket{\Psi} = a\ket{00} + b\ket{01} + c\ket{10} + d\ket{11}
+\end{equation}
+where we are only constrained by normalisation conditions that $|a|^2 + |b|^2 + |c|^2 + |d|^2 = 1$. This allows us to introduce the states
+
+\begin{align}
+	\label{eq:BellStateStart}
+	\ket{\Phi^+} &= \frac{\ket{00} + \ket{11}}{\sqrt{2}}\\
+	\ket{\Phi^-} &= \frac{\ket{00} - \ket{11}}{\sqrt{2}}\\
+	\ket{\Psi^+} &= \frac{\ket{01} + \ket{10}}{\sqrt{2}}\\
+	\ket{\Psi^-} &= \frac{\ket{01} - \ket{10}}{\sqrt{2}}
+	\label{eq:BellStateEnd}
+\end{align}
+which are \brisred{entangled} and form the \brisred{Bell basis}. If we consider measuring the Bell states, perhaps in the computational basis, we will find the outcomes will random but always exactly correlated. In fact, we would find that the outcomes would be correlated for any basis choice.
+
+These states were first introduced in the seminal paper by Einstein, Podolsky and Rosen in 1935 \cite{einstein1935can}, but it was Schr\"{o}dinger who coined the term
+
+\begin{quote}
+\textit{``I would not call [entanglement] one but rather the characteristic trait of quantum mechanics, the one that enforces its entire departure from classical lines of thought.''}\sourceatright{ - Erwin Schrödinger \cite{schrodinger1935discussion}}
+\end{quote}
+
+It wasn't until 1964 that a method to test whether entanglement was non-classical was proposed by John Bell who placed a bound on correlations between systems \cite{Bell1964Einstein}. From the theory proposed by Bell, Clauser, Horne, Shimony and Holt proposed an experiment in 1969 that would verify the theorem \cite{CHSH}. This usually takes the form
+
+\begin{equation}
+	S = E(a,b) - E(a, b') + E(a',b) + E(a',b') \le 2
+\end{equation}
+where $E$ is the expectation value for $\{a,a'\}$ measurements on the first state and $\{b,b'\}$ on the second. This bound has been violated numerous times experimentally, most notably in 2015 when three separate experiments closed all loopholes \cite{Giustina2015, shalm2015, hensen2015}.
+
+\subsubsection{Encoding}
+
+How $\ket{0}$ and $\ket{1}$ are encoded will depend on the physical system being used. Some notable examples of encoding are electron spins; nuclear spins; photon path, polarisation or timing; and superconducting flux. Each has their own benefits and drawbacks and will be suited for different tasks in quantum information processing. 
+
+Of course, for quantum communication we will be interested in sending quantum information between distant parties, Alice and Bob. Light is already fundamental in modern communications networks. By considering single-photons, we can encode qubits that are compatible with much of the existing network architecture.
+
+% for which photons will are well suited. The encodings for photons will be discussed further below.
+
+%However, interactions between photons remains challenging meaning other encodings are more widely explored for quantum computing applications.
+
+%For communication protocols, we will find it useful to encode information using time and phase of quantum states as it is generally less susceptible to fluctuations in real-world fibres.
+
+\subsection{No-Cloning Theorem}
+
+A fundamental theorem in quantum mechanics is the {\color{bristol-red} no-cloning theorem} which will also underpin the security of \ac{QKD}. The general principle of the theorem states that there is no physical process that copies, or clones, an arbitrary quantum state. We can state this more formally:
+
+%\begin{theorem}[No-Cloning Theorem]
+%	 The no-cloning theorem states that there is no quantum channel, $\mathcal{E}$, from $M(\mathbb{C}^d)$ to $M(\mathbb{C}^d) \otimes M(\mathbb{C}^d)$ such that
+%	 \begin{equation*}
+%	 	\mathcal{E}(\ket{\psi}\bra{\psi}) = \ket{\psi}\bra{\psi} \otimes \ket{\psi}\bra{\psi}
+%	 \end{equation*}
+%	 for all states $\ket{\psi} \in \mathbb{C}^d$.
+%\end{theorem}
+
+\begin{theorem}[No-Cloning Theorem]
+	 The no-cloning theorem states that there is no unitary transformation such that
+	 \begin{equation}
+	 	\hat{U}\ket{\psi}\ket{a} = \ket{\psi}\ket{\psi}
+	 \end{equation}
+	 for an arbitrary quantum state $\ket{\psi}$ and an ancillary quantum state $\ket{a}$.
+\end{theorem}
+
+Consider two arbitrary quantum states $\ket{\psi}$ and $\ket{\phi}$. Let us assume that there is a unitary that allows us to copy a quantum state
+
+\begin{align}
+	\hat{U}\ket{\psi}\ket{a} &= \ket{\psi}\ket{\psi}\\
+	\hat{U}\ket{\phi}\ket{a} &= \ket{\phi}\ket{\phi}
+\end{align}
+
+If we compare the overlap of the states on the left and right of the equation we find
+
+\begin{equation}
+	\braket{\psi|\phi} = \left(\braket{\psi|\phi}\right)^2
+\end{equation}
+which requires the $\ket{\psi}$ and $\ket{\phi}$ to either be identical or orthogonal. Therefore, we cannot clone an \emph{arbitrary} quantum state.
 
 \subsection{Quantum Computing}
 
-To motivate the introduction of quantum-secure communication, we will introduce some concepts and protocols in quantum computing. While quantum computing has been a big motivator for moving to new encryption, we still have no assurances that the trap-door functions we rely on for security are secure even against classical computers.
+To motivate the introduction of quantum-safe communication, we will introduce some quantum computing algorithms. While the progression in quantum computing has played a large part in the motivation of quantum-safe cryptography, it is not the only factor. However, the an algorithm that will break out cryptography provides a very tangible reason to replace public-key algorithms.
 
-Shor's algorithm efficiently factors composite numbers into their prime factors \cite{shor1994}. Both RSA and Diffie-Hellman are vulnerable to attacks from a quantum computer using Shor's algorithm. The estimated number of physical qubits needed to factor RSA-2048 has reduced drastically in recent years from 1 billion \cite{mosca2018, fowler2012} to 20 million \cite{gidney2019}. While the task is still daunting, it is more reasonable.
+%While quantum computing has been a big motivator for moving to new encryption, we still have no assurances that the trap-door functions we rely on for security are secure even against classical computers.
 
-Grover's algorithm could also be used to search through keys in a block cipher protocol. However, the speed-up is only $\sqrt{n}$ which has been proven as optimal on a quantum computer \cite{Bennent1997} . Therefore, the same security in a post-quantum world can be achieved by doubling the key length i.e. moving from 128 bit to 256 bit \ac{aes}.
+Shor's algorithm efficiently factors composite numbers into their prime factors \cite{shor1994}. Both \ac{rsa} and Diffie-Hellman are vulnerable to attacks from a quantum computer using Shor's algorithm. The estimated number of physical qubits needed to factor \ac{rsa}-2048 has reduced drastically in recent years from one billion \cite{mosca2018, fowler2012} to twenty million \cite{gidney2019}. A state-of-the-art quantum processor was recently demonstrated with fifty qubits \cite{arute2019quantum}. While very far away from the estimates, it is a necessary first step towards ubiquitous quantum computers.
+
+Grover's algorithm could also be used to search through keys in a block cipher protocol \cite{grover1996fast}. However, the speed-up is only $\sqrt{n}$ which has been proven as optimal any computer \cite{Bennent1997}. Therefore, the same security in a post-quantum world can be achieved by doubling the key length i.e. moving from 128 bit to 256 bit \ac{aes}.
 
 \section{Quantum Key Distribution}
+
+\Acf{QKD} is a fundamentally new method of key exchange by exploiting quantum mechanics to ensure security that is guaranteed by the laws of physics. It falls under the umbrella of \brisred{quantum safe} cryptography and, together with post-quantum cryptography, is likely to form a crucial part of future global networks.
+
+Unlike the public-key protocols introduced in section \ref{sec1:crypto}, \ac{QKD} does not rely on assumed computationally hard trapdoor functions. Instead, the security is based on the no-cloning theorem and, with minimal assumptions, can provide information-theoretic secure key exchange.
+
+The concept for \ac{QKD} was derived idea developed in the 1960's by Stephen Wiesner. However, this wouldn't be published until 1983 \cite{quantum_money}. Through \emph{conjugate coding} Wiesner developed two schemes. The first allowed Alice to send two messages to Bob, but Bob could only choose to read one message depending on his basis. Upon measurement, the other message would be destroyed.
+
+The second idea allow uncounterfeitable money to be created based simply on the superposition principle. By introducing two sets of orthogonal states, \{$a$, $b$\} and \{$\alpha$, $\beta$\} where
+
+\begin{equation}
+	\alpha = \frac{a+b}{\sqrt{2}} \quad \text{and} \quad \beta = \frac{a-b}{\sqrt{2}}
+\end{equation}
+banks could print a serial number on each note made from the four states. The basis choice associated with each qubit would be stored in the bank records. Upon return of a note, the bank would be able to measure each qubit in the correct basis to verify that it was the original. Any attempt to counterfeit a note would result in errors during the verification. 
+
+%There are many different ways that information can be encoded on photons. This had led to quite a few different protocols. Here we will discuss 
+
+In a \ac{QKD} protocol, we will introduce a new resource that is available to Alice and Bob:  a quantum channel. This channel allows Alice to send quantum states to Bob. We well of course assume that the channel is prone to errors but we need not assume that the channel is private. Both Eve and Mallory will have full access. Uniquely, \ac{QKD} offers the ability to detect an eavesdropper as measurements of quantum states causes them to collapse.
+
+As with public-key cryptography, we will require an \emph{authenticated} classical channel between Alice and Bob to avoid \ac{mitm} attacks. This classical channel, as with the quantum channel, can be completely public. The authentication of the classical channel is something that is not solved with \ac{QKD} and will need to utilise post-quantum algorithms. As Alice and Bob will require some initial bit of shared secret to authenticate their messages, \ac{QKD} is sometimes referred to as quantum key \emph{expansion}. 
+
+As the security of \ac{QKD} systems stems from physical properties it has often been claimed to be \emph{perfectly} secure. However, we will see later that side-channels or imperfections in physically implementations will decrease the security. It is perhaps more accurate to say that, provided that the key is securely stored following a protocol, the security of that key does not decrease with advances in computing. 
+
+%Of course, we will need to be aware that Eve and Mallory are listening and trying to gain valuable secret information.
+
+%In this section, we will introduce the main concepts behind \ac{QKD} and some of the original protocols. 
+
+\subsection{Protocols}
+
+\Ac{QKD} protocols are generally separated into three distinct categories: \acf{dvqkd}, \acf{cvqkd} and \acf{dprqkd}. Here, we will introduce each with discussion of how qubits are encoded and the practicalities of each.
+
+\subsubsection{Discrete-Variable}
 
 \begin{figure}
 	\centering
 	\def\svgwidth{0.9\textwidth}
    	\import{chapters/chapter02/fig02/}{qkd_encoding.pdf_tex}
-   	\caption[\acs{dvqkd} and \acs{cvqkd} encoding]{\acs{dvqkd} and \acs{cvqkd} encoding.}
+   	\caption[\acs{dvqkd} and \acs{cvqkd} encoding]{States used to encode information for \acs{dvqkd} and \acs{cvqkd}.}
 \end{figure}
-
-\Acl{QKD} is a fundamentally new method of key exchange by exploiting quantum mechanics to ensure security that is guaranteed by the laws of physics. It comes under the umbrella of \brisred{quantum safe} cryptography and, together with \brisred{post-quantum} cryptography, will form a crucial part of future global networks.
-
-Unlike key exchange protocols (such as those discussed in section \ref{sec1:crypto}), it does not rely on assumed mathematically hard trapdoor functions. Instead, the security is based on the no-cloning theorem and 
-
-There are many different ways that information can be encoded on photons. This had led to quite a few different protocols. Here we will discuss 
-
-The resources available to the two parties, Alice and Bob, are a quantum communication channel that can be used to send quantum states and an authenticated, public classical channel. Of course, we will need to be aware that Eve and Mallory are listening and trying to gain valuable secret information.
-
-\subsection{Discrete-Variable}
 
 The first ways that it was conceived that information could be encoded on photons was using orthogonal states to represent 0 or 1. For example, one could use the vertical and horizontal polarisations of a photon where diagonal and anti-diagonal could be used to encode superpositions. 
 
@@ -374,36 +682,117 @@ A more practical method of encoding information when intending to use fibre opti
 
 \subsubsection*{BB84}
 
-The first \ac{QKD} protocol that was developed was the BB84 protocol, named after its inventors: Bennett and Brassard \cite{BB84}. The protocol stemmed from an earlier idea of quantum money \cite{quantum_money}.
+The first \ac{QKD} protocol that was developed was the \ac{bb84} protocol, named after its inventors \cite{BB84} which was demonstrated in a proof-of-principle experiment a few years later \cite{bennett1992experimental}. Since then, there have been numerous demonstrations of \ac{bb84} either demonstrating new platforms or realising backbone quantum networks \cite{pirandola2019advances}. \Ac{bb84} remains a favourite choice for systems despite alternative protocols being available \cite{sarg2004, DPS-QKD, COW-QKD, B92}.
+
+We will introduce the four states
+
+\begin{equation}
+	\ket{0}, \quad \ket{1}, \quad \ket{+} = \frac{\ket{0} + \ket{1}}{\sqrt{2}}, \quad \text{and} \quad \ket{-} = \frac{\ket{0} - \ket{1}}{\sqrt{2}}
+\end{equation}
+that we will refer to as the \ac{bb84} states.
 
 This protocol is typically referred to as {\color{bristol-red}prepared-and-measure}. Alice and Bob play complementary roles. Alice {\color{bristol-red}prepares} a quantum state which she sends to Bob who {\color{bristol-red}measures} the state in a predefined way. 
 
-There are many other prepares and measure protocols which have been developed over the years such as \ac{cow} \cite{COW-QKD} and \ac{dps} \cite{DPS-QKD}.
+\begin{algorithm}[Bennett-Brassard 1984]
+\begin{enumerate}
+	\item Alice generates two uniform and random bit strings, $b_a$ and $n$. The first bit string will determines the basis, Z = \{$\ket{0}$,$\ket{1}$\} if 0 or X =  \{$\ket{+}$,$\ket{-}$\}. The second bit string $n$ determines whether the first or second state in each basis is chosen. 
+	\item Each state is sent sequentially to Bob via the quantum channel.
+	\item Similarly, Bob generates a bit string, $b_b$ uniformly and random. This determines either the X or Z basis in which to measure. These are equivalent to the Pauli $\hat{x}$ and $\hat{y}$ observables introduced earlier.
+	\item Bob measures each of the bits in turn using the randomly selected bases and records the outcomes.
+	\item Alice and Bob announce their basis bit strings, $b_{a,b}$, over the authenticated classical channel. They discard all events where the bases didn't match.
+	\item Using some of the remaining events, they compare their values to check for eavesdropping. If an unacceptable amount do not match, they abort the protocol.
+	\item Finally, privacy amplification can be applied to satisfy security requirements.
+\end{enumerate}
+\end{algorithm}
+
+Upon successfully finishing a \ac{bb84} protocol, Alice and Bob share a symmetric key. If they wished, they could use a \ac{otp} cipher to ensure information-theoretic secure communication. However, as one bit of key is needed to encrypt each bit of message, more pragmatic systems will implement a block cipher. 
+
+\subsubsection*{BB84 with Decoy States}
+
+As single-photon sources remain technically challenge to engineering, \ac{QKD} system have preferred using weakly attenuated laser pulses to generate \acp{wcs}. However, as \ac{wcs} have a distribution of photon numbers, it opens the system up to a \ac{pns} attack. 
+
+In such an attack, we assume that Mallory has access to a device that can make a non-demolition of the photon number of the state. She will block each state which contains zero or one photons, and for each multi-photon state will keep one photon in a memory until Alice and Bob announce the chosen bases. 
+
+One can consider the security of using \ac{wcs} in the \ac{bb84} protocol describe above. However, this will offer a far reduced secret key rate due to the information leakage \cite{Norbert2000Security, Brassard2000Limitations}. Instead, decoy state protocols have been developed allowing Alice and Bob to bound the knowledge that could have been accessed by Eve \cite{Lo2005}. 
+
+During the first step of the protocol, Alice will randomly modulate the intensity of her \ac{wcs}. Typically, Alice and Bob will agree on two decoy states that will be chosen to optimise the key rate depending on the error rate. As Mallory has no way to tell which decoy state Alice has sent, she is more likely to block the decoy states than the signal states. During the basis discussion stage, Alice and Bob can bound the number of true single-photon events and use that to inform how much privacy amplification is required, or to abandon the protocol altogether.
+
+Ideally, Alice and Bob would like to have perfect, unbiased estimators of the single-photon events in their key exchange. However, in a realistic exchange, they will necessarily have a finite number of events in which to estimate the parameters. Therefore, they must instead consider the finite key effects and calculate bounds on the single-photon statistics. 
 
 \subsubsection*{E91}
 
-Independently of the development of BB84, another protocol was developed by Ekert called E91 \cite{E91}. The protocol took advantage of the correlations of entangled photons and realised that by distributing two entangled photons between Alice and Bob meant that they could share a secret key. While it could be argues that this could be considered a prepare-and-measure scheme, we distinguish it so as to describe the use of entangled states.
+Independently of the development of \ac{bb84}, another protocol was developed by Artur Ekert in 1991 \cite{E91}. The \ac{e91} protocol takes advantage of the correlations of entangled states and realised that by distributing two entangled photons between Alice and Bob meant that their measurements would be correlated. Further, using Bell's test and CHSH measurements they could verify that an eavesdropper hadn't interfered with the states \cite{Bell1964Einstein, CHSH}. 
 
-\subsection{Continuous-Variable}
+\begin{algorithm}[Ekert 1991]
+\begin{enumerate}
+	\item Alice generates an entangled state, for example one of the Bell states in equations \ref{eq:BellStateStart} to \ref{eq:BellStateEnd}.
+	\item She sends one qubit from the state to Bob and keeps one for herself.
+	\item Alice and Bob independently and randomly choose one of the CHSH angles \cite{CHSH} in which to measure their qubit.
+	\item After a sufficient number of states, they each announce their basis choices while keeping the results secret.
+	\item They use a random set of the measurement results to calculate the $S$ and verify that the state was entangled.
+	\item If they can successfully violate a Bell inequality, the remainder of the events should be correlated.
+	\item Finally, they apply error reconciliation and privacy amplification as required.
+\end{enumerate}
+\end{algorithm}
 
-More recently there has been an interest in \ac{cvqkd} due to the compatibility with current telecomms equipments. The states are encoded in quadrature space and measured using homodyne receivers, much like how classical information is transmitter.
+As Alice and Bob are able to verify that the state is entangled, we don't need to assume that one of them is generating the entangled state. The protocol could be equally secure if Charlie, Eve or Mallory were generating the state. Any tampering with the state would only result in a reduction of key rate.
 
-There are still some questions about the security of \ac{cvqkd} and the practicality of the post-processing requirements. Unlike in \ac{dvqkd} where only successful measurements need to be analyse, each potential event needs to be analysed. This leads to big overheads during the error correction stages of the protocol.
+Entanglement-based protocols are often used as a method to prove the security of other prepare-and-measure protocols. For example, the chosen randomness used in a \ac{bb84} protocol is equivalent to a postponed measurement on an entangled state.
+
+\subsubsection{Continuous-Variable}
+
+More recently there has been an interest in \ac{cvqkd} due to the compatibility with current telecommunication equipment. Instead of \acp{spd}, Bob can use photodiodes to perform measurements on the states through homodyne (or heterodyne) detection. 
+
+\Ac{cvqkd} uses states that are described in Hilbert spaces of infinite dimension. Protocols have been proposed that encode information in Gaussian states \cite{Ralph1999} and squeezed states \cite{Hillery2000Quantum}. Both are considered prepare-and-measure schemes and the outline of the protocols remains the same.
+
+\begin{algorithm}[Continous-Variable Quantum Key Distribution]
+\begin{enumerate}
+	\item Alice encodes a random variable in a quantum state. In the case of Gaussian modulation, Alice encodes the information from a set of overlapping Gaussian states. In the case of squeezed state encoding, she randomly chooses between squeezing in the $\hat{x}$ and $\hat{p}$ quadratures.
+	\item The states are sent to Bob through the quantum channel which is typically assumed to be a thermal-loss channel.
+	\item Bob performs a homodyne (or heterodyne) measurement, switching between the $\hat{x}$ and $\hat{p}$ quadratures.
+	\item Alice and Bob use the classical channel to compare the quadratures they chose.
+	\item Using some of the matching bases, they perform parameter estimations to bound the knowledge that could have been gained by Eve or Mallory.
+	\item Finally, they perform privacy amplification as required.
+\end{enumerate}
+\end{algorithm}
+
+%Protocols date back to 1999  Instead of \acp{spd}, measurements can be achieved through homodyne measurements which is already used in modern networks. 
+
+%\Ac{cvqkd} can also be performed with squeezed states \cite{Hillery2000Quantum}.
+
+%\Ac{cvqkd} using states that are described in Hilbert spaces with infinite dimension. It is still a prepare-and-measure scheme. Bob requires a local oscillator which acts as a phase reference. The local oscillator needs to be distributed between Alice and Bob.
+
+%The states are encoded in quadrature space and measured using homodyne receivers, much like how classical information is transmitter.
+
+For homodyne detection to be meaningful, Alice and Bob need to make sure they share a local oscillator. This provides a phase reference so that the prepared states can be reconciled with the measured states. Often, the local oscillator is multiplex with the encoded state to avoid any mismatch in the phase fluctuations from the quantum channel \cite{jouguet2013experimental}.
+
+For a long time, there were questions about the security of the \ac{cvqkd} systems. There has since been a composable proof against general attacks \cite{Leverrier2015Composable} which was later extended to better consider finite key effects \cite{Leverrier2017Secrity}. The post-processing requirements for \ac{cvqkd} are also computationally challenging. Unlike in \ac{dvqkd}, where only photons that reach Bob require analysis, \ac{cvqkd} requires each potentially event to be analysed which leads to large overheads.
+
+%There are still some questions about the security of \ac{cvqkd} \cite{Scarani2009security} and the practicality of the post-processing requirements. Unlike in \ac{dvqkd} where only successful measurements need to be analyse, each potential event needs to be analysed. This leads to big overheads during the error correction stages of the protocol.
+
+\subsubsection{Distributed-Phase-Reference}
+
+\Ac{dprqkd} protocols were developed in order to solve practical issues with the security of \ac{QKD} systems when using realistic equipment \cite{diamanti2016practical}. As single-photon sources are not widely available, system typically use coherent states that are prone to \ac{pns} attacks. In \ac{dprqkd} protocols, the qubits are encoded in timing or relative phases of signals where a joint measurement of subsequent signals is required. Protocols include \ac{cow} \cite{COW-QKD} and \ac{dps} \cite{DPS-QKD}.
 
 \subsection{Hacking}
 
 \begin{table}[t]
 \centering
 \begin{tabular}{lll}
-	\textbf{Attack} & \textbf{Target} & \textbf{References}\\ 
-	\Acl{pns} & photon source &
+	\textbf{Attack}\hspace{4cm} & \textbf{Target}\hspace{4cm}  & \textbf{References}\\ 
+	Photon-number splitting    & Photon source          & 	\cite{Norbert2000Security, Brassard2000Limitations}  \\
+	Inter-symbol interference      & State modulation      & 	\cite{yoshino2018quantum}   \\
+	Trojan horse & Phase modulation      &   \cite{jain2014trojan, sajeed2017invisible} \\
+	Time-shift 		&	Single-photon detectors	& \cite{Qi2007Time} \\
+	Detector Blinding	&	Single-photon detectors 	&	\cite{Lydersen2010a, Gerhardt2011a}	\\
+	Laser damage	&	Any	& \cite{Makarov2016Creation}
 \end{tabular}
-\caption[Attacks demonstrated against \acs{QKD} systems]{Attacks demonstrated against \acs{QKD} systems.}
+\caption[Attacks demonstrated against QKD systems]{Attacks demonstrated against \acs{QKD} systems. Further details about the attacks, including countermeasures and bounds, can be found in refs. \cite{pirandola2019advances, xu2019quantum}.}
 \end{table}
 
 While \ac{QKD} is often claimed to be ``perfectly secure'' or ``unhackable'', this is only true under certain assumptions.  Mallory, however, is quite determined to gain any knowledge of the secret key. As the systems exist in the real world, the security of a key exchange is only as good as the security model. However, it is challenging to completely model every part of a system. This leaves side-channels, where sensitive information is leaked through uncharacterised channels such as sound or temperature.
 
-The first demonstration of \ac{QKD} by Bennett and Brassard was flawed due to polarisation dependent sounds from the power supplies. Brassard noted that their key exchange was ``perfectly secure against any eavesdropper who happened to be deaf'' \cite{Brassard2005}. 
+The first demonstration of \ac{QKD} by Bennett and Brassard was also the first to demonstrate side-channel attacks in a \ac{QKD} system: 
 
 \begin{quote}
 \textit{``…power supplies make noise, and not the same noise for the different voltages needed for different polarizations... Thus, our prototype was unconditionally secure against any eavesdropper who happened to be deaf!''} - Gilles Brassard \cite{Brassard2005}
@@ -441,12 +830,22 @@ In the search for a platform for \ac{QKD} protocols, we will need to define cert
 
 In this section, we will introduce two platforms for photonic integration: \ac{InP} and \ac{soi}.
 
+\subsection{Quantum Photonics}
+
+Fock states
+
+Coherent states are very useful and are given by
+
+\begin{equation}
+	\ket{\alpha} = \mathrm{e}^{-\frac{|\alpha|^2}{2}} \sum_{n=0}^\infty \frac{\alpha^n}{\sqrt{n}} \ket{n} 
+\end{equation}
+
 \subsection{Waveguides}
 
 \begin{figure}[t]
 	\centering
 	\includegraphics[width=0.8\textwidth]{./Integrated_optics/waveguides.pdf}
-	\caption[Main types of waveguide structures]{There are three main types of waveguides. The core is shown in purple while the cladding is shown in red. \textbf{a} Slab; \textbf{b} Rib; \textbf{c} Strip waveguides}
+	\caption[Main types of waveguide structures]{There are three main types of waveguide structures:  \textbf{a} Slab; \textbf{b} Rib; \textbf{c} Strip. The core is shown in purple while the cladding is shown in red.}
 	\label{fig:waveguides}
 \end{figure}
 
@@ -620,5 +1019,7 @@ There are also efforts to develop cross-platform electronic integration between 
 \section{Summary}
 
 In this background chapter we have introduced important cryptographic techniques, quantum theory and integrated photonics that will form the foundation for the remainder of this thesis.
+
+Introduced the humble beginnings of cryptography and how quantum theory has both required and facilitated new protocols.
 
 %=========================================================
