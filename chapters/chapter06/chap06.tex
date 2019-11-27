@@ -66,7 +66,7 @@ This method of \ac{pls} provides the base pulses for a \ac{QKD} system but encod
 \begin{sidewaysfigure}
 	\centering
 	\includegraphics[width=0.8\textwidth]{Laser_Seeding_gds.png}
-	\caption[\acs{InP} laser seeding transmitter with \acs{qrng}]{This shows the layout of the laser seeded transmitter device fabricated by \acs{hhi}. The optical components are shown in blue while the electrical connections are in red. The chip measures \SI{6x4}{mm} and contains two laser seeding prototype circuits, a homodyne \acs{qrng} and test structure to measure laser and waveguide performances. Wires are routed to the side of the chip to allow wirebonding. Light is converted from the waveguide mode to a \SI{10}{\um} mode with \acsp{ssc} at the side of the chip.}
+	\caption[InP laser seeding transmitter with \acs{qrng}]{This shows the layout of the laser seeded transmitter device fabricated by \acs{hhi}. The optical components are shown in blue while the electrical connections are in red. The chip measures \SI{6x4}{mm} and contains two laser seeding prototype circuits, a homodyne \acs{qrng} and test structure to measure laser and waveguide performances. Wires are routed to the side of the chip to allow wirebonding. Light is converted from the waveguide mode to a \SI{10}{\um} mode with \acsp{ssc} at the side of the chip.}
 	\label{fig:hhi_laser_seeding}
 \end{sidewaysfigure}
 
@@ -89,7 +89,7 @@ Without isolation between the master and slave laser, back reflections are a pot
 \begin{figure}[t]
 	\centering
 	\includegraphics[width=\textwidth]{./schematics/laser_seeding.pdf}
-	\caption[Schematic of fibre-based and on-chip \acs{pls}]{\textbf{a} Fibre schematic for \acs{pls}. A master laser provides a pulse which is attenuated and sent to the slave through a circulator. The slave then generates a pulse from this seed which is sent to the output. As there is no non-linearity to exploit for a circulator, the usual method of laser seeding cannot be achieved in integrated photonics. These are the simplest conceivable circuits to attempt \acs{pls} in a \acs{pic}. \textbf{b} The master can inject light through a \num{1x2} \acs{mmi} which also allows half of the slave light to the output. \textbf{c} The master and slave are in series. Light is injected into the rear \acs{DBR} of the slave which is also connected directly to the output.}
+	\caption[Schematic of fibre-based and on-chip PLS]{\textbf{a} Fibre schematic for \acs{pls}. A master laser provides a pulse which is attenuated and sent to the slave through a circulator. The slave then generates a pulse from this seed which is sent to the output. As there is no non-linearity to exploit for a circulator, the usual method of laser seeding cannot be achieved in integrated photonics. These are the simplest conceivable circuits to attempt \acs{pls} in a \acs{pic}. \textbf{b} The master can inject light through a \num{1x2} \acs{mmi} which also allows half of the slave light to the output. \textbf{c} The master and slave are in series. Light is injected into the rear \acs{DBR} of the slave which is also connected directly to the output.}
 	\label{fig:las_seed_schem}
 \end{figure}
 
@@ -123,7 +123,7 @@ where $f$ is the maximum frequency of operation and $E_r$ is the dielectric cons
 \begin{figure}[t]
 	\centering
 	\includegraphics[width=\textwidth]{HHI_PCB/HHI_PCB_render_2.png}
-	\caption[PCB breakout for an \acs{InP} integrated circuit]{PCB designed to connect the \acs{hhi} device to control and measurement equipment. The chip sits in the middle of the PCB so that RF track length can be minimised. RF lines are shielded with vias to create \acs{gcpw} for high bandwidth and are connected to edge-launch SMA connectors. DC lines are routed through a lower layer of the PCB and connected to an FFC receptacle. A section of the PCB is milled out to allow a \acs{vga} to be mounted for optical connection. Screw holes allow the package to be mounted to a heat sink for thermal management.}
+	\caption[PCB breakout for an InP integrated circuit]{PCB designed to connect the \acs{hhi} device to control and measurement equipment. The chip sits in the middle of the PCB so that RF track length can be minimised. RF lines are shielded with vias to create \acs{gcpw} for high bandwidth and are connected to edge-launch SMA connectors. DC lines are routed through a lower layer of the PCB and connected to an FFC receptacle. A section of the PCB is milled out to allow a \acs{vga} to be mounted for optical connection. Screw holes allow the package to be mounted to a heat sink for thermal management.}
 	\label{fig:hhi_pcb}
 \end{figure}
 
@@ -165,7 +165,7 @@ To accurately place the chip onto the PCB, vacuum tweezers were used. A silicone
 \begin{figure}[t]
 	\centering
 	\includegraphics[width = 0.8\textwidth]{hhi_packaged}
-	\caption[Photograph of packaged \acs{pls} test transmitter]{Photograph of the packaged \ac{pls} test device. The \acs{InP} chip is glued to the centre of the PCB with the \acs{vga} glued to the edge couplers for optical access. Fibre strain relief is shown to the left were the bare fibres from the \acs{vga} are attached to the PCB. The electrical pads on the chip have been wirebonded to the PCB for electrical control through SMA and FFC connections.}
+	\caption[Photograph of packaged PLS test transmitter]{Photograph of the packaged \ac{pls} test device. The \acs{InP} chip is glued to the centre of the PCB with the \acs{vga} glued to the edge couplers for optical access. Fibre strain relief is shown to the left were the bare fibres from the \acs{vga} are attached to the PCB. The electrical pads on the chip have been wirebonded to the PCB for electrical control through SMA and FFC connections.}
 	\label{fig:hhi_photo}
 \end{figure}
 
@@ -196,7 +196,7 @@ The packaged device was screwed to a heat sink with nylon screws to avoid therma
 	\small	
 	\def\svgwidth{\textwidth} 
 	\import{chapters/chapter06/fig06/I_sweep/}{current_sweep.pdf_tex}
-	\caption[Current sweep of the \acs{hhi} Fabry-P\'{e}rot test lasers]{Current sweep of the on-chip, Fabry-P\'{e}rot test lasers. The two designs have different \acs{SOA} and front \acs{DBR} lengths. Both show a lasing threshold of around \SI{30}{\mA}. We find that the longer \acs{SOA} provides considerably more power despite the shorter front \acsp{DBR}. Fluctuations in power likely due to the mode competition in the cavity. Reduction in power for \SI{300}{\um} \acs{SOA} are likely attributed to heating of the diode reducing efficiency. The effective is elastic so reducing the current recovers the original efficiency.}
+	\caption[Current sweep of the HHI Fabry-P\'{e}rot test lasers]{Current sweep of the on-chip, Fabry-P\'{e}rot test lasers. The two designs have different \acs{SOA} and front \acs{DBR} lengths. Both show a lasing threshold of around \SI{30}{\mA}. We find that the longer \acs{SOA} provides considerably more power despite the shorter front \acsp{DBR}. Fluctuations in power likely due to the mode competition in the cavity. Reduction in power for \SI{300}{\um} \acs{SOA} are likely attributed to heating of the diode reducing efficiency. The effective is elastic so reducing the current recovers the original efficiency.}
 	\label{fig:hhi_soa_sweep}
 \end{figure}
 
@@ -207,7 +207,7 @@ This device contains two Fabry-P\'{e}rot laser test structures to assess their c
 	\small	
 	\def\svgwidth{0.9\textwidth} 
 	\import{chapters/chapter06/fig06/Spectra/}{spectra.pdf_tex}
-	\caption[Spectra of the on-chip lasers with wavelength through current injection of \acsp{DBR}]{Spectra from an \acs{OSA} of the on-chip lasers whilst tuning the wavelength with the \acsp{DBR}. Current injection of the tunable \acsp{DBR} causes a change of peak reflected wavelength and, therefore, laser wavelength. The lasers are single-mode, with a \acs{FWHM} of \SI{30}{pm}. However, the sideband suppression is only \SI{30}{dB} and varies with \acs{DBR} tuning. The wavelength can be tuned by \SI{3}{nm} with a current of \SI{40}{\mA}.}
+	\caption[Spectra of the on-chip lasers with wavelength through current injection of DBRs]{Spectra from an \acs{OSA} of the on-chip lasers whilst tuning the wavelength with the \acsp{DBR}. Current injection of the tunable \acsp{DBR} causes a change of peak reflected wavelength and, therefore, laser wavelength. The lasers are single-mode, with a \acs{FWHM} of \SI{30}{pm}. However, the sideband suppression is only \SI{30}{dB} and varies with \acs{DBR} tuning. The wavelength can be tuned by \SI{3}{nm} with a current of \SI{40}{\mA}.}
 	\label{fig:hhi_dbr_sweep}
 \end{figure}
 
@@ -234,7 +234,7 @@ By tuning the front and rear \acp{DBR}, the lasing wavelength can be changed. Pa
 	\small	
 	\def\svgwidth{\textwidth} 
 	\import{chapters/chapter06/fig06/laser_gain_switch/}{gain_switch_test.pdf_tex}
-	\caption[Gain switching test of the \acs{hhi} on-chip lasers]{Gain switching test of the on-chip lasers. A bias tee mixes a DC offset with an RF signal. A \SI{1}{GHz} \SI{2}{\Vpp} square wave was used and the DC offset was varied around the lasing threshold. the \SI{20}{mA} (left), \SI{30}{\mA} (middle), \SI{40}{\mA} (right). When the DC offset is just below the threshold, \SI{120}{ps} pulses can be generated with an extinction ratio of around \SI{25}{dB}.}
+	\caption[Gain switching test of the HHI on-chip lasers]{Gain switching test of the on-chip lasers. A bias tee mixes a DC offset with an RF signal. A \SI{1}{GHz} \SI{2}{\Vpp} square wave was used and the DC offset was varied around the lasing threshold. the \SI{20}{mA} (left), \SI{30}{\mA} (middle), \SI{40}{\mA} (right). When the DC offset is just below the threshold, \SI{120}{ps} pulses can be generated with an extinction ratio of around \SI{25}{dB}.}
 	%\SI{1}{GHz} \SI{2}{\Vpp} square wave from \ac{ppg}. Laser threshold around \SI{30}{mA}. Pulses are around \SI{120}{ps} \ac{FWHM}.
 	\label{fig:gain_switch_test}
 \end{figure}
@@ -290,7 +290,7 @@ Further testing of this \ac{pls} is required to verify its operation. One might 
 \begin{figure}[p]
 	\centering
 	\includegraphics[width=\textwidth]{schematics/qrng.pdf}
-	\caption[Schematic for \acs{InP} quantum random number generator]{Schematic for the \acs{qrng} using on-chip laser sources and fast \acsp{pd} for homodyne measurement. Each laser can be indpendently controlled and variably attenuated with \acsp{mzi} allowing the lasers to be tuned in power. A further \acs{mzi} acts as a beam splitter with a tunable splitting ratio to interfere the two light sources.}
+	\caption[Schematic for InP quantum random number generator]{Schematic for the \acs{qrng} using on-chip laser sources and fast \acsp{pd} for homodyne measurement. Each laser can be indpendently controlled and variably attenuated with \acsp{mzi} allowing the lasers to be tuned in power. A further \acs{mzi} acts as a beam splitter with a tunable splitting ratio to interfere the two light sources.}
 	\label{fig:qrng}
 \end{figure}
 
@@ -323,7 +323,7 @@ The full integration of a \ac{qrng} mean that the optics for a \ac{QKD} transmit
 \begin{sidewaysfigure}
 	\centering
 	\includegraphics[width=0.8\textwidth]{QKD_transmitter}
-	\caption[Layout of latest generation \acs{InP} \acs{QKD} Transmitter]{Latest generation \ac{InP} transmitter fabricated by Fraunhofer \acs{hhi}. The \SI{6x4}{mm} chip contains three ways to create BB84 states for \acs{QKD}. The optical components are shown in blue, while the electrical connects are in red. Light created with on-chip lasers and manipulated with \acsp{cipm} and \acs{topm}. States are coupled off the chip through \acsp{ssc} into fibre.}
+	\caption[Layout of latest generation InP QKD Transmitter]{Latest generation \ac{InP} transmitter fabricated by Fraunhofer \acs{hhi}. The \SI{6x4}{mm} chip contains three ways to create BB84 states for \acs{QKD}. The optical components are shown in blue, while the electrical connects are in red. Light created with on-chip lasers and manipulated with \acsp{cipm} and \acs{topm}. States are coupled off the chip through \acsp{ssc} into fibre.}
 	\label{fig:hhi_gds}
 \end{sidewaysfigure}
 
@@ -417,7 +417,7 @@ Future designs could considering including a master laser to seed each source in
 \begin{sidewaysfigure}
 	\centering
 	\includegraphics[width=\textwidth]{./schematics/hhi_transmitter.pdf}
-	\caption[Schematic of the \acs{hhi} full transmitter]{Schematic of the operating modes of the \acs{hhi} transmitter. \textbf{a} Either a \acs{DBR} or \acs{dfb} laser source provides a phase randomised \acs{wcp} through gain-switching. The pulse is attenuated with an \acs{mzi} for decoy state preparation (Intensity Mod.) and a fast \acs{cipm} can be used if further phase randomisation is required. Basis Enc. switches between the long and short arms of an \acs{amzi}, where a superposition is used for X basis states. A \acs{cipm} within the \acs{amzi} then encodes relative phases between early and late time-bins. An \acs{mzi} allows for loss compensation between the long and short arms. \textbf{b} A laser source provides \acs{CW} light which is modulated into pulses (Pulse Mod.). A \acs{cipm} can then provide phase randomisation over the entire state and an \acs{mzi} can encode relative phases. A final \acs{mzi} provides intensity modulation for decoy state preparation.}
+	\caption[Schematic of the HHI full transmitter]{Schematic of the operating modes of the \acs{hhi} transmitter. \textbf{a} Either a \acs{DBR} or \acs{dfb} laser source provides a phase randomised \acs{wcp} through gain-switching. The pulse is attenuated with an \acs{mzi} for decoy state preparation (Intensity Mod.) and a fast \acs{cipm} can be used if further phase randomisation is required. Basis Enc. switches between the long and short arms of an \acs{amzi}, where a superposition is used for X basis states. A \acs{cipm} within the \acs{amzi} then encodes relative phases between early and late time-bins. An \acs{mzi} allows for loss compensation between the long and short arms. \textbf{b} A laser source provides \acs{CW} light which is modulated into pulses (Pulse Mod.). A \acs{cipm} can then provide phase randomisation over the entire state and an \acs{mzi} can encode relative phases. A final \acs{mzi} provides intensity modulation for decoy state preparation.}
 	\label{fig:hhi_transmitter}
 \end{sidewaysfigure}
 

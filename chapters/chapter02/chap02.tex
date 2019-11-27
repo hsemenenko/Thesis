@@ -516,7 +516,7 @@ Similar to how information is represented as bits in classical computers, we can
 where $|\alpha|^2 + |\beta|^2 = 1$. Equivalently, we can write
 
 \begin{equation}
-	\ket{\psi} = \cos\left(\nicefrac{\theta}{2}\right)\ket{0} + e^{i\varphi}\sin\left(\nicefrac{\theta}{2}\right)\ket{0}
+	\ket{\psi} = \cos\left(\nicefrac{\theta}{2}\right)\ket{0} + \mathrm{e}^{i\varphi}\sin\left(\nicefrac{\theta}{2}\right)\ket{0}
 \end{equation}
 where $0\le\theta\le\pi$ and $0\le\varphi<2\pi$ as shown in figure \ref{fig:bloch}. To account for mixed states, this representation is a ball, rather than a sphere. Pure states exist on the surface on the ball, while mixed states exist within.
 
@@ -584,7 +584,7 @@ where $E$ is the expectation value for $\{a,a'\}$ measurements on the first stat
 
 How $\ket{0}$ and $\ket{1}$ are encoded will depend on the physical system being used. Some notable examples of encoding are electron spins; nuclear spins; photon path, polarisation or timing; and superconducting flux. Each has their own benefits and drawbacks and will be suited for different tasks in quantum information processing. 
 
-Of course, for quantum communication we will be interested in sending quantum information between distant parties, Alice and Bob. Light is already fundamental in modern communications networks. By considering single-photons, we can encode qubits that are compatible with much of the existing network architecture.
+Of course, for quantum communication we will be interested in sending quantum information between distant parties, Alice and Bob. Light is already fundamental in modern communications networks. By considering single-photons, we can encode qubits that are compatible with much of the existing network architecture. These encodings will be discussed further in section \ref{sec:photon_encoding}.
 
 % for which photons will are well suited. The encodings for photons will be discussed further below.
 
@@ -774,7 +774,23 @@ For a long time, there were questions about the security of the \ac{cvqkd} syste
 
 \Ac{dprqkd} protocols were developed in order to solve practical issues with the security of \ac{QKD} systems when using realistic equipment \cite{diamanti2016practical}. As single-photon sources are not widely available, system typically use coherent states that are prone to \ac{pns} attacks. In \ac{dprqkd} protocols, the qubits are encoded in timing or relative phases of signals where a joint measurement of subsequent signals is required. Protocols include \ac{cow} \cite{COW-QKD} and \ac{dps} \cite{DPS-QKD}.
 
-\subsection{Hacking}
+\subsection{Security and Hacking}
+
+Generally, security proofs for protocols fall into three categories. \brisred{Individual} attacks allow an adversary to interact with each state individually as it is sent. A \brisred{collective} attack allows them to process the states and store state indefinitely in a quantum memory. Finally, a \brisred{coherent} attack allows Mallory to generate arbitrary ancilla states which can interact with the states and be measured jointly. Coherent attacks only limit Mallory to the laws of physics and nothing more.
+
+A proof of a protocol gives a security guarantee against an adversary but only under certain assumptions. It is often claimed that \ac{QKD} is information-theoretic secure when used with a \ac{otp}. However, verifying the assumptions required for security is challenging in a practical setting and has been scrutinised by the quantum hacking community. 
+
+As the systems exist in the real world, the security of a key exchange is only as good as the model used to describe it. Any part of the system that is not fully characterised may leak information through \brisred{side-channels} allowing Eve to gain knowledge of the secret key. Such channels may include polarisation, after-pulses or wavelength. The concept of side-channels is not something unique to \ac{QKD} and has been previously exploited to break \ac{rsa}-4096 keys using a smartphone microphone \cite{Genkin2014RSA}. In fact, side-channels were present even in the first demonstrations by Bennett and Brassard:
+
+%While it is true that under certain assumptions, a \ac{QKD} protocol can be proven to be information-theoretic secure, \emph{verifying} the assumptions in a practical setting becomes more challenging. 
+
+% this is only true under certain assumptions.  Mallory, however, is quite determined to gain any knowledge of the secret key.  the security model. However, it is challenging to completely model every part of a system. This leaves side-channels, where sensitive information is leaked through uncharacterised channels such as sound or temperature.
+
+%The first demonstration of \ac{QKD} by Bennett and Brassard was also the first to demonstrate side-channel attacks in a \ac{QKD} system: 
+
+\begin{quote}
+\textit{``…power supplies make noise, and not the same noise for the different voltages needed for different polarizations... Thus, our prototype was unconditionally secure against any eavesdropper who happened to be deaf!''} - Gilles Brassard \cite{Brassard2005}
+\end{quote}
 
 \begin{table}[t]
 \centering
@@ -782,37 +798,40 @@ For a long time, there were questions about the security of the \ac{cvqkd} syste
 	\textbf{Attack}\hspace{4cm} & \textbf{Target}\hspace{4cm}  & \textbf{References}\\ 
 	Photon-number splitting    & Photon source          & 	\cite{Norbert2000Security, Brassard2000Limitations}  \\
 	Inter-symbol interference      & State modulation      & 	\cite{yoshino2018quantum}   \\
-	Trojan horse & Phase modulation      &   \cite{jain2014trojan, sajeed2017invisible} \\
-	Time-shift 		&	Single-photon detectors	& \cite{Qi2007Time} \\
+	Trojan horse & Phase modulation      &   \cite{Gisin2006, jain2014trojan, sajeed2017invisible} \\
+	Time-shift 		&	Single-photon detectors	& \cite{Qi2007Time, Zhao2008Quantum} \\
 	Detector Blinding	&	Single-photon detectors 	&	\cite{Lydersen2010a, Gerhardt2011a}	\\
-	Laser damage	&	Any	& \cite{Makarov2016Creation}
+	Laser damage	&	Any	& \cite{Bugge2014Laser, Makarov2016Creation}
 \end{tabular}
 \caption[Attacks demonstrated against QKD systems]{Attacks demonstrated against \acs{QKD} systems. Further details about the attacks, including countermeasures and bounds, can be found in refs. \cite{pirandola2019advances, xu2019quantum}.}
+\label{tab:hacks}
 \end{table}
 
-While \ac{QKD} is often claimed to be ``perfectly secure'' or ``unhackable'', this is only true under certain assumptions.  Mallory, however, is quite determined to gain any knowledge of the secret key. As the systems exist in the real world, the security of a key exchange is only as good as the security model. However, it is challenging to completely model every part of a system. This leaves side-channels, where sensitive information is leaked through uncharacterised channels such as sound or temperature.
+Since then, there have been a number of attacks proposed on \ac{QKD} systems exploiting uncharacterised channels \cite{xu2019quantum}. Many have been demonstrated against both research and commercial systems. A brief list is compiled in table \ref{tab:hacks}, although this list is far from exhaustive. 
 
-The first demonstration of \ac{QKD} by Bennett and Brassard was also the first to demonstrate side-channel attacks in a \ac{QKD} system: 
+%numerous demonstrations that \ac{QKD} system are insecure under real world condition. These have demonstrated vulnerabilities in all parts of both the transmitters and receivers: transmitter modulation \cite{}. 
 
-\begin{quote}
-\textit{``…power supplies make noise, and not the same noise for the different voltages needed for different polarizations... Thus, our prototype was unconditionally secure against any eavesdropper who happened to be deaf!''} - Gilles Brassard \cite{Brassard2005}
-\end{quote}
+One of the most vulnerable parts of a \ac{QKD} system seems to be the \acp{spd}. Due to their complexity, they have been exposed to many attacks which have allowed Mallory to be in complete control of a key exchange \cite{Makarov2006, Gerhardt2011a, Lydersen2010a, Lydersen2010b, Lydersen2011, Sauge2011, Makarov2009, Wiechers2011}.
 
-Since then, there have been numerous demonstrations that \ac{QKD} system are insecure under real world condition. These have demonstrated vulnerabilities in all parts of both the transmitters and receivers: transmitter modulation \cite{Gisin2006}. 
+%It has even been demonstrated that Bell violations can be experimentally faked \cite{Gerhardt2011b}.
 
-One of the most vulnerable parts of a \ac{QKD} system are the detectors. Due to their complexity, they have been exposed to many attacks which have allows an attacker to be in complete control of a key exchange \cite{Makarov2006, Gerhardt2011a, Lydersen2010a, Lydersen2010b, Lydersen2011, Sauge2011, Makarov2009, Wiechers2011}.
+Counter measures have been proposed to alleviate specific attacks against certain systems \cite{Lydersen2010c, Yuan2010}. There have also been bounds set for the amount of information that can be gained against particular attacks such as the trojan horse attack \cite{Lucamarini2015Practical}. However, continually testing and patching system with physical changes will be impractical for any ubiquitous network. A new vulnerability could render an entire system insecure requiring the hardware to be modified or replaced.
 
-It has even been demonstrated that Bell violations can be experimentally faked \cite{Gerhardt2011b}.
-
-It is possible to develop methods to counter certain attacks \cite{Lydersen2010c, Yuan2010}. However, verifying the security and continually patch new exploits and vulnerabilities will be impractical for a quantum secured network.
+%It is possible to develop methods to counter certain attacks. However, verifying the security and continually patch new exploits and vulnerabilities will be impractical for a quantum secured network.
 
 \subsection{Device-Independence}
 
-To remove potential attacks on \ac{QKD} systems, protocols have been developed to relieve some of the assumptions required for security in a key exchange. \Ac{diqkd}  \cite{Acin2007, Barrett2005, Mayers1998}. 
+Realising that the arms race between cryptographers and hackers would lead to an unending cycle, interest turned to reducing the assumptions required for security of a system \cite{Mayers1998, Acin2007, Barrett2005}. In particular, how the assumptions about specific equipment can be removed. \Ac{diqkd} provides a method for Alice and Bob to verify the operation of the equipment \emph{during} a protocol through a Bell test. Alice and Bob then only need to ensure that there are no communication channels out of their lab and that the laws of physics are correct. 
 
-Creating accurate models for equipment is particularly challenging. By removing assumptions about their operation, full characterisation is no longer required.
+Implementing a \ac{diqkd} scheme remains incredibly challenging with modern technology as it requires near unity single-photon detection \cite{pironio2009device}. It also requires a loophole-free Bell test to be performed which, while such experiments have recently been realised \cite{Giustina2015, shalm2015, hensen2015}, had rates that were far slower than needed for communication protocols. 
 
-Fully \ac{diqkd} is practically challenging due to the requirements of the equipment. \ac{MDI} can relieve assumptions about the detector device and is possible with current technology \cite{mdi-qkd}, as we will see in chapters \ref{chap:mdiqkd}. 
+In order to create more practical systems with improved security, protocols were developed which relaxed the device-independence. \Ac{MDI} removes the need to characterise the detection system, which remains challenging due to their complexity \cite{mdi-qkd}. It does, however, still required characterisation of the transmitters. \Ac{MDI} will be discussed further in chapter \ref{chap:mdiqkd}.
+
+%To remove potential attacks on \ac{QKD} systems, protocols have been developed to relieve some of the assumptions required for security in a key exchange. \Ac{diqkd}  \cite{}. 
+
+%Creating accurate models for equipment is particularly challenging. By removing assumptions about their operation, full characterisation is no longer required.
+
+%Fully \ac{diqkd} is practically challenging due to the requirements of the equipment. \ac{MDI} can relieve assumptions about the detector device and is possible with current technology \cite{mdi-qkd}, as we will see in chapters \ref{chap:mdiqkd}. 
 
 \section{Integrated Photonic Circuits}
 
@@ -832,15 +851,88 @@ In this section, we will introduce two platforms for photonic integration: \ac{I
 
 \subsection{Quantum Photonics}
 
-Fock states
+We will begin with the description of a quantised electromagnetic field as a harmonic oscillator with associated annihilation and creation operators, $\hat{x}$ and $\hat{p}$. For a more complete description or derivation of these operators, we refer the reader to any number of quantum optics textbooks \cite{gerry2005introductory, fox2006quantum, loudon2000quantum}. The energy in the field corresponds to discretised packets of energy known as photons. The number of excitations in the field is described in the Fock basis and written as $\ket{n}$ for $n\in \mathbb{Z}_{\ge 0}$. The annihilation and creation operators change the photon number accordingly,
 
-Coherent states are very useful and are given by
+\begin{alignat}{2}
+	&\hat{a}\ket{n} &&= \sqrt{n}\ket{n-1}\\
+	&\hat{a}^\dagger \ket{n} &&= \sqrt{n+1}\ket{n+1}\\
+	&\hat{a}\ket{0} && = \ket{0}
+\end{alignat}
+where the final equation imposes that the energy of the field must be positive. The number operator, $\hat{n} = \hat{a}^\dagger\hat{a}$, is an eigenvector of Fock states such that
+
+\begin{equation}
+	\hat{n}\ket{n} = n\ket{n}
+\end{equation}
+
+%We will take as our starting point the quadrature variables  which define the position and momentum operators, respectively, in our 
+
+%A photon number, or Fock, state with $n$ photons is represented by $\ket{n}$. Annihilation  and creation operations, $\hat{a}$ and $\hat{a}^\dagger$ give the relations
+
+An interest state in the quantised electromagnetic field is the coherent state, which exist at the boundary of quantum and classical. Coherent states satisfy 
+
+\begin{equation}
+	\hat{a}\ket{\alpha} = \alpha\ket{\alpha}
+\end{equation}
+for $\alpha \in \mathbb{C}$. As the Fock states form a complete set, we must be able to write
+
+\begin{equation}
+	\ket{\alpha} = \sum_{n=0}^\infty c_n \ket{n}
+\end{equation}
+which of course must then satisfy
+
+\begin{equation}
+	\hat{a}\ket{\alpha} = \sum_{n=1}^\infty c_n \sqrt{n} \ket{n-1} = \alpha  \sum_{n=0}^\infty c_n
+\end{equation}
+
+Each $c_n$ is uniquely determined in terms of $\alpha$ and $c_0$. By imposing normalisation conditions on the state, we arrive at
 
 \begin{equation}
 	\ket{\alpha} = \mathrm{e}^{-\frac{|\alpha|^2}{2}} \sum_{n=0}^\infty \frac{\alpha^n}{\sqrt{n}} \ket{n} 
 \end{equation}
 
-\subsection{Waveguides}
+The generation of coherent states from vacuum is described through the displacement operator, $\hat{D}(\alpha)$, and defined as
+
+\begin{equation}
+	\hat{D}(\alpha) = \mathrm{e}^{\alpha\hat{a}^\dagger - \alpha^\ast\hat{a}}
+\end{equation}
+which acts on the vacuum state, $\ket{0}$, to generate a coherent state with average photon number $|\alpha|^2$:
+
+\begin{equation}
+	\ket{\alpha} = \hat{D}(\alpha)\ket{0}
+\end{equation}
+
+The study of coherent states stemmed from an interest in the boundary of quantum and classical mechanics and the concept is almost as old as quantum mechanics itself \cite{Schrodinger1926}. More practically speaking, coherent states are readily produced from lasers which makes them far more useful for \ac{QKD} than probabilistic single-photon sources.
+
+\subsection{Photon Encoding}
+\label{sec:photon_encoding}
+
+\begin{figure}
+	\centering
+	\def\svgwidth{\textwidth}
+   	\import{chapters/chapter02/fig02/Integrated_optics/}{encodings.pdf_tex}
+   	\caption[Quantum information encoding with photons]{Information can be encoding in photons in different ways where superposition of each basis give access to the full Bloch sphere. Subscripts refer to the mode than the Fock state is in. \textbf{a} Orthogonal polarisations of light can be used as a basis, typically horizontal, $H$, and vertical, $V$ are chosen. \textbf{b} The position, or path encoding can be used as a spatial encoding. Basis states are given by a photon either in the top path, $t$, or the bottom path, $b$. \textbf{c} The early or late arrival time of a photon, $e$ and $l$, can be used to encode the computational basis.}
+   	\label{fig:encodings}
+\end{figure}
+
+We have discussed how single-mode photons can be represented but have yet to mention exactly what mode is used to encode information. This section will discuss the degrees of freedom available in photonics in which to encoding information, which are shown in figure \ref{fig:encodings}.
+
+\subsubsection*{Polarisation}
+
+The orientation of the electric field can be used to encode information in the polarisation.  We can describe the computational basis by encoding $\ket{0}$ as a horizontal photon, $\ket{1}_H$, and $\ket{1}$ as vertical, $\ket{1}_V$. Phases between these states allow the entire Bloch sphere to be access. The manipulation of the states is performed through sequences of half and quarter wave plates. Polarisation is typically used in free-space quantum optics where there is minimal rotation of the fields. More recently, there have been developments in integrated optics that have allows waveguide polarisation rotation \cite{smit2014} meaning it could be a useful encoding scheme in the future.
+
+\subsubsection*{Path}
+
+The spatial mode of photons can be use to encode qubits in which path they are following. The phase stability of integrated circuits means that paths are the typically encoding of choice. Two separate waveguides provide different paths which we will call the top, $t$, and bottom, $b$, paths. These can, with relative phases and intensities between the paths, encode arbitrary qubits in a computational basis. Beam splitters and phase modulators are used to manipulate the states and linear optic components can convert from path encoding to polarisation easily. 
+
+\subsubsection*{Time-bin}
+
+Finally, the time of arrival can be used to form a basis in distinct bins. Early and late photons, $e$ and $l$ modes, can be used to represent $\ket{0}$ and $\ket{1}$. Again, the relative phases of the time-bins can be controlled using phase modulation. Delay lines can be used to allow the early and late photons to interact. Time-binning is used in fibre optics where a polarisation or path encoding would be unstable from environmental drifts.
+
+\subsection{Components}
+
+Integrated photonics utilises fundamental components that will be used to guide, control, manipulate and detect photons. Here we will describe some fundamental components that will facilitate quantum information processing through linear optics.
+
+\subsubsection*{Waveguides}
 
 \begin{figure}[t]
 	\centering
@@ -883,7 +975,7 @@ For a waveguide, we find the equations \cite{lifante2003integrated}.
 	\nabla^2\mathcal{H} + \frac{1}{n^2}\nabla n^2\times\left(\nabla\times\mathcal{H}\right) - \epsilon_o\mu_0 n^2 \frac{\partial^2\mathcal{H}}{\partial t^2} &= 0
 \end{align}
 
-\subsection{Multi-Mode Interferometer}
+\subsubsection*{Multi-Mode Interferometer}
 
 \begin{figure}[t]
 	\centering
@@ -892,29 +984,55 @@ For a waveguide, we find the equations \cite{lifante2003integrated}.
 	\label{fig:mmi}
 \end{figure}
 
-\Acp{mmi} can be used to mix or separate spatially separated waveguide modes \cite{soldano1995optical}.
+Different spatial modes in photonics experiments are typically interfered using a beam splitter. The traditional half-silvered mirror isn't something that is easily fabricated as a linear optical components, so another method is required.
+
+Directional couplers allow waveguides to be interfere as they are brought in close proximity. Evanescent coupling allows the mode to shift from one to the other. The splitting ratio a directional coupler is dependent on the length of interaction. This made fabricating accurate couplers challenging as small variations in length can cause a large change in splitting ratio.
+
+Alternatively, waveguide modes can be interfere with \acp{mmi} that are based on the self-imaging principle \cite{soldano1995optical}. A schematic is shown in figure \ref{fig:mmi}. Light in the input mode excites a superposition of modes within the \ac{mmi}. As these modes propagate, they constructively and destructively interfere. The length is chosen to allow the light to be split equally when there is constructive interference into two output modes. The same structure can equally be designed to create $n\times m$ splitters. In general, the transfer matrix is
 
 \begin{equation}
-	\frac{1}{\sqrt{2}}\left(
+	\hat{U}_\mathrm{MMI} = \left(
 	\begin{matrix}
 	r & t\\
 	t & r
 	\end{matrix}
 	\right)
 \end{equation}
+where $r$ and $t$ are complex numbers that correspond to the reflectivity and transmission, respectively, and will be constrained such that the matrix is unitary.
 
-\subsection{Phase modulation}
+\subsubsection*{Phase modulation}
+
+The phase of the optical field in a waveguide is controlled with phase modulator.
 
 \begin{equation}
-	\left(
+	\hat{U}_\mathrm{PM}\left(
 	\begin{matrix}
 	1 & 0\\
 	0 & e^{i\theta}
 	\end{matrix}
 	\right)
 \end{equation}
+where a phase modulation is applied to the second mode, relative to the first.
 
-\subsection{Mach-Zehnder Interferometer}
+Thermo-optic effects can be used to change the phase of a waveguide by changing the refractive index. The change of phase, $\Delta\theta$, is given by
+
+\begin{equation}
+	\Delta\theta = \frac{2\pi\cdot L\cdot (\Delta T)}{\lambda}\frac{\mathrm{d}n}{\mathrm{d}T}
+\end{equation}
+where $L$ is the length of the modulator, $\Delta T$ is the change in temperature, $\lambda$ is the wavelength of light and $\nicefrac{\mathrm{d}n}{\mathrm{d}T}$ is the thermo-optic coefficient of the material. \Acp{topm} can achieve very good precision and stability with very low loss but have a slow response time. 
+
+Electro-optic modulation can be achieved through 
+
+\begin{equation}
+	\Delta\phi = \frac{2\pi\cdot L\cdot  \chi^{(2)}\cdot E}{\lambda}
+\end{equation}
+where $E$ is the applied electric field and $\chi^{(2)}$ is the second-order non-linear optical susceptibility. Lithium niobate modulators are commercially available with a bandwidth of \SI{100}{GHz} \cite{Louay2001Advances}.
+
+Carrier effects can be used in semiconductor materials to change the absorption in p-i-n or p-n junctions which in turn generations a phase relationship through a Kramer-Kronig relation. These modulations are used where high-bandwidths are required in materials that don't have intrinsic electro-optic effects, such as silicon. These modulators have been shown to operate at \SI{10}{GHz} bandwidths \cite{Sibson2017Si}.
+
+A final effect that we will mention is the \ac{qcse}. The effect presents itself in materials where the absorption can be varied through an electric field applied over a multi-quantum well structures. Again, the change in absorption provides a phase relationship through a Kramers-Kronig relation and can provide modulation bandwidths above \SI{10}{GHz} \cite{Sibson2017InP, semenenko2019integrated, semenenko2019mdi, semenenko2019, smit2014}. The \ac{qcse} will be discussed in more detail in chapter \ref{chap:hom}.
+
+\subsubsection*{Mach-Zehnder Interferometer}
 
 \begin{figure}[t]
 	\centering
@@ -923,13 +1041,13 @@ For a waveguide, we find the equations \cite{lifante2003integrated}.
 	\label{fig:mzi}
 \end{figure}
 
-Combining \acp{eopm}, acp{topm} and \acp{mmi} we can create on-chip \acp{mzi} which can be used for very fast routing, intensity modulation and phase encoding. 
+Combining \acp{eopm}, \acp{topm} and \acp{mmi} we can create on-chip \acp{mzi} which can be used for very fast routing, intensity modulation and phase encoding. 
 
 \begin{equation}
 	\frac{1}{\sqrt{2}}\left(
 	\begin{matrix}
-	1 & 1\\
-	1 & -1
+	1 & i\\
+	i & 1
 	\end{matrix}
 	\right)
 	\left(
@@ -940,49 +1058,44 @@ Combining \acp{eopm}, acp{topm} and \acp{mmi} we can create on-chip \acp{mzi} wh
 	\right)
 	\frac{1}{\sqrt{2}}\left(
 	\begin{matrix}
-	1 & 1\\
-	1 & -1
+	1 & i\\
+	i & 1
 	\end{matrix}
 	\right)=
 	\frac{1}{2}\left(
 	\begin{matrix}
-	1 + e^{i\theta} & 1 -  e^{i\theta}\\
-	1 -  e^{i\theta} & 1 +  e^{i\theta}
+	1 - e^{i\theta} & i(1 +  e^{i\theta})\\
+	i(1 +  e^{i\theta}) & -1 +  e^{i\theta}
 	\end{matrix}
 	\right)
 \end{equation}
 
 The layout is shown in figure \ref{fig:mzi}.
 
-\subsection{Indium Phosphide}
+\subsubsection*{Single-photon Detection}
 
-One of the more recent advances in integrated photonics is from III-V materials which offer certain benefits for \acp{pic}, especially for communication purposes. In this section, we will introduce the \acl{InP} platform and describe some of the components that we will find useful for the remainder of the thesis.
+An important part of any communication protocol is the detection of states. As \ac{QKD} will typically be concerned with single photon states (or close to) the efficiency of detection will be crucial. The losses associated with coupling on and off of integrated devices are a big problem. By fabricating detectors onto the waveguides we gain a few benefits.
 
-\Ac{InP} has a higher non-linearity than silicon \cite{Kumar2019}. Index contrast is low, high bend radius. Improved with InP membrane.
+Some metrics used to compare \acp{spd} are
 
-\subsubsection*{Lasers}
+\begin{itemize}
+	\item \textbf{Efficiency:} the probability that the detector will fire given a photon was present.
+	\item \textbf{Timing Jitter:} the uncertainty in the time of arrival of a photon.
+	\item \textbf{Dead Time:} the time in which a detector cannot detect photons after firing.
+	\item \textbf{Dark Counts:} the number of events when no photons are present.
+\end{itemize}
 
-As \ac{InP} has a direct band gap it is possible to monolithically integrate lasers onto the devices. 
+\Acp{apd} have been widely used for quantum optics experiments. Their efficiency for visibility . Within the C-band, InGaAs \acp{apd} have been demonstrated with \SI{55}{\percent} efficiency in a \SI{1}{GHz} gated mode \cite{comandar2015gigahertz}. 
 
-Multi quantum well structures in \ac{InP} mean that we can create lasers on chip.
+More recently, \acp{snspd} have become more widely available due to advances in cryogenic cooling technology. 
 
-We can make either \ac{DBR} or \ac{dfb} lasers in \ac{InP} with very competitive linewidths and mW power into fibre \cite{smit2014, jeppix}. An example spectrum is show in 
+Moving the detectors on-chip removes the coupling losses and the high confinement in waveguides means a strong interaction between photons and the detectors. This also means that superconducting nanowires can be made shorter which reduces the jitter and dead times.
 
-\subsubsection*{Thermo-optic Modulation}
+\subsection{Platforms}
 
-Very stable phase modulation can be achieved with thermo-optic effects. By heating the material we can change the refractive index and induce a phase.
+Different materials will exhibit different properties that provide benefits and weaknesses when making \acp{pic}. Some different platforms will be introduced here with some of their favourable properties discussed.
 
-The modulation that can be achieved is relatively slow as it is reliant on heating effects. Typically, the modulation has a bandwidth of KHz. 
-
-Thermal management can become an issue if too many \acp{topm} are used on a chip and this can also introduce crosstalk between modulators. This can cause issues with calibration of \acp{pic}.
-
-\subsubsection*{Electro-optic Modulation}
-
-A \ac{qcse} gives rise to high speed electro-optic modulation of up to \SI{40}{GHz} \cite{smit2014, jeppix}.
-
-High-speed modulation can also be achieved through current injection into the material to change the refractive index. 
-
-\subsection{Silicon-on-Insulator}
+\subsubsection*{Silicon-on-Insulator}
 
 Silicon is ubiquitous in the world today and powers everything from watches to supercomputers. The advances that have been made in the trillion dollar semiconductor industry have made silicon a hugely successful platform for quantum photonics. With a band gap of \SI{\sim 1100}{nm}, we can also leverage the telecommunications industry to create low-loss \acl{pic}. However, as it has an indirect band gap, it has been challenging to develop efficient light sources on-chip \cite{}. While efforts have been made to create integrated lasers and amplifiers, their performances don't match those of other integrated approaches, such as III-V materials.
 
@@ -992,17 +1105,33 @@ Coupling can be done with grating couplers meaning that coupling light on and of
 
 It is not possible to realise \ac{eopm} in silicon as there is no $\chi^{(2)}$ non-linearity because of the centrosymmetry of the structure. High-speed modulation can be achieved through current injection but the phase dependent losses limit their performance \cite{} or the symmetry can be broken by introducing strain such as depositing a silicon nitride thin film.
 
-\subsubsection*{CMOS Compatibility}
-
 One of the major advantages of the silicon platform is the potential for integration for control electronics on the same device as the photonics. This could facilitate creating transmitter and receiver devices which have all of the photonic and electrical components for a key exchange. 
 
-\subsubsection*{Integrated Detectors}
+\subsubsection*{Silicon Nitride}
 
-An important part of any communication protocol is the detection of states. As \ac{QKD} will typically be concerned with single photon states (or close to) the efficiency of detection will be crucial. The losses associated with coupling on and off of integrated devices are a big problem. By fabricating detectors onto the waveguides we gain a few benefits.
+A wider bandgap material which reduces non-linear losses such as two-photon absorption in the mid-IR spectrum. Phase modulation is achieved through thermo-optic effects which allows circuit reconfigurability.
 
-Moving the detectors on-chip removes the coupling losses and the high confinement in waveguides means a strong interaction between photons and the detectors. This also means that superconducting nanowires can be made shorter which reduces the jitter and dead times.
+\subsubsection*{Indium Phosphide}
 
-\subsection{Hybrid Integration}
+One of the more recent advances in integrated photonics is from III-V materials which offer certain benefits for \acp{pic}, especially for communication purposes. Unlike silicon, \Ac{InP} has a direct bandgap which means that lasers can be easily integrated into waveguides \cite{smit2014}. Waveguide integrated \acp{SOA} and \acp{DBR} structures allow Fabry-P\'{e}rot lasers to be created and high-bandwidth \ac{dfb} components are also available \cite{smit2014, jeppix}.
+
+More recently, there has been work on membrane \ac{InP} on an insulator. This increases the index contrast in the waveguides meaning that bend radii can be smaller \cite{Kumar2019}. In this first demonstration of \ac{sfwm} in \ac{InP} it was noted that the non-linearity is actually stronger than silicon. However, the non-linear losses through two-photon absorption is much larger. This could be solved by either increasing the bandgap of the material, much like silicon nitride compared with silicon. Alternatively, longer wavelength photons would be unable to cause two-photon absorption \cite{rosenfeld2019mid}. 
+
+%In this section, we will introduce the \acl{InP} platform and describe some of the components that we will find useful for the remainder of the thesis.
+
+%\Ac{InP} has a higher non-linearity than silicon \cite{Kumar2019}. Index contrast is low, high bend radius. Improved with InP membrane.
+
+%As \ac{InP} has a direct band gap it is possible to monolithically integrate lasers onto the devices. 
+
+%Multi quantum well structures in \ac{InP} mean that we can create lasers on chip.
+
+%We can make either \ac{DBR} or \ac{dfb} lasers in \ac{InP} with very competitive linewidths and mW power into fibre \cite{smit2014, jeppix}. An example spectrum is show in 
+
+\subsubsection*{Lithium Niobate}
+
+Lithium niobate offers a $\chi^{(2)}$ non-linearity which allows fast phase modulation and \ac{spdc}. This 
+
+\subsubsection{Hybrid Integration}
 
 More recently, there have been effects to hybridise \acp{pic} to create devices which exploit the benefits of multiple platforms. 
 

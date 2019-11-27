@@ -251,7 +251,6 @@
 										%figures, etc. 
 \usepackage[version=0.96]{pgf}			%PGF/TikZ is a tandem of languages for producing 
 										%vector graphics from a 
-\usepackage{tikz}						%geometric/algebraic description.
 \usepackage{siunitx}					%package to format SI units
 \sisetup{
 	detect-all,
@@ -262,10 +261,6 @@
 }
 
 \DeclareSIUnit[]{\Vpp}{\ensuremath{\si{\V}_\text{pp}}}
-
-\usetikzlibrary{arrows,shapes,decorations,
-		       automata,backgrounds,			
-		       petri,topaths}				%To use diverse features from tikz	
 
 %TC:macrocount \SI 2
 %TC:macrocount \SIrange 4
@@ -284,7 +279,7 @@
 %Define the pdf info
 \hypersetup{
 	pdfinfo={
-		Title={Advances in Chip-Based Quantum Key Distribution},
+		Title={\mytitle},
 		Author={Henry Semenenko},
 		Keywords={integrated optics; quantum key distribution; quantum optics},	
 		CreationDate={D:\DTMfetchyear{now}\DTMfetchmonth{now}\DTMfetchday{now}\DTMfetchhour{now}\DTMfetchminute{now}\DTMfetchsecond{now}},
@@ -385,17 +380,18 @@
 
 
 %
-%
-% New definition of square root:
-% it renames \sqrt as \oldsqrt
+% Define closed sqrt
 \let\oldsqrt\sqrt
-% it defines the new \sqrt in terms of the old one
-\def\sqrt{\mathpalette\DHLhksqrt}
-\def\DHLhksqrt#1#2{%
-\setbox0=\hbox{$#1\oldsqrt{#2\,}$}\dimen0=\ht0
+\makeatletter
+\let\oldr@@t\r@@t
+\def\r@@t#1#2{%
+\setbox0=\hbox{$\oldr@@t#1{#2\,}$}\dimen0=\ht0
 \advance\dimen0-0.2\ht0
 \setbox2=\hbox{\vrule height\ht0 depth -\dimen0}%
-{\box0\lower0.4pt\box2}}
+{\box0\lower0.44pt\box2}}
+\LetLtxMacro{\oldsqrt}{\sqrt}
+\renewcommand*{\sqrt}[2][\ ]{\oldsqrt[#1]{#2}}
+\makeatother
 
 % Theorem styles
 %
