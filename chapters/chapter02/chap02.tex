@@ -408,19 +408,21 @@ The most well known example of cryptanalysis was in Bletchley Park during the se
 
 \section{Quantum Information}
 
-Exploiting quantum mechanical processes gives rise to a new information theory called \brisred{quantum information}. Using quantum phenomena, we introduce quantum bits (qubits) as a generalisation of the bits that are typically used in classical computing.
+From a thorough understanding of quantum mechanics came the new field of \brisred{quantum information}. Using fundamental particles, it was suggested that information could be encoded in a completely new way \cite{manin1980computable, feynman1982simulating}. This section will give a brief introduction to quantum mechanics theory and how it can be used to encode information. Some fundamental aspects will be discussed including a brief digression into quantum computing.
 
-The success of quantum mechanics to describe the physical world has yet to be beaten. 
+%Exploiting quantum mechanical processes gives rise to a new information theory called . Using quantum phenomena, we introduce quantum bits (qubits) as a generalisation of the bits that are typically used in classical computing.
 
-The quantum computer concept had been suggested in the 1980s by Yuri Manin \cite{manin1980computable} and Richard Feynman \cite{feynman1982simulating}.
+%The success of quantum mechanics to describe the physical world has yet to be beaten. 
 
-Divincenzo's criteria \cite{divincenzo2000physical}.
+%The quantum computer concept had been suggested in the 1980s by Yuri Manin \cite{} and Richard Feynman \cite{}.
 
-Despite the success of describe the physical world, quantum mechanics remains a mathematical framework from which physical laws can be derived. 
+%Divincenzo's criteria \cite{divincenzo2000physical}.
 
-Quantum mechanics can be seen as a generalised probability theory and was born out of mathematics. While quantum mechanics 
+%Despite the success of describe the physical world, quantum mechanics remains a mathematical framework from which physical laws can be derived. 
+%
+%Quantum mechanics can be seen as a generalised probability theory and was born out of mathematics. While quantum mechanics 
 
-The ideas create a framework to describe physical systems which rests on four postulates:
+%The ideas create a framework to describe physical systems which rests on four postulates:
 
 \subsection{Quantum Mechanics}
 
@@ -520,7 +522,7 @@ where $|\alpha|^2 + |\beta|^2 = 1$. Equivalently, we can write
 \end{equation}
 where $0\le\theta\le\pi$ and $0\le\varphi<2\pi$ as shown in figure \ref{fig:bloch}. To account for mixed states, this representation is a ball, rather than a sphere. Pure states exist on the surface on the ball, while mixed states exist within.
 
-We introduce the Pauli matrixes which form the observables of qubits: 
+We introduce the Pauli matrices
 
 \begin{equation}
 	\hat{x} = \left(\begin{matrix}
@@ -538,7 +540,7 @@ We introduce the Pauli matrixes which form the observables of qubits:
 		0 & -1
 	\end{matrix}\right)
 \end{equation}
-which are given in the computational basis. 
+which form the observables of qubits and are given in the computational basis. 
 
 As per postulate 4, we can form composite systems through the tensor product of individual qubits for form more complex systems. Given two qubits,
 
@@ -835,19 +837,19 @@ In order to create more practical systems with improved security, protocols were
 
 \section{Integrated Photonic Circuits}
 
-On the route to a scalable technology, we will need to find a platform which allows for many devices to be made without an exponentially increase in resources. Integrated optics is not a new idea and has been considered for more than half a century \cite{miller1969}. However, the techniques will need to be adapted to ensure compatibility with quantum information processing.
+On the route to an accessible technology, we will need to find a platform which allows for many devices to be made without an exponential increase in resources. Photonic integration is by no means a new idea having been considered for more than half a century \cite{miller1969}. However, the techniques have recently been adopted by the quantum photonic community for information processing.
 
-\Acp{pic} are still widely being research and although there are many commercial applications there are also many challenges before they become mass producible. Packing, the process of electrically and optically connecting a \ac{pic}, is still a highly manual process and typically each \ac{pic} package will need custom built. We will see in chapter \ref{chap:future} how packaging problems can limit \ac{pic} operation.
+In this section, we will cover the basic concepts in quantum photonics before discussing integrated photonics circuits. Some fundamental components that are used to create circuits will be presented and, finally, some of the more common platforms for photonic integration will be introduced.
 
-In the search for a platform for \ac{QKD} protocols, we will need to define certain criteria which will need to be met.
+%\Acp{pic} are still widely being research and although there are many commercial applications there are also many challenges before they become mass producible. Packing, the process of electrically and optically connecting a \ac{pic}, is still a highly manual process and typically each \ac{pic} package will need custom built. We will see in chapter \ref{chap:future} how packaging problems can limit \ac{pic} operation.
 
-\begin{itemize}
-	\item Creation of quantum light
-	\item High-speed modulation
-	\item Detection of single-photons
-\end{itemize}
-
-In this section, we will introduce two platforms for photonic integration: \ac{InP} and \ac{soi}.
+%In the search for a platform for \ac{QKD} protocols, we will need to define certain criteria which will need to be met.
+%
+%\begin{itemize}
+%	\item Creation of quantum light
+%	\item High-speed modulation
+%	\item Detection of single-photons
+%\end{itemize}
 
 \subsection{Quantum Photonics}
 
@@ -1002,7 +1004,7 @@ where $r$ and $t$ are complex numbers that correspond to the reflectivity and tr
 
 \subsubsection*{Phase modulation}
 
-The phase of the optical field in a waveguide is controlled with phase modulator.
+There are a few different methods that we can use to control the phase of photons. Of course, it only makes sense to talk about a relative phase, such as when a photon is in superposition. The transfer matrix of a phase modulator over two modes is given by
 
 \begin{equation}
 	\hat{U}_\mathrm{PM}\left(
@@ -1012,21 +1014,21 @@ The phase of the optical field in a waveguide is controlled with phase modulator
 	\end{matrix}
 	\right)
 \end{equation}
-where a phase modulation is applied to the second mode, relative to the first.
+where a phase modulation is applied to the second mode, relative to the first which is left untouched.
 
-Thermo-optic effects can be used to change the phase of a waveguide by changing the refractive index. The change of phase, $\Delta\theta$, is given by
+Thermo-optic effects can be used to change the phase of a waveguide by changing the refractive index and is ubiquitous in integrated photonics. The change of phase, $\Delta\theta$, is given by
 
 \begin{equation}
 	\Delta\theta = \frac{2\pi\cdot L\cdot (\Delta T)}{\lambda}\frac{\mathrm{d}n}{\mathrm{d}T}
 \end{equation}
 where $L$ is the length of the modulator, $\Delta T$ is the change in temperature, $\lambda$ is the wavelength of light and $\nicefrac{\mathrm{d}n}{\mathrm{d}T}$ is the thermo-optic coefficient of the material. \Acp{topm} can achieve very good precision and stability with very low loss but have a slow response time. 
 
-Electro-optic modulation can be achieved through 
+To achieve faster modulation, which will be required for communication protocols, electro-optic effects have been explored. The effects exploit non-linear effects in a material a change of phase is given by
 
 \begin{equation}
-	\Delta\phi = \frac{2\pi\cdot L\cdot  \chi^{(2)}\cdot E}{\lambda}
+	\Delta\theta = \frac{2\pi\cdot L\cdot  \chi^{(2)}\cdot E}{\lambda}
 \end{equation}
-where $E$ is the applied electric field and $\chi^{(2)}$ is the second-order non-linear optical susceptibility. Lithium niobate modulators are commercially available with a bandwidth of \SI{100}{GHz} \cite{Louay2001Advances}.
+where $E$ is the applied electric field and $\chi^{(2)}$ is the second-order non-linear optical susceptibility. Only materials that exhibit a second-order component can be used for electro-optic modulation. Due to the centrosymmetry in silicon, other methods are required. However, lithium niobate modulators are commercially available with bandwidths up to \SI{40}{GHz} while \SI{100}{GHz} has been demonstrated in laboratories \cite{Louay2001Advances, Atsushi2010NRZ}.
 
 Carrier effects can be used in semiconductor materials to change the absorption in p-i-n or p-n junctions which in turn generations a phase relationship through a Kramer-Kronig relation. These modulations are used where high-bandwidths are required in materials that don't have intrinsic electro-optic effects, such as silicon. These modulators have been shown to operate at \SI{10}{GHz} bandwidths \cite{Sibson2017Si}.
 
@@ -1041,7 +1043,7 @@ A final effect that we will mention is the \ac{qcse}. The effect presents itself
 	\label{fig:mzi}
 \end{figure}
 
-Combining \acp{eopm}, \acp{topm} and \acp{mmi} we can create on-chip \acp{mzi} which can be used for very fast routing, intensity modulation and phase encoding. 
+Combining phase modulations and \acp{mmi}, we can create on-chip \acp{mzi} which can be used for very fast routing, intensity modulation and phase encoding. A schematic is shown in figure \ref{fig:mzi} where a phase modulation is applied to one arm of the \ac{mzi}.  We can calculate the transfer matrix by simply combing the matrices for phase modulation and \ac{mmi} to get
 
 \begin{equation}
 	\frac{1}{\sqrt{2}}\left(
@@ -1070,13 +1072,11 @@ Combining \acp{eopm}, \acp{topm} and \acp{mmi} we can create on-chip \acp{mzi} w
 	\right)
 \end{equation}
 
-The layout is shown in figure \ref{fig:mzi}.
+When the phase modulator in the circuit has a high bandwidth, \acp{mzi} can be used for fast intensity modulation of the states, as we will see in chapter \ref{chap:hom}, but also more stable phase modulation, which is discussed further in chapter \ref{chap:mdiqkd}. In the ideal case, the phases accumulated in each arm of the \ac{mzi} will be equivalent. However, due to fabrication tolerances this is challenging to achieve. Therefore, \acp{mzi} using combine slow phase modulation to correct for an offset with a fast phase modulation for high speed operation. This combination maximises the performance.
 
 \subsubsection*{Single-photon Detection}
 
-An important part of any communication protocol is the detection of states. As \ac{QKD} will typically be concerned with single photon states (or close to) the efficiency of detection will be crucial. The losses associated with coupling on and off of integrated devices are a big problem. By fabricating detectors onto the waveguides we gain a few benefits.
-
-Some metrics used to compare \acp{spd} are
+An important part of any quantum photonic information processing is detection of single-photon states. A number of different technologies are available for single-photon detection \cite{hadfield2009single}. Some metrics used to compare \acp{spd} are
 
 \begin{itemize}
 	\item \textbf{Efficiency:} the probability that the detector will fire given a photon was present.
@@ -1085,11 +1085,15 @@ Some metrics used to compare \acp{spd} are
 	\item \textbf{Dark Counts:} the number of events when no photons are present.
 \end{itemize}
 
-\Acp{apd} have been widely used for quantum optics experiments. Their efficiency for visibility . Within the C-band, InGaAs \acp{apd} have been demonstrated with \SI{55}{\percent} efficiency in a \SI{1}{GHz} gated mode \cite{comandar2015gigahertz}. 
+\Acp{apd} have been widely used for quantum optics experiments with efficiency in the visible spectrum exceeding \SI{60}{\percent} \cite{hadfield2009single}. Dart counts for \acp{apd} can be relatively high with \si{KHz} rates which can be reduced with cooling. Jitter is typically O(\SI{100}{ps}). The detection efficiency for longer wavelengths, such as light used in telecommunications, is typically lower. More recently, there has been a demonstrated of a \SI{1}{GHz} gated \ac{apd} for \ac{QKD} with an efficiency of \SI{55}{\percent} \cite{comandar2015gigahertz}. There have been demonstrations of integrated Ge-on-Si \acp{apd} with efficiency up to \SI{35}{\percent} at \SI{125}{\kelvin} \cite{Martinez2017Single, vines2019high}. While the efficiency here is lower, there are obvious advantages in terms of scalability and reduced coupling losses.
 
-More recently, \acp{snspd} have become more widely available due to advances in cryogenic cooling technology. 
+% Within the C-band, InGaAs \acp{apd} have been demonstrated with \SI{55}{\percent} efficiency in a \SI{1}{GHz} gated mode \cite{comandar2015gigahertz}. On-chip \acp{apd} have been demonstrated \cite{}.
 
-Moving the detectors on-chip removes the coupling losses and the high confinement in waveguides means a strong interaction between photons and the detectors. This also means that superconducting nanowires can be made shorter which reduces the jitter and dead times.
+More recently, \acp{snspd} have become more widely available due to advances in cryogenic cooling technology. Their uptake in quantum photonics experiments has been rapid due to their unmatched efficiency which can easily exceed \SI{90}{\percent} with timing jitter of O(\SI{10}{ps}). Short recovery times can allow for high count rates and dark counts lower than 1 per hour \cite{wollman2017}. Waveguide integrated detectors have been demonstrated \cite{sprengers2011} which benefit from enhanced interaction between the confined light and the detector. Cavities have been explored to further increase the detection efficiency and reduce the jitter \cite{vetter2016, yun2019, tyler2016modelling}.
+
+%As \ac{QKD} will typically be concerned with single photon states (or close to) the efficiency of detection will be crucial. The losses associated with coupling on and off of integrated devices are a big problem. By fabricating detectors onto the waveguides we gain a few benefits.
+
+%Moving the detectors on-chip removes the coupling losses and the high confinement in waveguides means a strong interaction between photons and the detectors. This also means that superconducting nanowires can be made shorter which reduces the jitter and dead times.
 
 \subsection{Platforms}
 
@@ -1097,25 +1101,41 @@ Different materials will exhibit different properties that provide benefits and 
 
 \subsubsection*{Silicon-on-Insulator}
 
-Silicon is ubiquitous in the world today and powers everything from watches to supercomputers. The advances that have been made in the trillion dollar semiconductor industry have made silicon a hugely successful platform for quantum photonics. With a band gap of \SI{\sim 1100}{nm}, we can also leverage the telecommunications industry to create low-loss \acl{pic}. However, as it has an indirect band gap, it has been challenging to develop efficient light sources on-chip \cite{}. While efforts have been made to create integrated lasers and amplifiers, their performances don't match those of other integrated approaches, such as III-V materials.
+One of the more mature \ac{pic} platform is \ac{soi} which has leveraged fabrication from the ubiquitous silicon microelectronics industry. \Ac{cmos} compatibility has enabled large, complex devices to be fabricated \cite{wang2019integrated}. A high index contrast between the waveguide and the substrate allows tight confinement of the light meaning small bend radii are possible. 
 
-The high index contrast in a \ac{soi} device means that very compact devices with small bend radii are possible.
+As silicon is centro-symmetric, it has no natural $\chi^{(2)}$ which means that there is no electro-optic effect to use for phase modulation. Instead, modulation is achieved through thermo-optic, which are slow, or carrier injection/depletion modulators, which suffer from phase dependent losses. There have been attempts to break this centro-symmetry to achieve high bandwidth modulation \cite{cazzanelli2016second, castellan2019origin}.
 
-Coupling can be done with grating couplers meaning that coupling light on and off chip isn't limited to the edges.
+A strong $\chi^{(3)}$ non-linearity allows single-photon generation through \ac{sfwm} \cite{SilverstoneThesis}. However, as silicon doesn't have a direct bandgap lasers there is no immediate route to integrating lasers. Instead, hybrid platforms have emerge to utilise III-V lasers \cite{Fan2017, Agnesi2019}. Doped silicon has allowed fast photodiodes to be waveguide integrated with high bandwidths \cite{raffaelli2018generation}.
 
-It is not possible to realise \ac{eopm} in silicon as there is no $\chi^{(2)}$ non-linearity because of the centrosymmetry of the structure. High-speed modulation can be achieved through current injection but the phase dependent losses limit their performance \cite{} or the symmetry can be broken by introducing strain such as depositing a silicon nitride thin film.
+Light can be edge-coupled but grating structures are more common. Periodic structured in the silicon convert the waveguide mode to couple into single-mode fibre. Losses have been shown to be as low as \SI{0.36}{dB} \cite{Notaros2016}, although the loss is typically higher. Silicon suffers from high non-linear losses which are suppressed at longer wavelengths \cite{rosenfeld2019mid}.
 
-One of the major advantages of the silicon platform is the potential for integration for control electronics on the same device as the photonics. This could facilitate creating transmitter and receiver devices which have all of the photonic and electrical components for a key exchange. 
+%Silicon is ubiquitous in the world today and powers everything from watches to supercomputers. The advances that have been made in the trillion dollar semiconductor industry have made silicon a hugely successful platform for quantum photonics. With a band gap of \SI{\sim 1100}{nm}, we can also leverage the telecommunications industry to create low-loss \acl{pic}. However, as it has an indirect band gap, it has been challenging to develop efficient light sources on-chip \cite{}. While efforts have been made to create integrated lasers and amplifiers, their performances don't match those of other integrated approaches, such as III-V materials.
+
+%The high index contrast in a \ac{soi} device means that very compact devices with small bend radii are possible.
+
+%Coupling can be done with grating couplers meaning that coupling light on and off chip isn't limited to the edges.
+
+%It is not possible to realise \ac{eopm} in silicon as there is no $\chi^{(2)}$ non-linearity because of the centrosymmetry of the structure. High-speed modulation can be achieved through current injection but the phase dependent losses limit their performance \cite{} or the symmetry can be broken by introducing strain such as depositing a silicon nitride thin film.
+
+%One of the major advantages of the silicon platform is the potential for integration for control electronics on the same device as the photonics. This could facilitate creating transmitter and receiver devices which have all of the photonic and electrical components for a key exchange. 
 
 \subsubsection*{Silicon Nitride}
 
-A wider bandgap material which reduces non-linear losses such as two-photon absorption in the mid-IR spectrum. Phase modulation is achieved through thermo-optic effects which allows circuit reconfigurability.
+Silicon nitride (Si\textsubscript{3}N\textsubscript{4}) offers a wider bandgap than silicon meaning that it has a much wider transparency. This has added benefits at mid-infra-red wavelengths as the non-linear losses, such as two-photon absorption \cite{tan2018nonlinear}, are reduced which is crucial for quantum photonic technologies \cite{lu2019chip}. Reconfigurable circuits can be achieved through themo-optic phase modulation and \acp{mmi}. Like silicon, there is no natural electro-optic effect so any fast modulation is achieved through carrier effects.
+
+% which reduces non-linear losses such as two-photon absorption in the mid-IR spectrum. Phase modulation is achieved through thermo-optic effects which allows circuit reconfigurability.
 
 \subsubsection*{Indium Phosphide}
 
-One of the more recent advances in integrated photonics is from III-V materials which offer certain benefits for \acp{pic}, especially for communication purposes. Unlike silicon, \Ac{InP} has a direct bandgap which means that lasers can be easily integrated into waveguides \cite{smit2014}. Waveguide integrated \acp{SOA} and \acp{DBR} structures allow Fabry-P\'{e}rot lasers to be created and high-bandwidth \ac{dfb} components are also available \cite{smit2014, jeppix}.
+\Ac{InP} offers benefits over other platforms, especially with its direct bandgap which allows easily integrable lasers. \Acp{SOA} and \acp{DBR} structures allow Fabry-P\'{e}rot lasers to be created and directly coupled to waveguides. Alternatively, high-bandwidth \ac{dfb} components are also available \cite{smit2014, jeppix}. Multi-quantum well structures allow fast phase modulation up to \SI{40}{GHz} through the \ac{qcse} with similar bandwidth photodiodes also available \cite{smit2014}. Thermo-optic effects are also available for stable modulation and tuning.
 
-More recently, there has been work on membrane \ac{InP} on an insulator. This increases the index contrast in the waveguides meaning that bend radii can be smaller \cite{Kumar2019}. In this first demonstration of \ac{sfwm} in \ac{InP} it was noted that the non-linearity is actually stronger than silicon. However, the non-linear losses through two-photon absorption is much larger. This could be solved by either increasing the bandgap of the material, much like silicon nitride compared with silicon. Alternatively, longer wavelength photons would be unable to cause two-photon absorption \cite{rosenfeld2019mid}. 
+As there is no insulator, like in \ac{soi}, there is a very low index contrast to create grating couplers as the light from similar structures would launch into the substrate. Therefore, edge couplers are required to access the optical circuits. \Acp{ssc} are tapered waveguides that convert the waveguide to single-mode fibre. This low contrast also means that the bend radius is larger meaning that the component density is lower than silicon.
+
+More recently, there has been work to replicate \ac{soi} with \ac{imos} \cite{IMOS, van2011photonic}. This increases the index contrast in the waveguides meaning that bend radii can be smaller \cite{Kumar2019}. In this first demonstration of \ac{sfwm} in \ac{InP} it was noted that the non-linearity is actually stronger than silicon. However, the non-linear losses through two-photon absorption is far larger. This could be solved by either increasing the bandgap of the material, much like silicon nitride compared with silicon. Alternatively, longer wavelength photons would be unable to cause two-photon absorption \cite{rosenfeld2019mid}. 
+
+
+%A less mature platform for quantum photonics comes from III-V materials which offer certain benefits for \acp{pic}, especially for communication purposes. Unlike silicon, \Ac{InP} has a direct bandgap which means that lasers can be easily integrated into waveguides \cite{smit2014}.
+
 
 %In this section, we will introduce the \acl{InP} platform and describe some of the components that we will find useful for the remainder of the thesis.
 
@@ -1129,26 +1149,30 @@ More recently, there has been work on membrane \ac{InP} on an insulator. This in
 
 \subsubsection*{Lithium Niobate}
 
-Lithium niobate offers a $\chi^{(2)}$ non-linearity which allows fast phase modulation and \ac{spdc}. This 
+Lithium niobate is a favourite choice phase and intensity modulation offering very high bandwidth modulation \cite{Louay2001Advances, Atsushi2010NRZ}. Single-photon generation is also available through \ac{spdc} in periodically poled structures \cite{tanzilli2002ppln}. Reconfigurable circuits have been demonstrated making it a potential candidate for future networks \cite{jin2014chip}. 
 
-\subsubsection{Hybrid Integration}
+%\subsubsection{Hybrid Integration}
 
-More recently, there have been effects to hybridise \acp{pic} to create devices which exploit the benefits of multiple platforms. 
+%More recently, there have been effects to hybridise \acp{pic} to create devices which exploit the benefits of multiple platforms. 
 
-For example, hybrids of an \ac{InP} laser and Si ring filters to make a laser device with a linewidth of \SI{290}{Hz} \cite{Fan2017}. \ac{InP} lasers have also been directly coupled to silicon devices for \ac{QKD} transmission \cite{Agnesi2019}.
+%For example, hybrids of an \ac{InP} laser and Si ring filters to make a laser device with a linewidth of \SI{290}{Hz} \cite{Fan2017}. 
 
-While \ac{InP} offers many appealing optical properties, control through integrated electronics is desirable to create a scalable \ac{pic} platform. There are two ways that could create hybrid \ac{InP}-Si devices. 
+%\ac{InP} lasers have also been directly coupled to silicon devices for \ac{QKD} transmission \cite{Agnesi2019}.
 
-Heterogeneous integrated can be a achieved by wafer bonding an \ac{InP} \ac{pic} to either a silicon photonics chip or a \ac{cmos} control chip \cite{jeppix}. The bonded devices can then be further processed on a wafer scale.
+%While \ac{InP} offers many appealing optical properties, control through integrated electronics is desirable to create a scalable \ac{pic} platform. There are two ways that could create hybrid \ac{InP}-Si devices. 
 
-\Ac{imos} aims to introduce an \ac{InP} membrane onto a silicon wafer to provide efficient optic-electronic integration \cite{jeppix, IMOS}. The \ac{imos} platform has been demonstrated with some basis building blocks.
+%Heterogeneous integrated can be a achieved by wafer bonding an \ac{InP} \ac{pic} to either a silicon photonics chip or a \ac{cmos} control chip \cite{jeppix}. The bonded devices can then be further processed on a wafer scale.
 
-There are also efforts to develop cross-platform electronic integration between III-V materials and Silicon \cite{}. 
+%\Ac{imos} aims to introduce an \ac{InP} membrane onto a silicon wafer to provide efficient optic-electronic integration \cite{jeppix, IMOS}. The \ac{imos} platform has been demonstrated with some basis building blocks.
+
+%There are also efforts to develop cross-platform electronic integration between III-V materials and Silicon \cite{}. 
 
 \section{Summary}
 
-In this background chapter we have introduced important cryptographic techniques, quantum theory and integrated photonics that will form the foundation for the remainder of this thesis.
+In this background chapter, we have introduced important cryptographic techniques, quantum theory and integrated photonics that will form the foundation for the remainder of this thesis. The humble beginning of cryptography have been incredible influential throughout history and remains a vital endeavour. With a better understand of cryptoanalysis techniques the field will need to keep evolving.
 
-Introduced the humble beginnings of cryptography and how quantum theory has both required and facilitated new protocols.
+Advances in the understanding of quantum mechanics has allowed a more complete view of the world. It has also facilitated a new range of quantum technologies to compliment their classical counterparts. Through quantum key distribution, we can develop entirely new ways to securely communicate. At the same time, thorough analysis will be crucial to their claims of security.
+
+As with any technology, the mass-manufacturability of quantum photonic circuits will be key to its success. Developments in integrated platforms have allowed quantum photonic to progress from modest proof of principle experiments into the commercial world. Quantum communication systems are set to utilise these techniques to become part of future quantum networks. The rest of this thesis concerns developing the integrated platform for quantum key distribution.
 
 %=========================================================

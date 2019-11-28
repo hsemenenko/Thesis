@@ -80,3 +80,9 @@ plot!(twinx(),
    )
 
 savefig("count.png")
+
+texcount = open("count.tex", "w")
+
+write(texcount, "{\\color{white}Word count: $(words[end])}\\\\")
+
+close(texcount)
