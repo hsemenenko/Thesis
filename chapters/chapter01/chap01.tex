@@ -10,12 +10,33 @@
 \chapter{Introduction}
 \label{chap:intro}
 
+\section{Foreword}
 
-Something about the rest of the stuff in here.
+The second quantum revolution is steadily progressing with no immediate sense of slowing. The prospect of a large scale quantum computing a no longer a pipe dream. In fact, the current scale of research focused on the area suggests that the question should not be \emph{if} but rather \emph{when}.
 
-\lipsum[1-7]
-\lipsum[1-7]
+An immense level of precision is required to control quantum information. Microelectronics -> integrated photonics. 
 
-The outline of the thesis is as follows. Chapter \ref{chap:background} will introduce some of the necessary background work and concepts that will be used throughout the rest of the thesis. The experimental work will start with Chapter \ref{chap:hom} by introducing \ac{HOM} interference using integrated devices. Chapters \ref{chap:mdiqkd} and \ref{chap:node} will build on this work to present a demonstration of \ac{MDI} using integrated devices. Finally, Chapter \ref{chap:laser-seeding} will show work towards new \ac{QKD} transmitters before we conclude in Chapter \ref{chap:conclusion}.
+The promised benefits of quantum computer claims are immeasurable. This is mostly because the benefits have not been fully explored beyond a few applications. However, one well known example threatens the future of modern secure communication. 
+
+With large scale quantum computing forthcoming, we must explore new methods of secure communication. \Ac{QKD} is one such attempt to securely distribute randomness.
+
+\Ac{MDI}.
+
+This thesis will explore the extension of the integrated photonic platform into new protocols.
+
+This thesis will explore how new protocol design and developments in the integrated photonics platform will facilitate accessible quantum-secured communication and form the basis for future quantum networks.
+
+\newpage
+\section{Outline}
+
+The outline of the thesis is as follows:
+
+\begin{itemize}
+	\item \brisred{Chapter 2} will introduce the general concepts required for the rest of the thesis. Cryptography will be put in context with advances that have been made over the last 4000 years which will end with the current state of modern protocols. Quantum information will be introduced starting with the foundations of quantum mechanics. The notion of quantum bits is discussed as well as key aspects that will be relevant for secure key exchange. Several different \acl{QKD} protocols will be presented and the practical security of them discussed. Finally, the field of integrated photonics will be introduced and the essential building blocks will be described. Information encoding through quantum photonics will be reviewed and the different platforms for photonics integration will be compared.
+	\item \brisred{Chapter 3} presents work by introducing \ac{HOM} interference using integrated devices. 
+	\item \brisred{Chapter 4} builds on the \ac{HOM} interference by demonstrating \ac{MDI} which removes all potentially information leaks from the detection system. We will see how entirely integrated components can generate \SI{250}{MHz}-clocked quantum states and distribute \SI{1}{kbps} of key at \SI{100}{km}. The security of the transmitters will be reviewed as well as the security trade-off for cost-effective electronics. Finally, we will see how developments in silicon photonics could enable a fully-integrated \ac{QKD} system to further reduce cost and enable multi-user, metropolitan, quantum-secured networks.
+	\item \brisred{Chapter 5} explores new \acp{pic} for \ac{QKD} by using the ever-advances photonics platform.
+	\item \brisred{Chapter 6} concludes this thesis with a summary of the presented work. The importance of \ac{HOM} interference and its place in \ac{QKD} will be discussed. The importance of ensuring security in any key exchange system will be reviewed and how closing loopholes will be vital to the success of \ac{QKD}. The integrated photonics platform, and the new devices presented in chapter \ref{chap:future}, will be put into context. We will close by placing this work in the larger context of future quantum networks.
+\end{itemize}
 
 %=========================================================

@@ -11,18 +11,18 @@
 
 \section*{Statement of Work}
 
-Philip Sibson and I designed the photonic chips and compiled the chip mask that was fabricated by Fraunhofer \ac{hhi}. I design the PCB for electrical operation and optical connection. I packaged the chip with support from Alasdair Price and Graham Marshall. I performed characterisation of the initial components of the circuits which included laser driving under both DC and RF operation and a preliminary test of laser seeding capability.
+Philip Sibson and I designed the photonic chips and compiled the chip mask that was fabricated by Fraunhofer \ac{hhi}. I designed the PCB for electrical operation and optical connection. I packaged the chip with support from Alasdair Price and Graham Marshall. I performed characterisation of the initial components of the circuits which included laser driving under both DC and RF operation and a preliminary test of laser seeding capability.
 
 %=======
 \section{Introduction}
 
-Recent developments in monolithic fabrication has facilitated a drastic increase in the optical complexity which has been thoroughly utilised for quantum information experiments \cite{wang2019integrated}. The inherent phase stability allows a level of control on a scale simply not possible with fibre or bulk alternatives. However, the technology is still under heavy development to improve the performances of devices at both component and circuit levels. As such, further optimisation is required to fully benefit from the integration of \ac{QKD} systems. 
+Recent developments in monolithic fabrication have facilitated a drastic increase in the optical complexity which has been thoroughly utilised for quantum information experiments \cite{wang2019integrated}. The inherent phase stability allows a level of control on a scale simply not possible with fibre or bulk alternatives. However, the technology is still under heavy development to improve the performances of devices at both component and circuit levels. As such, further optimisation is required to fully benefit from the integration of \ac{QKD} systems. 
 
-While the demonstrations in previous chapters showed state-of-the-art performances from \ac{InP} devices, several non-idealities were noted which are in need of revision. The phase imperfections in the \acp{mzi} meant that a resistance over the \acp{eopm} needed to be used to maximise the performance for the device. By including dedicated \acp{topm}, the performance may be further increased and allow a true ``push-pull'' method of modulation to be used. Similarly, the dimensions of the laser components could be optimised to increase laser performance. Tuning the lengths of the front and rear \acp{DBR} and increasing the \ac{SOA} length should increase the laser intensity. These considerations may be crucial for \ac{cvqkd} demonstrations where a bright local oscillator is required. 
+While the demonstrations in previous chapters showed state-of-the-art performances from \ac{InP} devices, several non-idealities were noted which are in need of improvement. The phase imperfections in the \acp{mzi} meant that a resistance over the \acp{eopm} needed to be used to maximise the performance of the device. By including dedicated \acp{topm}, the performance may be further increased and allow a true ``push-pull'' method of modulation to be used. Similarly, the dimensions of the laser components could be optimised to increase laser performance. Tuning the lengths of the front and rear \acp{DBR} and increasing the \ac{SOA} length should increase the laser intensity. These considerations may be crucial for \ac{cvqkd} demonstrations where a bright local oscillator is required. 
 
 %For example, tuning of \acp{mzi} requires \ac{topm} and delay line losses were too high to be used. 
 
-Performance gains can also be made from the continual development of the \ac{InP} platform. Modulator bandwidths are continually increasing and laser linewidths and sideband suppression always improving meaning that the optical performance of integrated photonics is yet to be achieved. Even passive losses through waveguides have halved since the initial designs from \num{2} to \SI{1}{dB\per\cm}. This makes integrated photon delay lines are more accessible which may allow simpler operation. 
+Performance gains can also be made from the continual development of the \ac{InP} platform. Modulator bandwidths are continually increasing and laser linewidths and sideband suppression always improving meaning that the optimal performance of integrated photonics is yet to be achieved. Even passive losses through waveguides have halved since the initial designs from \num{2} to \SI{1}{dB\per\cm}. This makes integrated photon delay lines more accessible which may allow simpler operation. 
 
 %Waveguide losses have halved from \SI{2}{dB\per\cm} to \SI{1}{dB\per\cm}.
 
@@ -47,7 +47,9 @@ In this chapter, we will introduce the next generation designs of \ac{InP} \ac{Q
 
 \section{Pulsed Laser Seeding}
 
-\Ac{pls} is an optical technique that is based on optical-injection locking of lasers which can be used to create narrow pulses with low timing jitter when compared with gain-switching or intensity modulation \cite{Seo1996, Gunning1996}. As schematic is shown in figure \ref{fig:las_seed_schem}. An initial (master) laser operates in \ac{CW} mode which is injected into a second (slave) laser. The slave is electrically pulsed which creates an optical pulse from the injected photons and inherits the phase of the master. As the process is not reliant on a spontaneous emission, the pulse width can be very narrow \cite{Comandar2016PLS}. However, as the master laser is running in \ac{CW} operation, the phase of the pulsed slave laser will only drift slowly with the changing phase of the master laser. This will not be sufficiency for \ac{QKD} pulses which require phase randomisation between states. 
+In the previous chapter, we saw how states could be encoded through intensity and phase modulation of a \ac{CW} laser. This allows \SI{2}{GHz} clocked states to be generated with high fidelity. However, for a \ac{QKD} system, we required the state to be phase randomised which meant that the state rate needed to be reduced to \SI{250}{MHz}. Alternatively, phase randomisation can be achieved with a separate phase modulator where a set of finite phases are randomly chosen which approximates a random phase \cite{Sibson2017InP}. This requires a multi-level signal to operate the modulator which increases the complexity of the system and detrimental phase-dependent losses can compromise security. To ensure high bandwidth key exchange, whilst maintaining simplicity, we might consider a different method of state generation.
+
+\Ac{pls} is an optical technique that is based on optical-injection locking of lasers which can be used to create narrow pulses with low timing jitter when compared with gain-switching or intensity modulation \cite{Seo1996, Gunning1996}. A schematic is shown in figure \ref{fig:las_seed_schem}a. An initial (master) laser operates in \ac{CW} mode which is injected into a second (slave) laser. The slave is electrically pulsed which creates an optical pulse from the injected photons and inherits the phase of the master. As the process is not reliant on a spontaneous emission, the pulse width can be very narrow \cite{Comandar2016PLS}. However, as the master laser is running in \ac{CW} operation, the phase of the pulsed slave laser will only drift slowly with the changing phase of the master laser. This will not be sufficient for \ac{QKD} pulses which require phase randomisation between states. 
 
 %However, this would still require phase randomisation for \ac{QKD} as the phase from the initial laser would only slow drift. 
 
@@ -57,9 +59,16 @@ Instead of operating the maser laser in a \ac{CW} mode, it is given a DC offset 
 
 This method of \ac{pls} provides the base pulses for a \ac{QKD} system but encoding is still required. Previous demonstrations have used a polarisation encoding to generate the BB84 states in adition to \ac{pls} \cite{Comandar2016}. However, for a time-bin encoding one can consider encoding the states directly with the master laser. To maintain phase coherence between time-bins, the master laser can be kept above threshold for two cycles. The pulses generated from the slave laser will then also have a phase coherence. By adjusting the driving voltage for the master laser between time-bins, a phase shift can be created between early and late time-bins. By fine tuning the parameters of a system, all of the BB84 states can be generated in a time-bin encoding scheme by just using \ac{pls}.
 
-\Ac{pls} provides a method of generating BB84 states by overcoming some of the issues with gain-switching or intensity modulation of lasers while also reducing the optical complexity of a circuit. The electrical requirement for the system remain stringent with RF signals requiring high resolution vertical precisions to sufficiently control the phases of the master laser. \Ac{pls} has been demonstrated using fibre optic components to show high-fidelity \ac{HOM} interference and \ac{MDI} \cite{Comandar2016PLS, Comandar2016}. 
+\Ac{pls} provides a method of generating BB84 states by overcoming some of the issues with gain-switching or intensity modulation of lasers while also reducing the optical complexity of a circuit. The electrical requirements for the system remain stringent with RF signals requiring high resolution vertical precisions to sufficiently control the phases of the master laser. \Ac{pls} has been demonstrated using fibre optic components to show high-fidelity \ac{HOM} interference and \ac{MDI} \cite{Comandar2016PLS, Comandar2016}. 
 
 %Laser seeing using two pulsed lasers: a master and a slave. Both are driving with electrical square waves. The master laser is kept just below threshold and gain switching causing a laser pulse from a spontaneous emission. The DC offset is such that the timing jitter is minimised (although still large) while maintaining a randomised phase. This initial pulse is sent through a circulator to the slave laser The slave has a DC offset below lasing threshold such that without the master laser pulse, no lasing can occur even with the RF signal.
+
+\begin{figure}[t]
+	\centering
+	\includegraphics[width=0.9\textwidth]{./schematics/laser_seeding.pdf}
+	\caption[Schematic of fibre-based and on-chip PLS]{\textbf{a} Fibre schematic for \acf{pls}. A master laser provides a pulse which is attenuated and sent to the slave through a circulator. The slave then generates a pulse from this seed which is sent to the output. As there is no non-linearity to exploit for a circulator, the usual method of laser seeding cannot be achieved in integrated photonics. These are the simplest conceivable circuits to attempt \acs{pls} in a \acs{pic}. \textbf{b} The master can inject light through a \num{1x2} \acs{mmi} which also allows half of the slave light to the output. \textbf{c} The master and slave are in series. Light is injected into the rear \acs{DBR} of the slave which is also connected directly to the output.}
+	\label{fig:las_seed_schem}
+\end{figure}
 
 \subsection{Integrated Laser Seeded Transmitter}
 
@@ -70,9 +79,9 @@ This method of \ac{pls} provides the base pulses for a \ac{QKD} system but encod
 	\label{fig:hhi_laser_seeding}
 \end{sidewaysfigure}
 
-In this section, we will present two designs for integrated laser seeding transmitter for time-bin encoding \ac{QKD}. The devices were fabricated by Fraunhofer \ac{hhi} from \ac{InP} and measure only \SI{6x4}{mm}. Edge couplers on the side of the chip allow optical access while the electrical connections are routed to the remaining three sides. Test structures are included in the design to measure the laser characteristics, photodiode performance and cutbacks allow the waveguide and coupling losses to be estimated. This device also contains a \ac{qrng} which will be discussed in section \ref{sec:hhi_qrng}.
+In this section, we will present two designs for integrated laser seeding transmitters for time-bin encoded \ac{QKD}. The devices were fabricated by Fraunhofer \ac{hhi} from \ac{InP} and measure only \SI{6x4}{mm}. Edge couplers on the side of the chip allow optical access while the electrical connections are routed to the remaining three sides. Test structures are included in the design to measure the laser characteristics, photodiode performance and cutbacks allow the waveguide and coupling losses to be estimated. This device also contains a \ac{qrng} which will be discussed in section \ref{sec:hhi_qrng}.
 
-Figure \ref{fig:hhi_laser_seeding} shows the GDS for the device and aptly demonstrates the complexity achievable with \acp{pic}. In total, the device contains eight Fabry-P\'{e}rot lasers. The fabrication process meant that all \acp{ssc} had to be on the same side of the device. Therefore, each \ac{ssc} was separated with \acp{mmi} to the different parts of the chip. This will increase the losses in the circuit and should be considered for the characterisation of the device. 
+Figure \ref{fig:hhi_laser_seeding} shows the GDS for the device and aptly demonstrates the complexity achievable with \acp{pic}. The optical components are shown in blue, while the electrical connections are in red. Schematics of the transmitters are shown in figure \ref{fig:las_seed_schem} and the integrated \ac{qrng} is discussed further in section \ref{sec:hhi_qrng}. In total, the device contains eight Fabry-P\'{e}rot lasers. The fabrication process meant that all \acp{ssc} had to be on the same side of the device. Therefore, each \ac{ssc} was separated with \acp{mmi} to the different parts of the chip. This will increase the losses in the circuit and should be considered for the characterisation of the device. 
 
 Electrical connections were routed to the side of the chip in staggered rows to help with wirebonding. Waveguide crossings were added where appropriate as the stack does not have a separated electrical layer. Due to the number of electrical connections, shared grounds were implemented to reduce the number of bond pads required.
 
@@ -86,14 +95,7 @@ Without isolation between the master and slave laser, back reflections are a pot
 
 %The schematic for the on-chip laser seeding test is shown in figure \ref{fig:las_seed_schem} where master and slave lasers can interact.
 
-\begin{figure}[t]
-	\centering
-	\includegraphics[width=\textwidth]{./schematics/laser_seeding.pdf}
-	\caption[Schematic of fibre-based and on-chip PLS]{\textbf{a} Fibre schematic for \acs{pls}. A master laser provides a pulse which is attenuated and sent to the slave through a circulator. The slave then generates a pulse from this seed which is sent to the output. As there is no non-linearity to exploit for a circulator, the usual method of laser seeding cannot be achieved in integrated photonics. These are the simplest conceivable circuits to attempt \acs{pls} in a \acs{pic}. \textbf{b} The master can inject light through a \num{1x2} \acs{mmi} which also allows half of the slave light to the output. \textbf{c} The master and slave are in series. Light is injected into the rear \acs{DBR} of the slave which is also connected directly to the output.}
-	\label{fig:las_seed_schem}
-\end{figure}
-
-Since this chip had been designed, similar work was published demonstrating an integrated laser-seeding transmitter based on the \ac{InP} platform \cite{paraiso2019}. The designs are similar to those present here but use \ac{dfb} lasers in series with an \ac{mzi} in between to attenuate the master laser, as required. 
+Since this chip was designed and fabricated, similar work was published demonstrating an integrated \ac{pls} transmitter based on the \ac{InP} platform \cite{paraiso2019}. The designs are similar to those present here but use \ac{dfb} lasers in series with an \ac{mzi} in between to attenuate the master laser, as required. 
 
 \subsection{Optical and Electrical Packaging}
 
@@ -105,15 +107,15 @@ The complexity of the device required careful consideration to ensure optical an
 	\centering	
 	\def\svgwidth{\textwidth} 
 	\import{chapters/chapter06/fig06/}{GCPW.pdf_tex}
-	\caption[Grounded coplanar waveguide schematic]{Cross-section and top view schematicof the \acs{gcpw} structure. The track width, $a$, total width $b$, substrate height, $h$, and dielectric constant $E_r$ determine the characteristic impedance of the track. Vias provide a shield to suppress surface wave modes. Vias are spaced $S_\text{via}$ which determines their performance.}
+	\caption[Grounded coplanar waveguide schematic]{Cross-section and top view schematicof the \acf{gcpw} structure. The track width, $a$, total width $b$, substrate height, $h$, and dielectric constant $E_r$ determine the characteristic impedance of the track. Vias provide a shield to suppress surface wave modes. Vias are spaced $S_\text{via}$ which determines their performance.}
 	\label{fig:gcpw}
 \end{figure}
 
-The electrical connections for integrated devices is challenging, especially in test devices where on-chip real estate is valuable and therefore fully utilised. In figure \ref{fig:hhi_pcb} we show the PCB designed to connect most (but not all) components of the chip shown in figure \ref{fig:hhi_laser_seeding}. For this initial test, the \ac{qrng} section of the chip was not connected to reduce the number of electrical connections. In total, 33 electrical lines were included in the design for the initial testing the integrated lasers, modulators and \acp{pd}.
+The electrical connections for integrated devices is challenging, especially in test devices where on-chip real estate is valuable and therefore fully utilised. In figure \ref{fig:hhi_pcb} we show the PCB designed to connect most (but not all) components of the chip shown in figure \ref{fig:hhi_laser_seeding}. For this initial test, the \ac{qrng} section of the chip was not connected to reduce the number of electrical connections. In total, 33 electrical lines were included in the design for the initial testing of the integrated lasers, modulators and \acp{pd}.
 
 The PCB was again made from Rogers 6006 for its high dielectric constant and contained four layers. The top layer of the PCB is \ac{enig} plated for the wirebond connections. The first two layers were dedicated to the RF tracks. The top layer provided signal lines through \ac{cpw} while the second layer provided isolation from the DC tracks below. The \ac{cpw} dimensions can be calculated using equations presented in chapter \ref{chap:hom}. The high dielectric constant allowed narrow \acp{cpw} while maintaining a \SI{50}{\ohm} impedance. 
 
-To improve the performance over previous designs, a via fence was included along the RF tracks to create a \ac{gcpw} which should increase the bandwidth \cite{haydl2002use}. A schematic is shown in figure \ref{fig:gcpw}. This via fence reflects the signal and stops a surface wave being created along the track. The spacing between the vias is important to maximise bandwidth, as is the spacing between the track and via. Generally speaking, a microwaves will reflect off of gaps which are less than \nicefrac{1}{4} of their wavelength \cite{Sain2016}. Therefore, the spacing between each via can be calculated as 
+To improve the performance over previous designs, a via fence was included along the RF tracks to create a \ac{gcpw} which should increase the bandwidth \cite{haydl2002use}. A schematic is shown in figure \ref{fig:gcpw}. This via fence reflects the signal and stops a surface wave being created along the track. The spacing between the vias is important to maximise bandwidth, as is the spacing between the track and via. Generally speaking, microwaves will reflect off of gaps which are less than \nicefrac{1}{4} of their wavelength \cite{Sain2016}. Therefore, the spacing between each via can be calculated as 
 
 \begin{equation}
 	S_\text{via} = \frac{\lambda}{4} = \frac{c}{4 f \sqrt{E_r}}
@@ -122,7 +124,7 @@ where $f$ is the maximum frequency of operation and $E_r$ is the dielectric cons
 
 \begin{figure}[t]
 	\centering
-	\includegraphics[width=\textwidth]{HHI_PCB/HHI_PCB_render_2.png}
+	\includegraphics[width=0.9\textwidth]{HHI_PCB/HHI_PCB_render_2.png}
 	\caption[PCB breakout for an InP integrated circuit]{PCB designed to connect the \acs{hhi} device to control and measurement equipment. The chip sits in the middle of the PCB so that RF track length can be minimised. RF lines are shielded with vias to create \acs{gcpw} for high bandwidth and are connected to edge-launch SMA connectors. DC lines are routed through a lower layer of the PCB and connected to an FFC receptacle. A section of the PCB is milled out to allow a \acs{vga} to be mounted for optical connection. Screw holes allow the package to be mounted to a heat sink for thermal management.}
 	\label{fig:hhi_pcb}
 \end{figure}
@@ -133,9 +135,9 @@ The chip contains a PIN \ac{pd} for test purposes. To isolate this from the rest
 
 %Due to the number of connections required for the chip, DC connections near the chip were routed through plated and capped vias. These were then routed to an FFC connector. 
 
-The chip was placed in the center of the PCB minimise the RF track lengths required. One side of the PCB was curved to further reduce the distance to the chip. This section of the PCB was partial milled out the width, length and thickness of the chip so that the top of the chip would be flush with the top of the PCB. This makes wirebonding the chip easier and allows wirebond length to be minimised. This section was plated for thermal conductivity and plated vias added to the bottom of the PCB for thermal management and temperature stabilisation. 
+The chip was placed in the center of the PCB to minimise the RF track lengths required. One side of the PCB was curved to further reduce the distance to the chip. This section of the PCB was partially milled out the width, length and thickness of the chip so that the top of the chip would be flush with the top of the PCB. This makes wirebonding the chip easier and allows wirebond length to be minimised. This section was plated for thermal conductivity and plated vias added to the bottom of the PCB for thermal management and temperature stabilisation. 
 
-As in the previous chips, the \acp{ssc} were angled at \SI{7}{\degree} from the edge of the chip. This is to reduce the back reflections into the chip. To increase the coupling from the chip to the \ac{vga}, the chip was rotated by \SI{7}{\degree} in the PCB design. The \ac{vga} could then be polished at a \SI{7}{\degree} in the opposite direction and be aligned parallel to the PCB. Unfortunately, the geometry of this design was not fully considered meaning that once rotated, the \ac{vga} was no longer \SI{500}{\um} \textit{vertically} spaced. This is shown in figure \ref{fig:geometry_lesson}. When the first fibre is aligned to the chip, the subsequent fibres no longer line up with the chip facets. Future designs should consider this in the compilation of the chip mask. By adjusting the spacing between \acp{ssc} on the chip, a standard polished \ac{vga} can be used to connect all the optical ports. Alternatively, one can sacrifice coupling efficiency by leaving the chip parallel with the chip and using a standard flat-faced \ac{vga}.
+As in the previous chips, the \acp{ssc} were angled at \SI{7}{\degree} from the edge of the chip. This is to reduce the back reflections into the chip. To increase the coupling from the chip to the \ac{vga}, the chip was rotated by \SI{7}{\degree} in the PCB design. The \ac{vga} could then be polished at a \SI{7}{\degree} in the opposite direction and be aligned parallel to the PCB. Unfortunately, the geometry of this design was not fully considered meaning that once rotated, the \ac{vga} was no longer \SI{500}{\um} \textit{vertically} spaced. This is shown in figure \ref{fig:geometry_lesson}. When the first fibre is aligned to the chip, the subsequent fibres no longer line up with the chip facets. Future designs should consider this in the compilation of the chip mask. By adjusting the spacing between \acp{ssc} on the chip, a standard polished \ac{vga} can be used to connect all the optical ports. Alternatively, one can sacrifice coupling efficiency by leaving the chip parallel with the PCB and using a standard flat-faced \ac{vga}.
 
 %The chip was angled at \SI{7}{\degree} so that the \acp{ssc} were perpendicular to the side of the PCB. Unfortunately, as shown in figure \ref{fig:geometry_lesson}, this meant that the \ac{vga} no longer lined up with the output ports of the chip. 
 
@@ -148,7 +150,7 @@ As in the previous chips, the \acp{ssc} were angled at \SI{7}{\degree} from the 
 
 One should also note that \SI{7}{\degree} is not the optimal angle for coupling from the chip to the \ac{vga}. The refractive index of the \ac{InP} waveguides is 3.26 whereas standard optical fibre has a refractive index of around 1.44. Therefore, through Snell's law, the optimal angle for coupling from an \ac{ssc} to fibre would be \SI{16}{\degree}. 
 
-A section at the edge of the chip was milled out to provide a space for the \ac{vga} to be held and glued onto the chip. The cutout was designed to allow the chip to hang over the side by about \SI{0.5}{\mm} to ease gluing to \ac{vga} to the chip. A section at the edge of the PCB was also partially milled out to a depth of around \SI{0.5}{\mm}. This was to allow the bare fibres to remain horizontal and not change the pitch of the \ac{vga} when aligned to the chip. It also provides a place for the fibres to be fixed to the PCB for strain relief to make the packaged device more robust.
+A section at the edge of the chip was milled out to provide a space for the \ac{vga} to be held and glued onto the chip. The cutout was designed to allow the chip to hang over the side by about \SI{0.5}{\mm} to ease gluing the \ac{vga} to the chip. A section at the edge of the PCB was also partially milled out to a depth of around \SI{0.5}{\mm}. This was to allow the bare fibres to remain horizontal and not change the pitch of the \ac{vga} when aligned to the chip. It also provides a place for the fibres to be fixed to the PCB for strain relief to make the packaged device more robust.
 
 Solder pads were placed as close to the chip as possible for a thermistor to be used for thermal stabilisation. Tracks were routed to the bottom of the PCB to provide good thermal connectivity to the chip and peltier. Screw holes were provided to allow the device to be connected to a heat sink and were surrounded by vias to shield the PCB from RF radiation.
 
@@ -169,7 +171,7 @@ To accurately place the chip onto the PCB, vacuum tweezers were used. A silicone
 	\label{fig:hhi_photo}
 \end{figure}
 
-\SI{25}{\um} gold wire is used to connect the chip bond pads to the PCB which heated to \SI{100}{\celsius}. A high-voltage electrode provides a spark to the end of the wire creating a \SI{50}{\um} ball at the end of a capillary. The capillary is positioned above the chip bond pad connected to the chip bond pad through thermosonic bonding, which using a combination of heat, pressure and ultrasonic energy to form a bond. The wire is then fed through the capillary to form a loop so the wire can be connected to the PCB pad with a wedge bond, again using thermosonic bonding. This method can be used to create connections to devices with bandwidths above \SI{60}{GHz} \cite{chen2015bandwidth}, while coax wirebonds have been developed to support bandwidths above \SI{100}{GHz} \cite{cahill2006development}.
+\SI{25}{\um} gold wire is used to connect the chip bond pads to the PCB which was heated to \SI{100}{\celsius}. A high-voltage electrode provides a spark to the end of the wire creating a \SI{50}{\um} ball at the end of a capillary. The capillary is positioned above the chip bond pad connected to the chip bond pad through thermosonic bonding, which using a combination of heat, pressure and ultrasonic energy to form a bond. The wire is then fed through the capillary to form a loop so the wire can be connected to the PCB pad with a wedge bond, again using thermosonic bonding. This method can be used to create connections to devices with bandwidths above \SI{60}{GHz} \cite{chen2015bandwidth}, while coax wirebonds have been developed to support bandwidths above \SI{100}{GHz} \cite{cahill2006development}.
 
 \subsubsection*{Optical Connection}
 
@@ -177,7 +179,7 @@ The device contains eight \acp{ssc} on the side of the chip which are designed t
 
 A brass vacuum chuck was designed from the dimensions of the \ac{vga} so that it could be securely held during alignment and gluing. The chuck was placed on a 6-axis micro-positioner (Thorlabs NanoMax) so that it could be well aligned with the orientation of the chip. 
 
-The integrated lasers were used to align the \ac{vga} to the chip. A stable current source provided each laser with \SI{75}{\mA}.The device had been designed with lasers at both the top and bottom of the chip to allow the roll of the \ac{vga} to match that of the chip. As mentioned before, and shown in figure \ref{fig:geometry_lesson}, it was not possible to align all of the fibres in the \ac{vga} with the \acp{ssc}. Therefore, the \ac{ssc} with the most test structures was chosen to be the only fibre aligned. 
+The integrated lasers were used to align the \ac{vga} to the chip. A stable current source provided each laser with \SI{75}{\mA}. The device had been designed with lasers at both the top and bottom of the chip to allow the orientation of the \ac{vga} to match that of the chip. As mentioned before, and shown in figure \ref{fig:geometry_lesson}, it was not possible to align all of the fibres in the \ac{vga} with the \acp{ssc}. Therefore, the \ac{ssc} with the most test structures was chosen to be the only fibre aligned. 
 
 %was held using a vacuum chuck and moved using a . The on-chip lasers provided a light source for alignment. 
 
@@ -196,30 +198,30 @@ The packaged device was screwed to a heat sink with nylon screws to avoid therma
 	\small	
 	\def\svgwidth{\textwidth} 
 	\import{chapters/chapter06/fig06/I_sweep/}{current_sweep.pdf_tex}
-	\caption[Current sweep of the HHI Fabry-P\'{e}rot test lasers]{Current sweep of the on-chip, Fabry-P\'{e}rot test lasers. The two designs have different \acs{SOA} and front \acs{DBR} lengths. Both show a lasing threshold of around \SI{30}{\mA}. We find that the longer \acs{SOA} provides considerably more power despite the shorter front \acsp{DBR}. Fluctuations in power likely due to the mode competition in the cavity. Reduction in power for \SI{300}{\um} \acs{SOA} are likely attributed to heating of the diode reducing efficiency. The effective is elastic so reducing the current recovers the original efficiency.}
+	\caption[Current sweep of the HHI Fabry-P\'{e}rot test lasers]{Current sweep of the on-chip, Fabry-P\'{e}rot test lasers. The two designs have different \acs{SOA} and front \acs{DBR} lengths which are shown at the top of the figure. Both show a lasing threshold of around \SI{30}{\mA}. We find that the longer \acs{SOA} provides considerably more power despite the shorter front \acsp{DBR}. Fluctuations in power are likely due to the mode competition in the cavity. Reduction in power for \SI{300}{\um} \acs{SOA} are likely attributed to heating of the diode reducing efficiency. The effect is elastic so reducing the current recovers the original efficiency.}
 	\label{fig:hhi_soa_sweep}
 \end{figure}
 
-This device contains two Fabry-P\'{e}rot laser test structures to assess their characteristics. A cavity is formed from two current-injection tunable \acp{DBR} which are of different lengths. The rear \ac{DBR} is \SI{300}{\um} in length for both test lasers which should provide \SI{95}{\percent} reflectivity. Two different front \ac{DBR} lengths were chosen, as well as different lengths for the \ac{SOA}. The first laser had a front \ac{DBR} length of \SI{150}{\um} with an \ac{SOA} length of \SI{300}{\um}. The second laser had a front \ac{DBR} length of \SI{50}{\um} and \ac{SOA} length of \SI{500}{\um}. The reduction in \ac{DBR} length from \SI{150}{\um} to \SI{50}{\um} is estimated by the foundry to reduce the reflectivity from \SI{75}{\percent} to \SI{25}{\percent}. Both cavities also contain a \ac{cipm} which can be used to precisely tune the wavelength of the laser. This method is preferred over current injection of the \ac{SOA} as it won't not affect the output power of the laser. The schematics of the two lasers designs are shown in figure \ref{fig:hhi_soa_sweep}.
+This device contains two Fabry-P\'{e}rot laser test structures to assess their characteristics. A cavity is formed from two current-injection tunable \acp{DBR} which are of different lengths. The rear \ac{DBR} is \SI{300}{\um} in length for both test lasers which should provide \SI{95}{\percent} reflectivity. Two different front \ac{DBR} lengths were chosen, as well as different lengths for the \ac{SOA}. The first laser had a front \ac{DBR} length of \SI{150}{\um} with an \ac{SOA} length of \SI{300}{\um}. The second laser had a front \ac{DBR} length of \SI{50}{\um} and \ac{SOA} length of \SI{500}{\um}. The reduction in \ac{DBR} length from \SI{150}{\um} to \SI{50}{\um} is estimated by the foundry to reduce the reflectivity from \SI{75}{\percent} to \SI{25}{\percent}. Both cavities also contain a \ac{cipm} which can be used to precisely tune the wavelength of the laser. This method is preferred over current injection of the \ac{SOA} as it will not affect the output power of the laser. The schematics of the two lasers designs are shown in figure \ref{fig:hhi_soa_sweep}.
 
 \begin{figure}[t]
 	\centering
 	\small	
 	\def\svgwidth{0.9\textwidth} 
 	\import{chapters/chapter06/fig06/Spectra/}{spectra.pdf_tex}
-	\caption[Spectra of the on-chip lasers with wavelength through current injection of DBRs]{Spectra from an \acs{OSA} of the on-chip lasers whilst tuning the wavelength with the \acsp{DBR}. Current injection of the tunable \acsp{DBR} causes a change of peak reflected wavelength and, therefore, laser wavelength. The lasers are single-mode, with a \acs{FWHM} of \SI{30}{pm}. However, the sideband suppression is only \SI{30}{dB} and varies with \acs{DBR} tuning. The wavelength can be tuned by \SI{3}{nm} with a current of \SI{40}{\mA}.}
+	\caption[Spectra of the HHI laser whilst wavelength tuning through current injection of DBRs]{Spectra from an \acs{OSA} of an on-chip laser \ref{fig:hhi_soa_sweep}a whilst tuning the wavelength with the \acsp{DBR}. Current injection of the tunable \acsp{DBR} causes a change of peak reflected wavelength and, therefore, laser wavelength. The lasers are single-mode, with a \acs{FWHM} of \SI{30}{pm}. However, the sideband suppression is only \SI{30}{dB} and varies with \acs{DBR} tuning. The wavelength can be tuned by \SI{3}{nm} with a current of \SI{40}{\mA}.}
 	\label{fig:hhi_dbr_sweep}
 \end{figure}
 
 %Two different lasers designs were tested on chip with \num{300} and \SI{500}{\um} \ac{SOA} lengths to see the difference in performance. The rear \ac{DBR} and phase modulator were \SI{300}{\um} and \SI{50}{\um}, respectively, for both lasers. However, the front \ac{DBR} was only \SI{50}{\um} for the \SI{500}{\um} laser, while the other was \SI{150}{\um}.
 
-A current sweep of each of the test laser \acp{SOA} was performed to see threshold and power characteristics which are shown in figure \ref{fig:hhi_soa_sweep}. Both laser designs show a lasing threshold of around \SI{30}{\mA} and gain is initially linear. At high driving currents, both lasers exhibit fluctuations in power. This is likely attributed to mode competition within the laser cavity caused by cavity heating. The increased \ac{SOA} length allows the laser to reach around three times higher power for the same driving current. This will be partially due to the longer gain medium allowing a higher amplification and also the reduced reflectivity of the front \ac{DBR} allowing more light to escape the cavity. The power given in figure \ref{fig:hhi_soa_sweep} is not corrected for coupling or routing component loss and so the power on-chip is expected to be higher. 
+A current sweep of each of the test laser \acp{SOA} was performed to measure threshold and power characteristics which are shown in figure \ref{fig:hhi_soa_sweep}. Both laser designs show a lasing threshold of around \SI{30}{\mA} and gain is initially linear. At high driving currents, both lasers exhibit fluctuations in power. This is likely attributed to mode competition within the laser cavity caused by cavity heating. The increased \ac{SOA} length in configuration \ref{fig:hhi_soa_sweep}b allows the laser to reach around three times higher power for the same driving current. This will be partially due to the longer gain medium allowing a higher amplification and also the reduced reflectivity of the front \ac{DBR} allowing more light to escape the cavity. The power given in figure \ref{fig:hhi_soa_sweep} is not corrected for coupling or routing component loss and so the power on-chip is expected to be higher. 
 
 At currents above \SI{100}{\mA}, the \SI{300}{\um} \ac{SOA} begins to decrease in power and by \SI{150}{\mA} the optical power has drastically reduced. While more investigation is required, this is likely due an increase in temperature of the diode reducing its efficiency. The effect is elastic so reducing the driving current recovers the efficiency of the laser. This breakdown could possibly be remedied through better thermal management.
 
 % Fluctuations in power at higher driving current is likely attributed to mode competition. At very high currents, the \SI{300}{\um} \ac{SOA} laser starts to decrease in power. This will be due to the efficiency of the laser diode at higher temperatures.
 
-Figure \ref{fig:hhi_dbr_sweep} shows typical specta of the lasers while tuning the \acp{DBR} through current injection as measured by an \ac{OSA}. The lasing is single-mode with a \ac{FWHM} of \SI{30}{pm} which is limited to the resolution of the \ac{OSA} used (Anritsu MS9740A). However, the laser only achieves \SI{30}{dB} of sideband suppression when \acp{DBR} are suitably tuned. Both the laser configurations exhibit similar spectra. This suppression is much less than the \SI{50}{dB} found in the Oclaro lasers of similar design. These sidebands are likely due to the reflected wavelength of the \acp{DBR} being quite broad allowing multiple modes to co-exist. 
+Figure \ref{fig:hhi_dbr_sweep} shows typical specta of the lasers while tuning the \acp{DBR} through current injection as measured by an \ac{OSA}. The lasing is single-mode with a \ac{FWHM} of \SI{30}{pm} which is limited to the resolution of the \ac{OSA} used (Anritsu MS9740A). However, the laser only achieves \SI{30}{dB} of sideband suppression when \acp{DBR} are suitably tuned. Both the laser configurations exhibit similar spectra so only laser configuration \ref{fig:hhi_soa_sweep}a is shown. This suppression is much less than the \SI{50}{dB} found in the Oclaro lasers of similar design. These sidebands are likely due to the reflected wavelength of the \acp{DBR} being quite broad allowing multiple modes to co-exist. 
 
 By tuning the front and rear \acp{DBR}, the lasing wavelength can be changed. Passing a current through the \acp{DBR} causes them to heat, expanding the grating period and reducing the peak reflected wavelength. With a current up to \SI{40}{\mA}, the wavelength of the laser can be tuned by around \SI{3}{nm}. Fine tuning of the wavelength can be achieved by adjusting the temperature of the device or current injection of the \ac{cipm} within the cavity. 
 
@@ -229,12 +231,12 @@ By tuning the front and rear \acp{DBR}, the lasing wavelength can be changed. Pa
 
 \subsection{Gain Switching}
 
-\begin{figure}[p]
+\begin{figure}[tp]
 	\centering
 	\small	
 	\def\svgwidth{\textwidth} 
 	\import{chapters/chapter06/fig06/laser_gain_switch/}{gain_switch_test.pdf_tex}
-	\caption[Gain switching test of the HHI on-chip lasers]{Gain switching test of the on-chip lasers. A bias tee mixes a DC offset with an RF signal. A \SI{1}{GHz} \SI{2}{\Vpp} square wave was used and the DC offset was varied around the lasing threshold. the \SI{20}{mA} (left), \SI{30}{\mA} (middle), \SI{40}{\mA} (right). When the DC offset is just below the threshold, \SI{120}{ps} pulses can be generated with an extinction ratio of around \SI{25}{dB}.}
+	\caption[Gain switching test of the HHI on-chip lasers]{Gain switching test of the on-chip lasers. A bias tee mixes a DC offset with an RF signal. A \SI{1}{GHz} \SI{2}{\Vpp} square wave was used and the DC offset was varied around the lasing threshold. \SI{20}{mA} (left), \SI{30}{\mA} (middle), \SI{40}{\mA} (right). When the DC offset is just below the threshold, \SI{120}{ps} pulses can be generated with an extinction ratio of around \SI{25}{dB}.}
 	%\SI{1}{GHz} \SI{2}{\Vpp} square wave from \ac{ppg}. Laser threshold around \SI{30}{mA}. Pulses are around \SI{120}{ps} \ac{FWHM}.
 	\label{fig:gain_switch_test}
 \end{figure}
@@ -243,13 +245,13 @@ By applying a DC offset and RF signal to the \ac{SOA} of a laser, we can test it
 
 %We can characterise the on-chip laser ability to gain switch, which is important for phase randomisation in \ac{QKD}. 
 
-The \ac{SOA} within the laser cavity is connected to a \ac{gcpw} line on the PCB for high-speed operation. Using a bias tee, the DC offset provided by a stable current source (Arroyo 6305) and an RF signal is provided from a \ac{ppg} (Keysight 81134A) are combined. The laser is attenuated with a \ac{voa} (OzOptics DA-100) and measured with a \ac{snspd} (Photospot). The detection events are correlated with a time-tagger (PicoQuant Hydraharp) which creates a histogram where the time of arrival is relative to a sync signal provided by the \ac{ppg}. The device is temperature stabilised at \SI{25}{\celsius} with an instability of less than \SI{0.01}{\celsius}.
+The \ac{SOA} within the laser cavity is connected to a \ac{gcpw} line on the PCB for high-speed operation. Using a bias tee, the DC offset provided by a stable current source (Arroyo 6305) and an RF signal provided by a \ac{ppg} (Keysight 81134A) are combined. The laser is attenuated with a \ac{voa} (OzOptics DA-100) and measured with a \ac{snspd} (Photospot). The detection events are correlated with a time-tagger (PicoQuant Hydraharp) which creates a histogram where the time of arrival is relative to a sync signal provided by the \ac{ppg}. The device is temperature stabilised at \SI{25}{\celsius} with an instability of less than \SI{0.01}{\celsius}.
 
 %A \ac{ppg} provided a \SI{1}{GHz} signal, Arroyo 6305 provided the stable current source. The \ac{ppg} also provided a synchronisation signal to the detectors through an optical channel. \Ac{snspd} was used for detection and events correlated on a PicoQuant Hydraharp. A histogram could then be created. A \ac{voa} was used to stop the laser light from saturating the detectors.
 
-By changing the DC offset below, around and above the lasing threshold, we can characterise the effect of gain-switching, as shown in figure \ref{fig:gain_switch_test}. A \SI{2}{\Vpp} \SI{1}{GHz} square wave is applied to the SOA for each DC offset. When then DC offset is well below threshold (\SI{20}{\mA}), the RF signal does not bring the laser above threshold so the laser cannot start lasing. At the lasing threshold (\SI{30}{\mA}), the square wave creates pulses of around \SI{120}{ps} \ac{FWHM} but only during the positive section of the square wave. Otherwise, the laser remains below threshold implying that the pulses would be phase randomised. This, however, would need to be verified. A \SI{25}{dB} extinction ratio is also achieved. Once the DC offset is above the threshold (\SI{40}{\mA}), the RF signal will still generate pulses. However, in between pulses, the laser does not return below threshold. Therefore, we would expect a phase relationship between subsequent pulses which could be checks with an \ac{amzi}.
+By changing the DC offset below, around and above the lasing threshold, we can characterise the effect of gain-switching, as shown in figure \ref{fig:gain_switch_test}. A \SI{2}{\Vpp} \SI{1}{GHz} square wave is applied to the SOA for each DC offset. When then DC offset is well below threshold (\SI{20}{\mA}), the RF signal does not bring the laser above threshold so the laser cannot start lasing. At the lasing threshold (\SI{30}{\mA}), the square wave creates pulses of around \SI{120}{ps} \ac{FWHM} but only during the positive section of the square wave. Otherwise, the laser remains below threshold implying that the pulses would be phase randomised. This, however, would need to be verified. A \SI{25}{dB} extinction ratio is also achieved. Once the DC offset is above the threshold (\SI{40}{\mA}), the RF signal will still generate pulses. However, in between pulses, the laser does not return below threshold. Therefore, we would expect a phase relationship between subsequent pulses which could be checked with an \ac{amzi}.
 
-\begin{figure}[p]
+\begin{figure}[tp]
 	\centering
 	\small	
 	\def\svgwidth{0.9\textwidth} 
@@ -262,7 +264,7 @@ A spectrum of the gain switched laser is shown in figure \ref{fig:gain_switch_sp
 
 \subsection{Laser Seeding}
 
-\begin{figure}[p]
+\begin{figure}[tp]
 	\centering	
 	\def\svgwidth{0.9\textwidth} 
 	\import{chapters/chapter06/fig06/}{laser_seeding_test.pdf_tex}
@@ -274,9 +276,9 @@ As described above, the device contains two methods of performing \ac{pls} as sh
 
 In this design, the master and slave lasers are connected with a \num{1x2} \ac{mmi} which allows the master pulses to reach the slave, but also for half of the slave light to be emitted from the device. Both the \ac{SOA} are connected with \ac{gcpw} to allow for high-speed operation. The setup is as with the gain-switching tests above, with a second stable current source and RF signal provided to the device to control the master and slave lasers independently. Electronic delays were used to overlap the master and slave gain-switching in time. Single-photon events can again be measured with an \ac{snspd} and time-tagger to correlate events with the \ac{ppg}.
 
-In figure \ref{fig:las_seed_test}, we show a histogram of single-photon events when \SI{1}{GHz} square waves are applied to both the master and slave lasers. The master laser had a DC offset of \SI{30}{\mA}, which is around lasing threshold, to reduce the turn-on time. This should, however, ensure that the pulses are phase randomised. The slave offset is set at \SI{20}{\mA} which, as we saw previously, should mean that no pulses are created despite the RF signal. 
+In figure \ref{fig:las_seed_test}, we show a histogram of single-photon events when \SI{1}{GHz} square waves are applied to both the master and slave lasers. The master laser had a DC offset of \SI{30}{\mA}, which is lasing threshold, to reduce the turn-on time. This should, however, ensure that the pulses are phase randomised. The slave offset is set at \SI{20}{\mA} which, as we saw previously, should mean that no pulses are created despite the RF signal. 
 
-The histogram shows characteristics that are similar to that of the gain-switched pulses above. The \ac{FWHM} is around \SI{120}{ps} and the extinction ratio is around \SI{20}{dB}. Therefore, it is unclear if the device is successfully performing \ac{pls} as a reduction of pulse width is common when compared with gain-switching \cite{Comandar2016PLS}. 
+The histogram shows characteristics that are similar to that of the gain-switched pulses above. The \ac{FWHM} is around \SI{120}{ps} and the extinction ratio is around \SI{20}{dB}. Therefore, it is unclear if the device is successfully performing \ac{pls} as a reduction of pulse width is common when compared with gain-switching. Similar demonstrations have shown pulse widths of \SI{40}{ps} \cite{paraiso2019, Comandar2016PLS}.
 
 Further testing of this \ac{pls} is required to verify its operation. One might consider first demonstrating that pulses can be created through optical-injection locking \cite{Seo1996, Gunning1996} to show a reduced pulse width. This should then allow an easier verification of \ac{pls} when the master laser is pulsed. The final step towards creating a transmitter, would be to demonstrate phase control between the time-bins for X basis encoding. This encoding could either utilise a change in the RF driving voltage of the \ac{SOA}, or the \ac{cipm} within the laser cavity itself. Revised packaging could allow the second \ac{pls} design to be tested and loss measurements from the coupling and waveguides could help with characterisation.
 
@@ -287,14 +289,14 @@ Further testing of this \ac{pls} is required to verify its operation. One might 
 \section{Quantum Random Number Generation}
 \label{sec:hhi_qrng}
 
-\begin{figure}[p]
+\begin{figure}[tp]
 	\centering
 	\includegraphics[width=\textwidth]{schematics/qrng.pdf}
-	\caption[Schematic for InP quantum random number generator]{Schematic for the \acs{qrng} using on-chip laser sources and fast \acsp{pd} for homodyne measurement. Each laser can be indpendently controlled and variably attenuated with \acsp{mzi} allowing the lasers to be tuned in power. A further \acs{mzi} acts as a beam splitter with a tunable splitting ratio to interfere the two light sources.}
+	\caption[Schematic for InP quantum random number generator]{Schematic for the \acs{qrng} using on-chip laser sources and fast \acsp{pd} for homodyne measurement. Each laser can be independently controlled and variably attenuated with \acsp{mzi} allowing the lasers to be tuned in power. A further \acs{mzi} acts as a beam splitter with a tunable splitting ratio to interfere the two light sources.}
 	\label{fig:qrng}
 \end{figure}
 
-The security of any \ac{QKD} system is reliant on having a stream of unbiased randomness available in real-time to determine the states to be sent and the measurement basis. For a \si{\GHz}-clocked transmitter generating BB84 states about \SI{4}{Gb\per\second} of randomness is required to determine the basis, state and decoy level. Generating high bandwidth randomness is real-time remains practically challenging.
+The security of any \ac{QKD} system is reliant on having a stream of unbiased randomness available in real-time to determine the states to be sent and the measurement basis. For a \si{\GHz}-clocked transmitter generating BB84 states about \SI{4}{Gb\per\second} of randomness in required to determine the basis, state and decoy level. Generating high bandwidth randomness is real-time remains practically challenging.
 
 \Acp{prng} are readily available which provide perceived randomness at high-bandwidths through a predetermined algorithm based off an initial seed. As the algorithm is predetermined, the numbers are not sufficient for a \ac{QKD} system as a compromised initial seed would compromise the entire protocol \cite{Bouda2012Weak, li2015randomness}. Therefore, another source of randomness is required.
 
@@ -304,9 +306,9 @@ Instead, methods have been developed to exploit the randomness that is inherent 
 
 %Random numbers are required for many parts of \ac{QKD}. One way of generating this randomness is with \acp{qrng} which has been demonstrated on \ac{InP} \cite{}. However, there has not yet been a single device which fulfils both the requirements for quantum random number generation \textit{and} \ac{QKD} state preparation.
 
-The inclusion of laser sources and fast \acp{pd} in the \ac{InP} platform mean that a \ac{qrng} can be completely integrated a \ac{pic}. One such design is include within the chip design shown in figure \ref{fig:hhi_laser_seeding} and a schematic is given in figure \ref{fig:qrng}. Two laser sources are including which can be individually variably attenuated with an \ac{mzi}. The two arms are combined with another \ac{mzi} which can act as a beam splitter with a tunable splitting ratio. Measurements are performed by two fast \acp{pd} with bandwidths of \SI{>35}{GHz}. 
+The inclusion of laser sources and fast \acp{pd} in the \ac{InP} platform mean that a \ac{qrng} can be completely integrated in a single \ac{pic}. One such design is included within the chip design shown in figure \ref{fig:hhi_laser_seeding} and a schematic is given in figure \ref{fig:qrng}. Two laser sources are directly integrated into the waveguides which can be individually, variably attenuated with an \ac{mzi}. The two arms are combined with another \ac{mzi} which can act as a beam splitter with a tunable splitting ratio. Measurements are performed by two fast \acp{pd} with bandwidths of \SI{>35}{GHz}. 
 
-This design allows randomness to be generated through three different techniques: amplified vacuum state measurement with homodyne detector \cite{gabriel2010generator, zheng20196}, laser intensity fluctuations \cite{raffaelli2018generation} or homodyne phase measurements \cite{xu2012ultrafast}. All three have been demonstrated to generate random bits at \si{Gb\per\second} rates with the main restriction being the post-processing computational intensity \cite{Herrero-Collantes2017Quantum}.
+This design allows randomness to be generated through three different techniques: amplified vacuum state measurement with homodyne detection \cite{gabriel2010generator, zheng20196}, laser intensity fluctuations \cite{raffaelli2018generation} or homodyne phase measurements \cite{xu2012ultrafast}. All three have been demonstrated to generate random bits at \si{Gb\per\second} rates with the main restriction being the post-processing computational intensity \cite{Herrero-Collantes2017Quantum}.
 
 %The chip shown in figure \ref{fig:hhi_laser_seeding} contains both a \ac{qrng} and a laser seeded \ac{QKD} transmitter. Together with electronics to directly read the randomness and generate \ac{QKD} states this could be a fully packaged system.
 
@@ -316,7 +318,7 @@ This design allows randomness to be generated through three different techniques
 
 %Such methods have previously been demonstrated in integrated photonics \cite{Raffaelli2018homodyne, Abellan2016}
 
-The full integration of a \ac{qrng} mean that the optics for a \ac{QKD} transmitter could be completely contained within a single \ac{pic}. Processing the random number could be achieve with a dedicated \ac{fpga} or \ac{asic} which could increase the randomness generation bandwidth. Signals from the \ac{qrng} could be used to directly drive modulators in the \ac{QKD} transmitter.
+The full integration of a \ac{qrng} mean that the optics for a \ac{QKD} transmitter could be completely contained within a single \ac{pic}. Processing the random numbers could be achieved with a dedicated \ac{fpga} or \ac{asic} which could increase the randomness generation bandwidth. Signals from the \ac{qrng} could be used to directly drive modulators in the \ac{QKD} transmitter.
 
 \section{Next Generation QKD Transmitters}
 
@@ -335,7 +337,7 @@ We can also use advances in the design and fabrication of the individual compone
 
 %The Fraunhofer HHI foundry don't yet offer \acp{eopm} instead offering \ac{cipm} which are expected to have a lower bandwidth.
 
-In figure \ref{fig:hhi_transmitter}, we show the GDS of the next generation \ac{QKD} transmitters based on \ac{InP} and fabricated by Fraunhofer \ac{hhi}. The design is similar to the \ac{pls} device with the optical connections occupying one side and the electrical connections along the remaining three. As before, Fabry-P\'{e}rot lasers can be used as light source. However, the \ac{hhi} foundry offers the option of \ac{dfb} lasers, of which one is included in the design for optical testing. The phase modulators offered don't yet include \acp{eopm} so a combination of \acp{topm} and \acp{cipm} are used which will likely have a lower bandwidth.
+In figure \ref{fig:hhi_gds}, we show the GDS of the next generation \ac{QKD} transmitters based on \ac{InP} and fabricated by Fraunhofer \ac{hhi}. The design is similar to the \ac{pls} device with the optical connections occupying one side and the electrical connections along the remaining three. As before, Fabry-P\'{e}rot lasers can be used as a light source. However, the \ac{hhi} foundry offers the option of \ac{dfb} lasers, of which one is included in the design for optical testing. The phase modulators offered don't yet include \acp{eopm} so a combination of \acp{topm} and \acp{cipm} are used which will likely have a lower bandwidth.
 
 The design utilises the optical complexity offered by integrated photonics to allow three separate methods of generating BB84 states in a single devices. The following sections will describe each.
 
@@ -353,7 +355,7 @@ In an effort to reduce the required electronic control, this circuit introduces 
 
 Each of the different sources is a Fabry-P\'{e}rot laser which enters the optical circuit at different points to create different timing and phase relations for a time-bin encoding. The timing is achieved with an \ac{amzi} while the relative phases are created from the phase in the beam splitter transformation. 
 
-We have demonstrated that the Fraunhofer \ac{hhi} laser are capable of generating gain-switched pulses at \SI{1}{GHz} with an extinction ratio of \SI{25}{dB} allowing phase randomised pulses to be generated at high rates. The timing of the electronics is easily controlled to \SI{1}{ps} resolution allowing the pulses from the sources to be overlapped in time. Also, from chapter \ref{chap:hom} we found it was possible to overlap independent sources in all degrees of freedom with high-fidelity. Therefore, we should not expect using independent sources to introduce side-channels to be exploited by Eve or Mallory.
+We have demonstrated that the Fraunhofer \ac{hhi} lasers are capable of generating gain-switched pulses at \SI{1}{GHz} with an extinction ratio of \SI{25}{dB} allowing phase randomised pulses to be generated at high rates. The timing of the electronics is easily controlled to \SI{1}{ps} resolution allowing the pulses from the sources to be overlapped in time. Also, from chapter \ref{chap:hom} we found it was possible to overlap independent sources in all degrees of freedom with high-fidelity. Therefore, we should not expect using independent sources to introduce side-channels to be exploited by Eve or Mallory.
 
 %We introduce multiple laser sources into the circuit which can each be independently gain-switched to generate the four BB84 states. 
 
@@ -371,7 +373,7 @@ The delay line in the circuit will convert pulses in the top path from early to 
 \begin{equation}
 	a^\dagger_e \rightarrow a^\dagger_l \quad \text{and} \quad b^\dagger_e \rightarrow b^\dagger_e
 \end{equation}
-where will assume for the purposed of analysis that the circuit is lossless. Of course, the loss between the long and short arm of the \ac{amzi} will be different. A nested \ac{mzi} is included to compensate for this loss.
+where will assume for the purpose of analysis that the circuit is lossless. Of course, the loss between the long and short arm of the \ac{amzi} will be different. A nested \ac{mzi} is included to compensate for this loss.
 
 These transformations can be applied to each laser source, where we consider that each can be independently pulsed in the early time-bin. First consider the lasers in the Z basis, which enter the circuit before the delay line. The pulse from the $\ket{0}$ laser transforms as
 
@@ -402,7 +404,7 @@ while for the $\ket{-}$ pulse we find
 
 \noindent By looking at the output port from the top path, we find that we can generate the states
 \begin{align}
-	\ket{0} = a^\dagger_l, \quad \ket{1} = a^\dagger_l, \quad \ket{+} = \frac{1}{\sqrt{2}}(a^\dagger_e + a^\dagger_l),  \quad \text{and} \quad \ket{-} = \frac{1}{\sqrt{2}}(a^\dagger_e - a^\dagger_l)
+	\ket{0} = a^\dagger_e, \quad \ket{1} = a^\dagger_l, \quad \ket{+} = \frac{1}{\sqrt{2}}(a^\dagger_e + a^\dagger_l),  \quad \text{and} \quad \ket{-} = \frac{1}{\sqrt{2}}(a^\dagger_e - a^\dagger_l)
 \end{align}
 where the states have been renormalised considering only the top path. There is no need to compensate the intensity of the Z and X basis as was the case with the intensity modulated states. 
 
@@ -417,13 +419,13 @@ Future designs could considering including a master laser to seed each source in
 \begin{sidewaysfigure}
 	\centering
 	\includegraphics[width=\textwidth]{./schematics/hhi_transmitter.pdf}
-	\caption[Schematic of the HHI full transmitter]{Schematic of the operating modes of the \acs{hhi} transmitter. \textbf{a} Either a \acs{DBR} or \acs{dfb} laser source provides a phase randomised \acs{wcp} through gain-switching. The pulse is attenuated with an \acs{mzi} for decoy state preparation (Intensity Mod.) and a fast \acs{cipm} can be used if further phase randomisation is required. Basis Enc. switches between the long and short arms of an \acs{amzi}, where a superposition is used for X basis states. A \acs{cipm} within the \acs{amzi} then encodes relative phases between early and late time-bins. An \acs{mzi} allows for loss compensation between the long and short arms. \textbf{b} A laser source provides \acs{CW} light which is modulated into pulses (Pulse Mod.). A \acs{cipm} can then provide phase randomisation over the entire state and an \acs{mzi} can encode relative phases. A final \acs{mzi} provides intensity modulation for decoy state preparation.}
+	\caption[Schematic of the HHI full transmitter]{Schematic of the operating modes of the \acs{hhi} transmitter. \textbf{a} Either a \acs{DBR} or \acs{dfb} laser source provides a phase randomised \acs{wcp} through gain-switching. The pulse is attenuated with an \acs{mzi} for decoy state preparation (Intensity Mod.) and a fast \acs{cipm} can be used if further phase randomisation is required. Basis Enc. switches between the long and short arms of an \acs{amzi}, where superposition is used for X basis states. A \acs{cipm} within the \acs{amzi} then encodes relative phases between early and late time-bins. An \acs{mzi} allows for loss compensation between the long and short arms. \textbf{b} A laser source provides \acs{CW} light which is modulated into pulses (Pulse Mod.). A \acs{cipm} can then provide phase randomisation over the entire state and an \acs{mzi} can encode relative phases. A final \acs{mzi} provides intensity modulation for decoy state preparation.}
 	\label{fig:hhi_transmitter}
 \end{sidewaysfigure}
 
-While the previous generation of devices included delay lines to encode timing information, they we too lossy to be used. We have included a delay line in the design of this chip which should have lower losses. This should reduce the complexity of the control electronics and mean phase randomised pulses can be generated from a laser source which can subsequently be encoded into phase coherent time-bins. A schematic of the transmitter is shown in figure \ref{fig:hhi_transmitter}a.
+While the previous generation of devices included delay lines to encode timing information, they were too lossy to be used. We have included a delay line in the design of this chip which should have lower losses. This should reduce the complexity of the control electronics and mean phase randomised pulses can be generated from a laser source which can subsequently be encoded into phase coherent time-bins. A schematic of the transmitter is shown in figure \ref{fig:hhi_transmitter}a.
 
-To test the performance of two laser sources, both Fabry-P\'{e}rot and \ac{dfb} laser are included each of which can generate phase-randomised \acp{wcs}. Cascaded \acp{mzi} and a delay line can then encode information in time-bins. Each \ac{mzi} include both \acp{topm} to perform calibration and \acp{cipm} for high-speed operation. 
+To test the performance of two laser sources, both Fabry-P\'{e}rot and \ac{dfb} lasers are included each of which can generate phase-randomised \acp{wcs}. Cascaded \acp{mzi} and a delay line can then encode information in time-bins. Each \ac{mzi} includes both \acp{topm} to perform calibration and \acp{cipm} for high-speed operation. 
 
 The first \ac{mzi} is used to attenuate the pulses accordingly for a decoy state protocol while the second acts as a high-speed tunable beam splitter. For the X basis states, the \ac{mzi} splits the states, with half being delayed. This means that the early and late time-bins will be phase coherent as they have come from the same pulse. 
 
@@ -435,12 +437,12 @@ The design has been improved over the previous circuit with \acp{topm} included 
 
 \section{Outlook}
 
-While a number of \ac{QKD} demonstrations have been presented in recent years (notably references \cite{Sibson2017InP, Sibson2017Si, semenenko2019mdi, zhang2019integrated, ma2016silicon}) progression in the technology will always allow higher-bandwidth designs and new protocol demonstrations. This chapter has introduced new circuits that improve on previous demonstrations whilst also facilitating new operating techniques.
+While a number of \ac{QKD} demonstrations have been presented in recent years (notably references \cite{Sibson2017InP, Sibson2017Si, semenenko2019mdi, zhang2019integrated, ma2016silicon}) progression in the technology will always allow higher-bandwidth designs and new protocol demonstrations. This chapter has introduced new circuits that improve on previous devices, whilst also facilitating new operating techniques.
 
 A recent demonstration presented \ac{pls} as a useful source of \ac{wcs} through an \ac{MDI} protocol \cite{Comandar2016}. Despite the lack of isolation or circulators in integrated photonics, we have presented two circuits to achieve similar pulse preparation. The high-speed operation of the integrated lasers show promising initial characterisation, albeit in need of wavelength filtering. With further work on their operation, the circuits should be capable of high-fidelity state generation.
 
 Demonstrations of high-fidelity laser overlap from chapter \ref{chap:hom} mean that a composite transmitter with multiple laser sources becomes viable without introducing side-channels to be exploited by Eve and Mallory. While the optical circuit becomes more complex, the high-speed electronics required is reduced. Phase coherent time-bins can be encoded from phase randomised pulses with optical delay lines where most of the encoding is performed passively. 
 
-Improvements over the initial \ac{QKD} transmitters have been included both utilising a better understand of the operation of integrated photonics and new components available from the foundry. Such modification should help to improve both the bandwidth and fidelity of the states. The devices have been fabrication and so can now be packaged and tested by techniques introduced in this thesis.
+Improvements over the initial \ac{QKD} transmitters have been included both utilising a better understanding of the operation of integrated photonics and new components available from the foundry. Such modification should help to improve both the bandwidth and fidelity of the states. The devices have been fabricated and so can now be packaged and tested by techniques introduced in this thesis.
 
 %=========================================================
