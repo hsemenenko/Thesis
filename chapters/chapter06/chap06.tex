@@ -99,7 +99,9 @@ Since this chip was designed and fabricated, similar work was published demonstr
 
 \subsection{Optical and Electrical Packaging}
 
-The complexity of the device required careful consideration to ensure optical and electrical packaging for high-speed operation. This section will describe the design choices to perform the initial tests.
+The complexity of the device requires careful consideration to ensure optical and electrical packaging for high-speed operation. This section will describe the design choices for the PCB and how the device was put together. This allows initial tests to be performed.
+
+%to perform the initial tests.
 
 \subsubsection*{PCB Design}
 
@@ -209,7 +211,7 @@ This device contains two Fabry-P\'{e}rot laser test structures to assess their c
 	\small	
 	\def\svgwidth{0.9\textwidth} 
 	\import{chapters/chapter06/fig06/Spectra/}{spectra.pdf_tex}
-	\caption[Spectra of the HHI laser whilst wavelength tuning through current injection of DBRs]{Spectra from an \acs{OSA} of an on-chip laser \ref{fig:hhi_soa_sweep}a whilst tuning the wavelength with the \acsp{DBR}. Current injection of the tunable \acsp{DBR} causes a change of peak reflected wavelength and, therefore, laser wavelength. The lasers are single-mode, with a \acs{FWHM} of \SI{30}{pm}. However, the sideband suppression is only \SI{30}{dB} and varies with \acs{DBR} tuning. The wavelength can be tuned by \SI{3}{nm} with a current of \SI{40}{\mA}.}
+	\caption[Spectra of the HHI laser whilst injecting current to the of DBRs]{Spectra from an \acs{OSA} of an on-chip laser \ref{fig:hhi_soa_sweep}a whilst tuning the wavelength with the \acsp{DBR}. Current injection of the tunable \acsp{DBR} causes a change of peak reflected wavelength and, therefore, laser wavelength. The lasers are single-mode, with a \acs{FWHM} of \SI{30}{pm}. However, the sideband suppression is only \SI{30}{dB} and varies with \acs{DBR} tuning. The wavelength can be tuned by \SI{3}{nm} with a current of \SI{40}{\mA}.}
 	\label{fig:hhi_dbr_sweep}
 \end{figure}
 
@@ -364,25 +366,25 @@ We have demonstrated that the Fraunhofer \ac{hhi} lasers are capable of generati
 To consider how each laser source generates each BB84 state, consider the operator transformations of the circuit. The beam splitter transformations are given as 
 
 \begin{equation}
-	a^\dagger \rightarrow \frac{1}{\sqrt{2}}\left(a^\dagger + b^\dagger\right) \quad \text{and} \quad b^\dagger \rightarrow \frac{1}{\sqrt{2}}\left(a^\dagger - b^\dagger\right)
+	\hat{a}^\dagger \rightarrow \frac{1}{\sqrt{2}}\left(\hat{a}^\dagger + \hat{b}^\dagger\right) \quad \text{and} \quad \hat{b}^\dagger \rightarrow \frac{1}{\sqrt{2}}\left(\hat{a}^\dagger - \hat{b}^\dagger\right)
 \end{equation}
-where $a^\dagger$ and $b^\dagger$ are the creation operators for the top and bottom paths, respectively.
+where $\hat{a}^\dagger$ and $\hat{b}^\dagger$ are the creation operators for the top and bottom paths, respectively.
 
 The delay line in the circuit will convert pulses in the top path from early to late while the bottom path will be unaffected i.e.
 
 \begin{equation}
-	a^\dagger_e \rightarrow a^\dagger_l \quad \text{and} \quad b^\dagger_e \rightarrow b^\dagger_e
+	\hat{a}^\dagger_e \rightarrow \hat{a}^\dagger_l \quad \text{and} \quad \hat{b}^\dagger_e \rightarrow \hat{b}^\dagger_e
 \end{equation}
 where will assume for the purpose of analysis that the circuit is lossless. Of course, the loss between the long and short arm of the \ac{amzi} will be different. A nested \ac{mzi} is included to compensate for this loss.
 
 These transformations can be applied to each laser source, where we consider that each can be independently pulsed in the early time-bin. First consider the lasers in the Z basis, which enter the circuit before the delay line. The pulse from the $\ket{0}$ laser transforms as
 
 \begin{equation}
-	a^\dagger_e \xrightarrow{\text{Delay}} a^\dagger_l \xrightarrow{\text{\acs{bs}}} \frac{1}{\sqrt{2}}\left(a^\dagger_l + b^\dagger_l\right)
+	\hat{a}^\dagger_e \xrightarrow{\text{Delay}} \hat{a}^\dagger_l \xrightarrow{\text{\acs{bs}}} \frac{1}{\sqrt{2}}\left(\hat{a}^\dagger_l + \hat{b}^\dagger_l\right)
 \end{equation}
 whereas the $\ket{1}$ laser pulse becomes
 \begin{equation}
-	b^\dagger_e \xrightarrow{\text{Delay}} b^\dagger_e \xrightarrow{\text{\acs{bs}}} \frac{1}{\sqrt{2}}\left(a^\dagger_e - b^\dagger_e\right)
+	\hat{b}^\dagger_e \xrightarrow{\text{Delay}} \hat{b}^\dagger_e \xrightarrow{\text{\acs{bs}}} \frac{1}{\sqrt{2}}\left(\hat{a}^\dagger_e - \hat{b}^\dagger_e\right)
 \end{equation}
 
 Equivalently, we can apply the transformations to the X basis laser pulses which will experience the entire \ac{amzi}. For the $\ket{+}$ pulse, the transformation is
@@ -394,21 +396,21 @@ Equivalently, we can apply the transformations to the X basis laser pulses which
 %$\ket{+}$:
 
 \begin{equation}
-	a^\dagger_e \xrightarrow{\text{\acs{bs}}} \frac{1}{\sqrt{2}} (a^\dagger_e + b^\dagger_e) \xrightarrow{\text{Delay}} \frac{1}{\sqrt{2}} (a^\dagger_l + b^\dagger_e) \xrightarrow{\text{\acs{bs}}} \frac{1}{2}(a^\dagger_e + a^\dagger_l - b^\dagger_e + b^\dagger_l)
+	\hat{a}^\dagger_e \xrightarrow{\text{\acs{bs}}} \frac{1}{\sqrt{2}} (\hat{a}^\dagger_e + \hat{b}^\dagger_e) \xrightarrow{\text{Delay}} \frac{1}{\sqrt{2}} (\hat{a}^\dagger_l + \hat{b}^\dagger_e) \xrightarrow{\text{\acs{bs}}} \frac{1}{2}(\hat{a}^\dagger_e + \hat{a}^\dagger_l - \hat{b}^\dagger_e + \hat{b}^\dagger_l)
 \end{equation}
 while for the $\ket{-}$ pulse we find
 
 \begin{equation}
-	b^\dagger_e \xrightarrow{\text{\acs{bs}}} \frac{1}{\sqrt{2}} (a^\dagger_e - b^\dagger_e) \xrightarrow{\text{Delay}} \frac{1}{\sqrt{2}} (a^\dagger_l - b^\dagger_e) \xrightarrow{\text{\acs{bs}}} \frac{1}{2}(- a^\dagger_e + a^\dagger_l + b^\dagger_e + b^\dagger_l)
+	\hat{b}^\dagger_e \xrightarrow{\text{\acs{bs}}} \frac{1}{\sqrt{2}} (\hat{a}^\dagger_e - \hat{b}^\dagger_e) \xrightarrow{\text{Delay}} \frac{1}{\sqrt{2}} (\hat{a}^\dagger_l - \hat{b}^\dagger_e) \xrightarrow{\text{\acs{bs}}} \frac{1}{2}(- \hat{a}^\dagger_e + \hat{a}^\dagger_l + \hat{b}^\dagger_e + \hat{b}^\dagger_l)
 \end{equation}
 
 \noindent By looking at the output port from the top path, we find that we can generate the states
 \begin{align}
-	\ket{0} = a^\dagger_e, \quad \ket{1} = a^\dagger_l, \quad \ket{+} = \frac{1}{\sqrt{2}}(a^\dagger_e + a^\dagger_l),  \quad \text{and} \quad \ket{-} = \frac{1}{\sqrt{2}}(a^\dagger_e - a^\dagger_l)
+	\ket{0} = \hat{a}^\dagger_e, \quad \ket{1} = \hat{a}^\dagger_l, \quad \ket{+} = \frac{1}{\sqrt{2}}(\hat{a}^\dagger_e + \hat{a}^\dagger_l),  \quad \text{and} \quad \ket{-} = \frac{1}{\sqrt{2}}(\hat{a}^\dagger_e - \hat{a}^\dagger_l)
 \end{align}
 where the states have been renormalised considering only the top path. There is no need to compensate the intensity of the Z and X basis as was the case with the intensity modulated states. 
 
-As is usual for \ac{QKD} transmitters, we will be using \acp{wcs} instead of single photons so the bottom path ($b^\dagger$) can be considered a loss. However, this loss is before the states have been sent through the quantum channel so can be compensated with an increased pulse intensity. Phase modulators within the \ac{amzi} allow fine adjustments of the relative phases between the long and short arms which are unlikely to be phase matched due to fabrication tolerances. 
+As is usual for \ac{QKD} transmitters, we will be using \acp{wcs} instead of single photons so the bottom path ($\hat{b}^\dagger$) can be considered a loss. However, this loss is before the states have been sent through the quantum channel so can be compensated with an increased pulse intensity. Phase modulators within the \ac{amzi} allow fine adjustments of the relative phases between the long and short arms which are unlikely to be phase matched due to fabrication tolerances. 
 
 One final thing to consider with this transmitter is the spectral broadening and sideband suppression reduction seen whilst gain-switching. Without proper filtering, such spectra would exhibit reduced interference during measurement and possible information leakage to Eve and Mallory. Commercially available filters should resolve these issues and also allow the laser wavelengths to be precisely overlapped.
 

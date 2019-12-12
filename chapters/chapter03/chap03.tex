@@ -17,7 +17,7 @@ The photonic chips were initially conceived by Mark Thompson and Mark Godfrey. T
 
 Secure communication protocols have been the focus of much academic research since the promise of quantum computing attacks against modern cryptography \cite{shor1994}. \Ac{QKD} aims to provide long-term security without assuming the computational power of an adversary \cite{BB84, E91}. However, inconsistencies between theory and experiment have raised questions in terms of real-world security, while large and power-hungry commercial systems have slowed wide-scale adoption.
 
-\Ac{QKD} has been under scrutiny from the emerging `quantum hacking' community who have demonstrated that real-world implementations do not always meet the assumptions of the theoretical models \cite{mdi-qkd}. This can lead to malicious attacks that allow Mallory to gain information about the secret key. These include side channels \cite{Lamas-Linares2007}, where vulnerable information is leaked through uncharacterised channels, or responses to external manipulation of devices through classical means \cite{Gisin2006}. In particular, many attacks have been directed at the \acp{spd} due to their complexity and inconsistencies between theory and experiment \cite{Lydersen2010b,Zhao2008, Makarov2006}.
+\Ac{QKD} has been under scrutiny from the emerging `quantum hacking' community who have demonstrated that real-world implementations do not always meet the assumptions of the theoretical models \cite{mdi-qkd}. This can lead to malicious attacks that allow Mallory to gain information about the secret key. These include side channels \cite{Lamas-Linares2007}, where vulnerable information is leaked through uncharacterised channels, or responses to external manipulation of devices through classical means \cite{Gisin2006}. In particular, many attacks have been directed at the \acp{spd} due to their complexity and inconsistencies between theory and experiment \cite{Lydersen2010b, Zhao2008Quantum, Makarov2006}.
 
 \Ac{MDI} is a recent protocol that tackles some of the more prevalent attacks on systems by removing all detector side channels \cite{mdi-qkd}. It does so by introducing a third party (Charlie) who acts as a relay to mediate detection events by announcing quantum correlations between states sent by Alice and Bob. The detection events alone do not contain any information about the secret key, so an eavesdropper cannot gain information by targeting the detectors. 
 
@@ -112,13 +112,13 @@ While \ac{HOM} interference is typically considered when single-photons interfer
 Consider two coherent states, $\ket{\alpha}$ and $\ket{\beta}$, incident on a beam splitter. Before the beam splitter, the states can be written as
 
 \begin{align}
-	\ket{\alpha} &= \text{D}(\alpha)\ket{0,0}_{a,b} = e^{\alpha a^\dagger - \alpha^\ast a}\ket{0,0}_{a,b} = e^{-\frac{|\alpha|^2}{2}} e^{-\alpha^\ast a} e^{\alpha a^\dagger}\ket{0,0}_{a,b}\\
-	\ket{\beta} &= \text{D}(\beta)\ket{0,0}_{a,b} = e^{\beta b^\dagger - \beta^\ast b}\ket{0,0}_{a,b} = e^{-\frac{|\beta|^2}{2}} e^{-\beta^\ast b} e^{\beta b^\dagger}\ket{0,0}_{a,b}
+	\ket{\alpha} &= \hat{\mathcal{D}}(\alpha)\ket{0,0}_{a,b} = e^{\alpha \hat{a}^\dagger - \alpha^\ast a}\ket{0,0}_{a,b} = e^{-\frac{|\alpha|^2}{2}} e^{-\alpha^\ast a} e^{\alpha \hat{a}^\dagger}\ket{0,0}_{a,b}\\
+	\ket{\beta} &= \hat{\mathcal{D}}(\beta)\ket{0,0}_{a,b} = e^{\beta \hat{b}^\dagger - \beta^\ast b}\ket{0,0}_{a,b} = e^{-\frac{|\beta|^2}{2}} e^{-\beta^\ast b} e^{\beta \hat{b}^\dagger}\ket{0,0}_{a,b}
 \end{align}
 which, before the beam splitter, can be written jointly as
 
 \begin{equation}
-	\text{D}(\alpha)\otimes\text{D}(\beta)\ket{0,0}_{a,b}
+	\hat{\mathcal{D}}(\alpha)\otimes\hat{\mathcal{D}}(\beta)\ket{0,0}_{a,b}
 \end{equation}
 
 %For generality, we can consider a beam splitter in terms of reflections, $r$, and transmissions, $t$, which yields the transformation matrix
@@ -139,21 +139,21 @@ which, before the beam splitter, can be written jointly as
 From the beam splitter transformation above, the creation operator transformations are
 
 \begin{equation}
-	a^\dagger \rightarrow rc^\dagger + td^\dagger \quad \text{and} \quad b^\dagger \rightarrow tc^\dagger - rd^\dagger
+	\hat{a}^\dagger \rightarrow r\hat{c}^\dagger + t\hat{d}^\dagger \quad \text{and} \quad \hat{b}^\dagger \rightarrow t\hat{c}^\dagger - r\hat{d}^\dagger
 \end{equation}
 and similarly for the annihilation operators. We will consider a beam splitter with variable reflectivity so that we can see how fabrication tolerances within the beam splitter would affect the potential visibility. Applying these relations to incident coherent states, we find after the beam splitter the state becomes
 
 \begin{align}
-	\text{D}_a(\alpha)\otimes\text{D}_b(\beta)\ket{0} =&  e^{\alpha a^\dagger - \alpha^\ast a} e^{\beta b^\dagger - \beta^\ast b}\ket{0,0}_{a,b}\\
-	\longrightarrow&  e^{\alpha (r c^\dagger + t d^\dagger) - \alpha^\ast (r^\ast c + t^\ast d)}e^{\beta (t c^\dagger - r d^\dagger) - \beta^\ast (t^\ast c - r^\ast d)}\ket{0,0}_{c,d}\\
-	=&  e^{(\alpha r + \beta t) c^\dagger - (\alpha^\ast r^\ast + \beta^\ast t^\ast) c} e^{(\alpha t - \beta r) d^\dagger - (\alpha^\ast t^\ast - \beta^\ast r^\ast) d}\ket{0,0}_{c,d}\\
-	=&  \text{D}_c(\alpha r + \beta t)\otimes\text{D}_d(\alpha t - \beta r)\ket{0,0}_{c,d}
+	\hat{\mathcal{D}}_a(\alpha)\otimes\hat{\mathcal{D}}_b(\beta)\ket{0} =&  e^{\alpha \hat{a}^\dagger - \alpha^\ast a} e^{\beta \hat{b}^\dagger - \beta^\ast b}\ket{0,0}_{a,b}\\
+	\longrightarrow&  e^{\alpha (r \hat{c}^\dagger + t \hat{d}^\dagger) - \alpha^\ast (r^\ast c + t^\ast d)}e^{\beta (t \hat{c}^\dagger - r \hat{d}^\dagger) - \beta^\ast (t^\ast c - r^\ast d)}\ket{0,0}_{c,d}\\
+	=&  e^{(\alpha r + \beta t) \hat{c}^\dagger - (\alpha^\ast r^\ast + \beta^\ast t^\ast) c} e^{(\alpha t - \beta r) \hat{d}^\dagger - (\alpha^\ast t^\ast - \beta^\ast r^\ast) d}\ket{0,0}_{c,d}\\
+	=&  \hat{\mathcal{D}}_c(\alpha r + \beta t)\otimes\hat{\mathcal{D}}_d(\alpha t - \beta r)\ket{0,0}_{c,d}
 \end{align}
 
 For a 50:50 beam splitter, the output would become
 
 \begin{equation}
-	\text{D}_c\left(\frac{1}{\sqrt{2}}\big(i\alpha + \beta\big)\right)\otimes\text{D}_d\left(\frac{1}{\sqrt{2}}\big(\alpha - i\beta\big)\right)\ket{0,0}_{c,d}
+	\hat{\mathcal{D}}_c\left(\frac{1}{\sqrt{2}}\big(i\alpha + \beta\big)\right)\otimes\hat{\mathcal{D}}_d\left(\frac{1}{\sqrt{2}}\big(\alpha - i\beta\big)\right)\ket{0,0}_{c,d}
 \end{equation}
 
 We will model the \acp{spd} as threshold detectors meaning that single-photon events are not distinguishable from multi-photon events. Therefore, we will need to consider how the efficiency of detection changes with multi-photon events. Consider an \ac{spd} with efficiency of detection $\eta$, then the probability that the detector clicks, given $n$ photons were present, is
@@ -485,7 +485,7 @@ In figure \ref{fig:DBR_sweep}, we show laser tuning through current injection of
 \begin{figure}[tp]
 	\centering
 	\small	
-	\def\svgwidth{\textwidth} 
+	\def\svgwidth{0.9\textwidth} 
 	\import{chapters/chapter03/fig03/Laser_current_sweep/}{plot.pdf_tex}
 	\caption[Laser wavelength current-injection sweep]{By changing the driving current of the on-chip laser, we can change the wavelength through heating and carrier effects. This will also vary the power output of the laser. The precision of the wavelength tuning is only limited by the control of the current source.}
 	\label{fig:curr_sweep}

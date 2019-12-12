@@ -506,7 +506,7 @@ This postulate also applies to states that are not simply the product of individ
 
 \begin{figure}
 	\centering
-	\def\svgwidth{0.4\textwidth}
+	\def\svgwidth{0.5\textwidth}
    	\import{chapters/chapter02/fig02/}{Bloch_Sphere.pdf_tex}
    	\caption[Bloch sphere representation of a qubit]{Bloch Ball representation of the qubit state $\ket{\psi}$. We introduce the real variables $0\le\theta\le\pi$ and $0\le\varphi<2\pi$ where an unphysical global phase has been omitted.}
    	\label{fig:bloch}
@@ -893,15 +893,15 @@ Each $c_n$ is uniquely determined in terms of $\alpha$ and $c_0$. By imposing no
 	\ket{\alpha} = \mathrm{e}^{-\frac{|\alpha|^2}{2}} \sum_{n=0}^\infty \frac{\alpha^n}{\sqrt{n}} \ket{n} 
 \end{equation}
 
-The generation of coherent states from vacuum is described through the displacement operator, $\hat{D}(\alpha)$, and defined as
+The generation of coherent states from vacuum is described through the displacement operator, $\hat{\mathcal{D}}(\alpha)$, and defined as
 
 \begin{equation}
-	\hat{D}(\alpha) = \mathrm{e}^{\alpha\hat{a}^\dagger - \alpha^\ast\hat{a}}
+	\hat{\mathcal{D}}(\alpha) = \mathrm{e}^{\alpha\hat{a}^\dagger - \alpha^\ast\hat{a}}
 \end{equation}
 which acts on the vacuum state, $\ket{0}$, to generate a coherent state with average photon number $|\alpha|^2$:
 
 \begin{equation}
-	\ket{\alpha} = \hat{D}(\alpha)\ket{0}
+	\ket{\alpha} = \hat{\mathcal{D}}(\alpha)\ket{0}
 \end{equation}
 
 The study of coherent states stemmed from an interest in the boundary of quantum and classical mechanics and the concept is almost as old as quantum mechanics itself \cite{Schrodinger1926}. More practically speaking, coherent states are readily produced from lasers which makes them far more practical for \ac{QKD} than probabilistic single-photon sources.
@@ -939,7 +939,7 @@ Integrated photonics utilises fundamental components that will be used to guide,
 
 \begin{figure}[t]
 	\centering
-	\includegraphics[width=0.8\textwidth]{./Integrated_optics/waveguides.pdf}
+	\includegraphics[width=0.9\textwidth]{./Integrated_optics/waveguides.pdf}
 	\caption[Main types of waveguide structures]{There are three main types of waveguide structures:  \textbf{a} Slab; \textbf{b} Rib; \textbf{c} Strip. The core is shown in purple while the cladding is shown in red.}
 	\label{fig:waveguides}
 \end{figure}

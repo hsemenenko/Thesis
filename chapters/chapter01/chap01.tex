@@ -12,30 +12,39 @@
 
 \section{Foreword}
 
-The second quantum revolution is steadily progressing with no immediate sense of slowing. The prospect of a large scale quantum computing a no longer a pipe dream. In fact, the current scale of research focused on the area suggests that the question should not be \emph{if} but rather \emph{when}.
+The second quantum revolution is steadily progressing with no immediate sense of slowing. The prospect of a large scale quantum computing a no longer a pipe dream with small quantum computers available publicly online. The current scale of research focused on the field suggests that the question should not be \emph{if} but rather \emph{when}. 
 
-An immense level of precision is required to control quantum information. Microelectronics -> integrated photonics. 
+The promised benefits of quantum computing seem immeasurable, partly because the benefits have not been fully explored beyond a few applications. However, one well-known example threatens the future of modern secure communication \cite{shor1994}. With large scale quantum computing forthcoming \cite{arute2019quantum}, we must explore new methods of secure communication before such quantum algorithms become a reality.
 
-The promised benefits of quantum computer claims are immeasurable. This is mostly because the benefits have not been fully explored beyond a few applications. However, one well known example threatens the future of modern secure communication. 
+%As the quantum computing field progresses, the security of modern networks comes under increased scrutiny and new methods must be explored before quantum algorithms become a reality.
 
-With large scale quantum computing forthcoming, we must explore new methods of secure communication. \Ac{QKD} is one such attempt to securely distribute randomness.
+ \Ac{QKD} is one such attempt to securely distribute randomness which exploits quantum phenomena to create a security key exchange based on nature \cite{BB84, E91}. There are no assumptions of mathematically-hard problems and the security of the key doesn't decrease after the exchange. While there has been rapid progress from initial demonstrations into commercial systems, \ac{QKD} has not been widely adopted. Cost aside, there are two factors that limit the progression of ubiquitous \ac{QKD} systems: practical security and mass-manufacturability. 
 
-\Ac{MDI}.
+Recently, the claims of \ac{QKD} security has come under pressure from the quantum hacking community. While the security is not based off mathematical assumption, it is important that the physical system matches the performance that is predicted by the theory. It has been demonstrated that often physical systems to not meet this requirement \cite{}.
 
-This thesis will explore the extension of the integrated photonic platform into new protocols.
+In an effort to reduce the characterisation required for the security of a key exchange, device-independent protocols were developed \cite{Mayers1998}. This has since inspired new protocols which are more practical. For example, \ac{MDI} removes all possible attacks against the detections system \cite{mdi-qkd}. 
 
-This thesis will explore how new protocol design and developments in the integrated photonics platform will facilitate accessible quantum-secured communication and form the basis for future quantum networks.
+Following many successful demonstration of quantum phenomena in laboratories, interest turned from fundamental science to quantum engineering. Robust platforms were required to scale the potential technologies for application outside the lab. Pioneering work in photonic integration has allowed a drastic increase in the level of complexity in quantum photonic experiments. These platforms allow for entire \ac{QKD} systems to be created in a single monolithic device \cite{Sibson2017InP}.
 
+%the exploration of the usefulness of quantum mechanics to transform many technologies, interest turned from fundamental science to quantum engineering. While phenomena could be easily demonstrated in a laboratory, it was not clear how they could be utilised on a large scale in the wider world. An immense level of precision is required to control quantum information. 
+
+%Microelectronics -> integrated photonics. 
+
+This thesis will explore the extension of the integrated photonic platform into new protocols which will simultaneously increase security and facilitate wide-scale quantum-secured networks. We will show how fine precision of integrated light sources allows for high-fidelity quantum interference. Potential security flaws in previous \ac{QKD} demonstrations will be addressed. 
+
+%This thesis will explore how new protocol design and developments in the integrated photonics platform will facilitate accessible quantum-secured communication and form the basis for future quantum networks.
+
+\clearpage
 \newpage
 \section{Outline}
 
-The outline of the thesis is as follows:
+The outline of the remainder of this thesis is as follows:
 
 \begin{itemize}
 	\item \brisred{Chapter 2} will introduce the general concepts required for the rest of the thesis. Cryptography will be put in context with advances that have been made over the last 4000 years which will end with the current state of modern protocols. Quantum information will be introduced starting with the foundations of quantum mechanics. The notion of quantum bits is discussed as well as key aspects that will be relevant for secure key exchange. Several different \acl{QKD} protocols will be presented and the practical security of them discussed. Finally, the field of integrated photonics will be introduced and the essential building blocks will be described. Information encoding through quantum photonics will be reviewed and the different platforms for photonics integration will be compared.
-	\item \brisred{Chapter 3} presents work by introducing \ac{HOM} interference using integrated devices. 
+	\item \brisred{Chapter 3} presents the fundamental \ac{HOM} interference effect and how it can be performed with integrated devices. The photonic chips will be introduced and their operation discussed. We will show how interference between independent devices can be achieved at \SI{431}{MHz}. Finally, we will show how active-phase randomisation is achieved, which will be crucial for \ac{QKD} devices. 
 	\item \brisred{Chapter 4} builds on the \ac{HOM} interference by demonstrating \ac{MDI} which removes all potentially information leaks from the detection system. We will see how entirely integrated components can generate \SI{250}{MHz}-clocked quantum states and distribute \SI{1}{kbps} of key at \SI{100}{km}. The security of the transmitters will be reviewed as well as the security trade-off for cost-effective electronics. Finally, we will see how developments in silicon photonics could enable a fully-integrated \ac{QKD} system to further reduce cost and enable multi-user, metropolitan, quantum-secured networks.
-	\item \brisred{Chapter 5} explores new \acp{pic} for \ac{QKD} by using the ever-advances photonics platform.
+	\item \brisred{Chapter 5} explores new \acp{pic} for \ac{QKD} by using the ever-advances photonics platform. New methods of generating quantum states will be discussed. We will also introduce new integrated circuits that will simplify the electronics required for operation. We will show how photonic chips become devices through optical and electrical connections, as well as discussing the challenges. 
 	\item \brisred{Chapter 6} concludes this thesis with a summary of the presented work. The importance of \ac{HOM} interference and its place in \ac{QKD} will be discussed. The importance of ensuring security in any key exchange system will be reviewed and how closing loopholes will be vital to the success of \ac{QKD}. The integrated photonics platform, and the new devices presented in chapter \ref{chap:future}, will be put into context. We will close by placing this work in the larger context of future quantum networks.
 \end{itemize}
 

@@ -13,26 +13,55 @@
 
 %=======
 
-It is becoming increasingly evident that the security of our modern networks will be forfeit as computing power inevitably increases. Quantum computing is one known threat against modern communication protocols. However, the situation is more dire than arguments over the `if' or `when' of quantum computing. The underlying security of all widely used cryptographic systems is based from assumed computationally-hard mathematical problems. There is no guarantee of the validity of these assumption, or even that they currently remain valid.
+\section{Summary}
 
-In developing a new precedent for secure cryptography, dubbed quantum-safe, there are two available routes. The first, which is favourable to the current network architecture, creates public-cryptography based off of new problems that are thought to be even more difficult to solve than those in current protocols. While these protocols will utilise the same classical computers, there is still no guarantee of their security. Even under full scrutiny of the scientific community, a new quantum algorithm may be imminent. 
+This thesis has advanced the application of integrated photonic circuits for quantum-secured key exchange. We introduced the \ac{HOM} interference effect as a fundamental tool in quantum optics. Interference was demonstrated between independently controlled, integrated devices with a visibility of \SI{46.5(8)}{\percent}, close to the theoretical maximum of \SI{50}{\percent}. The devices used entirely integrated components to generate \acp{wcp} at \SI{431}{MHz} and did not require any wavelength filtering beyond the laser cavity. Active phase randomisation of the on-chip laser was achieved through gain-switching at a reduced rate of \SI{250}{MHz} to maintain compatibility with time-bin encoding. Again, interference was demonstrated with a high visibility.
 
-\Ac{QKD} offers an entirely different solution with security founded in well established laws of physics. However, it has been demonstrated the even the security of \ac{QKD} is still only as good as the assumptions of the physical system. Unless a system if completely characterised, it has been demonstrated that assumed secret information could be leak or accessed through classical means. As such, the security could be compromised without violating the underlying physical principle of quantum mechanics.
+Using further integrated components, we encoded \SI{2}{GHz} clocked, time-bin encoded quantum states from the on-chip laser and interfered them to demonstrate \ac{MDI}. We show a phase error rates less than \SI{30}{\percent} with bit error rates around \SI{0.5}{\percent}. We introduced a banked of detectors at the receiver to increase key rates. At short distances (\SI{25}{km}), over \SI{12}{kbps} could be securely exchange, while at \SI{100}{km} \SI{1}{kbps} was shown. Positive key generation demonstrated at \SI{200}{km} and, from the performance of the system, we predict that positive key generation is possible at distances beyond \SI{350}{km}. The trade-off between cost-effective electronics and security was discussed. \Ac{isi} was shown as a potential side-channel which would need to be addressed in future systems. Finally, a fully-integrated system was presented utilising waveguide integrated detectors. A silicon device could replace the fibre-optic receiver used in the first demonstration. This would facilitate further accessibility in a future network and potential benefits for photonic routing and detection efficiency. 
 
-Due to the nature of the key exchange, \ac{QKD} even offers the unique capability to detect an eavesdropper. 
+We explored how advances in integrated photonics can improve the performances of \ac{QKD} transmitters and introduce new photonic circuit designs. Through \ac{pls}, we aim to increase the generation rate of phase-randomised quantum states so that integrated devices can fulfil the bandwidth requirements of modern networks. The devices were electrically and optically packaged and initial characterisation showed promising results for these new devices. \Ac{qrng} designs were integrated with \ac{QKD} transmitters on a single monolithically fabricated device to allow modulation directly from true randomness. All of the photonic components have been combined in a single chip. Dedicated electronics chips would allow truly mass-manufacturable \ac{QKD} systems. Finally, new circuit designs for simplified state generation were introduced. With an increased optical complexity, we can drastically reduce the requirements on the driving electronics.
 
-However, we saw that the theoretical description of devices doesn't necessarily meet the physical implementation.
+\clearpage
+\newpage
+\section{Outlook}
 
-Integrated photonics is the only way we will be able to make many devices for ubiquitous quantum technology. This thesis describes how we can use them for quantum communication protocols. 
+It is paramount that the security of crucial network infrastructure is addressed as computing power inevitably increases. Quantum computing is one known threat against modern communication protocols. However, the situation is more dire than arguments over the `if' or `when' of quantum computing. The underlying security of all widely used cryptographic systems is based from assumed computationally-hard, mathematical problems. There is no guarantee of the validity of these assumptions, or even that they currently remain valid.
 
-\Ac{HOM} interference is a vital phenomenon which underpins much of quantum photonic information. We demonstrated that interference between independently generate states from \acp{pic} was possible at \SI{431}{MHz}
+In developing a new precedent for secure cryptography, dubbed `quantum-safe', there are two available routes. The first, which is favourable to the current network architecture, creates public-cryptography based off of new problems that are thought to be even more difficult to solve than those in current protocols. While these protocols will utilise the same classical computers, there is still no guarantee of their security. Even under full scrutiny of the scientific community, a new quantum algorithm may be imminent. 
 
-\Ac{MDI} relaxing the assumptions require for a secure key exchange while facilitating a more accessible topology. A centralised resource that houses expensive single-photon detectors and processing equipment, many users can exchange keys and split the costs. Waveguide detectors on silicon devices would allow a further increase in the 
+\Ac{QKD} offers an entirely different solution with security founded in well established laws of physics. However, there are several key issues that need to be addressed before quantum-secured networks can be widely deployed. First, we must ensure that we can the theoretical security of a protocol is maintained in physical \ac{QKD} systems. Second, there must be a way to mass-manufacture devices with the precision required to create, manipulate and detect quantum states. 
 
-Integrated quantum photonics is still advancing and there are many improvements to devices that can be done. 
+This thesis aims to alleviate both of these concerns. By implementing new protocols and carefully considering the operation of the transmitter, we can ensure that a system satisfies the conditions of protocol security. We have demonstrated this new system based on the integrated photonics platform. Monolithic fabrication will be the only that we can truly satisfy the mass-manufacturability of \ac{QKD} devices. 
 
-Key exchange protocols will be the first use-case of quantum-ready networks but the advantages certainly don't stop there. \Ac{QKD} networks have a lower tolerances that networks for other quantum protocols. However, they required the same architecture. Single-photon detection and low losses are vital. Multiplexing with classical data. Networks can evolve to provided limited local operations before distributed quantum computing will be accessible. 
+The final concern with introducing \ac{QKD} networks is that creating ``quantum-ready'' networks will either be too costly or impractical. I will finish by arguing that quantum-secured communication is only the first use case for developing these new networks. As quantum technologies advance, new protocols will cause the development of these networks based on the same components. Single-photon detection and quantum state manipulation will all be requirements of any future quantum network. The integrated \ac{QKD} devices presented here will form the building blocks of the quantum internet so that in the future we may share videos of quantum cats.
 
-The technological advances in the information age far exceeded all expectations. Should we be so naive to doubt that humanity has the capability of developing a global quantum network? This these is to a quantum internet what the first transistor is to a modern supercomputer. The building blocks are here, they just require some assembly.
+%I will leave the reader with the story of the first message ever sent over ARPANET. This network that would go on to become what we now call the internet. Between Prof. Leonard Kleinrock and his student, Charley Kline, they agreed that the first message would be \texttt{`login'}. The first letter, \texttt{`l'}, was typed, sent and successfully received, as was the second letter, \texttt{`o'}. After this the system crashed. 
+
+%However, it has been demonstrated the even the security of \ac{QKD} is still only as good as the model of the physical system. Unless a system is completely characterised, it has been demonstrated that assumed secret information could be leak or accessed through classical means. As such, the security could be compromised without violating the underlying physical principle of quantum mechanics.
+
+%Due to the nature of the key exchange, \ac{QKD} even offers the unique capability to detect an eavesdropper. 
+
+%However, we saw that the theoretical description of devices doesn't necessarily meet the physical implementation.
+
+%For \ac{QKD} to conceivably become a ubiquitous tool, there must be a method to mass-manufacture devices. Monolithic integration is the only current method in which this would be possible to the precision required for quantum states manipulation. 
+
+%Integrated photonics is the only way we will be able to make many devices for ubiquitous quantum technology. This thesis describes how we can use them for quantum communication protocols. 
+
+%\Ac{HOM} interference is a vital phenomenon which underpins much of quantum photonic information. We demonstrated that interference between independently generate states from \acp{pic} was possible at \SI{431}{MHz}
+
+%\Ac{MDI} relaxing the assumptions require for a secure key exchange while facilitating a more accessible topology. A centralised resource that houses expensive single-photon detectors and processing equipment, many users can exchange keys and split the costs. Waveguide detectors on silicon devices would allow a further increase in the 
+
+%Integrated quantum photonics is still advancing and there are many improvements to devices that can be done. 
+
+%Key exchange protocols will be the first use-case of quantum-ready networks but the advantages certainly don't stop there. \Ac{QKD} networks have a lower tolerances that networks for other quantum protocols. However, they required the same architecture. Single-photon detection and low losses are vital. Multiplexing with classical data. Networks can evolve to provided limited local operations before distributed quantum computing will be accessible. 
+
+%The technological advances in the information age far exceeded all expectations. Should we be so naive to doubt that humanity has the capability of developing a global quantum network? This these is to a quantum internet what the first transistor is to a modern supercomputer. The building blocks are here, they just require some assembly. 
+
+%Single-photon detectors and low-loss switching are all crucial for any future quantum networks. As the requirements for \ac{QKD} networks are lower, we can start to build the foundations for networks that can evolve. 
+
+
+%These early networks became the internet just as trial \ac{QKD} networks will become the quantum internet.
+
+%The quantum internet will be developed so that in the future we may look at videos of quantum cats.
 
 %=========================================================
