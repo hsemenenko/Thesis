@@ -8,15 +8,27 @@ data0 = curr_sweep[2,1:10:end] ./ mean(curr_sweep[2,1:10])
 
 curr = 12:0.1:34
 
-p1 = plot(curr,
-    data0,
+using LsqFit
+model(x,p) = p[1] .- p[2]*exp.(-((x .- p[3]).^2)./(2*p[4]^2))
+xdata = curr
+ydata = data0
+p0 = [maximum(ydata),minimum(ydata),xdata[argmin(ydata)],3]
+
+fit = curve_fit(model, xdata, ydata, p0)
+vis = fit.param[2]/fit.param[1]
+vis_error = vis * sqrt((sqrt(stderror(fit)[1]^2 + stderror(fit)[2]^2)/(fit.param[1] - fit.param[2]))^2 + (stderror(fit)[1]/fit.param[1])^2)
+
+p1 = plot([curr, curr],
+    [model(curr, fit.param), data0],
     yaxis = ("Normalised Coincidences", (0,1.5), 0:0.5:1),
     xaxis = ("Current (mA)", (12,34), 12:4:34),
-    st = :scatter,
+    st = [:line :scatter],
     leg = false,
-    markercolor = light_purple,
-    markerstrokecolor = RdYlPu33,
-    markersize = 5,
+    linecolor = light_purple,
+    linewidth = 4,
+    markercolor = light_red,
+    markerstrokecolor = red,
+    markersize = 4,
     markerstrokewidth = 1
     )
 
@@ -26,15 +38,26 @@ yen_sweep = readdlm(yen_sweep_file,',')
 
 data1 = yen_sweep./420
 
-p2 = plot(-92:1:208,
-    data1[1:1:end],
+model(x,p) = p[1] .- p[2]*exp.(-((x .- p[3]).^2)./(2*p[4]^2))
+xdata = -92:1:208
+ydata = data1[:]
+p0 = [maximum(ydata),minimum(ydata),0,3]
+
+fit = curve_fit(model, xdata, ydata, p0)
+vis = fit.param[2]/fit.param[1]
+vis_error = vis * sqrt((sqrt(stderror(fit)[1]^2 + stderror(fit)[2]^2)/(fit.param[1] - fit.param[2]))^2 + (stderror(fit)[1]/fit.param[1])^2)
+
+p2 = plot([-92:1:208, -92:1:208],
+    [model(-92:1:208, fit.param), data1[1:1:end]],
     yaxis = ("Normalised Coincidences", (0,1.5), 0:0.5:1),
     xaxis = ("Relative Wavelength (pm)", (-75,75)),
-    st = :scatter,
+    st = [:line :scatter],
     leg = false,
-    markercolor = light_purple,
-    markerstrokecolor = RdYlPu33,
-    markersize = 5,
+    linecolor = light_purple,
+    linewidth = 4,
+    markercolor = light_red,
+    markerstrokecolor = red,
+    markersize = 4,
     markerstrokewidth = 1
     )
 

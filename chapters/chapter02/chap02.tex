@@ -32,7 +32,7 @@ The reader is encouraged to picture their own cast of characters in their mind's
 
 Elements of cryptography date back almost 4000 years to Ancient Egyptian times where unusual hieroglyphs were found to have been added to potential shroud mystery over the meaning\cite{singh1999code}. While generally not considered a serious attempt at hiding any secret message (and therefore considered steganography) such concepts of concealment are fundamental in modern cryptography.
 
-It has been argued that cryptography was known to the Ancient Greeks. To incite a revolt against the Persians around 440 BC, Histi{\ae}us was said to shave the head of his most trusted slave so that a tattooed message would be hidden by his regrown hair \cite{Herodotus}. References were also made centuries later to a long stick called a scytale around the 3rd century BC \cite{Deipnosophistae}. Parchment was wound around the scytale and in effect created a transposition of the message which was then used in the Spartan military. While these were revolutionary for their time, they are not considered cryptographic as the message is merely hidden rather than encrypted.
+It has been argued that cryptography was known to the Ancient Greeks. To incite a revolt against the Persians around 440 BC, Histi{\ae}us was said to shave the head of his most trusted slaves so that a tattooed message would be hidden by his regrown hair \cite{Herodotus}. References were also made centuries later to a long stick called a scytale around the 3rd century BC \cite{Deipnosophistae}. Parchment was wound around the scytale and, in effect, created a transposition of the message which was then used in the Spartan military. While these were revolutionary for their time, they are not considered cryptographic as the message is merely hidden rather than encrypted.
 
 %The history of cryptography is long with elements dating back as long ago as Egyptian and Ancient Greek times \cite{Deipnosophistae, singh1999code}.
 
@@ -67,7 +67,7 @@ The first algorithms used for cryptography were so called \brisred{symmetric-key
 
 \subsubsection{Monoalphabetic Ciphers}
 
-The most basic ciphers are those that are simple permutations of the alphabet. These are known as \brisred{monoalphabetic ciphers}. The symmetric key in these ciphers is the permutation used, that can be as simple as a single number. Here we will introduce a couple of simple examples of monoalphabetic ciphers. 
+The most basic ciphers are those that are simple permutations of the alphabet. These are known as \brisred{monoalphabetic ciphers}. The symmetric key in these ciphers is the permutation used, that can be as simple as a single number. Here, we will introduce a couple of simple examples of monoalphabetic ciphers. 
 
 \subsubsection*{Caesar Cipher}
 
@@ -95,7 +95,7 @@ In an era where most people would have been illiterate, the cipher was likely to
 
 \subsubsection*{Affine Cipher}
 
-A slightly more complex monoalphabetic permutation comes from the affine cipher, although it seems to be confined more for academic interest than real world use. The cipher is still a simple permutation of the alphabet but Alice and Bob now share two numbers. They agree on two integers $k,\lambda\in \mathbb{Z}_{26}$ such that $\lambda$ is coprime to $k$ i.e. they have no common factors greater than $1$. For each letter $x$, we can encrypt using the mapping
+A slightly more complex monoalphabetic permutation comes from the affine cipher, although it seems to be confined more for academic interest than real world use. The cipher is still a simple permutation of the alphabet but Alice and Bob now share two numbers. They agree on two integers $k,\lambda\in \mathbb{Z}_{26}$ such that $\lambda$ is coprime to $k$ i.e. they have no common factors greater than $1$. For each letter, $x$, we can encrypt using the mapping
 
 \begin{equation}
 	x \rightarrow \lambda \cdot x + k\quad\text{(mod 26)}
@@ -160,7 +160,7 @@ where the second message has been shifted by four letters. The letters that matc
 Considering the frequencies of each letters, as shown in figure \ref{fig:letter_freq}, we can calculate the probability as
 
 \begin{equation}
-	P(\text{id}) = p_\text{`a'}^2 + p_\text{`b'}^2 + \dots +p_\text{`z'}^2 \approx 0.0655
+	P(\mathrm{id}) = p_\text{`a'}^2 + p_\text{`b'}^2 + \dots +p_\text{`z'}^2 \approx 0.0655
 \end{equation}
 where the `id' refers to the fact that the messages were both written with the same alphabet.
 
@@ -173,7 +173,7 @@ Suppose we were to instead compare two messages which had a different encoding, 
 In general, the probability of coincidence will \emph{always} be less when comparing two different encodings. For any non-trivial permutation $\pi$,
 
 \begin{align}
-	P(\text{id}) - P(\pi) &= \sum p_i^2 - \sum p_i \cdot p_{\pi(i)}\\
+	P(\mathrm{id}) - P(\pi) &= \sum p_i^2 - \sum p_i \cdot p_{\pi(i)}\\
 	&= \frac{1}{2}\left(\sum p_i^2 + \sum p_{\pi(i)}^2\right) - \sum p_i \cdot p_{\pi(i)}\\
 	&= \frac{1}{2} \sum (p_i - p_{\pi(i)})^2 > 0
 \end{align}
@@ -211,7 +211,7 @@ While the protocol itself provides a `perfect' method of encryption, this doesn'
 
 \subsubsection{Block Ciphers}
 
-Despite the inherent security provided by the \ac{otp}, it is rarely used in practice. Challenges with key exchange render it impractical as Alice and Bob must have keys that are as long as the message itself. Methods to exchange these keys remain slow meaning that, typically, the theoretical security of a system is forfeit in favour of practicality. 
+Despite the inherent security provided by the \ac{otp}, it is rarely used in practice. Challenges with key exchange render it impractical as Alice and Bob must have keys that are as long as the message itself. Methods to exchange these keys remain slow meaning that, typically, the theoretical security of a system is relaxed in favour of practicality. 
 
 The most used encryption methods in modern communication are \brisred{block ciphers} that were introduced by Horst Feistel \cite{feistel1970cryptographic}. Instead of considering the message as individual letters (or binary bits), a block cipher will consider the message in blocks of a certain length. As the data is encoded in vectors encryption and decryption can be performed by matrix multiplication which is computationally efficient. The exact length of the block will depend on the cipher being used. The block is split into two equal parts $v$ and $w$ which are encoded in the first round using 
 
@@ -301,7 +301,7 @@ Now that Alice and Bob share a secret key $k$, they can choose a symmetric key a
 
 \subsubsection*{RSA Algorithm}
 
-Two years later, the \ac{rsa} algorithm would be released publicly, named after its inventors Ron Rivest, Adi Shamir, and Leonard Adleman \cite{rivest1978method}. As with the Diffie-Hellman algorithm, it was later discovered that the \ac{rsa} method had been known by Clifford Cocks during his time at \ac{gchq} \cite{Cocks1973}. 
+Two years later, the \ac{rsa} algorithm would be released publicly, named after its inventors \cite{rivest1978method}. As with the Diffie-Hellman algorithm, it was later discovered that the \ac{rsa} method had been known by Clifford Cocks during his time at \ac{gchq} \cite{Cocks1973}. 
 
 Unlike the Diffie-Hellman algorithm, the \ac{rsa} algorithm allows Alice to send a predetermined message to Bob. Its security relies on the hardness of factoring semi-primes: a number that is the product of two prime numbers. The \ac{rsa} algorithm is given below.
 
@@ -354,7 +354,7 @@ As Mallory is aware of the protocol that Alice and Bob are using (again referrin
 
 Alice will encrypt a message, that is intended for Bob, with Mallory's public key who is able to decrypt the message into plain text. Mallory can then re-encrypt the message using Bob's public key and send it to him. Without authentication neither Alice or Bob will know that their message was compromised. 
 
-Specific authentication protocols are beyond the scope of this thesis. However, we will note that their importance in modern communication is paramount and remains a prevalent discussion for the future of cryptography. 
+For Bob to verify that the message came from Alice, they will use an authentication protocol. This is typically achieved using a pre-shared key between Alice and Bob from which then can create an authentication tag to send alongside their message. Specific authentication protocols are beyond the scope of this thesis. However, we will note that their importance in modern communication is paramount and remains a prevalent discussion for the future of cryptography. 
 
 %The reader is encouraged to learn more that a variant of \ac{aes} is often used for authentication and the digital signature algorithm is used for public-key cryptography. 
 
@@ -368,11 +368,11 @@ Specific authentication protocols are beyond the scope of this thesis. However, 
 
 \subsection{Post-Quantum Cryptography}
 
-In light of recent advances in quantum computing architectures \cite{arute2019quantum}, it is become more realistic that current public-key cryptography will become vulnerable to Shor's algorithm \cite{shor1994} in the near future. To counter these advances, \brisred{post-quantum} algorithms have been suggested as alternatives that will remain secure even against quantum computers. These algorithms use the same classical computers and networks, but are based on different problems. These algorithms are part of \brisred{quantum-safe} cryptography.
+In light of recent advances in quantum computing architectures \cite{arute2019quantum}, it is becoming more realistic that current public-key cryptography will become vulnerable to Shor's algorithm \cite{shor1994} in the near future. To counter these advances, \brisred{post-quantum} algorithms have been suggested as alternatives that will remain secure even against quantum computers. These algorithms use the same classical computers and networks, but are based on different problems. These algorithms are part of \brisred{quantum-safe} cryptography.
 
 Since November 2017, \ac{nist} has been developing a new public standard for post-quantum algorithms. The process invited protocols to be submitted for assessment. In total 82 candidates were submitted, of which 69 were accepted as the first round candidates \cite{alagic2019status}. Finalists are expected to be selected in 2020.
 
-Proving the security of an algorithm remains challenging, particularly against quantum computers. A recent algorithm, \textit{Soliloquy}, was a lattice-based algorithm created by researchers at \ac{gchq}. After a brief development between 2010 and 2013, a quantum algorithm was discovered that would efficiently break the cipher. The story was published as a cautionary tale for future algorithms. A paper from Peter Shor that claimed to efficiently break lattice-based cryptography was quickly withdrawn following a mistake\cite{eldar2016efficient}. Such developments demonstrate the rapidly changing landscape of modern cryptography.
+Proving the security of an algorithm remains challenging, particularly against quantum computers. A recent algorithm, \textit{Soliloquy}, was a lattice-based algorithm created by researchers at \ac{gchq}. After a brief development between 2010 and 2013, a quantum algorithm was discovered that would efficiently break the cipher. The story was published as a cautionary tale for future algorithms. A paper from Peter Shor that claimed to efficiently break lattice-based cryptography was quickly withdrawn following a mistake\cite{eldar2016efficient}. Such developments demonstrate the rapidly changing landscape of cryptography.
 
 % for security against quantum computers and processors. A status report has recently been 
 
@@ -428,7 +428,7 @@ From a thorough understanding of quantum mechanics came the new field of \brisre
 
 \subsection{Quantum Mechanics}
 
-The postulates of quantum mechanics are not quite axiomatic, but rather guidelines for developing a more comprehensive framework for a particular system. The postulate are what connects the mathematical framework of quantum mechanics to physical systems.
+The postulates of quantum mechanics are not quite axiomatic, but rather guidelines for developing a more comprehensive framework for a particular system. The postulates are what connects the mathematical framework of quantum mechanics to physical systems.
 
 \subsubsection*{Postulate 1: The State Space}
 
@@ -508,7 +508,7 @@ This postulate also applies to states that are not simply the product of individ
 	\centering
 	\def\svgwidth{0.5\textwidth}
    	\import{chapters/chapter02/fig02/}{Bloch_Sphere.pdf_tex}
-   	\caption[Bloch sphere representation of a qubit]{Bloch Ball representation of the qubit state $\ket{\psi}$. We introduce the real variables $0\le\theta\le\pi$ and $0\le\varphi<2\pi$ where an unphysical global phase has been omitted.}
+   	\caption[Bloch ball representation of a qubit]{Bloch ball representation of the qubit state $\ket{\psi}$. We introduce the real variables $0\le\theta\le\pi$ and $0\le\varphi<2\pi$ where an unphysical global phase has been omitted.}
    	\label{fig:bloch}
 \end{figure}
 
@@ -685,7 +685,7 @@ A more practical method of encoding information when intending to use fibre opti
 
 \subsubsection*{BB84}
 
-The first \ac{QKD} protocol that was developed was the \ac{bb84} protocol, named after its inventors \cite{BB84} which was demonstrated in a proof-of-principle experiment a few years later \cite{bennett1992experimental}. Since then, there have been numerous demonstrations of \ac{bb84} either demonstrating new platforms or realising backbone quantum networks \cite{pirandola2019advances}. \Ac{bb84} remains a favourite choice for systems despite alternative protocols being available \cite{sarg2004, DPS-QKD, COW-QKD, B92}.
+The first \ac{QKD} protocol to be developed \ac{bb84}, named after its inventors \cite{BB84} which was demonstrated in a proof-of-principle experiment a few years later \cite{bennett1992experimental}. Since then, there have been numerous demonstrations of \ac{bb84} either demonstrating new platforms or realising backbone quantum networks \cite{pirandola2019advances}. \Ac{bb84} remains a favourite choice for systems despite alternative protocols being available \cite{sarg2004, DPS-QKD, COW-QKD, B92}.
 
 We will introduce the four states
 
@@ -694,13 +694,13 @@ We will introduce the four states
 \end{equation}
 that we will refer to as the \ac{bb84} states.
 
-\Ac{bb84} is a {\color{bristol-red}prepared-and-measure} where Alice and Bob play complementary roles. Alice {\color{bristol-red}prepares} a quantum state which she sends to Bob who {\color{bristol-red}measures} the state in a predefined way. 
+\Ac{bb84} is a {\color{bristol-red}prepared-and-measure} protocol where Alice and Bob play complementary roles. Alice {\color{bristol-red}prepares} a quantum state which she sends to Bob who {\color{bristol-red}measures} the state in a predefined way. 
 
 \begin{algorithm}[Bennett-Brassard 1984]
 \begin{enumerate}
-	\item Alice generates two uniform and random bit strings, $b_a$ and $n$. The first bit string will determines the basis, Z = \{$\ket{0}$,$\ket{1}$\} if 0 or X =  \{$\ket{+}$,$\ket{-}$\} if 1. The second bit string $n$ determines whether the first or second state in each basis is chosen. 
+	\item Alice generates two uniform and random bit strings, $b_a$ and $n$. The first bit string will determines the basis, $Z$ = \{$\ket{0}$,$\ket{1}$\} if 0 or $X$ =  \{$\ket{+}$,$\ket{-}$\} if 1. The second bit string $n$ determines whether the first or second state in each basis is chosen. 
 	\item Each state is sent sequentially to Bob via the quantum channel.
-	\item Similarly, Bob generates a bit string, $b_b$ uniformly and random. This determines either the X or Z basis in which to measure. These are equivalent to the Pauli $\hat{x}$ and $\hat{y}$ observables introduced earlier.
+	\item Similarly, Bob generates a bit string, $b_b$ uniformly and random. This determines either the $X$ or $Z$ basis in which to measure. These are equivalent to the Pauli $\hat{x}$ and $\hat{z}$ observables introduced earlier.
 	\item Bob measures each of the bits in turn using the randomly selected bases and records the outcomes.
 	\item Alice and Bob announce their basis bit strings, $b_{\{a,b\}}$, over the authenticated classical channel. They discard all events where the bases didn't match.
 	\item Using some of the remaining events, they compare their values to check for eavesdropping. If an unacceptable amount do not match, they abort the protocol.
@@ -748,7 +748,7 @@ More recently there has been an interest in \ac{cvqkd} due to the compatibility 
 
 \Ac{cvqkd} uses states that are described in Hilbert spaces of infinite dimension. Protocols have been proposed that encode information in Gaussian states \cite{Ralph1999} and squeezed states \cite{Hillery2000Quantum}. Both are considered prepare-and-measure schemes and the outline of the protocols remains the same.
 
-\begin{algorithm}[Continous-Variable Quantum Key Distribution]
+\begin{algorithm}[Continuous-Variable Quantum Key Distribution]
 \begin{enumerate}
 	\item Alice encodes a random variable in a quantum state. In the case of Gaussian modulation, Alice encodes the information from a set of overlapping Gaussian states. In the case of squeezed state encoding, she randomly chooses between squeezing in the $\hat{x}$ and $\hat{p}$ quadratures.
 	\item The states are sent to Bob through the quantum channel which is typically assumed to be a thermal-loss channel.
@@ -779,7 +779,7 @@ For a long time, there were questions about the security of the \ac{cvqkd} syste
 
 \subsection{Security and Hacking}
 
-Generally, security proofs for protocols fall into three categories. \brisred{Individual} attacks allow an adversary to interact with each state individually as it is sent. A \brisred{collective} attack allows them to process the states and store state indefinitely in a quantum memory. Finally, a \brisred{coherent} attack allows Mallory to generate arbitrary ancilla states which can interact with the states and be measured jointly. Coherent attacks only limit Mallory to the laws of physics and nothing more.
+Generally, security proofs for \ac{QKD} protocols fall into three categories. \brisred{Individual} attacks allow an adversary to interact with each state individually as it is sent. A \brisred{collective} attack allows them to process the states and store state indefinitely in a quantum memory. Finally, a \brisred{coherent} attack allows Mallory to generate arbitrary ancilla states which can interact with the states and be measured jointly. Coherent attacks only limit Mallory to the laws of physics and nothing more.
 
 A proof of a protocol gives a security guarantee against an adversary but only under certain assumptions. It is often claimed that \ac{QKD} is information-theoretic secure when used with a \ac{otp}. However, verifying the assumptions required for security is challenging in a practical setting and has been scrutinised by the quantum hacking community. 
 
@@ -921,7 +921,7 @@ We have discussed how single-mode photons can be represented but have yet to men
 
 \subsubsection*{Polarisation}
 
-The orientation of the electric field can be used to encode information in the polarisation.  We can describe the computational basis by encoding $\ket{0}$ as a horizontal photon, $\ket{1}_H$, and $\ket{1}$ as vertical, $\ket{1}_V$. Phases between these states allow the entire Bloch sphere to be access. The manipulation of the states is performed through sequences of half and quarter wave plates. Polarisation is typically used in free-space quantum optics where there is minimal rotation of the fields. More recently, there have been developments in integrated optics that have allows waveguide polarisation rotation \cite{smit2014} meaning it could be a useful encoding scheme in the future.
+The orientation of the electric field can be used to encode information in the polarisation.  We can describe the computational basis by encoding $\ket{0}$ as a horizontal photon, $\ket{1}_H$, and $\ket{1}$ as vertical, $\ket{1}_V$. Relative phases and amplitudes between these states allow the entire Bloch sphere to be access. The manipulation of the states is performed through sequences of half and quarter wave plates. Polarisation is typically used in free-space quantum optics where there is minimal rotation of the fields. More recently, there have been developments in integrated optics that have allows waveguide polarisation rotation \cite{smit2014} meaning it could be a useful encoding scheme in the future.
 
 \subsubsection*{Path}
 
@@ -952,7 +952,7 @@ To manipulate the path of lights, waveguide structures are created in a \ac{pic}
 	\nabla\times\mathcal{E} &= -\mu_0\frac{\partial\mathcal{H}}{\partial t}\\
 	\nabla\times\mathcal{H} &= \epsilon\frac{\partial\mathcal{E}}{\partial t}
 \end{align}
-where $\mu_0$ is the magnetic permeability of free space and $\epsilon$ is the dielectric permittivity of the material. These equations describe the electromagnetic field in a semiconductor material where the energy of the photon is less than the band gap. By combing the above equations, we can derive the wave equations
+where $\mu_0$ is the magnetic permeability of free space and $\epsilon$ is the dielectric permittivity of the material. These equations describe the electromagnetic field in a semiconductor material where the energy of the photon is less than the band gap. By combining the above equations, we can derive the wave equations
 
 \begin{align}
 	\nabla^2\mathcal{E} + \nabla\left(\frac{1}{n^2}\nabla n^2\mathcal{E}\right) - \epsilon_0\mu_0 n^2 \frac{\partial^2\mathcal{E}}{\partial t^2} = 0\\
@@ -994,7 +994,7 @@ introducing the complex amplitudes, $E$ and $H$, of the electric and magnetic fi
 \begin{figure}[t]
 	\centering
 	\includegraphics[width = 0.6\textwidth]{mmi.pdf}
-	\caption[Multi-mode interferometer operating principle]{Illustration of \acs{mmi} operation. The input light excites a superposition of modes with different propagation velocities. Depending on the length, the modes will either constructively or destructively interfere. This figure shows the simplest case for a \si{2x2} \acs{mmi} but in principle can be designed to be \si{n x m}.}
+	\caption[Multi-mode interferometer operating principle]{Illustration of \acs{mmi} operation. The input light excites a superposition of modes with different propagation velocities. Depending on the length, the modes will either constructively or destructively interfere. This figure shows the simplest case for a \si{2 x 2} \acs{mmi} but in principle can be designed to be \si{n x m}.}
 	\label{fig:mmi}
 \end{figure}
 
@@ -1002,7 +1002,7 @@ Different spatial modes in photonics experiments are typically interfered using 
 
 Directional couplers allow waveguides to interfere as they are brought in close proximity. Evanescent coupling allows the mode to shift from one to the other. The splitting ratio a directional coupler is dependent on the length of interaction. This makes fabricating accurate couplers challenging as small variations in length can cause a large change in splitting ratio.
 
-Alternatively, waveguide modes can be interfere with \acp{mmi} that are based on the self-imaging principle \cite{soldano1995optical}. A schematic is shown in figure \ref{fig:mmi}. Light in the input mode excites a superposition of modes within the \ac{mmi}. As these modes propagate, they constructively and destructively interfere. The length is chosen to allow the light to be split equally when there is constructive interference into two output modes. The same structure can equally be designed to create $n\times m$ splitters. In general, the transfer matrix is
+Alternatively, waveguide modes can be interfere with \acp{mmi} that are based on the self-imaging principle \cite{soldano1995optical}. A schematic is shown in figure \ref{fig:mmi}. Light in the input mode excites a superposition of modes within the \ac{mmi}. As these modes propagate, they constructively and destructively interfere. The length is chosen to allow the light to be split equally when there is constructive interference into two output modes. The same structure can equally be designed to create \si{n x m} splitters. In general, the transfer matrix is
 
 \begin{equation}
 	\hat{U}_\mathrm{MMI} = \left(
@@ -1012,7 +1012,16 @@ Alternatively, waveguide modes can be interfere with \acp{mmi} that are based on
 	\end{matrix}
 	\right)
 \end{equation}
-where $r$ and $t$ are complex numbers that correspond to the reflectivity and transmission, respectively, and will be constrained such that the matrix is unitary.
+where $r$ and $t$ are complex numbers that correspond to the reflectivity and transmission, respectively, and will be constrained such that the matrix is unitary. A balanced \ac{mmi} will have the transformation matrix
+
+\begin{equation}
+	\hat{U}_\mathrm{MMI} = \frac{1}{\sqrt{2}}\left(
+	\begin{matrix}
+	1 & i\\
+	i & 1
+	\end{matrix}
+	\right)
+\end{equation}
 
 \subsubsection*{Phase modulation}
 
@@ -1055,7 +1064,7 @@ A final effect that we will mention is the \ac{qcse}. The effect presents itself
 	\label{fig:mzi}
 \end{figure}
 
-Combining phase modulations and \acp{mmi}, we can create on-chip \acp{mzi} which can be used for very fast routing, intensity modulation and phase encoding. A schematic is shown in figure \ref{fig:mzi} where a phase modulation is applied to one arm of the \ac{mzi}.  We can calculate the transfer matrix by simply combing the matrices for phase modulation and \ac{mmi} to get
+Combining phase modulators and \acp{mmi}, we can create on-chip \acp{mzi} which can be used for very fast routing, intensity modulation and phase encoding. A schematic is shown in figure \ref{fig:mzi} where a phase modulation is applied to one arm of the \ac{mzi}.  We can calculate the transfer matrix by simply combing the matrices for phase modulation and {50:50} \ac{mmi} to get
 
 \begin{equation}
 	\frac{1}{\sqrt{2}}\left(
@@ -1097,11 +1106,11 @@ An important part of any quantum photonic information processing is detection of
 	\item \textbf{Dark Counts:} the number of events when no photons are present.
 \end{itemize}
 
-\Acp{apd} have been widely used for quantum optics experiments with efficiency in the visible spectrum exceeding \SI{60}{\percent} \cite{hadfield2009single}. Dart counts for \acp{apd} can be relatively high with \si{kHz} rates which can be reduced with cooling. Jitter is typically O(\SI{100}{ps}). The detection efficiency for longer wavelengths, such as light used in telecommunications, is typically lower. More recently, there has been a demonstrated of a \SI{1}{GHz} gated \ac{apd} for \ac{QKD} with an efficiency of \SI{55}{\percent} \cite{comandar2015gigahertz}. There have been demonstrations of integrated Ge-on-Si \acp{apd} with efficiency up to \SI{35}{\percent} at \SI{125}{\kelvin} \cite{Martinez2017Single, vines2019high}. While the efficiency here is lower, there are obvious advantages in terms of scalability and reduced coupling losses.
+\Acp{apd} have been widely used for quantum optics experiments with efficiency in the visible spectrum exceeding \SI{60}{\percent} \cite{hadfield2009single}. Dark counts for \acp{apd} can be relatively high with \si{kHz} rates which can be reduced with cooling. Jitter is typically O(\SI{100}{ps}). The detection efficiency for longer wavelengths, such as light used in telecommunications, is typically lower. More recently, there has been a demonstrated of a \SI{1}{GHz} gated \ac{apd} for \ac{QKD} with an efficiency of \SI{55}{\percent} \cite{comandar2015gigahertz}. There have been demonstrations of integrated Ge-on-Si \acp{apd} with efficiency up to \SI{35}{\percent} at \SI{125}{\kelvin} \cite{Martinez2017Single, vines2019high}. While the efficiency here is lower, there are obvious advantages in terms of scalability and reduced coupling losses.
 
 % Within the C-band, InGaAs \acp{apd} have been demonstrated with \SI{55}{\percent} efficiency in a \SI{1}{GHz} gated mode \cite{comandar2015gigahertz}. On-chip \acp{apd} have been demonstrated \cite{}.
 
-Advances in cryogenic cooling technology have allowed \acp{snspd} to become more widely available. Their uptake in quantum photonics experiments has been rapid due to their unmatched efficiency which can easily exceed \SI{90}{\percent} with timing jitter of O(\SI{10}{ps}). Short recovery times can allow for high count rates and dark counts lower than 1 per hour \cite{wollman2017}. Waveguide integrated detectors have been demonstrated \cite{sprengers2011} which benefit from enhanced interaction between the confined light and the detector. Cavities have been explored to further increase the detection efficiency and reduce the jitter \cite{vetter2016, yun2019, tyler2016modelling}.
+Advances in cryogenic cooling technology have allowed \acp{snspd} to become more widely available. Their uptake in quantum photonics experiments has been rapid due to their unmatched efficiency which can easily exceed \SI{90}{\percent} with timing jitter of O(\SI{10}{ps}) \cite{hadfield2009single}. Short recovery times can allow for high count rates and dark counts lower than 1 per hour \cite{wollman2017}. Waveguide integrated detectors have been demonstrated \cite{sprengers2011} which benefit from enhanced interaction between the confined light and the detector. Photonic cavities have been explored to further increase the detection efficiency and reduce the jitter \cite{vetter2016, yun2019, tyler2016modelling}.
 
 %As \ac{QKD} will typically be concerned with single photon states (or close to) the efficiency of detection will be crucial. The losses associated with coupling on and off of integrated devices are a big problem. By fabricating detectors onto the waveguides we gain a few benefits.
 
@@ -1119,7 +1128,7 @@ As silicon is centro-symmetric, it has no natural $\chi^{(2)}$ which means that 
 
 A strong $\chi^{(3)}$ non-linearity allows single-photon generation through \ac{sfwm} \cite{SilverstoneThesis}. However, as silicon doesn't have a direct band gap lasers there is no immediate route to integrating lasers. Instead, hybrid platforms have emerge to utilise III-V lasers \cite{Fan2017, Agnesi2019}. Doped silicon has allowed fast photodiodes to be waveguide integrated with high bandwidths \cite{raffaelli2018generation}.
 
-Light can be edge-coupled but grating structures are more common as they are not restricted to the edge of the device. Periodic structured in the silicon project the waveguide mode verically into single-mode fibres. Losses have been shown to be as low as \SI{0.36}{dB} \cite{Notaros2016}, although the loss is typically higher. Silicon suffers from high non-linear losses which are suppressed at longer wavelengths \cite{rosenfeld2019mid}.
+Light can be edge-coupled but grating structures are more common as they are not restricted to the edge of the device. Periodic structures in the silicon projects the waveguide mode verically into single-mode fibres. Losses have been shown to be as low as \SI{0.36}{dB} \cite{Notaros2016}, although the loss is typically higher. Silicon suffers from high non-linear losses which are suppressed at longer wavelengths \cite{rosenfeld2019mid}.
 
 %Silicon is ubiquitous in the world today and powers everything from watches to supercomputers. The advances that have been made in the trillion dollar semiconductor industry have made silicon a hugely successful platform for quantum photonics. With a band gap of \SI{\sim 1100}{nm}, we can also leverage the telecommunications industry to create low-loss \acl{pic}. However, as it has an indirect band gap, it has been challenging to develop efficient light sources on-chip \cite{}. While efforts have been made to create integrated lasers and amplifiers, their performances don't match those of other integrated approaches, such as III-V materials.
 
@@ -1139,7 +1148,7 @@ Silicon nitride (Si\textsubscript{3}N\textsubscript{4}) offers a wider band gap 
 
 \subsubsection*{Indium Phosphide}
 
-\Ac{InP} offers benefits over other platforms, especially with its direct band gap which allows easily integrable lasers. \Acp{SOA} and \acp{DBR} structures allow Fabry-P\'{e}rot lasers to be created and directly coupled to waveguides. Alternatively, high-bandwidth \ac{dfb} components are also available \cite{smit2014, jeppix}. Multi-quantum well structures allow fast phase modulation up to \SI{40}{GHz} through the \ac{qcse} with similar bandwidth photodiodes also available \cite{smit2014}. Thermo-optic effects are also available for stable modulation and tuning.
+\Ac{InP} offers benefits over other platforms, especially with its direct band gap which allows easily integrable lasers. \Acp{SOA} and \acp{DBR} structures allow Fabry-P\'{e}rot lasers to be created and directly coupled to waveguides. Alternatively, high-bandwidth \ac{dfb} components are also available \cite{smit2014, JeppixRoadmap}. Multi-quantum well structures allow fast phase modulation up to \SI{40}{GHz} through the \ac{qcse} with similar bandwidth photodiodes also available \cite{smit2014}. Thermo-optic effects are also available for stable modulation and tuning.
 
 As there is no insulator, like in \ac{soi}, there is a very low index contrast to create grating couplers as the light from similar structures would launch into the substrate. Therefore, edge couplers are required to access the optical circuits. \Acp{ssc} are tapered waveguides that convert the waveguide to single-mode fibre. This low contrast also means that the bend radius is larger meaning that the component density is lower than silicon.
 
@@ -1161,7 +1170,7 @@ More recently, there has been work to replicate \ac{soi} with \ac{imos} \cite{IM
 
 \subsubsection*{Lithium Niobate}
 
-Lithium niobate is a favourite choice phase and intensity modulation offering very high bandwidth modulation \cite{Louay2001Advances, Atsushi2010NRZ}. Single-photon generation is also available through \ac{spdc} in periodically poled structures \cite{tanzilli2002ppln}. Reconfigurable circuits have been demonstrated making it a potential candidate for future networks \cite{jin2014chip}. 
+Lithium niobate is a favourite choice for phase and intensity modulation offering very high bandwidth modulation \cite{Louay2001Advances, Atsushi2010NRZ}. Single-photon generation is also available through \ac{spdc} in periodically poled structures \cite{tanzilli2002ppln}. Reconfigurable circuits have been demonstrated making it a potential candidate for future networks \cite{jin2014chip}. 
 
 %\subsubsection{Hybrid Integration}
 
@@ -1181,10 +1190,10 @@ Lithium niobate is a favourite choice phase and intensity modulation offering ve
 
 \section{Summary}
 
-In this background chapter, we have introduced important cryptographic techniques, quantum theory and integrated photonics that will form the foundation for the remainder of this thesis. The humble beginning of cryptography have been incredible influential throughout history and remains a vital endeavour. With a better understand of cryptoanalysis techniques the field will need to keep evolving.
+In this background chapter, we have introduced important cryptographic techniques, quantum theory and integrated photonics that will form the foundation for the remainder of this thesis. The humble beginning of cryptography have been incredibly influential throughout history and remains a vital endeavour. With a better understand of cryptoanalysis techniques the field will need to keep evolving.
 
 Advances in the understanding of quantum mechanics has allowed a more complete view of the world. It has also facilitated a new range of quantum technologies to complement their classical counterparts. Through quantum key distribution, we can develop entirely new ways to securely communicate. At the same time, thorough analysis will be crucial to their claims of security.
 
-As with any technology, the mass-manufacturability of quantum photonic circuits will be key to its success. Developments in integrated platforms have allowed quantum photonicsto progress from modest proof of principle experiments into the commercial world. Quantum communication systems are set to utilise these techniques to become part of future quantum networks. The rest of this thesis concerns developing the integrated platform for quantum key distribution.
+As with any technology, the mass-manufacturability of quantum photonic circuits will be key to its success. Developments in integrated platforms have allowed quantum photonics to progress from modest proof of principle experiments into the commercial world. Quantum communication systems are set to utilise these techniques to become part of future quantum networks. The rest of this thesis concerns developing the integrated platform for quantum key distribution.
 
 %=========================================================

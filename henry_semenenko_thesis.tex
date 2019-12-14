@@ -136,7 +136,7 @@
 \newcommand\feline@chapter@marker[1][4cm]{%
 	\sbox\feline@chapter{% 
 		\resizebox{!}{#1}{\fboxsep=1pt%
-			{\ifdraftdoc\color{gray}\else\color{gray}\fi\thechapter}% 
+			{\ifdraftdoc\color{gray}\else\color{white}\fi\thechapter}% 
 			}
 		}%
 		\quad%
@@ -151,14 +151,14 @@
 	\renewcommand\chapnamefont{\normalfont\Large\scshape\raggedleft\so} 
 	\renewcommand\chaptitlefont{\normalfont\huge\bfseries\scshape} 
 	\renewcommand\chapternamenum{} \renewcommand\printchaptername{} 
-	\renewcommand\printchapternum{\thispagestyle{empty}\ifdraftdoc\else\pagecolor{white}\fi\null\hfill\feline@chm[2.5cm]\par} 
+	\renewcommand\printchapternum{\thispagestyle{empty}\ifdraftdoc\else\pagecolor{bristol-red}\fi\null\hfill\feline@chm[2.5cm]\par} 
 	\renewcommand\afterchapternum{\par\vspace{25pt}\vskip\midchapskip} 
 	\renewcommand\printchaptertitle[1]{
 		\if@mainmatter
 			\ifdraftdoc
 				\color{gray}
 			\else
-				\color{gray}
+				\color{white}
 			\fi
 			\chaptitlefont\raggedleft ##1			
 		\else
@@ -169,7 +169,7 @@
 									\par
 									\begin{figure*}
 										\centering
-									\includegraphics[scale=0.25]{./graphics/skytale_draft}
+									\includegraphics[scale=0.25]{./graphics/skytale}
 									\end{figure*}	
 									\clearpage
 									\nopagecolor
@@ -435,16 +435,17 @@
 \hyphenation{mea-sure-ment}
 \hyphenation{in-de-pen-dent}
 \hyphenation{metro-pol-it-an}
+\hyphenation{wave-length}
 %
 %
 %% Change the space between paragraphs
 \abnormalparskip{3pt}
 
 %% Change the spacing after an equation
-\setDisplayskipStretch{1.5}
-\renewcommand*{\memdskips}{%
-	\advance\belowdisplayskip \memdskipstretch\belowdisplayskip%
-	\advance\belowdisplayshortskip \memdskipstretch\belowdisplayshortskip}
+%\setDisplayskipStretch{1.5}
+%\renewcommand*{\memdskips}{%
+%	\advance\belowdisplayskip \memdskipstretch\belowdisplayskip%
+%	\advance\belowdisplayshortskip \memdskipstretch\belowdisplayshortskip}
 
 \begin{document}
 
@@ -470,13 +471,13 @@
 %
 \input{frontmatter/title}
 %
-\input{frontmatter/declaration}
-\clearemptydoublepage
-%
 \input{frontmatter/abstract}
 \clearemptydoublepage
 %
 \input{frontmatter/dedication}
+\clearemptydoublepage
+%
+\input{frontmatter/declaration}
 \clearemptydoublepage
 %
 \pdfbookmark[0]{Table of Contents}{contents}
