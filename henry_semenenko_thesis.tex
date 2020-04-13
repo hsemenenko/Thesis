@@ -410,6 +410,29 @@
 \mdtheorem[style=mytheorem]{theorem}{Theorem}[chapter]
 \mdtheorem[style=mytheorem]{algorithm}{Algorithm}[chapter]
 
+%Style to mark where changes have been made for corrections
+%https://tex.stackexchange.com/a/336210
+\newmdenv[ % Define mdframe settings and store as leftrule
+  linecolor=yellow,
+  linewidth=4pt,
+  topline=false,
+  bottomline=false,
+  rightline=false,
+  frametitleaboveskip = 0pt,
+  frametitlebelowskip=0pt,
+  innermargin=0pt,
+  outermargin=0pt,
+  skipabove=0pt,
+  skipbelow=0pt,
+  innertopmargin=0pt,
+  innerbottommargin=0pt,
+  innerrightmargin=0pt,
+  backgroundcolor=yellow!30
+]{leftrule}
+
+\NewDocumentEnvironment{parahigh}{O{{}}} % Define example environment
+{\begin{leftrule}\noindent\textcolor{yellow}{#1}\par}
+{\end{leftrule}}
 
 %
 % Expand tables
@@ -436,6 +459,7 @@
 \hyphenation{in-de-pen-dent}
 \hyphenation{metro-pol-it-an}
 \hyphenation{wave-length}
+\hyphenation{pho-tons}
 %
 %
 %% Change the space between paragraphs
@@ -516,12 +540,12 @@
 \clearemptydoublepage
 \import{chapters/chapter02/}{chap02.tex}
 \clearemptydoublepage
-\import{chapters/chapter03/}{chap03.tex}
-\clearemptydoublepage
-\import{chapters/chapter04/}{chap04.tex}
-\clearemptydoublepage
-\import{chapters/chapter06/}{chap06.tex}
-\clearemptydoublepage
+%\import{chapters/chapter03/}{chap03.tex}
+%\clearemptydoublepage
+%\import{chapters/chapter04/}{chap04.tex}
+%\clearemptydoublepage
+%\import{chapters/chapter06/}{chap06.tex}
+%\clearemptydoublepage
 \import{chapters/chapter07/}{chap07.tex}
 \clearemptydoublepage
 
