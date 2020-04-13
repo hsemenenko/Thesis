@@ -413,6 +413,7 @@
 %Style to mark where changes have been made for corrections
 %https://tex.stackexchange.com/a/336210
 \newmdenv[ % Define mdframe settings and store as leftrule
+  frametitle={},
   linecolor=yellow,
   linewidth=4pt,
   topline=false,
@@ -425,9 +426,10 @@
   skipabove=0pt,
   skipbelow=0pt,
   innertopmargin=0pt,
-  innerbottommargin=0pt,
+  innerbottommargin=2pt,
   innerrightmargin=0pt,
-  backgroundcolor=yellow!30
+  backgroundcolor=yellow!30,
+  userdefinedwidth=\linewidth + 2cm
 ]{leftrule}
 
 \NewDocumentEnvironment{parahigh}{O{{}}} % Define example environment
@@ -540,12 +542,12 @@
 \clearemptydoublepage
 \import{chapters/chapter02/}{chap02.tex}
 \clearemptydoublepage
-%\import{chapters/chapter03/}{chap03.tex}
-%\clearemptydoublepage
-%\import{chapters/chapter04/}{chap04.tex}
-%\clearemptydoublepage
-%\import{chapters/chapter06/}{chap06.tex}
-%\clearemptydoublepage
+\import{chapters/chapter03/}{chap03.tex}
+\clearemptydoublepage
+\import{chapters/chapter04/}{chap04.tex}
+\clearemptydoublepage
+\import{chapters/chapter06/}{chap06.tex}
+\clearemptydoublepage
 \import{chapters/chapter07/}{chap07.tex}
 \clearemptydoublepage
 

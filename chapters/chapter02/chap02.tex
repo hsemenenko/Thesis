@@ -521,7 +521,8 @@ Similar to how information is represented as bits in classical computers, we can
 \begin{equation}
 	\ket{\psi} = \cos\left(\nicefrac{\theta}{2}\right)\ket{0} + \mathrm{e}^{i\varphi}\sin\left(\nicefrac{\theta}{2}\right)\ket{1}
 \end{equation}
-where $0\le\theta\le\pi$ and $0\le\varphi<2\pi$ as shown in figure \ref{fig:bloch}. Mathematically speaking, to account for mixed states, this representation is a ball, rather than a sphere. Pure states exist on the surface on the ball, while mixed states exist within.
+\begin{parahigh}where $0\le\theta\le\pi$ and $0\le\varphi<2\pi$ as shown in figure \ref{fig:bloch}. Mathematically speaking, this representation is a closed ball, rather than a sphere which describes only the surface. The space bounded by a sphere gives a ball. Pure states exist on the surface on the ball, while mixed states exist within.
+\end{parahigh}
 
 We introduce the Pauli matrices
 
@@ -639,7 +640,7 @@ To motivate the introduction of quantum-safe communication, we will introduce so
 
 %While quantum computing has been a big motivator for moving to new encryption, we still have no assurances that the trap-door functions we rely on for security are secure even against classical computers.
 
-Shor's algorithm efficiently factors composite numbers into their prime factors \cite{shor1994} meaning that both \ac{rsa} and Diffie-Hellman are vulnerable to attacks from a quantum computer. The estimated number of physical qubits needed to factor \ac{rsa}-2048 has reduced drastically in recent years from one billion \cite{mosca2018, fowler2012} to twenty million \cite{gidney2019}. A state-of-the-art quantum processor was recently demonstrated with fifty qubits \cite{arute2019quantum}. While very far away from the estimates, it is a necessary first step towards ubiquitous quantum computers.
+\begin{parahigh}Shor's algorithm efficiently factors composite numbers into their prime factors \cite{shor1994} meaning that both \ac{rsa} and Diffie-Hellman are vulnerable to attacks from a quantum computer. The estimated number of physical qubits needed to factor \ac{rsa}-2048 has reduced drastically in recent years from one billion \cite{mosca2018, fowler2012} to twenty million \cite{gidney2019}. A state-of-the-art quantum processor was recently demonstrated with fifty qubits \cite{arute2019quantum}. Another important metric is the circuit depth possible during a calculation. The quantum processor managed a circuit depth of 20 which is far below the estimated $10^9$ required \cite{Jones2012}. While this quantum computer is very far away from the estimates, it is a necessary first step towards ubiquitous quantum computers. \end{parahigh}
 
 Grover's algorithm could also be used to search through keys in a block cipher protocol \cite{grover1996fast}. However, the speed-up is only $\sqrt{n}$ which has been proven as the lower bound for an unordered search \cite{Bennent1997}. Therefore, the same security in a post-quantum world can be achieved by doubling the key length i.e. moving from 128 bit to 256 bit \ac{aes}.
 
@@ -701,6 +702,7 @@ that we will refer to as the \ac{bb84} states.
 \Ac{bb84} is a {\color{bristol-red}prepared-and-measure} protocol where Alice and Bob play complementary roles. Alice {\color{bristol-red}prepares} a quantum state which she sends to Bob who {\color{bristol-red}measures} the state in a predefined way. 
 
 \begin{algorithm}[Bennett-Brassard 1984]
+
 \begin{enumerate}
 	\item Alice generates two uniform and random bit strings, $b_a$ and $n$. The first bit string will determines the basis, $Z$ = \{$\ket{0}$,$\ket{1}$\} if 0 or $X$ =  \{$\ket{+}$,$\ket{-}$\} if 1. The second bit string $n$ determines whether the first or second state in each basis is chosen. 
 	\item Each state is sent sequentially to Bob via the quantum channel.
@@ -708,8 +710,13 @@ that we will refer to as the \ac{bb84} states.
 	\item Bob measures each of the bits in turn using the randomly selected bases and records the outcomes.
 	\item Alice and Bob announce their basis bit strings, $b_{\{a,b\}}$, over the authenticated classical channel. They discard all events where the bases didn't match.
 	\item Using some of the remaining events, they compare their values to check for eavesdropping. If an unacceptable amount do not match, they abort the protocol.
-	\item Finally, privacy amplification can be applied to satisfy security requirements.
 \end{enumerate}
+\begin{parahigh}
+\begin{enumerate}
+	\setcounter{enumi}{6}
+	\item Finally, privacy amplification can be applied where Alice and Bob sacrifice some of their key to reduce the amount of knowledge Eve could have gained to satisfy security requirements.
+\end{enumerate}
+\end{parahigh}
 \end{algorithm}
 
 Upon successfully finishing a \ac{bb84} protocol, Alice and Bob share a symmetric key. If they wished, they could use a \ac{otp} cipher to ensure information-theoretic secure communication. However, as one bit of key is needed to encrypt each bit of message, more pragmatic systems will implement a block cipher. 
@@ -718,7 +725,9 @@ Upon successfully finishing a \ac{bb84} protocol, Alice and Bob share a symmetri
 
 As single-photon sources remain technically challenging to engineer, \ac{QKD} system have preferred using weakly attenuated laser pulses to generate \acp{wcs}. However, as \ac{wcs} have a distribution of photon numbers, it opens the system up to a \ac{pns} attack. 
 
-In such an attack, we assume that Mallory has access to a device that can make a non-demolition of the photon number of the state. She will block each state which contains zero or one photons, and for each multi-photon state will keep one photon in a memory until Alice and Bob announce the chosen bases. 
+\begin{parahigh}
+In such an attack, we assume that Mallory has access to a device that can make a non-demolition of the photon number of the state. She will block each state which contains zero or one photons, and for each multi-photon state will keep one photon in a quantum memory until Alice and Bob announce the chosen bases. 
+\end{parahigh}
 
 One can consider the security of using \ac{wcs} in the \ac{bb84} protocol describe above. However, this will offer a far reduced secret key rate due to the information leakage \cite{Norbert2000Security, Brassard2000Limitations}. Instead, decoy state protocols have been developed allowing Alice and Bob to bound the knowledge that could have been accessed by Eve \cite{Lo2005}. 
 
