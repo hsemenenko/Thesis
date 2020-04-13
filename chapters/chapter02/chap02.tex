@@ -91,7 +91,7 @@ where the Alice finds the letter of her plain text in the top row and substitute
 
 Once Bob receives the message from Alice, he can decipher the message by `subtracting' $k$ from the message i.e. moving from the bottom row of the table above to the top row. This allows him to read the message.
 
-In an era where most people would have been illiterate, the cipher was likely to be secure. However, with only 25 possible combinations to try, guess each one is rather trivial. Once a single word has been uncovered the entire message would be forfeit. 
+In an era where most people would have been illiterate, the cipher was likely to be secure. However, with only 25 possible combinations to try, guessing each permutation is rather trivial. Once a single word has been uncovered the entire message would be forfeit. 
 
 \subsubsection*{Affine Cipher}
 
@@ -211,9 +211,13 @@ While the protocol itself provides a `perfect' method of encryption, this doesn'
 
 \subsubsection{Block Ciphers}
 
-Despite the inherent security provided by the \ac{otp}, it is rarely used in practice. Challenges with key exchange render it impractical as Alice and Bob must have keys that are as long as the message itself. Methods to exchange these keys remain slow meaning that, typically, the theoretical security of a system is relaxed in favour of practicality. 
+Despite the inherent security provided by the \ac{otp}, it is rarely used in practice. Challenges with key exchange render it impractical as Alice and Bob must have keys that are as long as the message itself. Methods to exchange these keys remain slow meaning that, typically, the theoretical security of a system is relaxed in favour of practicality.
 
-The most used encryption methods in modern communication are \brisred{block ciphers} that were introduced by Horst Feistel \cite{feistel1970cryptographic}. Instead of considering the message as individual letters (or binary bits), a block cipher will consider the message in blocks of a certain length. As the data is encoded in vectors encryption and decryption can be performed by matrix multiplication which is computationally efficient. The exact length of the block will depend on the cipher being used. The block is split into two equal parts $v$ and $w$ which are encoded in the first round using 
+\begin{parahigh}
+The most used encryption methods in modern communication are \brisred{block ciphers} that were introduced by Horst Feistel \cite{feistel1970cryptographic}. Instead of considering the message as individual letters (or binary bits), a block cipher will consider the message in blocks of a certain length. These blocks are the passed through a deterministic algorithm that encrypts the message with a short key. The exact length of the block will depend on the cipher being used, but is always shorter than the message meaning the security is weakened when compared with the \ac{otp}. However, as the data is encoded in vectors encryption and decryption can be performed by matrix multiplication which is computationally efficient.
+\end{parahigh}
+
+The message block is split into two equal parts $v$ and $w$ which are encoded in the first round using 
 
 \begin{equation}
 	v' = w \quad \text{and} \quad w' = v + F(w, k)
@@ -284,7 +288,7 @@ The Diffie-Hellman algorithm is not used to send a message between Alice and Bob
 \label{alg:dh}
 \begin{enumerate}
 	\item Alice and Bob agree on a large prime number, $p$, and a primitive root, $a$. These numbers can be publicly available.
-	\item They both also secretly choose integers $d_A$ and $d_B$.
+	\item They both also secretly choose integers $d_A$ and $d_B \in \mathbb{N}$.
 	\item Alice sends her public key, $q_A = a^{d_A}$, to Bob, and Bob send his public key, $q_B = a^{d_B}$ to Alice.
 	\item On receiving a public key, Alice and Bob compute $k = q_B^{d_A} = a^{d_A\times d_B}$ and $k = q_A^{d_B} = a^{d_A\times d_B}$, respectively.
 	\item Alice and Bob now share the secret key $k$.
@@ -293,7 +297,7 @@ The Diffie-Hellman algorithm is not used to send a message between Alice and Bob
 
 The information that is available to Eve or Mallory are the numbers $p, a, q_{A}$ and $q_{B}$. However, without being able to solve the discrete logarithm, they are unable to compute $d_A$ or $d_B$. Hence, they cannot efficiently compute the secret key $k$.  
 
-Now that Alice and Bob share a secret key $k$, they can choose a symmetric key algorithm to send encrypted messages.
+Now that Alice and Bob share a secret key $k$, they can choose a symmetric key algorithm, such as \ac{aes}, to send encrypted messages.
 
 %Typically, the Diffie-Hellman algorithm is used as a key exchange method to 
 
@@ -434,7 +438,7 @@ The postulates of quantum mechanics are not quite axiomatic, but rather guidelin
 
 The first postulate concerns the state of the system. Any closed quantum system exists in a Hilbert space, $\mathcal{H}$, which is known as the state space of the system. The system is described by a vector of unit length within $\mathcal{H}$. Any vectors that differ by a global factor represent the same state.
 
-Of course, the postulate doesn't tell us which Hilbert space to choose for our particular quantum system. Nor does it give the vector associated with our quantum state. To answer such questions, one must consult theories such as quantum electrodynamics. The simplest spaces and states are those found in quantum information which is restricted to two-level systems. The states are called \brisred{qubits} and take the general form
+Of course, the postulate doesn't tell us which Hilbert space to choose for our particular quantum system. Nor does it give the vector associated with our quantum state. To answer such questions, one must consult theories such as quantum electrodynamics. The simplest spaces and states are those found in quantum information which is restricted to two-level systems. These states are called \brisred{qubits} and take the general form
 
 \begin{equation}
 	\ket{\psi} = \alpha\ket{0} + \beta\ket{1}
@@ -515,9 +519,9 @@ This postulate also applies to states that are not simply the product of individ
 Similar to how information is represented as bits in classical computers, we can introduce the concept of a \brisred{quantum bit}, which we will call \brisred{qubits}. As mentioned above, qubits are two-level systems that exist in $\mathcal{H}_2$ where we introduce the orthonormal basis $\ket{0}$ and $\ket{1}$, called the computational basis. It is more usual to consider qubits in a Bloch representation,
 
 \begin{equation}
-	\ket{\psi} = \cos\left(\nicefrac{\theta}{2}\right)\ket{0} + \mathrm{e}^{i\varphi}\sin\left(\nicefrac{\theta}{2}\right)\ket{0}
+	\ket{\psi} = \cos\left(\nicefrac{\theta}{2}\right)\ket{0} + \mathrm{e}^{i\varphi}\sin\left(\nicefrac{\theta}{2}\right)\ket{1}
 \end{equation}
-where $0\le\theta\le\pi$ and $0\le\varphi<2\pi$ as shown in figure \ref{fig:bloch}. To account for mixed states, this representation is a ball, rather than a sphere. Pure states exist on the surface on the ball, while mixed states exist within.
+where $0\le\theta\le\pi$ and $0\le\varphi<2\pi$ as shown in figure \ref{fig:bloch}. Mathematically speaking, to account for mixed states, this representation is a ball, rather than a sphere. Pure states exist on the surface on the ball, while mixed states exist within.
 
 We introduce the Pauli matrices
 
@@ -740,7 +744,7 @@ Independently of the development of \ac{bb84}, another protocol was developed by
 
 As Alice and Bob are able to verify that the state is entangled, we don't need to assume that one of them is generating the entangled state. The protocol could be equally secure if Charlie, Eve or Mallory were generating the state. Any tampering with the state would only result in a reduction of key rate.
 
-Entanglement-based protocols are often used as a method to prove the security of other prepare-and-measure protocols. For example, the chosen randomness used in a \ac{bb84} protocol is equivalent to a postponed measurement on an entangled state.
+Entanglement-based protocols are often used as a method to prove the security of other prepare-and-measure protocols. For example, the chosen randomness used in a \ac{bb84} protocol is mathematically equivalent to a postponed measurement on an entangled state.
 
 \subsubsection{Continuous-Variable}
 
@@ -1000,9 +1004,9 @@ introducing the complex amplitudes, $E$ and $H$, of the electric and magnetic fi
 
 Different spatial modes in photonics experiments are typically interfered using a beam splitter. The traditional half-silvered mirror isn't something that is easily fabricated as a linear optical components, so another method is required.
 
-Directional couplers allow waveguides to interfere as they are brought in close proximity. Evanescent coupling allows the mode to shift from one to the other. The splitting ratio a directional coupler is dependent on the length of interaction. This makes fabricating accurate couplers challenging as small variations in length can cause a large change in splitting ratio.
+Directional couplers allow waveguides to interfere as they are brought in close proximity. Evanescent coupling allows the mode to shift from one to the other. The splitting ratio of a directional coupler is dependent on the length of interaction. This makes fabricating accurate couplers challenging as small variations in length can cause a large change in splitting ratio.
 
-Alternatively, waveguide modes can be interfere with \acp{mmi} that are based on the self-imaging principle \cite{soldano1995optical}. A schematic is shown in figure \ref{fig:mmi}. Light in the input mode excites a superposition of modes within the \ac{mmi}. As these modes propagate, they constructively and destructively interfere. The length is chosen to allow the light to be split equally when there is constructive interference into two output modes. The same structure can equally be designed to create \si{n x m} splitters. In general, the transfer matrix is
+Alternatively, waveguide modes can be interfered with \acp{mmi} that are based on the self-imaging principle \cite{soldano1995optical}. A schematic is shown in figure \ref{fig:mmi}. Light in the input mode excites a superposition of modes within the \ac{mmi}. As these modes propagate, they constructively and destructively interfere. The length is chosen to allow the light to be split equally when there is constructive interference into two output modes. The same structure can equally be designed to create \si{n x m} splitters. In general, the transfer matrix is
 
 \begin{equation}
 	\hat{U}_\mathrm{MMI} = \left(
@@ -1067,7 +1071,7 @@ A final effect that we will mention is the \ac{qcse}. The effect presents itself
 Combining phase modulators and \acp{mmi}, we can create on-chip \acp{mzi} which can be used for very fast routing, intensity modulation and phase encoding. A schematic is shown in figure \ref{fig:mzi} where a phase modulation is applied to one arm of the \ac{mzi}.  We can calculate the transfer matrix by simply combing the matrices for phase modulation and {50:50} \ac{mmi} to get
 
 \begin{equation}
-	\frac{1}{\sqrt{2}}\left(
+	\hat{U}_\mathrm{MZI} = \frac{1}{\sqrt{2}}\left(
 	\begin{matrix}
 	1 & i\\
 	i & 1
@@ -1124,9 +1128,9 @@ Different materials will exhibit different properties that provide benefits and 
 
 One of the more mature \ac{pic} platform is \ac{soi} which has leveraged fabrication from the ubiquitous silicon microelectronics industry. \Ac{cmos} compatibility has enabled large, complex devices to be fabricated \cite{wang2019integrated}. A high index contrast between the waveguide and the substrate allows tight confinement of the light meaning small bend radii are possible. 
 
-As silicon is centro-symmetric, it has no natural $\chi^{(2)}$ which means that there is no electro-optic effect to use for phase modulation. Instead, modulation is achieved through thermo-optic, which are slow, or carrier injection/depletion modulators, which suffer from phase dependent losses. There have been attempts to break this centro-symmetry to achieve high bandwidth modulation \cite{cazzanelli2016second, castellan2019origin}.
+As silicon is centro-symmetric, it has no natural $\chi^{(2)}$ which means that there is no electro-optic effect to use for phase modulation. Instead, modulation is achieved through thermo-optic effects, which are slow, or carrier injection/depletion modulators, which suffer from phase dependent losses. There have been attempts to break this centro-symmetry to achieve high bandwidth modulation \cite{cazzanelli2016second, castellan2019origin}.
 
-A strong $\chi^{(3)}$ non-linearity allows single-photon generation through \ac{sfwm} \cite{SilverstoneThesis}. However, as silicon doesn't have a direct band gap lasers there is no immediate route to integrating lasers. Instead, hybrid platforms have emerge to utilise III-V lasers \cite{Fan2017, Agnesi2019}. Doped silicon has allowed fast photodiodes to be waveguide integrated with high bandwidths \cite{raffaelli2018generation}.
+A strong $\chi^{(3)}$ non-linearity allows single-photon generation through \ac{sfwm} \cite{SilverstoneThesis}. However, as silicon doesn't have a direct band gap lasers there is no immediate route to integrating lasers. Instead, hybrid platforms have emerged to utilise III-V lasers \cite{Fan2017, Agnesi2019}. Doped silicon has allowed fast photodiodes to be waveguide integrated with high bandwidths \cite{raffaelli2018generation}.
 
 Light can be edge-coupled but grating structures are more common as they are not restricted to the edge of the device. Periodic structures in the silicon projects the waveguide mode verically into single-mode fibres. Losses have been shown to be as low as \SI{0.36}{dB} \cite{Notaros2016}, although the loss is typically higher. Silicon suffers from high non-linear losses which are suppressed at longer wavelengths \cite{rosenfeld2019mid}.
 

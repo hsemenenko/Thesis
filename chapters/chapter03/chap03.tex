@@ -33,9 +33,9 @@ One of the more challenging degrees of freedom to ensure indistinguishability is
 
 Integrated quantum photonics has facilitated a drastic increase in complexity of experiments simply not possible with alternatives. The inherent phase stability is a vital resource for quantum experiments meaning integrated devices are poised to create an accessible platform. \Ac{QKD} systems have historically been bulky and expensive which has limited their practicality and has slowed their commercial adoption. 
 
-Recent developments on \ac{InP} photonic integrated devices have established them as a promising platform for telecommunications \cite{smit2014}. The platform fulfils all of the requirements to perform \ac{QKD} at state-of-the-art rates \cite{Sibson2017InP}. The monolithic inclusion of laser sources provides a method of producing weak coherent states that can be used in a decoy-state QKD protocol \cite{Lo2005}. Efficient and fast phase modulation can be performed through a \ac{qcse} with a bandwidth up to \SI{40}{GHz} \cite{smit2014}. The possibility of mass production means that \ac{InP} devices are an excellent candidate to reduce the access cost of a \ac{QKD} network and allow wide adoption \cite{JeppixRoadmap}.
+Recent developments on \ac{InP} photonic integrated devices have established them as a promising platform for telecommunications \cite{smit2014}. The platform fulfils all of the requirements to perform \ac{QKD} at state-of-the-art rates \cite{Sibson2017InP}. The monolithic inclusion of laser sources provides a method of producing weak coherent states that can be used in a decoy-state QKD protocol \cite{Lo2005}. Efficient and fast phase modulation can be performed through the \ac{qcse} with a bandwidth up to \SI{40}{GHz} \cite{smit2014}. The possibility of mass production means that \ac{InP} devices are an excellent candidate to reduce the access cost of a \ac{QKD} network and allow wide adoption \cite{JeppixRoadmap}.
 
-In this chapter, we experimentally demonstrate that \ac{InP} devices fulfil all the requirements for state-of-the-art \ac{HOM} interference while also being a practical platform for future quantum networks. Using on-chip lasers and pulse modulation, we generated \acp{wcp} and measured a visibility of \SI{46.5(8)}{\percent} between independent devices clocked at \SI{431}{MHz}. Using gain switching as an alternative means to accomplish phase randomisation between pulses, we show that the same interference is possible at \SI{250}{MHz} without a reduction in state fidelity. This visibility is comparable to other demonstrations \cite{Yuan2014, Rubenok2013, Comandar2016} with the benefit of being performed with integrated devices. Crucially, this level of interference demonstrates \ac{InP} fulfills the required control for future \ac{MDI} networks.
+In this chapter, we experimentally demonstrate that \ac{InP} devices fulfil all the requirements for state-of-the-art \ac{HOM} interference while also being a practical platform for future quantum networks. Using on-chip lasers and pulse modulation, we generated \acp{wcp} and measured a visibility of \SI{46.5(8)}{\percent} between independent devices clocked at \SI{431}{MHz}. Using gain-switching as an alternative means to accomplish phase randomisation between pulses, we show that the same interference is possible at \SI{250}{MHz} without a reduction in state fidelity. This visibility is comparable to other demonstrations \cite{Yuan2014, Rubenok2013, Comandar2016} with the benefit of being performed with integrated devices. Crucially, this level of interference demonstrates \ac{InP} fulfills the required control for future \ac{MDI} networks.
 
 %In this letter, we extend the application of InP devices as a QKD platform by demonstrating the required control to interfere two independent InP transmitters producing weak coherent states.  This experiment paves the way for a more practical, accessible and affordable metropolitan QKD networks.
 
@@ -56,13 +56,13 @@ In general, we can consider an ideal beam splitter to have some relationship bet
 	\hat{U}_{bs} = \left(
 	\begin{matrix}
 		t_{ac} & r_{bc} \\
-		r_{bd} & t_{bd}
+		r_{ad} & t_{bd}
 	\end{matrix}
 	\right)
 \end{equation}
 such that
 \begin{equation}
-	|t_{ac}|^2 + |r_{bc}|^2 = |r_{bd}|^2 + |t_{bd}|^2 = 1 
+	|t_{ac}|^2 + |r_{bc}|^2 = |r_{ad}|^2 + |t_{bd}|^2 = 1 
 	\quad\text{and}\quad
 	t_{ac}^\ast r_{bd} + t_{bd} r_{bc}^\ast = t_{ac} r_{bd}^\ast + t_{bd}^\ast  r_{bc} = 0
 \end{equation}
@@ -224,12 +224,12 @@ Therefore, the probability of a coincidence click, with both coherent states ove
 	\label{fig:HOM_BS_Vis}
 \end{figure}
 
-To get a visibility for the HOM dip, we need to consider two coherent states not interfering on a beam splitter i.e. two states with orthogonal polarisation. Then the distributions after a beam splitter are the sum of the reflected and transmitted states. Therefore, the probability of coincidence is given by
+To get a visibility for the HOM dip, we need to consider two coherent states not interfering on a beam splitter e.g. two states with orthogonal polarisation. Then the distributions after a beam splitter are the sum of the reflected and transmitted states. Therefore, the probability of coincidence is given by
 
 %where the the averages are given by $|r\alpha|^2 + |t\beta|^2$ and $|t\alpha|^2 + |r\beta|^2$ for $c$ and $d$, respectively.
 
 \begin{align}
-	\text{P}_\text{ind}(\text{coincidence}) &= \left(1 - e^{-\eta_c(|\alpha r|^2 + |\beta r|^2)}\right)\left(1 - e^{-\eta_d(|\alpha t|^2 + |\beta r|^2)}\right)
+	\text{P}_\text{ind}(\text{coincidence}) &= \left(1 - e^{-\eta_c(|\alpha r|^2 + |\beta t|^2)}\right)\left(1 - e^{-\eta_d(|\alpha t|^2 + |\beta r|^2)}\right)
 \end{align}
 
 We will see later that we want to consider pulses that are phase randomised relative to each other. For this, we can introduce a phase into the pulse incident from channel $a$. Mathematically speaking, we substitute $\alpha \rightarrow  e^{i\theta} \alpha$ for $0\le\theta < 2\pi$. The coincidence probabilities then become
@@ -391,9 +391,9 @@ Modern telecommunications networks heavily rely on \ac{wdm} to maintain the data
 
 Several methods have been used to generate \acp{wcp} for \ac{QKD} systems. Here we briefly discuss the benefits and drawbacks of each.
 
-\subsubsection*{Gain switched lasers}
+\subsubsection*{Gain-switched lasers}
 
-While gain switched lasers offer simplicity and easily satisfy the phase randomisation constraint, they can suffer from bad timing jitter from the spontaneous emission and have broad spectra which require filtering \cite{Agnesi2019}.
+While gain-switched lasers offer simplicity and easily satisfy the phase randomisation constraint, they can suffer from bad timing jitter from the spontaneous emission and have broad spectra which require filtering \cite{Agnesi2019}.
 
 %(filter required and timing jitter problems, limitation on speed from laser relaxation)
 
@@ -727,7 +727,7 @@ The initial tests of the system used the wavelength tunability of the fibre lase
 
 The wavelengths of the individual lasers were first coarsely overlapped on an \ac{OSA}. Then the fibre laser could be finely tuned relative to the integrated laser and coincidence counts measured. The timing of the pulses was controlled with electrical delays in the \acp{ppg} and a histogram used to overlap them with picosecond resolution. For this experiment the system clock was set to \SI{1.72}{\GHz}. A pulse was sent every 4 clock cycles for a state repetition rate of \SI{431}{\MHz}. Polarisation controllers and \acp{pbs} ensured both transmitters were in the same polarisation mode before interference.
 
-In figure \ref{fig:fibre_wavelength_sweep}, we show the single and coincidence events as the fibre laser is swept in \SI{1}{pm} steps over a \SI{150}{pm} range. As the two transmitters become more indistinguishable in wavelength, the number of coincidences reduces close to the theoretical maximum visibility of \SI{50}{\percent}. From the current injection of the on-chip laser, we can see that this level of precision is well within the capability of the chip.
+In figure \ref{fig:fibre_wavelength_sweep}, we show the single and coincidence events as the fibre laser is swept in \SI{1}{pm} steps over a \SI{150}{pm} range. As the two transmitters become more indistinguishable in wavelength, the number of coincidences reduces close to the theoretical maximum visibility of \SI{50}{\percent}. From the current injection of the on-chip laser in figure \ref{fig:curr_sweep}, we can see that this level of precision is well within the capability of the chip.
 
 By looking at the total number of counts in each detector, we can see that they do not vary with the change in coincidences. This demonstrates that the reduction in coincidences cannot be attributed to classical interference. The difference between the detector counts is due to a slight difference in efficiency between detectors.
 
@@ -753,7 +753,7 @@ In figure \ref{fig:fibre_curr_sweep}, we change the wavelength of the chip laser
 \begin{figure}[tp]
 	\centering
 	\includegraphics[width=\textwidth]{Experiment}
-	\caption[Hong-Ou-Mandel interference experimental setup]{Experimental setup of of the \ac{HOM} interference experiment. Two identical \ac{InP} chips prepare quantum states of light to be interfered on a {50:50} beam splitter. On-chip \ac{CW} lasers are intensity modulated into time bins with \acp{mzi}. The pulses are coupled into a fibre where \acfp{voa} ensure matched intensities and \acfp{pc} and \acfp{pbs} overlap the polarisation. Pulses are interfered on a \acf{bs} and detected by \acfp{snspd}. An optical channel (not shown) synchronises the transmitter and detector electronics.}
+	\caption[Hong-Ou-Mandel interference experimental setup]{Experimental setup of of the \ac{HOM} interference experiment. Two identical \ac{InP} chips prepare quantum states of light to be interfered on a {50:50} beam splitter. On-chip \ac{CW} lasers are intensity modulated into time bins with \acp{mzi}. The pulses are coupled into a fibre where \acfp{voa} ensure matched intensities and \acfp{pc} and \acfp{pbs} overlap the polarisation. Pulses are interfered on a \acf{bs} and detected by \acfp{snspd}. An optical channel (not shown) synchronises the transmitters and detectors.}
 	\label{fig:hom_experiment}
 \end{figure}
 
@@ -793,24 +793,24 @@ We have previously discussed that, to demonstrate quantum interference instead o
 
 %As we will see in chapter \ref{chap:mdiqkd}, it will be important for the pulses to be phase randomised relative to subsequent pulses to maintain the security of a \ac{QKD} protocol. 
 
-Laser gain-switching is a technique used to cause phase randomisation by keeping the laser below threshold and only applying current when a \ac{wcp} is desired. As the pulses are limited to the timing of a spontaneous emission, the timing jitter of the pulses is usually large. There is also a wavelength broadening meaning that filtering is required for \ac{HOM} interference \cite{Agnesi2019}. 
+Laser gain-switching is a technique used to cause phase randomisation by keeping the laser below threshold and only applying current when a \ac{wcp} is desired. As the pulses are limited to the timing of a spontaneous emission, the timing jitter of the pulses is usually large. There is also a wavelength broadening meaning that optical filtering is required for \ac{HOM} interference \cite{Agnesi2019}. 
 
 \begin{figure}[t]
 	\centering
 	\def\svgwidth{0.8\textwidth} 
 	\import{chapters/chapter03/fig03/}{gain_switch.pdf_tex}
-	\caption[Photon flux whilst gain switching of the on-chip lasers at \SI{250}{MHz}]{Photon flux of the on-chip laser during gain switching as measured by an \acs{spd}. A \SI{200}{ps} \SI{-1.5}{V} RF signal is applied to the cavity at \SI{250}{MHz}. The laser power oscillates for \SI{1}{ns} after lasing resumes due to mode competition. After stabilising, a \SI{2}{ns} window can be used for coherent state encoding.}	
+	\caption[Photon flux whilst gain-switching of the on-chip lasers at \SI{250}{MHz}]{Photon flux of the on-chip laser during gain-switching as measured by an \acs{spd}. A \SI{200}{ps} \SI{-1.5}{V} RF signal is applied to the cavity at \SI{250}{MHz}. The laser power oscillates for \SI{1}{ns} after lasing resumes due to mode competition. After stabilising, a \SI{2}{ns} window can be used for coherent state encoding.}	
 %	By applying a negative electrical signal to the on-chip laser, we can drain the optical cavity. Lasing will then resume from spontaneous emission meaning that the phase will not be coherent with the previous lasing conditions. It takes around \SI{1}{\ns} for the laser to relax into a continuous operation from which states can be encoded.}
 	\label{fig:gain_switch}
 \end{figure}
 
-Instead of gain switching to generate pulses, we can reverse the high-speed pulse to provide a negative voltage between pulse carving. These pulses removes the carriers in the diode and allows the optical cavity to empty to make phase randomised windows. The upper-state lifetime of semiconductors is short, as is the cavity lifetime, meaning this can still be done at a high repetition rate. 
+Instead of gain-switching to generate pulses, we can reverse the high-speed pulse to provide a negative voltage between pulse carving. These pulses removes the carriers in the diode and allows the optical cavity to empty to make phase randomised windows. The upper-state lifetime of semiconductors is short, as is the cavity lifetime, meaning this can still be done at a high repetition rate. 
 
-In figure \ref{fig:gain_switch}, we demonstrate gain switching the on-chip laser by providing a \SI{-1.5}{V} RF signal. This drains the cavity so that when lasing resumes the phase will come from a spontaneous emission and will be random compared with the previous window. The clock of the \ac{ppg} was set to \SI{2}{GHz} for this experiment, with a pulse being sent by each transmitter every 8 clock cycles. 
+In figure \ref{fig:gain_switch}, we demonstrate gain-switching the on-chip laser by providing a \SI{-1.5}{V} RF signal. This drains the cavity so that when lasing resumes the phase will come from a spontaneous emission and will be random compared with the previous window. The clock of the \ac{ppg} was set to \SI{2}{GHz} for this experiment, with a pulse being sent by each transmitter every 8 clock cycles. 
 
 After the negative signals, the lasing oscillates before returning to a continuous (and useful) lasing mode. These oscillations can be attributed to mode competition in the laser cavity and also ringing in the RF signal. Therefore, we can still generate states at \SI{250}{MHz} and demonstrate good state preparation through intensity modulation.
 
-In figure \ref{fig:HOM_coherence}, we demonstrate two \ac{HOM} fringes with and without phase randomisation. Both experiments see a visibility of \SI{47}{\percent}. When the pulses are coherent, we see a partial relationship between the pulses as the relative wavelength between the lasers changes. If there was complete coherence, this would be a sinusoidal fringe as subsequent pulses tune in and out of phase (similar to the error fringe from Bell state projections seen in the next chapter). After phase randomisation, we find no relationship between coincidences of subsequent pulses.
+In figure \ref{fig:HOM_coherence}, we demonstrate two \ac{HOM} fringes with and without phase randomisation. Both experiments see a visibility of more than \SI{47}{\percent}. When the pulses are coherent, we see a partial relationship between the pulses as the relative wavelength between the lasers changes. If there was complete coherence, this would be a sinusoidal fringe as subsequent pulses tune in and out of phase (similar to the error fringe from Bell state projections seen in the next chapter). After phase randomisation, we find no relationship between coincidences of subsequent pulses.
 
 \begin{figure}[tp]
 	\centering
@@ -827,7 +827,7 @@ We have demonstrated that by combining gain-switching and intensity modulation o
 
 In this chapter, we have demonstrated state-of-the-art \acl{HOM} interference between independent, integrated photonic devices. By utilising monolithically fabricated lasers and \acp{eopm}, we generated \acp{wcp} with precise control over all degrees of freedom. By changing the relative wavelength of the devices, we demonstrated a \ac{HOM} dip with a visibility of \SI{46.5(8)}{\%}. Further, we demonstrate gain-switching of the on-chip laser to provide actively phase randomised pulses. We show that the introduction of phase randomisation doesn't reduce the visibility of the interference and also doesn't require the pulses to be wavelength filtered.
 
-%\ac{HOM} effects are crucial for quantum information protocols and this demonstration expands the functionality of integrated devices. \ac{MDI} isis the first step towards chip-based \ac{MDI}. The experiment shows that control and precision to accurately  Further, we have demonstrated that gain switching the laser between pulses doesn't reduce the visibility. 
+%\ac{HOM} effects are crucial for quantum information protocols and this demonstration expands the functionality of integrated devices. \ac{MDI} isis the first step towards chip-based \ac{MDI}. The experiment shows that control and precision to accurately  Further, we have demonstrated that gain-switching the laser between pulses doesn't reduce the visibility. 
 
 %However, this does limit the speed of operation which will be a consideration for \ac{QKD} systems. As we will see in chapter \ref{chap:mdiqkd}, this result will play a crucial role in \ac{MDI} and high fidelity interference will be required to bound the knowledge that could be gained by Mallory.
 
@@ -857,6 +857,6 @@ As mentioned previously, there is no need to filter the pulses to see interferen
 
 \subsection{DFB Laser}
 
-The delay caused by the laser relaxation after phase randomisation could be reduced by using a \ac{dfb} laser. \ac{DBR} lasers will take time to relax after gain switching as the cavity will support many modes until a single mode becomes dominant. This behaviour is shown in figure \ref{fig:gain_switch} where the laser oscillates before becoming more stable. \Ac{dfb} lasers typically have a higher bandwidth which would reduce the amount of time required for the laser to stabilise.
+The delay caused by the laser relaxation after phase randomisation could be reduced by using a \ac{dfb} laser. \ac{DBR} lasers will take time to relax after gain-switching as the cavity will support many modes until a single mode becomes dominant. This behaviour is shown in figure \ref{fig:gain_switch} where the laser oscillates before becoming more stable. \Ac{dfb} lasers typically have a higher bandwidth which would reduce the amount of time required for the laser to stabilise.
 
 %=========================================================
