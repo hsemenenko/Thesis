@@ -299,15 +299,15 @@ While superconducting detectors are currently considered research equipment, the
 \Ac{InP} transmitters provide all the required optical components to create high fidelity \ac{bb84} states as required for \ac{MDI}. By using chip-based transmitters the power, size and weight of the required optical components can be dramatically reduced compared to fibre (and free-space) alternatives. Monolithic fabrication also facilitates mass manufacture without requiring manual assembly which would further decrease cost and increase availability.
 
 It is worth noting that the technology is still maturing and optimisation of designs is still required before devices can be confidently reproduced to a required standard for secure communication. The transmitters used for this experiment (figure \ref{fig:oclaro_00}) were originally designed to operate as transceiver modules which would allow two-way operation. The delay line in the centre of the device could be used for encoding and decoding time-bin encoded states. However, the waveguides were found to be too lossy to be useful, showing how further optimisation of designs is required. The design of such a delay line is challenging as the loss in a waveguide can be as high as \SI{2}{dB\per\cm} \cite{JeppixRoadmap}. For a \SI{500}{ps} delay in a material with a refractive index of 3, the loss could be as high as \SI{10}{dB} before considering bend losses. These losses are mostly linked to waveguide roughness and two-photon and free carrier absorption in \ac{InP} \cite{Kumar2019}.
-
-A schematic of the chip is shown in figure \ref{fig:chip_mdi_schematic}. Cascaded \acp{mzi} are used to encode time, phase and intensity onto \acp{wcs}.  We will encode our quantum states in a time-bin encoding scheme and the four \ac{bb84} states are shown in figure \ref{fig:BB84_time_bin}. The early and late time-bins of the states will be our $\ket{0}$ and $\ket{1}$ states where a superposition of these creates more complicated states. A relative phase can be applied between the time-bins for a full encoding. We will define the $\ket{+}$ state to be when the two time-bins are in phase. To encode a $\ket{-}$ state, we need to apply a $\pi$ phase shift between time-bins. 
-
+\begin{parahigh}
+A schematic of the chip is shown in figure \ref{fig:chip_mdi_schematic} to clarify which parts of the chip shown in figure \ref{fig:oclaro_00} are used for this experiment. Cascaded \acp{mzi} are used to encode time, phase and intensity onto \acp{wcs}.  We will encode our quantum states in a time-bin encoding scheme and the four \ac{bb84} states are shown in figure \ref{fig:BB84_time_bin}. The early and late time-bins of the states will be our $\ket{0}$ and $\ket{1}$ states where a superposition of these creates more complicated states. A relative phase can be applied between the time-bins for a full encoding. We will define the $\ket{+}$ state to be when the two time-bins are in phase. To encode a $\ket{-}$ state, we need to apply a $\pi$ phase shift between time-bins. 
+\end{parahigh}
 In this section, we will describe the operation of the transmitters to create weak coherent states that can be used for \acl{QKD} and expanding the functionality of the devices for use in \ac{MDI} systems.
 
 \subsection{On-Chip Laser}
-
-To generate \acp{wcs}, we will utilise the on-chip laser that was described in chapter \ref{chap:hom}. The Fabry-P\'{e}rot laser demonstrates a narrow linewidth to ensure coherence within a time-bin encoded state. The wavelength tunability of the laser through \ac{DBR} current injection, temperature and \ac{SOA} current injection will allow the wavelengths of separate devices to be precisely overlapped. We will also be able to exploit the short upper state and cavity lifetimes to create phase randomised pulses.
-
+\begin{parahigh}
+To generate \acp{wcs}, we will utilise the on-chip laser that was described in chapter \ref{chap:hom}. The Fabry-P\'{e}rot laser demonstrates a narrow linewidth to ensure coherence within a time-bin encoded state. The wavelength tunability of the laser through \ac{DBR} current injection, temperature and \ac{SOA} current injection will allow the wavelengths of separate devices to be precisely overlapped. We will also be able to exploit the short upper state and cavity lifetimes to create phase randomised pulses. This method is described in more detail in section \ref{sec:HOM_random}.
+\end{parahigh}
 \subsection{Timing Encoding}
 
 \begin{figure}[t]
@@ -331,31 +331,46 @@ The reduction in intensity for the diagonal basis could be realised by reducing 
 
 \subsection{Phase Encoding}
 \label{sec:phase_encoding}
+\begin{figure}[t]
+	\centering
+	\small
+	\def\svgwidth{0.6\textwidth} 
+	\import{chapters/chapter04/fig04/mzi_pi_phase/}{mzi.pdf_tex}
+	\caption[MZI schematic for $\pi$ phase encoding]{Schematic for the \acs{mzi} which is used to encode a $\pi$ phase. $\theta$ and $phi$ are phases applied by the modulators and $\psi^{\{\mathrm{in},\mathrm{out}\}}$ are the input and output states from the \ac{mzi}, as shown.}
+	\label{fig:mzi_pi_phase}
+\end{figure}
 
-Typically, phase encoding would be performed using a fast, phase modulator. However, the losses associated with the \ac{qcse} mean that applying a $\pi$ phase between early and late time-bins would also cause a drastic change in intensity. This could compromise security as the intensities between $\ket{+}$ and $\ket{-}$ states would be different. 
+Typically, phase encoding would be performed using a fast, phase modulator. However, the losses associated with the \ac{qcse} mean that applying a $\pi$ phase between early and late time-bins would also cause a drastic change in intensity. This could compromise security as the intensities between $\ket{+}$ and $\ket{-}$ states would be different.
 
-Therefore, instead of using a single modulator to encode phases between time-bins, we can use an \ac{mzi} in a push-pull method. Consider an \ac{mzi} with $\theta$ phase on the top arm and $\phi$ phase on the bottom. The output will then be 
-
+\begin{parahigh}
+Therefore, instead of using a single modulator to encode phases between time-bins, we can use an \ac{mzi} in a push-pull method. Consider an \ac{mzi} with $\theta$ phase on the top arm and $\phi$ phase on the bottom where $\psi^\mathrm{in}$ and $\psi^\mathrm{out}$ are the input and output states as shown in figure \ref{fig:mzi_pi_phase}. The output will then be 
 \begin{equation}
-	\psi^\mathrm{out} =  \left(e^{i\theta} - e^{i\phi}\right) \psi^\mathrm{in}
+	\psi^\mathrm{out} =  \frac{1}{\sqrt{2}}\left(e^{i\theta} - e^{i\phi}\right) \psi^\mathrm{in}
 \end{equation}
+\end{parahigh}
 
 We can consider applying two sets of phases to the modulators. Firstly, if we apply $\vartheta$ to the top modulator, but no phase to the bottom, the output becomes
 
+\begin{parahigh}
 \begin{equation}
-	\psi^\mathrm{out} =  \left(e^{i\vartheta} -1\right) \psi^\mathrm{in}
+	\psi^\mathrm{out} =  \frac{1}{\sqrt{2}}\left(e^{i\vartheta} -1\right) \psi^\mathrm{in}
 \end{equation}
+\end{parahigh}
 While, if we were to reverse how the phases were applied, and have no phase on the top modulator and $\vartheta$ on the bottom, we would get
 
+\begin{parahigh}
 \begin{equation}
-	\psi^\mathrm{out} =  \left(1 - e^{i\vartheta}\right) \psi^\mathrm{in}
+	\psi^\mathrm{out} =  \frac{1}{\sqrt{2}}\left(1 - e^{i\vartheta}\right) \psi^\mathrm{in}
 \end{equation}
+\end{parahigh}
 By taking the ratio of the outputs, we can compare their relative phases. Explicitly, we find
 
+\begin{parahigh}
 \begin{equation}
-	\frac{e^{i\vartheta} -1}{1 - e^{i\vartheta}} = e^{i\pi}
+	\frac{\frac{1}{\sqrt{2}}\left(e^{i\vartheta} -1\right)}{\frac{1}{\sqrt{2}}\left(1 - e^{i\vartheta}\right)} = e^{i\pi}
 \end{equation}
-which represents a $\pi$ phase shift between the two outcomes. Therefore, to apply a phase shift to encode the $\ket{-}$, we should switch between the two cases for the early and late time-bins. This avoids the loss associated with the \ac{qcse} effect whilst also reducing the voltage required for phase encoding.
+which represents a $\pi$ phase shift between the two outcomes. Therefore, to apply a phase shift to encode the $\ket{-}$, we should switch between the two cases for the early and late time-bins. This avoids the loss associated with the \ac{qcse} effect whilst also reducing the voltage required for phase encoding. The value of $\vartheta$ will not affect the phase relationship but will change the intensity of the output state $\psi^\mathrm{out}$. 
+\end{parahigh}
 
 %Also using an \ac{mzi}, phase can be encoding through a "push-pull" method. By either pulsing the top or bottom \ac{eopm}, a relative $\pi$ phase can be imparted on pulses.
 

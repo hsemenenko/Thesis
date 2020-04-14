@@ -220,7 +220,7 @@ Therefore, the probability of a coincidence click, with both coherent states ove
 	\small
 	\def\svgwidth{0.8\textwidth} 
 	\import{chapters/chapter03/fig03/HOM_Coherent/}{HOM_BS_Vis.pdf_tex}
-	\caption[Coherent state photon number visibility against beam splitter ratio]{Graph plotting the effect of an unbalanced beam splitter on the visibility of a HOM dip. Maximal visibility is found when the beam splitter is 50:50. Photon number also has an effect on visibility due to the increased probability of multi-photon terms. Here, we plot average photon numbers ranging from 1 to 5. Both incoming states are assumed to have equal average photon number. As the average photon number tends to zero, the visibility on a 50:50 beam splitter will tend towards \SI{50}{\percent}.}
+	\caption[Coherent state photon number visibility against beam splitter ratio]{Graph plotting the effect of an unbalanced beam splitter on the visibility of a HOM dip. Maximal visibility is found when the beam splitter is 50:50. Photon number also has an effect on visibility due to the increased probability of multi-photon terms. Here, we plot average photon numbers ranging from 1 to 5. Both incoming states are assumed to have equal average photon number. As the average photon number tends to zero, the visibility on a 50:50 beam splitter will tend towards \SI{50}{\percent}. \hl{We assume unity detection efficiency i.e. $\eta_\{c,d\} = 1$.}}
 	\label{fig:HOM_BS_Vis}
 \end{figure}
 
@@ -275,10 +275,11 @@ When the intensities of the fields are low the probability of coincidence is pro
 	P(\text{1 photon in } c,\text{1 photon in } d) \approx \langle \mathcal{I}_c \mathcal{I}_d\rangle_{\Delta\phi}
 \end{equation}
 Multiplying the intensities calculated above and averaging $\Delta\phi$ over $2\pi$, we find
-
+\begin{parahigh}
 \begin{equation}
-	\langle \mathcal{I}_c \mathcal{I}_d\rangle_{\Delta\phi} = \frac{1}{2\pi}\int_0^{2\pi} 1 - \exp\left(-\frac{t_p^2 \Delta\omega^2}{16\ln(2)}\right)\cos(\Delta\phi)^2 d(\Delta\phi)
+	\langle \mathcal{I}_c \mathcal{I}_d\rangle_{\Delta\phi} = \frac{1}{2\pi}\int_0^{2\pi}\left( 1 - \exp\left(-\frac{t_p^2 \Delta\omega^2}{16\ln(2)}\right)\cos^2(\Delta\phi) \right)d(\Delta\phi)
 \end{equation} 
+\end{parahigh}
 which gives the shape of the interference in terms of the relative frequencies of the two incoming pulses as
 
 \begin{equation}
@@ -461,7 +462,9 @@ While the spectrum is limited by the precision of the \ac{OSA}, we can put bound
 \begin{equation}
 	L_\text{coh} = \frac{c}{\pi\Delta v}
 \end{equation}
-where $\Delta v$ is the \ac{FWHM} of the laser in frequency. The integrated lasers from Oclaro have previously demonstrated a coherence length of \SI{45}{cm} which corresponds to a \ac{FWHM} of \SI{212}{MHz} (\SI{1.7}{pm} at \SI{1550}{nm}) \cite{Sibson2017InP}. We will see later that partial coherence can be seen at \SI{1.2}{\m} which provides a lower bound on the \ac{FWHM} of around \SI{87}{MHz} (or \SI{0.7}{pm}). In order to measure the linewidth more accurately, a self-heterodyne measurement technique can be used \cite{self-heterodyne}. 
+\begin{parahigh}
+where $\Delta v$ is the \ac{FWHM} of the laser in frequency. The integrated lasers from Oclaro have previously demonstrated a coherence length of \SI{45}{cm} which corresponds to a \ac{FWHM} of \SI{212}{MHz} (\SI{1.7}{pm} at \SI{1550}{nm}) \cite{Sibson2017InP}. We will see later that partial coherence can be seen at \SI{1.2}{\m} which provides a lower bound on the \ac{FWHM} of around \SI{87}{MHz} (or \SI{0.7}{pm}). In order to measure the linewidth more accurately than the previous \ac{OSA} measurement, a self-heterodyne measurement technique  \cite{self-heterodyne} can be used but has not been performed in this thesis. 
+\end{parahigh}
 
 \begin{figure}[t]
 	\centering
@@ -492,7 +495,9 @@ In figure \ref{fig:DBR_sweep}, we show laser tuning through current injection of
 	\label{fig:curr_sweep}
 \end{figure}
 
-The wavelength of the lasers can also be finely tuned through current injection of the \ac{SOA} itself. This is shown in figure \ref{fig:curr_sweep} where changing the driving current from \SIrange{20}{28}{mA} sees an increase in wavelength of around \SI{100}{pm} due to heating effects in the cavity. As the wavelength changes, so will the intensity of the laser. As we saw in figure \ref{fig:HOM_BS_Vis}, the photon number is an important aspect to control during a \ac{HOM} interference. Therefore, when using \ac{SOA} current injection to sweep the wavelength some attenuation will also be required. 
+\begin{parahigh}
+The wavelength of the lasers can also be finely tuned through current injection of the \ac{SOA} itself. This is shown in figure \ref{fig:curr_sweep} where changing the driving current from \SIrange{20}{28}{mA} sees an increase in wavelength of around \SI{100}{pm}. This wavelength shift is primarily due to heating effects in the cavity but carrier effects in the \ac{SOA} will also be present. As the wavelength changes, so will the intensity of the laser. As we saw in figure \ref{fig:HOM_BS_Vis}, the photon number is an important aspect to control during a \ac{HOM} interference. Therefore, when using \ac{SOA} current injection to sweep the wavelength some attenuation will also be required.
+ \end{parahigh}
 
 We note here that the narrow linewidth of the laser means that during no experiment with the \ac{InP} chips do we need to use a wavelength filter to clean up the light or optical pulses. This is important as it removed a component that would add cost to any system but also restrict the wavelength operation of the devices. Without the need for a filter, the lasers are free to operate in a wavelength that spans more than \SI{10}{nm}. This will be crucial as it is likely that \ac{QKD} systems will needed to be \ac{wdm} compatible to meet the demands of high-speed networks for increased rates or quantum-classical multiplexing.
 
@@ -526,6 +531,10 @@ By comparing the absorption of the material with and without the electric field,
 \end{equation}
 where $E$ is the applied electric field \cite{qcse}. As the electric field increases, the effect saturates meaning that the quadratic nature is only valid for small changes in the refractive index. Exactly how the electric field and the refractive index are proportional is related to the exciton peak which is dependent on the specific material. 
 
+\begin{parahigh}
+The exact relationship between phase and applied voltage has not been calculated for the devices presented here. This is due to the complexity of the circuit meaning it was not possible to isolate the effects of a single modulator.
+\end{parahigh}
+
 The modulators are oriented parallel to the major flat axis of the substrate so that linear electro-optic effects add to the \ac{qcse}, whereas they would subtract if placed orthogonally. While the effect from the \ac{qcse} can reach speeds in excess of \SI{40}{GHz}, design of the modulator and device packaging are important to maximise performance. For speeds above \SI{10}{GHz}, the modulator should be less than \SI{1}{mm} \cite{smit2014}. To ensure the faithful transfer of RF signals to the chip, wirebond length should be minimised and effective termination employed to stop reflections.
 
 \begin{figure}[tp]
@@ -553,7 +562,9 @@ The structure is \SI{1}{mm} in length, while the modulators themselves are appro
 \end{figure}
 
 Imperfections in the \acp{mzi} due to the fabrication of the devices mean that the phases accumulated on the top and bottom path are not the same. While not designed for thermo-optic modulation, the \acp{eopm} have a resistance of around \SI{10}{\ohm} which can also be used to vary the phase. By passing a small current over one arm of the \ac{mzi}, we can correct for the phase mismatch to recover the desired performance.
-
+\begin{parahigh}
+To operate the \ac{mzi} using the thermo-optic effect on one modulator and electro-optic modulation on the other, a negative \acs{dc} voltage offset is first applied to both modulators. This is to balance the phase-dependent losses in both arms of the \ac{mzi} and to access the quadratic effects of the \ac{qcse}. A current is then used to apply thermo-optic phases to balance any phase mismatch between the two arms. This current will also cause a small phase change due to electro-optic effect but these changes will be small so can be compensated for using the \acs{dc} offset. \Acs{rf} signals can then be applied to the electro-optic modulator to create high-extinction ratio states.
+\end{parahigh}
 Figure \ref{fig:mzi_heating} demonstrates how heating effects can change the characteristics of an \ac{mzi}. By changing the voltage bias for the \ac{qcse} over one arm of the modulator ($\Phi$) whilst the other arm is kept constant ($\theta$) we can characterise the performance. $\Phi$ is swept over the range \SIrange{0}{-10}{V} and the power at the arm output of the \ac{mzi} is measured. We can then compare the difference in DC modulation with and without heating. 
 
 Without heating, the absorption effects mean that the extinction ratio possible is limited to only around \SI{15}{dB}. However, by correcting for the phase difference in the two arms, the extinction ratio can be increased to \SI{30}{dB} with voltage swing of \SI{3}{\Vpp}. 
@@ -774,9 +785,9 @@ The experiment uses two \ac{InP} devices which we will call Alice and Bob and a 
 	\caption[Hong-Ou-Mandel interference between integrated devices]{\ac{HOM} dip between independently generated \acp{wcp} by two integrated devices. By changing the relative wavelength between the two devices, we demonstrate a reduction in coincidences due to \ac{HOM} interference. From the fit (shown in purple) we find a visibility of \SI{46.5(8)}{\%} which is limited to \SI{50}{\percent} for coherent states due to multi-photon terms.}
 	\label{fig:HOM}
 \end{figure}
-
-\acl{HOM} interference was demonstrated between two independent \acp{pic}, operating at \SI{431}{\MHz} pulse rate, by varying the relative wavelengths of the lasers. The relative wavelength of the lasers was chosen as the distinguishing degree of freedom as all others could be overlapped manually. However, a sweep in timing or polarisation would have seen similar interference provided a good wavelength overlap. 
-
+\begin{parahigh}
+\acl{HOM} interference was demonstrated between two independent \acp{pic} by varying the relative wavelengths of the lasers, where \acp{wcs} were modulated from \ac{CW} lasers at \SI{431}{\MHz} using \acp{mzi}. The relative wavelength of the lasers was chosen as the distinguishing degree of freedom as all others could be overlapped manually. However, a sweep in timing or polarisation would have seen similar interference provided a good wavelength overlap. 
+\end{parahigh}
 The two transmitters were initially overlapped in time, polarisation and photon number. Using ps resolution electronic delays in the pulse generation, a histogram from the \acp{spd} allowed a timing overlap between the pulses at the beam splitter. Care was taken to ensure that the pulses that were overlapped on the histogram matched with the pulses that could have interfered on the beam splitter and not a repetition rate or sync window apart. This required calibration of the relative optical and electronic delays after the beam splitter. 
 
 Similarly, the photon number of each pulse was calibrated using a histogram of the pulses relative to one another. This allowed the photon number to be calibrated regardless of the detector efficiency and fibre losses, provided that the beam splitter was balanced. By looking at each transmitter independently an average photon number per pulse was calculated to be $10^{-3}$. The value was chosen to minimise effects from multi-photon terms in the coherent state and to be far away from saturation of the detectors, both of which would have reduced the visibility.
@@ -788,6 +799,7 @@ The polarisation of the transmitters was rotated using fibre polarisation contro
 In figure \ref{fig:HOM}, we demonstrate \acl{HOM} interference between the two devices by sweeping the relative wavelengths of the lasers. From a Gaussian fit we find a visibility of \SI{46.5(8)}{\percent}. It is pertinent to note that during the experiment there was no active feedback to control the polarisation, pulse carving or timing which demonstrates the stability possible with an integrated platform. 
 
 \section{HOM Interference with Actively Phase Randomised Pulses}
+\label{sec:HOM_random}
 
 We have previously discussed that, to demonstrate quantum interference instead of classical interference, the laser pulses should be phase randomised relative to one another. In the previous experiment, as the lasers were not phase locked, we could average over the phases by taking data for long enough for the phases between the two lasers to drift. However, for \ac{QKD} purposes this would not meet criteria for security. This means that we need to be able to actively create pulses with randomised phases. This section will describe how we can utilise gain-switching to create phase randomised windows and intensity modulation to create well-defined pulses. Using coincidence counts between neighbouring pulses, we can verify that the  \acp{wcp} are phase randomised. By looking at coincidences between neighbouring pulses we can check correlations between \acp{wcp} that didn't interfere. If the laser is phase randomised, we would not expect to see any relation between subsequent pulses. 
 
