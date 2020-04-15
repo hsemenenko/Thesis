@@ -801,28 +801,47 @@ In figure \ref{fig:HOM}, we demonstrate \acl{HOM} interference between the two d
 \section{HOM Interference with Actively Phase Randomised Pulses}
 \label{sec:HOM_random}
 
-We have previously discussed that, to demonstrate quantum interference instead of classical interference, the laser pulses should be phase randomised relative to one another. In the previous experiment, as the lasers were not phase locked, we could average over the phases by taking data for long enough for the phases between the two lasers to drift. However, for \ac{QKD} purposes this would not meet criteria for security. This means that we need to be able to actively create pulses with randomised phases. This section will describe how we can utilise gain-switching to create phase randomised windows and intensity modulation to create well-defined pulses. Using coincidence counts between neighbouring pulses, we can verify that the  \acp{wcp} are phase randomised. By looking at coincidences between neighbouring pulses we can check correlations between \acp{wcp} that didn't interfere. If the laser is phase randomised, we would not expect to see any relation between subsequent pulses. 
+\begin{figure}[t]
+	\centering
+	\def\svgwidth{0.7\textwidth} 
+	\import{chapters/chapter03/fig03/}{ph_rand_coins.pdf_tex}
+	\caption[Schematic for phase randomisation coherence check]{Schematic for how coherence of the lasers can be checked through coincidences of events between the two detectors in different time bins, $t_i$. The colours are the same as those used in figure \ref{fig:HOM_coherence}. We can check between states that interfered on the beam splitter (purple) and those that did not interfere (red).}	
+	\label{fig:ph_rand_coins}
+\end{figure}
 
-%As we will see in chapter \ref{chap:mdiqkd}, it will be important for the pulses to be phase randomised relative to subsequent pulses to maintain the security of a \ac{QKD} protocol. 
+\begin{parahigh}
+We have previously discussed that, to demonstrate quantum interference instead of classical interference, the laser pulses should be phase randomised relative to one another. In the previous experiment, as the lasers were not phase locked, we could average over the phases by taking data for long enough for the phases between the two lasers to drift. However, for \ac{QKD} purposes this would not meet criteria for security. This means that we need to be able to actively create pulses with randomised phases between states. This section will describe how we can utilise gain-switching to create phase randomised windows and intensity modulation to create well-defined pulses. 
 
-Laser gain-switching is a technique used to cause phase randomisation by keeping the laser below threshold and only applying current when a \ac{wcp} is desired. As the pulses are limited to the timing of a spontaneous emission, the timing jitter of the pulses is usually large. There is also a wavelength broadening meaning that optical filtering is required for \ac{HOM} interference \cite{Agnesi2019}. 
+To verify that the \acp{wcp} are phase randomised, we can use coincidence counts between neighbouring pulses while both lasers are active. By this, we mean that we will look at events that occurred in the two detectors, but were separated by a time bin. This is shown in figure \ref{fig:ph_rand_coins} where we introduce the time bins $t_i$ and $t_{i-1}$. Events that happened in the same time bin will have interfered at the beam splitter so we can verify the \ac{HOM} visibility. This is shown in purple. However, we can also look at events that are separated by a time bin (i.e. coincident events between $t_i$ and $t_{i-1}$) which is shown in red. If the lasers have a coherence time that is much longer than the separation between the time bins, we would expect to see the same \ac{HOM} interference. This is because there will be a fixed phase relationship between the states sent in time bin $t_i$ and $t_{i-1}$.
+
+However, if we were to phase randomise between these states, it would no longer be true that there would be a fixed phase relationship so we would see no correlation between subsequent time bins.
+
+%By looking at coincidences between neighbouring pulses we can check correlations between \acp{wcp} that didn't interfere. If the laser is phase randomised, we would not expect to see any relation between subsequent pulses. 
+\end{parahigh}
 
 \begin{figure}[t]
 	\centering
 	\def\svgwidth{0.8\textwidth} 
 	\import{chapters/chapter03/fig03/}{gain_switch.pdf_tex}
 	\caption[Photon flux whilst gain-switching of the on-chip lasers at \SI{250}{MHz}]{Photon flux of the on-chip laser during gain-switching as measured by an \acs{spd}. A \SI{200}{ps} \SI{-1.5}{V} RF signal is applied to the cavity at \SI{250}{MHz}. The laser power oscillates for \SI{1}{ns} after lasing resumes due to mode competition. After stabilising, a \SI{2}{ns} window can be used for coherent state encoding.}	
-%	By applying a negative electrical signal to the on-chip laser, we can drain the optical cavity. Lasing will then resume from spontaneous emission meaning that the phase will not be coherent with the previous lasing conditions. It takes around \SI{1}{\ns} for the laser to relax into a continuous operation from which states can be encoded.}
 	\label{fig:gain_switch}
 \end{figure}
 
+%As we will see in chapter \ref{chap:mdiqkd}, it will be important for the pulses to be phase randomised relative to subsequent pulses to maintain the security of a \ac{QKD} protocol. 
+
+Laser gain-switching is a technique used to cause phase randomisation by keeping the laser below threshold and only applying current when a \ac{wcp} is desired. As the pulses are limited to the timing of a spontaneous emission, the timing jitter of the pulses is usually large. There is also a wavelength broadening meaning that optical filtering is required for \ac{HOM} interference \cite{Agnesi2019}. 
+
 Instead of gain-switching to generate pulses, we can reverse the high-speed pulse to provide a negative voltage between pulse carving. These pulses removes the carriers in the diode and allows the optical cavity to empty to make phase randomised windows. The upper-state lifetime of semiconductors is short, as is the cavity lifetime, meaning this can still be done at a high repetition rate. 
 
-In figure \ref{fig:gain_switch}, we demonstrate gain-switching the on-chip laser by providing a \SI{-1.5}{V} RF signal. This drains the cavity so that when lasing resumes the phase will come from a spontaneous emission and will be random compared with the previous window. The clock of the \ac{ppg} was set to \SI{2}{GHz} for this experiment, with a pulse being sent by each transmitter every 8 clock cycles. 
+\begin{parahigh}
+In figure \ref{fig:gain_switch}, we demonstrate gain-switching the on-chip laser by providing a \SI{-1.5}{V} RF signal. This drains the cavity so that when lasing resumes the phase will come from a spontaneous emission and will be random compared with the previous window. The internal clock of the \ac{ppg} was set to \SI{2}{GHz} for this experiment, with a pulse being sent by each transmitter every 8 clock cycles giving a state repetition rate of \SI{250}{MHz}. 
+\end{parahigh}
 
 After the negative signals, the lasing oscillates before returning to a continuous (and useful) lasing mode. These oscillations can be attributed to mode competition in the laser cavity and also ringing in the RF signal. Therefore, we can still generate states at \SI{250}{MHz} and demonstrate good state preparation through intensity modulation.
 
-In figure \ref{fig:HOM_coherence}, we demonstrate two \ac{HOM} fringes with and without phase randomisation. Both experiments see a visibility of more than \SI{47}{\percent}. When the pulses are coherent, we see a partial relationship between the pulses as the relative wavelength between the lasers changes. If there was complete coherence, this would be a sinusoidal fringe as subsequent pulses tune in and out of phase (similar to the error fringe from Bell state projections seen in the next chapter). After phase randomisation, we find no relationship between coincidences of subsequent pulses.
+\begin{parahigh}
+In figure \ref{fig:HOM_coherence}, we demonstrate two \ac{HOM} fringes without (left) and with (right) active phase randomisation between states. The two independent lasers are never coherent as they are independently driven. Both experiments see a visibility of more than \SI{47}{\percent}. When the pulses are coherent, we see a partial relationship between the pulses as the relative wavelength between the lasers changes. If there was complete coherence, this would be a sinusoidal fringe as subsequent pulses tune in and out of phase (similar to the error fringe from Bell state projections seen in the next chapter). After phase randomisation, we find no relationship between coincidences of subsequent pulses.
+\end{parahigh}
 
 \begin{figure}[tp]
 	\centering
