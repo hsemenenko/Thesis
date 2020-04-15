@@ -267,7 +267,7 @@
 
 %%% hyperref must be loaded before Glossaries-extra or hyperlinks go to the wrong place %%%
 	
-\usepackage[pdfpagelayout=TwoColumnRight,			%Makes pdf two page scrolling
+\usepackage[
 			pagebackref,
 			urlbordercolor=bristol-red,
 			citebordercolor=bristol-red,
@@ -289,7 +289,8 @@
 	%Define link colours
 	colorlinks=false,
 	%Define border style as underline
-	pdfborderstyle={/S/U/W 1}
+	pdfborderstyle={/S/U/W 1},
+	pdfpagelayout=OneColumn			%Makes pdf two page scrolling
 }	  	  
 	
 %%% GLOSSARIES STUFF %%%
