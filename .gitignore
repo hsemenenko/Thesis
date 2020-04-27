@@ -19,3 +19,5 @@ TeXcount/Doc
 TeXcount/History
 # Include the count image to show in README
 !TeXcount/count.png
+# Include PDF
+!henry_semenenko_thesis.pdf
