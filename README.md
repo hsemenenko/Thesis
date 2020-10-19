@@ -10,6 +10,6 @@ Before QKD can be widely adopted, a cost-effective and scalable platform must be
 
 This thesis will explore how integrated photonics can be deployed in device-independent QKD protocols to both ensure practical security and enhance network accessibility. We will show how integrated components can be used to generate quantum states with high fidelity and demonstrate quantum interference. The complexity of photonic integration will be explored to demonstrate new circuits for QKD that will eventually form the backbone of quantum-secured networks.
 
-
-![Thesis word count](TeXcount/count.png?raw=true)
+## Word count progression
+![Thesis word count](https://raw.githubusercontent.com/hsemenenko/Thesis/master/TeXcount/count.png)
 
